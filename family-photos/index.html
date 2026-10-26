@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ripple Wagon Rolls Out — Teardrop in Tow · Family Photos</title>
+<style>
+  :root{
+    --paper:#f7f1e5;
+    --card:#fffaf0;
+    --ink:#3b2f25;
+    --ink-soft:#6f6151;
+    --ink-faint:#a08d76;
+    --accent:#8a5a33;
+    --accent-dark:#6e4525;
+    --line:#d9cbb2;
+    --highlight:#fdf3d8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:Georgia,"Times New Roman",serif;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:1100px;margin:0 auto;padding:16px 16px 40px;}
+
+  /* ---------- password gate ---------- */
+  #gate{
+    max-width:520px;margin:8vh auto 0;background:var(--card);
+    border:1px solid var(--line);border-radius:12px;
+    padding:28px 26px 30px;box-shadow:0 4px 18px rgba(90,64,32,.12);
+  }
+  #gate h1{font-size:1.5rem;margin:0 0 6px;text-align:center;}
+  #gate p.intro{margin:0 0 18px;text-align:center;color:var(--ink-soft);}
+  #gate label{display:block;font-size:.95rem;margin:14px 0 5px;}
+  #gate input,#gate textarea{
+    width:100%;padding:11px 12px;font-size:1rem;font-family:inherit;
+    border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);
+  }
+  #gate textarea{min-height:64px;resize:vertical;}
+  .btn{
+    display:inline-block;border:1px solid var(--accent);border-radius:9px;
+    background:var(--accent);color:#fff8ec;font-family:inherit;font-size:1rem;
+    padding:11px 22px;cursor:pointer;
+  }
+  .btn:hover{background:var(--accent-dark);}
+  #gate .btn{width:100%;margin-top:18px;}
+  #gate-error{
+    display:none;margin:14px 0 0;padding:10px 12px;border-radius:8px;
+    background:#fbeae6;border:1px solid #d9a08f;color:#7c2d1c;font-size:.95rem;
+  }
+  #access-request{display:none;margin-top:22px;border-top:1px solid var(--line);padding-top:6px;}
+  #access-request h2{font-size:1.1rem;margin:12px 0 4px;}
+  #access-request p{margin:0;color:var(--ink-soft);font-size:.95rem;}
+  #access-request .btn{background:#fff;color:var(--accent-dark);}
+  #access-request .btn:hover{background:var(--highlight);}
+
+  /* ---------- photo page ---------- */
+  #main{display:none;}
+  header.site-head{text-align:center;margin:6px 0 14px;}
+  header.site-head .kicker{
+    font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin:0;
+  }
+  header.site-head h1{font-size:1.7rem;margin:4px 0 0;}
+  figure.photo{margin:0;text-align:center;}
+  figure.photo img{
+    width:100%;max-height:80vh;object-fit:contain;display:block;margin:0 auto;
+    background:#efe6d4;border:1px solid var(--line);border-radius:10px;
+    box-shadow:0 6px 24px rgba(90,64,32,.18);
+  }
+
+  .voices{margin:20px auto 0;max-width:760px;text-align:center;}
+  .voices h2{font-size:1.05rem;font-weight:normal;color:var(--ink-soft);margin:0 0 10px;}
+  .voice-buttons{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
+  .voice-btn{
+    font-family:inherit;font-size:1.15rem;padding:12px 26px;min-width:120px;
+    border-radius:999px;border:2px solid var(--accent);background:#fff;color:var(--accent-dark);
+    cursor:pointer;line-height:1.15;
+  }
+  .voice-btn .sub{display:block;font-size:.72rem;color:var(--ink-faint);margin-top:2px;letter-spacing:.02em;}
+  .voice-btn:hover:not(:disabled){background:var(--highlight);}
+  .voice-btn.active{background:var(--accent);color:#fff8ec;border-color:var(--accent-dark);}
+  .voice-btn.active .sub{color:#e8d9c3;}
+  .voice-btn:disabled{cursor:default;}
+  .voice-btn.grayed{opacity:.38;border-color:var(--ink-faint);color:var(--ink-soft);}
+  .voice-btn.pending{opacity:.65;border-style:dashed;color:var(--ink-soft);}
+
+  .player{
+    margin:18px auto 0;max-width:760px;background:var(--card);
+    border:1px solid var(--line);border-radius:10px;padding:14px 16px;
+  }
+  .player .now{font-size:.98rem;color:var(--ink-soft);margin:0 0 10px;text-align:center;min-height:1.2em;}
+  .player .controls{display:flex;align-items:center;gap:12px;}
+  #playpause{
+    flex:0 0 auto;width:52px;height:52px;border-radius:50%;
+    border:2px solid var(--accent-dark);background:var(--accent);color:#fff8ec;
+    font-size:1.05rem;cursor:pointer;font-family:inherit;
+  }
+  #playpause:disabled{opacity:.4;cursor:default;}
+  #seek{flex:1 1 auto;accent-color:var(--accent);height:32px;}
+  #seek:disabled{opacity:.4;}
+  #time{flex:0 0 auto;font-size:.95rem;color:var(--ink-soft);min-width:86px;text-align:right;font-variant-numeric:tabular-nums;}
+
+
+  footer.site-foot{
+    margin:28px auto 0;max-width:760px;text-align:center;
+    color:var(--ink-faint);font-size:.85rem;
+  }
+  @media (max-width:600px){
+    .wrap{padding:10px 10px 32px;}
+    header.site-head h1{font-size:1.35rem;}
+    figure.photo img{max-height:70vh;}
+    .voice-btn{font-size:1.05rem;padding:11px 20px;flex:1 1 40%;}
+    #time{min-width:76px;font-size:.88rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= PASSWORD GATE ================= -->
+<section id="gate" aria-label="Password gate">
+  <h1>Family Photos</h1>
+  <p class="intro">This is a private family page. Please sign in with your name and password to see picture 001.</p>
+
+  <form id="gate-form">
+    <label for="signin-name">Your name</label>
+    <input type="text" id="signin-name" autocomplete="username" required autofocus>
+    <label for="password">Password</label>
+    <input type="password" id="password" autocomplete="current-password" required>
+    <button class="btn" type="submit" id="signin-btn">Sign in</button>
+  </form>
+  <p id="gate-wait" style="display:none;margin-top:12px;text-align:left;"></p>
+  <div id="gate-error" role="alert"></div>
+
+  <!-- Access request: appears after a wrong password. The note is for THIS picture. -->
+  <div id="access-request">
+    <h2>Need the current password?</h2>
+    <p>Send a note to the admin for <strong>picture 001</strong>. Fill this in and send it —
+       the note goes straight to the admin.</p>
+    <form id="access-form">
+      <label for="req-name">Full name</label>
+      <input type="text" id="req-name" autocomplete="off" required>
+      <label for="req-email">Email address</label>
+      <input type="email" id="req-email" autocomplete="off" required>
+      <label for="req-rel">What is your relationship to the individuals in this picture?</label>
+      <textarea id="req-rel" required></textarea>
+      <button class="btn" type="submit">Send a note to the admin</button>
+    </form>
+    <p id="note-sent" style="display:none;"></p>
+  </div>
+</section>
+
+<!-- ================= PHOTO PAGE ================= -->
+<div class="wrap" id="main">
+  <header class="site-head">
+    <p class="kicker">Family Photos — Picture 001</p>
+    <h1>Ripple Wagon Rolls Out — Teardrop in Tow</h1>
+  </header>
+
+  <figure class="photo">
+    <img id="photo-img" src="" alt="Family photograph — picture 001">
+  </figure>
+
+  <section class="voices" aria-label="Hear the voices">
+    <h2>Tap a name to hear that person's memory of this picture.</h2>
+    <div class="voice-buttons" id="voice-buttons"></div>
+  </section>
+
+  <section class="player" aria-label="Voice player">
+    <p class="now" id="now-playing">Choose a name above to hear their memory.</p>
+    <div class="controls">
+      <button id="playpause" type="button" disabled aria-label="Play or pause">&#9654;</button>
+      <input type="range" id="seek" min="0" max="0" step="0.1" value="0" disabled aria-label="Seek">
+      <span id="time">0:00 / 0:00</span>
+    </div>
+  </section>
+
+  <p id="add-voice-line" style="text-align:center;margin:22px auto 0;max-width:760px;"><a href="intake.html">Add your voice to this picture</a></p>
+
+  <footer class="site-foot">A private family page — please don't pass this address around outside the family.</footer>
+</div>
+
+<audio id="audio" preload="metadata"></audio>
+
+<script>
+"use strict";
+
+/* =====================================================================
+   SIGN-IN — the Google program checks the name and password and
+   hands back a session; the page never holds a password or a hash.
+   The wiring is the shared sign-in script at the end of the page.
+   ===================================================================== */
+
+/* =====================================================================
+   DATA MODEL — one object per picture.
+   contributors[].audio      : path to the recording, or null until the
+                               recording has been made and filed.
+   ===================================================================== */
+const PHOTO = {
+  id: "001",
+  image: "3ffb9a0ae8c7d8617122d37fcd87c307.jpg",
+  contributors: [
+    { name: "Clay", audio: "6f9059b5677780d00432fa3e672928b9.m4a" },
+    { name: "Bill", audio: "d5790d06e2beaebe4c67186a3a3356cf.mp3" },
+  ]
+};
+
+
+/* ---------------- sign-in ----------------
+   The gate form and the note form are wired by the sign-in script at
+   the end of the page. This hook runs when a sign-in succeeds, and
+   again when a sign-in from earlier in this tab session is restored:
+   show the picture. Viewers do not see the contributor option. */
+const gateEl = document.getElementById("gate");
+const mainEl = document.getElementById("main");
+window.fpSignedIn = function (sess) {
+  gateEl.style.display = "none";
+  mainEl.style.display = "block";
+  if (sess.role === "viewer") {
+    var av = document.getElementById("add-voice-line");
+    if (av) av.style.display = "none";
+  }
+};
+
+/* ---------------- page build from the data model ---------------- */
+document.getElementById("photo-img").src = PHOTO.image;
+
+const buttonsBox = document.getElementById("voice-buttons");
+const contributorButtons = [];
+
+PHOTO.contributors.forEach(function (c, i) {
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "voice-btn" + (c.audio ? "" : " pending");
+  btn.innerHTML = "";
+  btn.appendChild(document.createTextNode(c.name));
+  if (!c.audio) {
+    const sub = document.createElement("span");
+    sub.className = "sub";
+    sub.textContent = "recording to come";
+    btn.appendChild(sub);
+    btn.disabled = true;
+  }
+  btn.addEventListener("click", function () { onContributorTap(i); });
+  buttonsBox.appendChild(btn);
+  contributorButtons.push(btn);
+});
+
+/* ---------------- player ---------------- */
+const audio = document.getElementById("audio");
+const playpauseBtn = document.getElementById("playpause");
+const seek = document.getElementById("seek");
+const timeEl = document.getElementById("time");
+const nowEl = document.getElementById("now-playing");
+
+let current = -1;      // index into PHOTO.contributors, -1 = none selected
+let seeking = false;
+
+function fmt(sec) {
+  if (!isFinite(sec) || sec < 0) sec = 0;
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60);
+  return m + ":" + (s < 10 ? "0" : "") + s;
+}
+
+function refreshButtons() {
+  const playing = !audio.paused && !audio.ended && current >= 0;
+  contributorButtons.forEach(function (btn, i) {
+    const c = PHOTO.contributors[i];
+    btn.classList.toggle("active", i === current);
+    if (!c.audio) { btn.disabled = true; btn.classList.add("pending"); return; }
+    if (playing && i !== current) {
+      btn.disabled = true;              // grayed out while another voice plays
+      btn.classList.add("grayed");
+    } else {
+      btn.disabled = false;             // pause re-enables everyone
+      btn.classList.remove("grayed");
+    }
+  });
+  playpauseBtn.disabled = current < 0;
+  playpauseBtn.innerHTML = playing ? "&#10074;&#10074;" : "&#9654;";
+  seek.disabled = current < 0;
+}
+
+function selectContributor(i, autoplay) {
+  const c = PHOTO.contributors[i];
+  if (!c.audio) return;
+  if (i !== current) {
+    current = i;
+    audio.src = c.audio;
+    audio.currentTime = 0;
+    nowEl.textContent = "Selected: " + c.name + " — tap play, or it starts on its own.";
+  }
+  if (autoplay) {
+    audio.play().then(function () {
+      nowEl.textContent = "Now playing: " + PHOTO.contributors[current].name;
+      refreshButtons();
+    }).catch(function () { refreshButtons(); });
+  }
+  refreshButtons();
+}
+
+function onContributorTap(i) {
+  if (i === current) { togglePlay(); return; }   // tapping the playing name pauses/resumes
+  selectContributor(i, true);                    // switching stops the old voice, starts the new
+}
+
+function togglePlay() {
+  if (current < 0) return;
+  if (audio.paused) {
+    audio.play().then(function () {
+      nowEl.textContent = "Now playing: " + PHOTO.contributors[current].name;
+      refreshButtons();
+    }).catch(function () { refreshButtons(); });
+  } else {
+    audio.pause();
+    nowEl.textContent = "Paused: " + PHOTO.contributors[current].name;
+    refreshButtons();
+  }
+}
+
+playpauseBtn.addEventListener("click", togglePlay);
+
+audio.addEventListener("loadedmetadata", function () {
+  seek.max = audio.duration || 0;
+  timeEl.textContent = fmt(audio.currentTime) + " / " + fmt(audio.duration);
+});
+audio.addEventListener("timeupdate", function () {
+  if (!seeking) seek.value = audio.currentTime;
+  timeEl.textContent = fmt(audio.currentTime) + " / " + fmt(audio.duration);
+});
+audio.addEventListener("play", refreshButtons);
+audio.addEventListener("pause", function () {
+  if (current >= 0 && !audio.ended) nowEl.textContent = "Paused: " + PHOTO.contributors[current].name;
+  refreshButtons();
+});
+audio.addEventListener("ended", function () {
+  if (current >= 0) nowEl.textContent = "Finished: " + PHOTO.contributors[current].name +
+    " — tap a name to hear another, or play to hear it again.";
+  refreshButtons();
+});
+seek.addEventListener("input", function () {
+  seeking = true;
+  audio.currentTime = parseFloat(seek.value);
+  timeEl.textContent = fmt(audio.currentTime) + " / " + fmt(audio.duration);
+});
+seek.addEventListener("change", function () { seeking = false; });
+
+/* A sign-in from earlier in this tab session is restored by the
+   sign-in script at the end of the page. */
+if (gateEl.style.display !== "none") document.getElementById("signin-name").focus();
+
+refreshButtons();
+</script>
+<script>
+/* Sign-in wiring — the same on every page of the album. The page's own
+   script defines window.fpSignedIn(sess), which shows the page for the
+   signed-in person: contributors get the contributor options; viewers
+   see only the pictures and the voices. */
+(function () {
+  var HELPER = "https://script.google.com/macros/s/AKfycbwm3esTC80cx9zJvKDabei8Rh8JmYK0uKwIpPnEAPtuHWFaWTcI13vFrk1Pue7nfF2VXQ/exec";
+  var HKEY = "91e4578bdef6255b5891f558f3754c8d";
+  var gateForm = document.getElementById('gate-form');
+  if (!gateForm) return;
+  var nameEl = document.getElementById('signin-name');
+  var pwEl = document.getElementById('password');
+  var btnEl = document.getElementById('signin-btn');
+  var errEl = document.getElementById('gate-error');
+  var waitEl = document.getElementById('gate-wait');
+  var accessEl = document.getElementById('access-request');
+  var lastName = '';
+  var waiting = false;
+
+  function store(k, v) { try { if (v === null) sessionStorage.removeItem(k); else sessionStorage.setItem(k, v); } catch (e) {} }
+  function read(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
+  function post(params) {
+    var body = new URLSearchParams();
+    body.set('key', HKEY);
+    Object.keys(params).forEach(function (k) { body.set(k, params[k]); });
+    return fetch(HELPER, { method: 'POST', body: body }).then(function (r) { return r.json(); });
+  }
+  function deviceKind() {
+    var ua = navigator.userAgent || '';
+    var dev = 'computer';
+    if (/Android/.test(ua)) dev = /Mobile/.test(ua) ? 'Android phone' : 'Android tablet';
+    else if (/iPhone/.test(ua)) dev = 'iPhone';
+    else if (/iPad/.test(ua)) dev = 'iPad';
+    else if (/Windows/.test(ua)) dev = 'Windows computer';
+    else if (/Macintosh|Mac OS X/.test(ua)) dev = 'Mac computer';
+    var br = 'browser';
+    if (/Edg\//.test(ua)) br = 'Edge';
+    else if (/Firefox\//.test(ua)) br = 'Firefox';
+    else if (/Chrome\//.test(ua)) br = 'Chrome';
+    else if (/Safari\//.test(ua)) br = 'Safari';
+    return dev + ' · ' + br;
+  }
+  function facts() {
+    var tz = '';
+    try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+    return {
+      device: deviceKind(),
+      language: navigator.language || '',
+      timezone: tz,
+      screen: (window.screen && screen.width ? screen.width : 0) + 'x' + (window.screen && screen.height ? screen.height : 0)
+    };
+  }
+  /* The IP address comes from a free IP-lookup service (ipapi.co).
+     If it does not answer, the try is still recorded, with the
+     address blank. */
+  function lookupIp() {
+    return fetch('https://ipapi.co/json/')
+      .then(function (r) { return r.json(); })
+      .then(function (d) { return (d && d.ip) || ''; })
+      .catch(function () { return ''; });
+  }
+  function setFormEnabled(on) {
+    nameEl.disabled = !on;
+    pwEl.disabled = !on;
+    btnEl.disabled = !on;
+  }
+  /* A wait is announced BEFORE it starts — which try failed and how
+     long the wait is — and the password box stays closed for the
+     wait. The send-a-note form below stays open the whole time. */
+  function startWait(seconds, message) {
+    waiting = true;
+    waitEl.textContent = message;
+    waitEl.style.display = 'block';
+    setFormEnabled(false);
+    setTimeout(function () {
+      waiting = false;
+      /* The NEXT try is the one that came after a wait — the mark is
+         set here, and the submit spends it, so it names one try
+         only. */
+      store('fps-afterwait', '1');
+      waitEl.style.display = 'none';
+      setFormEnabled(true);
+      pwEl.value = '';
+      pwEl.focus();
+    }, seconds * 1000);
+  }
+
+  gateForm.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (waiting) return;
+    var name = nameEl.value.trim();
+    var pw = pwEl.value;
+    lastName = name;
+    var triesBefore = parseInt(read('fps-tries') || '0', 10) || 0;
+    var failsBefore = parseInt(read('fps-fails') || '0', 10) || 0;
+    var afterWait = read('fps-afterwait') === '1' ? '1' : '0';
+    store('fps-afterwait', null);
+    store('fps-tries', String(triesBefore + 1));
+    errEl.style.display = 'none';
+    lookupIp().then(function (ip) {
+      var f = facts();
+      return post({
+        action: 'signin', name: name, password: pw,
+        tries: triesBefore + 1, failsBefore: failsBefore, afterWait: afterWait,
+        device: f.device, language: f.language, timezone: f.timezone, screen: f.screen, ip: ip
+      });
+    }).then(function (res) {
+      if (res && res.ok) {
+        store('fps-session', JSON.stringify({ token: res.session, name: res.name, role: res.role }));
+        store('fps-fails', '0');
+        store('fps-tries', '0');
+        store('fps-afterwait', null);
+        if (window.fpSignedIn) window.fpSignedIn({ token: res.session, name: res.name, role: res.role });
+        return;
+      }
+      store('fps-fails', String(failsBefore + 1));
+      if (accessEl) accessEl.style.display = 'block';
+      if (res && res.error === 'mismatch') {
+        errEl.textContent = "your password doesn't match your username";
+      } else {
+        errEl.textContent = "That name and password didn't work. You can send a note to the admin below.";
+      }
+      errEl.style.display = 'block';
+      if (res && res.waitSeconds > 0 && res.waitMessage) startWait(res.waitSeconds, res.waitMessage);
+    }).catch(function () {
+      errEl.textContent = "The sign-in didn't go through just now. Try again in a moment.";
+      errEl.style.display = 'block';
+    });
+  });
+
+  var accessForm = document.getElementById('access-form');
+  if (accessForm) {
+    accessForm.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var sentEl = document.getElementById('note-sent');
+      function noteLine(t) { if (sentEl) { sentEl.textContent = t; sentEl.style.display = 'block'; } }
+      post({
+        action: 'sendNote',
+        fullName: document.getElementById('req-name').value.trim(),
+        email: document.getElementById('req-email').value.trim(),
+        relationship: document.getElementById('req-rel').value.trim(),
+        picture: '001',
+        nameTyped: lastName
+      }).then(function (res) {
+        if (res && res.ok) {
+          noteLine('Your note was sent to the admin.');
+          accessForm.reset();
+        } else {
+          noteLine("The note didn't go through just now. Check the email address and try again.");
+        }
+      }).catch(function () {
+        noteLine("The note didn't go through just now. Try again in a moment.");
+      });
+    });
+  }
+
+  /* A sign-in from earlier in this tab session signs back in on its
+     own — the visit is still the same visit. The program is asked
+     first: a session it no longer holds (time up, or dropped when a
+     password was reset) does not unlock anything, and the stored
+     copy is thrown away. */
+  try {
+    var s = JSON.parse(read('fps-session') || 'null');
+    if (s && s.token) {
+      post({ action: 'sessionCheck', session: s.token }).then(function (res) {
+        if (res && res.ok) {
+          store('fps-session', JSON.stringify({ token: s.token, name: res.name, role: res.role }));
+          if (window.fpSignedIn) window.fpSignedIn({ token: s.token, name: res.name, role: res.role });
+        } else {
+          store('fps-session', null);
+        }
+      }).catch(function () { /* no answer — the gate simply stays up */ });
+    }
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
