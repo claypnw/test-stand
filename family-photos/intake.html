@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Add your voice — Family Photos</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background:#f4f1ea; color:#1c1a17; }
+  header { padding:14px 16px 6px; }
+  header h1 { font-size:20px; margin:0 0 4px; }
+  header p { margin:0; font-size:14px; color:#5b554b; }
+  main { padding:10px 16px 28px; max-width:720px; margin:0 auto; }
+  .photo { width:100%; border-radius:10px; display:block; box-shadow:0 2px 10px rgba(0,0,0,.25); }
+  .step { margin-top:18px; }
+  .who { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .who label { font-size:15px; }
+  .who input { font-size:17px; padding:10px 12px; border:2px solid #8a8274; border-radius:8px; background:#fff; color:#000; min-width:200px; }
+  .controls { display:flex; gap:10px; flex-wrap:wrap; margin-top:8px; }
+  button { font-size:18px; padding:14px 18px; border-radius:10px; border:2px solid #6d675c; background:#fff; color:#1c1a17; cursor:pointer; }
+  button.primary { background:#2f5d33; border-color:#2f5d33; color:#fff; }
+  button.danger { background:#7a2e22; border-color:#7a2e22; color:#fff; }
+  button:disabled { opacity:.45; cursor:default; }
+  .status { margin-top:12px; font-size:16px; min-height:24px; }
+  .meter { font-variant-numeric: tabular-nums; font-size:15px; color:#5b554b; }
+  audio { width:100%; margin-top:10px; }
+  .hidden { display:none !important; }
+  .box { margin-top:16px; background:#fff; border:2px solid #8a8274; border-radius:10px; padding:14px; }
+  .box h3 { margin:0 0 8px; font-size:17px; }
+  .note { font-size:14px; color:#5b554b; margin-top:10px; }
+</style>
+</head>
+<body>
+<!-- Sign-in gate — everyone signs in with a name and a password.
+     Contributors reach the recorder; viewers are told plainly that
+     recording is for contributors. The wiring is the shared sign-in
+     script at the end of the page. -->
+<div id="intakeGate" style="position:fixed;inset:0;background:rgba(40,30,20,.55);display:flex;align-items:flex-start;justify-content:center;padding:24px 16px;overflow:auto;z-index:50;">
+  <div style="background:#fffdf8;max-width:480px;width:100%;border-radius:12px;padding:22px;box-shadow:0 10px 40px rgba(0,0,0,.35);">
+    <h2 style="margin:0 0 8px;font:600 22px Georgia,serif;">Family Photos</h2>
+    <p style="margin:0 0 14px;font-size:16px;">This recorder is part of the private family page. Sign in with your name and password to continue.</p>
+    <form id="gate-form">
+      <label for="signin-name" style="display:block;font-size:15px;margin-bottom:4px;">Your name</label>
+      <input type="text" id="signin-name" autocomplete="username" required autofocus style="width:100%;font-size:17px;padding:10px;box-sizing:border-box;margin-bottom:10px;">
+      <label for="password" style="display:block;font-size:15px;margin-bottom:4px;">Password</label>
+      <input type="password" id="password" autocomplete="current-password" required style="width:100%;font-size:17px;padding:10px;box-sizing:border-box;">
+      <button type="submit" id="signin-btn" style="margin-top:12px;font-size:17px;padding:10px 18px;cursor:pointer;">Sign in</button>
+    </form>
+    <p id="gate-error" style="display:none;color:#7a2e22;font-size:15px;margin-top:10px;"></p>
+    <p id="gate-wait" style="display:none;font-size:15px;margin-top:10px;"></p>
+    <div id="viewer-note" style="display:none;margin-top:12px;font-size:15px;">
+      <p style="margin:0 0 8px;">Recording is for contributors. You are signed in as a viewer — you can see the pictures and hear the voices on the picture page.</p>
+      <p style="margin:0;"><a href="index.html">Go to the picture</a></p>
+    </div>
+    <div id="access-request" style="display:none;margin-top:16px;border-top:1px solid #ddd;padding-top:10px;">
+      <h3 style="margin:0 0 6px;font-size:16px;">Need the current password?</h3>
+      <p style="margin:0 0 8px;font-size:14px;">Send a note to the admin for <strong>picture 001</strong>. Fill this in and send it — the note goes straight to the admin.</p>
+      <form id="access-form">
+        <label for="req-name" style="display:block;font-size:14px;margin-bottom:4px;">Your full name</label>
+        <input type="text" id="req-name" autocomplete="off" required style="width:100%;font-size:16px;padding:9px;box-sizing:border-box;margin-bottom:8px;">
+        <label for="req-email" style="display:block;font-size:14px;margin-bottom:4px;">Your email address</label>
+        <input type="email" id="req-email" autocomplete="off" required style="width:100%;font-size:16px;padding:9px;box-sizing:border-box;margin-bottom:8px;">
+        <label for="req-rel" style="display:block;font-size:14px;margin-bottom:4px;">What is your relationship to the individuals in this picture?</label>
+        <textarea id="req-rel" required style="width:100%;font-size:16px;padding:9px;box-sizing:border-box;min-height:64px;margin-bottom:8px;"></textarea>
+        <button type="submit" style="font-size:16px;padding:9px 16px;cursor:pointer;">Send a note to the admin</button>
+      </form>
+      <p id="note-sent" style="display:none;font-size:14px;margin-top:8px;"></p>
+    </div>
+  </div>
+</div>
+
+<header>
+  <h1>Add your voice to this picture</h1>
+  <p>Record your voice. Send it, listen to it — then approve it, or delete it and record again. Nothing is kept unless you approve it.</p>
+</header>
+<main>
+  <img class="photo" src="3ffb9a0ae8c7d8617122d37fcd87c307.jpg" alt="The picture you are talking about">
+
+  <div class="step who">
+    <label for="who">Your name:</label>
+    <input id="who" type="text" autocomplete="off" placeholder="e.g. Clay">
+  </div>
+  <p class="note" id="nameNote">Your name is needed before recording, so your recording is filed under your name.</p>
+
+  <div class="step">
+    <div class="controls" id="recordRow">
+      <button id="btnRecord" class="primary" disabled>● Record</button>
+      <button id="btnStop" disabled>■ Stop</button>
+      <span class="meter" id="clock"></span>
+    </div>
+
+    <div class="controls hidden" id="choiceRow">
+      <button id="btnSend" class="primary">Send my recording</button>
+      <button id="btnPlay">▶ Listen to my take</button>
+      <button id="btnRerecord" class="danger">Re-record (delete this take)</button>
+    </div>
+
+    <audio id="playback" class="hidden" controls></audio>
+    <div class="status" id="status">Ready when you are.</div>
+  </div>
+
+  <!-- Listen and approve: the recording is already sent; the contributor
+       plays it back here and approves the sound. No words are involved. -->
+  <div id="reviewBox" class="box hidden">
+    <h3>Listen to your recording</h3>
+    <p style="margin:0;font-size:16px;">Your recording is in. Play it back and listen to it. If it sounds right, tap Approve — it will be filed with the picture. If it doesn't sound right, delete it and record again.</p>
+    <audio id="reviewPlayback" class="hidden" controls></audio>
+    <p class="note" id="reviewStatus" style="min-height:18px;"></p>
+    <div class="controls">
+      <button id="btnReviewPlay">▶ Listen to my recording</button>
+      <button id="btnApprove" class="primary">Approve</button>
+      <button id="btnReviewDelete" class="danger">Delete this take</button>
+    </div>
+  </div>
+
+  <div id="doneBox" class="box hidden">
+    <h3 id="doneTitle">Done</h3>
+    <p id="doneText" style="margin:0;font-size:16px;">Your recording is sent. It gets filed with the picture from here. Thank you.</p>
+    <div class="controls">
+      <button id="btnAgain">Record another</button>
+    </div>
+  </div>
+</main>
+
+<script>
+(function () {
+  var HELPER = "https://script.google.com/macros/s/AKfycbwm3esTC80cx9zJvKDabei8Rh8JmYK0uKwIpPnEAPtuHWFaWTcI13vFrk1Pue7nfF2VXQ/exec";
+  var HKEY = "91e4578bdef6255b5891f558f3754c8d";
+  var PICTURE = "pilot";
+  var MAX_MS = 5 * 60 * 1000;
+  var STORE = "fps-take-v2";
+
+  var statusEl = document.getElementById('status');
+  var clockEl = document.getElementById('clock');
+  var btnRecord = document.getElementById('btnRecord');
+  var btnStop = document.getElementById('btnStop');
+  var recordRow = document.getElementById('recordRow');
+  var choiceRow = document.getElementById('choiceRow');
+  var btnSend = document.getElementById('btnSend');
+  var btnRerecord = document.getElementById('btnRerecord');
+  var btnPlay = document.getElementById('btnPlay');
+  var playback = document.getElementById('playback');
+  var whoInput = document.getElementById('who');
+  var reviewBox = document.getElementById('reviewBox');
+  var reviewPlayback = document.getElementById('reviewPlayback');
+  var reviewStatus = document.getElementById('reviewStatus');
+  var doneBox = document.getElementById('doneBox');
+  var doneTitle = document.getElementById('doneTitle');
+  var doneText = document.getElementById('doneText');
+
+  var mediaRecorder = null, chunks = [], audioBlob = null, audioUrl = null;
+  var timer = null, startedAt = 0;
+  var takeId = null, sending = false, capStopped = false, busy = false;
+
+  function fmt(ms) { var s = Math.floor(ms / 1000); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
+  function setStatus(t) { statusEl.textContent = t; }
+  function newTakeId() {
+    var b = new Uint8Array(16); crypto.getRandomValues(b);
+    return Array.from(b).map(function (x) { return x.toString(16).padStart(2, '0'); }).join('');
+  }
+  function saveTake() { try { localStorage.setItem(STORE, JSON.stringify({ takeId: takeId, name: whoInput.value.trim(), picture: PICTURE })); } catch (e) {} }
+  function loadTake() { try { var t = JSON.parse(localStorage.getItem(STORE) || 'null'); return (t && t.takeId) ? t : null; } catch (e) { return null; } }
+  function clearTake() { try { localStorage.removeItem(STORE); } catch (e) {} takeId = null; }
+
+  function sessToken() {
+    try { var s = JSON.parse(sessionStorage.getItem('fps-session') || 'null'); return (s && s.token) || ''; }
+    catch (e) { return ''; }
+  }
+  function helperPost(params) {
+    var body = new URLSearchParams();
+    body.set('key', HKEY);
+    var st = sessToken(); if (st) body.set('session', st);
+    Object.keys(params).forEach(function (k) { body.set(k, params[k]); });
+    return fetch(HELPER, { method: 'POST', body: body }).then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (res && res.error === 'sign-in needed') {
+          try { sessionStorage.removeItem('fps-session'); } catch (e) {}
+          location.reload();
+        }
+        return res;
+      });
+  }
+  function helperGet(params) {
+    var q = new URLSearchParams();
+    q.set('key', HKEY);
+    Object.keys(params).forEach(function (k) { q.set(k, params[k]); });
+    return fetch(HELPER + '?' + q.toString()).then(function (r) { return r.json(); });
+  }
+  function blobToBase64(blob) {
+    return new Promise(function (resolve, reject) {
+      var fr = new FileReader();
+      fr.onload = function () { resolve(String(fr.result).split(',')[1] || ''); };
+      fr.onerror = reject;
+      fr.readAsDataURL(blob);
+    });
+  }
+
+  whoInput.addEventListener('input', function () {
+    if (busy) return;
+    btnRecord.disabled = !whoInput.value.trim() || !!takeId;
+  });
+  /* The name box starts empty on every visit (Clay, 2026-10-15): never
+     restore a saved name, and clear any name saved by an older version. */
+  try { localStorage.removeItem('fps-name'); } catch (e) {}
+  whoInput.value = '';
+
+  function resetTake() {
+    chunks = []; audioBlob = null;
+    if (audioUrl) { URL.revokeObjectURL(audioUrl); audioUrl = null; }
+    playback.removeAttribute('src'); playback.classList.add('hidden');
+    reviewPlayback.removeAttribute('src'); reviewPlayback.classList.add('hidden');
+    reviewStatus.textContent = '';
+    choiceRow.classList.add('hidden');
+    reviewBox.classList.add('hidden'); doneBox.classList.add('hidden');
+    recordRow.classList.remove('hidden');
+    busy = false; whoInput.disabled = false;
+    btnRecord.disabled = !whoInput.value.trim();
+    btnStop.disabled = true;
+    clockEl.textContent = '';
+  }
+
+  btnRecord.addEventListener('click', function () {
+    if (!whoInput.value.trim()) { setStatus('Add your name first — then record.'); whoInput.focus(); return; }
+    if (!navigator.mediaDevices || !window.MediaRecorder) {
+      setStatus("This browser can't record audio. Send a WhatsApp voice message instead — that path always works.");
+      return;
+    }
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+      chunks = [];
+      try { mediaRecorder = new MediaRecorder(stream); }
+      catch (e) { mediaRecorder = new MediaRecorder(stream, {}); }
+      mediaRecorder.ondataavailable = function (e) { if (e.data && e.data.size) chunks.push(e.data); };
+      mediaRecorder.onstop = function () {
+        stream.getTracks().forEach(function (t) { t.stop(); });
+        audioBlob = new Blob(chunks, { type: mediaRecorder.mimeType || 'audio/webm' });
+        audioUrl = URL.createObjectURL(audioBlob);
+        playback.src = audioUrl;
+        clearInterval(timer); timer = null;
+        btnStop.disabled = true;
+        recordRow.classList.add('hidden');
+        choiceRow.classList.remove('hidden');
+        if (capStopped) { capStopped = false; setStatus("That's the five-minute mark — the recording stopped there. Listen to it if you like — then send it, or re-record. Nothing is kept unless you send it and approve it."); }
+        else setStatus('Done recording. Listen to it if you like — then send it, or re-record and start over. Nothing is kept unless you send it and approve it.');
+      };
+      mediaRecorder.start();
+      busy = true; whoInput.disabled = true;
+      startedAt = Date.now();
+      clockEl.textContent = '0:00';
+      timer = setInterval(function () {
+        var el = Date.now() - startedAt;
+        clockEl.textContent = fmt(el);
+        if (el >= MAX_MS) { capStopped = true; btnStop.click(); }
+      }, 250);
+      btnRecord.disabled = true; btnStop.disabled = false;
+      setStatus('Recording… tap Stop when you are done. Five minutes at the most.');
+    }).catch(function () {
+      setStatus("The microphone wasn't allowed. Check the browser's microphone permission for this page, or send a WhatsApp voice message instead.");
+    });
+  });
+
+  btnStop.addEventListener('click', function () {
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') mediaRecorder.stop();
+  });
+
+  btnPlay.addEventListener('click', function () {
+    playback.classList.remove('hidden');
+    playback.play();
+  });
+
+  btnRerecord.addEventListener('click', function () {
+    resetTake();
+    setStatus('Take deleted. Ready for a fresh take.');
+  });
+
+  btnSend.addEventListener('click', function () {
+    if (sending || !audioBlob) return;
+    sending = true;
+    btnSend.disabled = true;
+    setStatus('Sending your recording…');
+    takeId = newTakeId();
+    blobToBase64(audioBlob).then(function (b64) {
+      return helperPost({ action: 'upload', takeId: takeId, name: whoInput.value.trim(), picture: PICTURE, mime: audioBlob.type || 'audio/webm', audio: b64 });
+    }).then(function (res) {
+      sending = false;
+      btnSend.disabled = false;
+      if (!res || !res.ok) throw new Error('send failed');
+      saveTake();
+      choiceRow.classList.add('hidden');
+      reviewBox.classList.remove('hidden');
+      reviewStatus.textContent = '';
+      setStatus('Your recording is in. Listen to it below, then approve it.');
+    }).catch(function () {
+      sending = false;
+      btnSend.disabled = false;
+      takeId = null;
+      setStatus("The recording didn't go through. It is still on this page — tap Send my recording again to resend it.");
+    });
+  });
+
+  function abandonTake(done) {
+    var id = takeId;
+    clearTake();
+    if (!id) { done(true); return; }
+    helperPost({ action: 'abandon', takeId: id }).then(function (res) { done(!!(res && res.ok)); }).catch(function () { done(false); });
+  }
+  function afterDelete(confirmed) {
+    resetTake();
+    if (confirmed) setStatus('Take deleted. Ready for a fresh take.');
+    else setStatus("That delete didn't go through just now. The copy in the folder is taken out on its own after 30 days. Ready for a fresh take.");
+  }
+
+  document.getElementById('btnReviewDelete').addEventListener('click', function () {
+    abandonTake(afterDelete);
+  });
+
+  /* Approve sends the takeId only — no words. The program's approve
+     action takes an optional text field and stores '' when none is
+     sent (helper v2.4), so approval works on the sound alone. */
+  document.getElementById('btnApprove').addEventListener('click', function () {
+    if (!takeId) return;
+    var btn = this; btn.disabled = true;
+    reviewStatus.textContent = 'Sending your approval…';
+    helperPost({ action: 'approve', takeId: takeId }).then(function (res) {
+      btn.disabled = false;
+      if (!res || !res.ok) throw new Error('x');
+      clearTake();
+      reviewBox.classList.add('hidden');
+      doneTitle.textContent = 'Sent';
+      doneText.textContent = 'Your recording is sent. It gets filed with the picture from here. Thank you.';
+      doneBox.classList.remove('hidden');
+      setStatus('Done.');
+    }).catch(function () {
+      btn.disabled = false;
+      reviewStatus.textContent = "The approval didn't go through. Tap Approve again.";
+    });
+  });
+
+  document.getElementById('btnReviewPlay').addEventListener('click', function () {
+    function play(url) { reviewPlayback.src = url; reviewPlayback.classList.remove('hidden'); reviewPlayback.play(); }
+    if (audioUrl) { play(audioUrl); return; }
+    if (!takeId) { reviewStatus.textContent = "The recording couldn't be played just now."; return; }
+    reviewStatus.textContent = 'Getting your recording…';
+    helperGet({ takeId: takeId, action: 'audio' }).then(function (res) {
+      if (res && res.audio) {
+        var bin = atob(res.audio); var arr = new Uint8Array(bin.length);
+        for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+        var blob = new Blob([arr], { type: res.mime || 'audio/webm' });
+        audioUrl = URL.createObjectURL(blob);
+        reviewStatus.textContent = '';
+        play(audioUrl);
+      } else {
+        reviewStatus.textContent = "The recording couldn't be played just now.";
+      }
+    }).catch(function () { reviewStatus.textContent = "The recording couldn't be played just now."; });
+  });
+
+  document.getElementById('btnAgain').addEventListener('click', function () {
+    resetTake();
+    setStatus('Ready when you are.');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Pick up where a past visit left off: one status check — the take is
+  // either already approved, still waiting (show listen and approve), or
+  // gone. The flow never waits on words.
+  // The sign-in hook, called by the shared sign-in script at the end
+  // of the page when a sign-in succeeds or is restored.
+  window.fpSignedIn = function (sess) {
+    if (sess.role === 'viewer') {
+      document.getElementById('gate-form').style.display = 'none';
+      document.getElementById('viewer-note').style.display = 'block';
+      return;
+    }
+    document.getElementById('intakeGate').style.display = 'none';
+    whoInput.value = sess.name;
+    whoInput.disabled = true;
+    if (!takeId) btnRecord.disabled = false;
+  };
+
+  (function resume() {
+    var t = loadTake();
+    if (!t) return;
+    takeId = t.takeId;
+    if (t.name && !whoInput.value) whoInput.value = t.name;
+    busy = true; whoInput.disabled = true;
+    btnRecord.disabled = true;
+    recordRow.classList.add('hidden');
+    reviewBox.classList.remove('hidden');
+    reviewStatus.textContent = '';
+    setStatus('Welcome back. Checking on your recording…');
+    helperGet({ takeId: takeId }).then(function (res) {
+      if (res && res.ok === false && res.error === 'no such take') {
+        clearTake();
+        reviewBox.classList.add('hidden');
+        recordRow.classList.remove('hidden');
+        busy = false; whoInput.disabled = false;
+        btnRecord.disabled = !whoInput.value.trim(); btnStop.disabled = true;
+        setStatus('That recording is not waiting anymore. It was filed already, or it was taken out after 30 days. You can record again.');
+        return;
+      }
+      if (res && res.ok && res.status === 'approved') {
+        clearTake();
+        reviewBox.classList.add('hidden');
+        doneTitle.textContent = 'Done';
+        doneText.textContent = 'Your recording was sent already. Thank you.';
+        doneBox.classList.remove('hidden');
+        setStatus('Done.');
+        return;
+      }
+      setStatus('Welcome back. Your recording is still here — listen to it below, then approve it.');
+    }).catch(function () {
+      setStatus('Welcome back. Your recording should still be here — listen to it below, then approve it.');
+    });
+  })();
+})();
+</script>
+
+<script>
+/* Sign-in wiring — the same on every page of the album. The page's own
+   script defines window.fpSignedIn(sess), which shows the page for the
+   signed-in person: contributors get the contributor options; viewers
+   see only the pictures and the voices. */
+(function () {
+  var HELPER = "https://script.google.com/macros/s/AKfycbwm3esTC80cx9zJvKDabei8Rh8JmYK0uKwIpPnEAPtuHWFaWTcI13vFrk1Pue7nfF2VXQ/exec";
+  var HKEY = "91e4578bdef6255b5891f558f3754c8d";
+  var gateForm = document.getElementById('gate-form');
+  if (!gateForm) return;
+  var nameEl = document.getElementById('signin-name');
+  var pwEl = document.getElementById('password');
+  var btnEl = document.getElementById('signin-btn');
+  var errEl = document.getElementById('gate-error');
+  var waitEl = document.getElementById('gate-wait');
+  var accessEl = document.getElementById('access-request');
+  var lastName = '';
+  var waiting = false;
+
+  function store(k, v) { try { if (v === null) sessionStorage.removeItem(k); else sessionStorage.setItem(k, v); } catch (e) {} }
+  function read(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
+  function post(params) {
+    var body = new URLSearchParams();
+    body.set('key', HKEY);
+    Object.keys(params).forEach(function (k) { body.set(k, params[k]); });
+    return fetch(HELPER, { method: 'POST', body: body }).then(function (r) { return r.json(); });
+  }
+  function deviceKind() {
+    var ua = navigator.userAgent || '';
+    var dev = 'computer';
+    if (/Android/.test(ua)) dev = /Mobile/.test(ua) ? 'Android phone' : 'Android tablet';
+    else if (/iPhone/.test(ua)) dev = 'iPhone';
+    else if (/iPad/.test(ua)) dev = 'iPad';
+    else if (/Windows/.test(ua)) dev = 'Windows computer';
+    else if (/Macintosh|Mac OS X/.test(ua)) dev = 'Mac computer';
+    var br = 'browser';
+    if (/Edg\//.test(ua)) br = 'Edge';
+    else if (/Firefox\//.test(ua)) br = 'Firefox';
+    else if (/Chrome\//.test(ua)) br = 'Chrome';
+    else if (/Safari\//.test(ua)) br = 'Safari';
+    return dev + ' · ' + br;
+  }
+  function facts() {
+    var tz = '';
+    try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+    return {
+      device: deviceKind(),
+      language: navigator.language || '',
+      timezone: tz,
+      screen: (window.screen && screen.width ? screen.width : 0) + 'x' + (window.screen && screen.height ? screen.height : 0)
+    };
+  }
+  /* The IP address comes from a free IP-lookup service (ipapi.co).
+     If it does not answer, the try is still recorded, with the
+     address blank. */
+  function lookupIp() {
+    return fetch('https://ipapi.co/json/')
+      .then(function (r) { return r.json(); })
+      .then(function (d) { return (d && d.ip) || ''; })
+      .catch(function () { return ''; });
+  }
+  function setFormEnabled(on) {
+    nameEl.disabled = !on;
+    pwEl.disabled = !on;
+    btnEl.disabled = !on;
+  }
+  /* A wait is announced BEFORE it starts — which try failed and how
+     long the wait is — and the password box stays closed for the
+     wait. The send-a-note form below stays open the whole time. */
+  function startWait(seconds, message) {
+    waiting = true;
+    waitEl.textContent = message;
+    waitEl.style.display = 'block';
+    setFormEnabled(false);
+    setTimeout(function () {
+      waiting = false;
+      /* The NEXT try is the one that came after a wait — the mark is
+         set here, and the submit spends it, so it names one try
+         only. */
+      store('fps-afterwait', '1');
+      waitEl.style.display = 'none';
+      setFormEnabled(true);
+      pwEl.value = '';
+      pwEl.focus();
+    }, seconds * 1000);
+  }
+
+  gateForm.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (waiting) return;
+    var name = nameEl.value.trim();
+    var pw = pwEl.value;
+    lastName = name;
+    var triesBefore = parseInt(read('fps-tries') || '0', 10) || 0;
+    var failsBefore = parseInt(read('fps-fails') || '0', 10) || 0;
+    var afterWait = read('fps-afterwait') === '1' ? '1' : '0';
+    store('fps-afterwait', null);
+    store('fps-tries', String(triesBefore + 1));
+    errEl.style.display = 'none';
+    lookupIp().then(function (ip) {
+      var f = facts();
+      return post({
+        action: 'signin', name: name, password: pw,
+        tries: triesBefore + 1, failsBefore: failsBefore, afterWait: afterWait,
+        device: f.device, language: f.language, timezone: f.timezone, screen: f.screen, ip: ip
+      });
+    }).then(function (res) {
+      if (res && res.ok) {
+        store('fps-session', JSON.stringify({ token: res.session, name: res.name, role: res.role }));
+        store('fps-fails', '0');
+        store('fps-tries', '0');
+        store('fps-afterwait', null);
+        if (window.fpSignedIn) window.fpSignedIn({ token: res.session, name: res.name, role: res.role });
+        return;
+      }
+      store('fps-fails', String(failsBefore + 1));
+      if (accessEl) accessEl.style.display = 'block';
+      if (res && res.error === 'mismatch') {
+        errEl.textContent = "your password doesn't match your username";
+      } else {
+        errEl.textContent = "That name and password didn't work. You can send a note to the admin below.";
+      }
+      errEl.style.display = 'block';
+      if (res && res.waitSeconds > 0 && res.waitMessage) startWait(res.waitSeconds, res.waitMessage);
+    }).catch(function () {
+      errEl.textContent = "The sign-in didn't go through just now. Try again in a moment.";
+      errEl.style.display = 'block';
+    });
+  });
+
+  var accessForm = document.getElementById('access-form');
+  if (accessForm) {
+    accessForm.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var sentEl = document.getElementById('note-sent');
+      function noteLine(t) { if (sentEl) { sentEl.textContent = t; sentEl.style.display = 'block'; } }
+      post({
+        action: 'sendNote',
+        fullName: document.getElementById('req-name').value.trim(),
+        email: document.getElementById('req-email').value.trim(),
+        relationship: document.getElementById('req-rel').value.trim(),
+        picture: '001',
+        nameTyped: lastName
+      }).then(function (res) {
+        if (res && res.ok) {
+          noteLine('Your note was sent to the admin.');
+          accessForm.reset();
+        } else {
+          noteLine("The note didn't go through just now. Check the email address and try again.");
+        }
+      }).catch(function () {
+        noteLine("The note didn't go through just now. Try again in a moment.");
+      });
+    });
+  }
+
+  /* A sign-in from earlier in this tab session signs back in on its
+     own — the visit is still the same visit. The program is asked
+     first: a session it no longer holds (time up, or dropped when a
+     password was reset) does not unlock anything, and the stored
+     copy is thrown away. */
+  try {
+    var s = JSON.parse(read('fps-session') || 'null');
+    if (s && s.token) {
+      post({ action: 'sessionCheck', session: s.token }).then(function (res) {
+        if (res && res.ok) {
+          store('fps-session', JSON.stringify({ token: s.token, name: res.name, role: res.role }));
+          if (window.fpSignedIn) window.fpSignedIn({ token: s.token, name: res.name, role: res.role });
+        } else {
+          store('fps-session', null);
+        }
+      }).catch(function () { /* no answer — the gate simply stays up */ });
+    }
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
