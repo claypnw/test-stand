@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="icon" type="image/jpeg" href="icon.jpg" />
+  <link rel="apple-touch-icon" href="icon.jpg" />
+  <title>Mogollon's Hearth Build Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #e7e1d4;
+      --paper: #f3eee3;
+      --paper-2: #ddd4c3;
+      --ink: #211e19;
+      --muted: #5d584f;
+      --line: #8f8068;
+      --line-soft: rgba(80, 68, 51, .22);
+      --wood: #542d1b;
+      --wood-deep: #2f1a12;
+      --ember: #b54f24;
+      --ember-hot: #d76c2e;
+      --pine: #334a3b;
+      --sky: #708897;
+      --shadow: rgba(40, 29, 18, .18);
+      --hero-veil: linear-gradient(90deg, rgba(16, 17, 16, .93) 0%, rgba(16, 17, 16, .78) 34%, rgba(16, 17, 16, .14) 68%, rgba(16,17,16,.06) 100%);
+      --display: "Alegreya SC", Georgia, serif;
+      --body: "Source Sans 3", "Trebuchet MS", sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #151817;
+        --paper: #202321;
+        --paper-2: #292b27;
+        --ink: #f2ecdf;
+        --muted: #c8c0b2;
+        --line: #8c7961;
+        --line-soft: rgba(223, 204, 173, .17);
+        --wood: #9a5b35;
+        --wood-deep: #1b1310;
+        --ember: #db7040;
+        --ember-hot: #ed8d4d;
+        --pine: #66806b;
+        --sky: #92aeba;
+        --shadow: rgba(0, 0, 0, .34);
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 0;
+      background:
+        repeating-linear-gradient(0deg, transparent 0 47px, var(--line-soft) 48px),
+        var(--bg);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 17px;
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+    button { font: inherit; }
+    .hero {
+      min-height: min(760px, 88vh);
+      display: grid;
+      align-items: end;
+      position: relative;
+      overflow: hidden;
+      background: #171a18 url("media-generation-hearth-hero-0-38611197-1f48-47e4-8359-bd7eeb17c243.webp") center / cover no-repeat;
+      color: #fff7e8;
+    }
+    .hero::before { content: ""; position: absolute; inset: 0; background: var(--hero-veil); }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 11px;
+      background: linear-gradient(90deg, #572f1c 0 20%, #bd592a 20% 22%, #3a2118 22% 62%, #70806b 62% 64%, #572f1c 64%);
+    }
+    .hero-inner {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: clamp(88px, 14vw, 176px) 0 clamp(62px, 9vw, 108px);
+      position: relative;
+      z-index: 1;
+    }
+    .identity { max-width: 650px; }
+    .chapter {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      margin: 0 0 14px;
+      color: #e0cbae;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .chapter::before { content: ""; width: 34px; height: 2px; background: #db7440; }
+    h1, h2, h3 { font-family: var(--display); line-height: .98; margin: 0; }
+    h1 { max-width: 620px; font-size: clamp(3.9rem, 9vw, 7.8rem); font-weight: 600; letter-spacing: -.035em; text-wrap: balance; }
+    .tagline { margin: 20px 0 0; max-width: 520px; font-family: var(--display); font-size: clamp(1.5rem, 3.2vw, 2.35rem); color: #f2d8ad; line-height: 1.1; }
+    .intro { margin: 24px 0 0; max-width: 540px; color: #eee6da; font-size: 1.1rem; }
+    .jumpbar {
+      width: min(1180px, calc(100% - 40px));
+      margin: -30px auto 0;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      background: var(--wood-deep);
+      color: #f7edde;
+      box-shadow: 0 15px 35px var(--shadow);
+      border-bottom: 3px solid var(--ember);
+    }
+    .menu-back {
+      position: absolute; top: 12px; left: 12px; z-index: 50;
+      display: inline-block; padding: 10px 16px;
+      color: #e8b64c; background: rgba(24,15,9,.85);
+      border: 2px solid #8f8068; border-radius: 10px;
+      font-weight: 700; font-size: 1rem; text-decoration: none;
+    }
+    .to-top {
+      display: inline-block; margin-top: 26px; padding: 10px 16px;
+      color: #e8b64c; background: rgba(24,15,9,.85);
+      border: 2px solid #8f8068; border-radius: 10px;
+      font-weight: 700; font-size: 1rem; text-decoration: none;
+    }
+    .jumpbar a {
+      flex: 1 1 180px;
+      padding: 17px 20px;
+      text-decoration: none;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,.16);
+      font-weight: 700;
+    }
+    .jumpbar a:last-child { border-right: 0; }
+    .jumpbar a:hover, .jumpbar a:focus-visible { background: var(--ember); outline: none; }
+    main { overflow: hidden; }
+    .section { width: min(1120px, calc(100% - 40px)); margin: 0 auto; padding: clamp(74px, 9vw, 120px) 0; }
+    .section + .section { border-top: 1px solid var(--line-soft); }
+    .section-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, .72fr); gap: 44px; align-items: end; margin-bottom: 42px; }
+    .kicker { margin: 0 0 8px; color: var(--ember); font-weight: 700; font-size: .8rem; letter-spacing: .13em; text-transform: uppercase; }
+    h2 { font-size: clamp(2.7rem, 6vw, 5.2rem); font-weight: 600; letter-spacing: -.025em; }
+    .section-lede { margin: 0 0 6px; color: var(--muted); font-size: 1.08rem; }
+    .vision-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; }
+    .vision-copy {
+      padding: clamp(28px, 5vw, 56px);
+      background: var(--pine);
+      color: #f7f0e2;
+      box-shadow: 10px 10px 0 color-mix(in srgb, var(--line) 50%, transparent);
+    }
+    .vision-copy p { margin: 0; font-family: var(--display); font-size: clamp(1.65rem, 3vw, 2.5rem); line-height: 1.18; }
+    .vision-note { padding: 30px; border: 1px solid var(--line); background: var(--paper); }
+    .vision-note h3 { font-size: 1.7rem; margin-bottom: 12px; }
+    .vision-note p { margin: 0; color: var(--muted); }
+    .gallery-shell { background: var(--paper); border: 1px solid var(--line-soft); box-shadow: 0 16px 38px var(--shadow); }
+    .comparison { display: grid; grid-template-columns: 1fr 1fr; }
+    .photo-slot {
+      min-height: 380px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 32px;
+      background:
+        linear-gradient(135deg, transparent 49.5%, var(--line-soft) 50%, transparent 50.5%),
+        linear-gradient(45deg, transparent 49.5%, var(--line-soft) 50%, transparent 50.5%),
+        var(--paper-2);
+      background-size: 38px 38px;
+      position: relative;
+    }
+    .photo-slot + .photo-slot { border-left: 1px solid var(--line); }
+    .slot-copy { max-width: 260px; background: var(--paper); padding: 22px 24px; border-top: 4px solid var(--wood); box-shadow: 0 8px 24px var(--shadow); }
+    .slot-label { display: block; margin-bottom: 5px; font-family: var(--display); font-size: 1.7rem; font-weight: 700; }
+    .slot-copy small { color: var(--muted); font-size: .92rem; }
+    .gallery-caption { display: flex; justify-content: space-between; gap: 28px; padding: 20px 24px; border-top: 1px solid var(--line-soft); color: var(--muted); }
+    .gallery-caption strong { color: var(--ink); }
+    .progress-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .stage { background: var(--paper); border-top: 6px solid var(--line); padding: 28px; min-height: 230px; }
+    .stage.is-now { border-color: var(--ember); }
+    .stage-num { font-family: var(--display); color: var(--ember); font-size: 1.4rem; font-weight: 700; }
+    .stage h3 { margin: 34px 0 10px; font-size: 1.75rem; }
+    .stage p { margin: 0; color: var(--muted); }
+    .feature {
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+      background: var(--wood-deep);
+      color: #f5ecdd;
+      overflow: hidden;
+    }
+    .feature-art {
+      min-height: 460px;
+      background: linear-gradient(rgba(19, 16, 13, .18), rgba(19, 16, 13, .55)), url("media-generation-hearth-hero-0-38611197-1f48-47e4-8359-bd7eeb17c243.webp") 76% center / cover no-repeat;
+    }
+    .feature-copy { padding: clamp(34px, 6vw, 70px); }
+    .feature-copy .kicker { color: #e8834d; }
+    .feature h3 { font-size: clamp(2.4rem, 4.6vw, 4.7rem); margin-bottom: 20px; }
+    .feature p { color: #dcd3c7; max-width: 530px; }
+    .detail-list { list-style: none; padding: 0; margin: 28px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
+    .detail-list li { position: relative; padding-left: 24px; }
+    .detail-list li::before { content: "◆"; position: absolute; left: 0; color: #e8834d; font-size: .75em; top: .25em; }
+    .journal-card { display: grid; grid-template-columns: 190px 1fr; gap: 32px; background: var(--paper); border: 1px solid var(--line-soft); padding: 28px; }
+    .journal-date { border-right: 1px solid var(--line); padding-right: 28px; }
+    .journal-date strong { display: block; font-family: var(--display); font-size: 1.55rem; }
+    .journal-date span { color: var(--muted); }
+    .journal-body h3 { font-size: 2rem; margin-bottom: 8px; }
+    .journal-body p { margin: 0; color: var(--muted); }
+    .next-callout {
+      margin-top: 22px;
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      background: var(--paper-2);
+      border-left: 5px solid var(--ember);
+    }
+    .next-callout strong { font-family: var(--display); font-size: 1.3rem; }
+    .next-callout span { color: var(--muted); text-align: right; }
+    footer { background: var(--wood-deep); color: #ddd1bf; }
+    .footer-inner { width: min(1120px, calc(100% - 40px)); margin: auto; padding: 36px 0; display: flex; justify-content: space-between; gap: 30px; }
+    .footer-inner strong { font-family: var(--display); color: #fff4e2; font-size: 1.25rem; }
+    .footer-inner span { color: #bfb3a2; }
+    @media (max-width: 760px) {
+      .hero { min-height: 700px; background-position: 82% center; }
+      .hero::before { background: linear-gradient(180deg, rgba(13,15,14,.08) 0%, rgba(13,15,14,.48) 43%, rgba(13,15,14,.96) 100%); }
+      .hero-inner { width: min(100% - 30px, 1180px); padding-bottom: 78px; }
+      h1 { font-size: clamp(3.4rem, 18vw, 5.2rem); }
+      .jumpbar { width: calc(100% - 30px); margin-top: -22px; }
+      .jumpbar a { flex: 1 1 50%; padding: 14px 10px; font-size: .92rem; }
+      .jumpbar a:nth-child(2) { border-right: 0; }
+      .jumpbar a:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,.16); }
+      .section { width: calc(100% - 30px); }
+      .section-head, .vision-grid, .comparison, .feature, .journal-card { grid-template-columns: 1fr; }
+      .section-head { gap: 18px; }
+      .vision-copy { box-shadow: 7px 7px 0 color-mix(in srgb, var(--line) 50%, transparent); }
+      .photo-slot { min-height: 280px; }
+      .photo-slot + .photo-slot { border-left: 0; border-top: 1px solid var(--line); }
+      .gallery-caption, .footer-inner, .next-callout { flex-direction: column; align-items: flex-start; }
+      .gallery-caption span, .next-callout span { text-align: left; }
+      .progress-track { grid-template-columns: 1fr; }
+      .stage { min-height: auto; }
+      .stage h3 { margin-top: 22px; }
+      .feature-art { min-height: 340px; }
+      .detail-list { grid-template-columns: 1fr; }
+      .journal-date { border-right: 0; border-bottom: 1px solid var(--line); padding: 0 0 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  
+    .prop-wrap { overflow-x: auto; background: var(--paper); border: 1px solid var(--line-soft); box-shadow: 0 16px 38px var(--shadow); }
+    #prop-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+    #prop-table th, #prop-table td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+    #prop-table thead th { background: var(--wood-deep); color: #f7edde; font-family: var(--display); font-weight: 600; white-space: nowrap; cursor: pointer; user-select: none; }
+    #prop-table thead th:hover { background: var(--ember); }
+    #prop-table thead th .dir { color: #e8834d; margin-left: 6px; }
+    #prop-table tbody tr:hover { background: var(--paper-2); }
+    #prop-table td:first-child { font-weight: 700; color: var(--ember); white-space: nowrap; }
+    #prop-table td img { width: 72px; height: 72px; object-fit: contain; display: block; border: 1px solid var(--line-soft); background: var(--paper-2); }
+    #prop-table td.no-photo { min-width: 72px; }
+    #prop-table thead th:nth-child(2) { cursor: default; }
+    #prop-table thead th:nth-child(2):hover { background: var(--wood-deep); }
+    .prop-hint { margin: 0 0 14px; color: var(--muted); font-size: .95rem; }
+
+  </style>
+</head>
+<body id="top">
+  <a class="menu-back" href="https://claypnw.github.io/menu/hearth-menu.html">← Menu</a>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="identity">
+        <p class="chapter">The build journal</p>
+        <h1>Mogollon's Hearth</h1>
+        <p class="tagline">Where the Rim touches the Sky</p>
+        <p class="intro">A Skyrim-inspired guest house taking shape among the pines of Arizona's Mogollon Rim.</p>
+      </div>
+    </div>
+  </header>
+
+  <nav class="jumpbar" aria-label="Page sections">
+    <a href="#vision">The vision</a>
+    <a href="#before-after">Before &amp; after</a>
+    <a href="#progress">Progress</a>
+    <a href="#props">Prop inventory</a>
+    <a href="#journal">Build notes</a>
+  </nav>
+
+  <main>
+    <section class="section" id="vision">
+      <div class="section-head">
+        <div>
+          <p class="kicker">The north star</p>
+          <h2>A guest house with a story</h2>
+        </div>
+        <p class="section-lede">Not a themed room assembled from props—a full-scale, hand-built retreat with the warmth, weight, and character of an old Nordic inn.</p>
+      </div>
+      <div class="vision-grid">
+        <div class="vision-copy">
+          <p>Rough timber. Firelight. Carved knotwork. A place that feels discovered rather than decorated.</p>
+        </div>
+        <aside class="vision-note">
+          <h3>The friendly innkeeper</h3>
+          <p>The Mogollon Monster is the hearth's smiling mascot. A monster doesn't have to be mean—this one raises a mug in welcome.</p>
+        </aside>
+      </div>
+      <a class="to-top" href="#top">↑ Back to top</a>
+    </section>
+
+    <section class="section" id="before-after">
+      <div class="section-head">
+        <div>
+          <p class="kicker">Room by room</p>
+          <h2>Before &amp; after</h2>
+        </div>
+        <p class="section-lede">Matching viewpoints will make each transformation easy to compare. The first pair will take this place as soon as the photos arrive.</p>
+      </div>
+      <div class="gallery-shell">
+        <div class="comparison" aria-label="Reserved spaces for a before and after photo pair">
+          <div class="photo-slot">
+            <div class="slot-copy">
+              <span class="slot-label">Before</span>
+              <small>The starting room, framed from a repeatable viewpoint.</small>
+            </div>
+          </div>
+          <div class="photo-slot">
+            <div class="slot-copy">
+              <span class="slot-label">After</span>
+              <small>The finished view will sit beside it for a true comparison.</small>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-caption">
+          <strong>First comparison waiting for photos</strong>
+          <span>Best match: same corner, lens height, and daylight.</span>
+        </div>
+      </div>
+      <a class="to-top" href="#top">↑ Back to top</a>
+    </section>
+
+    <section class="section" id="progress">
+      <div class="section-head">
+        <div>
+          <p class="kicker">Between the endpoints</p>
+          <h2>The build in motion</h2>
+        </div>
+        <p class="section-lede">Progress photos will preserve the parts that disappear—the test fits, raw materials, carved details, and clever fixes behind the finished room.</p>
+      </div>
+      <div class="progress-track">
+        <article class="stage is-now">
+          <span class="stage-num">01</span>
+          <h3>Starting point</h3>
+          <p>Wide room views and details worth preserving before work begins.</p>
+        </article>
+        <article class="stage">
+          <span class="stage-num">02</span>
+          <h3>Work in progress</h3>
+          <p>Fabrication, installation, finish tests, and the discoveries made along the way.</p>
+        </article>
+        <article class="stage">
+          <span class="stage-num">03</span>
+          <h3>Finished chapter</h3>
+          <p>The reveal, close-up craftsmanship, and a note about what changed.</p>
+        </article>
+      </div>
+      <a class="to-top" href="#top">↑ Back to top</a>
+    </section>
+
+    <section class="section" aria-labelledby="first-chapter-heading">
+      <div class="feature">
+        <div class="feature-art" role="img" aria-label="Illustrated Nordic hearth with carved wood, stonework and a round shield"></div>
+        <div class="feature-copy">
+          <p class="kicker">Featured build</p>
+          <h3 id="first-chapter-heading">The tavern sign</h3>
+          <p>A shield-shaped wooden plaque introduces the house and its genial guardian: the Mogollon Monster, waving with a mug beside the fire.</p>
+          <ul class="detail-list">
+            <li>Arched “Mogollon's Hearth” lettering</li>
+            <li>Nordic knotwork and dragon heads</li>
+            <li>Waving monster beside the fireplace</li>
+            <li>“Where the Rim touches the Sky”</li>
+          </ul>
+        </div>
+      </div>
+      <a class="to-top" href="#top">↑ Back to top</a>
+    </section>
+
+
+    <section class="section" id="props">
+      <div class="section-head">
+        <div>
+          <p class="kicker">The collection</p>
+          <h2>Prop inventory</h2>
+        </div>
+        <p class="section-lede">Every piece gathered for the house so far, and where each one will serve. Tap a column heading to sort.</p>
+      </div>
+      <p class="prop-hint">47 items · tap any column heading to sort</p>
+      <div class="prop-wrap">
+        <table id="prop-table" aria-label="Mogollon's Hearth prop inventory, sortable">
+          <thead>
+            <tr>
+              <th data-type="num">#<span class="dir"></span></th>
+              <th>Photo</th>
+              <th data-type="str">Item<span class="dir"></span></th>
+              <th data-type="str">Where / how used<span class="dir"></span></th>
+              <th data-type="str">Notes<span class="dir"></span></th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr><td data-v="1">1</td><td><a href="production/item.html?n=1"><img src="props/prop-01-02-led-bases.jpg?v=2" alt="Item 1 photo" loading="lazy"></a></td><td>Wooden LED base, small, USB w/ switch</td><td>Lighted soul-gem stand — set a quartz point or egg on it</td><td>purchased at Arizona Gift Center</td></tr>
+          <tr><td data-v="2">2</td><td><a href="production/item.html?n=2"><img src="props/prop-01-02-led-bases.jpg?v=2" alt="Item 2 photo" loading="lazy"></a></td><td>Wooden LED base, large, USB w/ switch</td><td>Lighted stand for the tall tower or obsidian sphere</td><td>purchased at Arizona Gift center</td></tr>
+          <tr><td data-v="3">3</td><td><a href="production/item.html?n=3"><img src="props/prop-03-aura-points.jpg?v=2" alt="Item 3 photo" loading="lazy"></a></td><td>Blue titanium aura quartz points (×4 at least)</td><td>Soul gems — lit from below on the wood LED bases</td><td></td></tr>
+          <tr><td data-v="4">4</td><td><a href="production/item.html?n=4"><img src="props/prop-04-eggs.jpg?v=2" alt="Item 4 photo" loading="lazy"></a></td><td>Polished stone eggs — red, blue, yellow</td><td>Soul gems by size — red = greater, blue = common, yellow = lesser; bowl together</td><td></td></tr>
+          <tr><td data-v="5">5</td><td><a href="production/item.html?n=5"><img src="props/prop-05-obsidian-sphere.jpg?v=2" alt="Item 5 photo" loading="lazy"></a></td><td>Obsidian sphere on wood stand</td><td>Black soul gem — centerpiece of the soul-gem display</td><td></td></tr>
+          <tr><td data-v="6">6</td><td><a href="production/item.html?n=6"><img src="props/prop-06-obsidian-egg.jpg?v=2" alt="Item 6 photo" loading="lazy"></a></td><td>Obsidian egg (polished black)</td><td>Second black soul gem, or a scrying stone</td><td></td></tr>
+          <tr><td data-v="7">7</td><td><a href="production/item.html?n=7"><img src="props/prop-07-tower.jpg?v=2" alt="Item 7 photo" loading="lazy"></a></td><td>Tall banded tower / obelisk</td><td>Standing-stone miniature, or altar centerpiece on the large LED base</td><td></td></tr>
+          <tr><td data-v="8">8</td><td><a href="production/item.html?n=8"><img src="props/prop-08-tree-small.jpg?v=2" alt="Item 8 photo" loading="lazy"></a></td><td>Crystal trees (×2, one tall w/ green stones)</td><td>Enchanted flora for altar corners</td><td></td></tr>
+          <tr><td data-v="9">9</td><td><a href="production/item.html?n=9"><img src="props/prop-09-mortar.jpg?v=2" alt="Item 9 photo" loading="lazy"></a></td><td>Onyx/marble mortar and pestle</td><td>Alchemy station — centerpiece; Arcadia's Cauldron energy</td><td></td></tr>
+          <tr><td data-v="10">10</td><td><a href="production/item.html?n=10"><img src="props/prop-10-sulfur.jpg?v=2" alt="Item 10 photo" loading="lazy"></a></td><td>Bright yellow sulfur cluster</td><td>Fire salts / brimstone — ingredient display in a dish</td><td></td></tr>
+          <tr><td data-v="11">11</td><td><a href="production/item.html?n=11"><img src="props/prop-11-peridot.jpg?v=2" alt="Item 11 photo" loading="lazy"></a></td><td>Peridot chips (bag, labeled)</td><td>Glow dust — pour into a small bowl as loose ingredients</td><td></td></tr>
+          <tr><td data-v="12">12</td><td><a href="production/item.html?n=12"><img src="props/prop-12-yellow-chips.jpg?v=2" alt="Item 12 photo" loading="lazy"></a></td><td>Yellow chips (bag — sulfur/calcite)</td><td>Salt pile / moon sugar — ingredient bowl</td><td></td></tr>
+          <tr><td data-v="13">13</td><td><a href="production/item.html?n=13"><img src="props/prop-13-goldstone-tube.jpg?v=2" alt="Item 13 photo" loading="lazy"></a></td><td>Goldstone chips in tube</td><td>Gold dust — apothecary vial</td><td></td></tr>
+          <tr><td data-v="14">14</td><td><a href="production/item.html?n=14"><img src="props/prop-14-green-vial.jpg?v=2" alt="Item 14 photo" loading="lazy"></a></td><td>Green chips in corked vial</td><td>Potion ingredient — ready-made corked apothecary bottle</td><td></td></tr>
+          <tr><td data-v="15">15</td><td><a href="production/item.html?n=15"><img src="props/prop-15-abalone.jpg?v=2" alt="Item 15 photo" loading="lazy"></a></td><td>Abalone shell</td><td>Ingredient bowl — Hagraven-made look; holds the chips</td><td></td></tr>
+          <tr><td data-v="16">16</td><td><a href="production/item.html?n=16"><img src="props/prop-16-onyx-bowl.jpg?v=2" alt="Item 16 photo" loading="lazy"></a></td><td>Small banded onyx bowl</td><td>Second ingredient bowl at the alchemy station</td><td></td></tr>
+          <tr><td data-v="17">17</td><td><a href="production/item.html?n=17"><img src="props/prop-17-bismuth.jpg?v=2" alt="Item 17 photo" loading="lazy"></a></td><td>Bismuth cluster (rainbow geometric)</td><td>Dwemer metal — grouped on the Dwemer shelf</td><td></td></tr>
+          <tr><td data-v="18">18</td><td><a href="production/item.html?n=18"><img src="props/prop-18-copper.jpg?v=2" alt="Item 18 photo" loading="lazy"></a></td><td>Copper nugget pieces</td><td>Dwemer scrap — scatter around the bismuth as ruins debris</td><td></td></tr>
+          <tr><td data-v="19">19</td><td><a href="production/item.html?n=19"><img src="props/prop-19-dark-mineral.jpg?v=2" alt="Item 19 photo" loading="lazy"></a></td><td>Dark metallic raw mineral</td><td>Ebony ore chunk — Dwemer shelf</td><td>Photo ID tentative — confirm in hand.</td></tr>
+          <tr><td data-v="20">20</td><td><a href="production/item.html?n=20"><img src="props/prop-20-skull.jpg?v=2" alt="Item 20 photo" loading="lazy"></a></td><td>Skull-shaped planter (dark)</td><td>Draugr crypt corner — plant something spiky in it (a “deathbell”)</td><td></td></tr>
+          <tr><td data-v="21">21</td><td><a href="production/item.html?n=21"><img src="props/prop-21-selenite.jpg?v=2" alt="Item 21 photo" loading="lazy"></a></td><td>Selenite bowl + carved heart stone</td><td>Heart Stone (Dragonborn) — offering bowl with the heart displayed in it</td><td>Photo ID tentative — confirm in hand.</td></tr>
+          <tr><td data-v="22">22</td><td><a href="production/item.html?n=22"><img src="props/prop-22-raw-stone.jpg?v=2" alt="Item 22 photo" loading="lazy"></a></td><td>Raw stones — brown, reddish, banded</td><td>Ore samples — iron, corundum, stone; line a shelf like a mine assay office</td><td>Photo ID tentative — confirm in hand.</td></tr>
+          <tr><td data-v="23">23</td><td><a href="production/item.html?n=23"><img src="props/prop-23-fossil.jpg?v=2" alt="Item 23 photo" loading="lazy"></a></td><td>Fossil / coral cross-section stone</td><td>Ancient Nord artifact — display piece</td><td>Photo ID tentative — confirm in hand.</td></tr>
+          <tr><td data-v="24">24</td><td><a href="production/item.html?n=24"><img src="props/prop-24-amber.jpg?v=2" alt="Item 24 photo" loading="lazy"></a></td><td>Framed amber pendants / keychains (×4)</td><td>Amber (Dragonborn) — hang as talismans or gift to guests as Hearth tokens</td><td></td></tr>
+          <tr><td data-v="25">25</td><td><a href="production/item.html?n=25"><img src="props/prop-25-coins.jpg?v=2" alt="Item 25 photo" loading="lazy"></a></td><td>2 round stones / coins in plastic</td><td>Septims — scatter in an offering bowl</td><td>Photo ID tentative — confirm in hand.</td></tr>
+          <tr><td data-v="26">26</td><td><a href="production/item.html?n=26"><img src="props/prop-26-wooden-box.jpg?v=2" alt="Item 26 photo" loading="lazy"></a></td><td>Wooden keepsake box (open, lined)</td><td>Quest-reward chest — holds small treasures or guest tokens</td><td></td></tr>
+          <tr><td data-v="27">27</td><td><a href="production/item.html?n=27"><img src="props/prop-27-black-goblet.jpg?v=2" alt="Item 27 photo" loading="lazy"></a></td><td>Black glass goblet with lid</td><td>Ebony chalice — mead-hall table centerpiece</td><td></td></tr>
+          <tr><td data-v="28">28</td><td><a href="production/item.html?n=28"><img src="props/prop-28-mini-bottles.jpg?v=2" alt="Item 28 photo" loading="lazy"></a></td><td>Mini glass bottles with striped straws (×2)</td><td>Potion vials — alchemy shelf dressing</td><td></td></tr>
+          <tr><td data-v="29">29</td><td><a href="production/item.html?n=29"><img src="props/prop-29-ceramic-vase.jpg?v=2" alt="Item 29 photo" loading="lazy"></a></td><td>Brown/green ceramic vase</td><td>Alchemy ingredient vase — dried flora display</td><td></td></tr>
+          <tr><td data-v="30">30</td><td><a href="production/item.html?n=30"><img src="props/prop-30-black-pot.jpg?v=2" alt="Item 30 photo" loading="lazy"></a></td><td>Black cauldron pot</td><td>Small alchemy cauldron — ingredient pot</td><td></td></tr>
+          <tr><td data-v="31">31</td><td><a href="production/item.html?n=31"><img src="props/prop-31-gold-trim.jpg?v=2" alt="Item 31 photo" loading="lazy"></a></td><td>Gold jingle bells + gold bead tube</td><td>Gilded trim — Yule decorations or Dwemer gold bits</td><td></td></tr>
+          <tr><td data-v="32">32</td><td><a href="production/item.html?n=32"><img src="props/prop-32-wall-planters.jpg?v=2" alt="Item 32 photo" loading="lazy"></a></td><td>Wooden wall pocket planters (×2)</td><td>Wall planters — hang with dried flora or deathbell</td><td></td></tr>
+          <tr><td data-v="33">33</td><td><a href="production/item.html?n=33"><img src="props/prop-33-glass-bottles.jpg?v=2" alt="Item 33 photo" loading="lazy"></a></td><td>Glass bottles — bud vase + square decanter (×2)</td><td>Potion bottles — skooma decanter for the tavern shelf</td><td></td></tr>
+          <tr><td data-v="34">34</td><td><a href="production/item.html?n=34"><img src="props/prop-34-astro-book.jpg?v=2" alt="Item 34 photo" loading="lazy"></a></td><td>Astro Bot children's book</td><td>Guest-room book — for visiting young adventurers</td><td></td></tr>
+          <tr><td data-v="35">35</td><td><a href="production/item.html?n=35"><img src="props/prop-35-trivets.jpg?v=2" alt="Item 35 photo" loading="lazy"></a></td><td>Black metal trivets (×2)</td><td>Trivets — under candles or serving dishes in the mead hall</td><td></td></tr>
+          <tr><td data-v="36">36</td><td><a href="production/item.html?n=36"><img src="props/prop-36-filler.jpg?v=2" alt="Item 36 photo" loading="lazy"></a></td><td>Shredded decorative filler, purple + red</td><td>Basket filler — for gift baskets or display nests</td><td></td></tr>
+          <tr><td data-v="37">37</td><td><a href="production/item.html?n=37"><img src="props/prop-37-tissue.jpg?v=2" alt="Item 37 photo" loading="lazy"></a></td><td>Yellow tissue paper</td><td>Wrapping — for guest tokens and favors</td><td></td></tr>
+          <tr><td data-v="38">38</td><td><a href="production/item.html?n=38"><img src="props/prop-38-mug-vase.jpg?v=2" alt="Item 38 photo" loading="lazy"></a></td><td>Black mug + amber bud vase</td><td>Tankard + bud vase — guest room dressing</td><td></td></tr>
+          <tr><td data-v="39">39</td><td><a href="production/item.html?n=39"><img src="props/prop-39-apothecary-jar.jpg?v=2" alt="Item 39 photo" loading="lazy"></a></td><td>Tall glass apothecary jar with lid</td><td>Apothecary jar — loose ingredients display</td><td></td></tr>
+          <tr><td data-v="40">40</td><td><a href="production/item.html?n=40"><img src="props/prop-40-square-jar.jpg?v=2" alt="Item 40 photo" loading="lazy"></a></td><td>Square glass jar with wooden lid</td><td>Ingredient jar — salt pile or moon sugar</td><td></td></tr>
+          <tr><td data-v="41">41</td><td><a href="production/item.html?n=41"><img src="props/prop-41-cauldron.jpg?v=2" alt="Item 41 photo" loading="lazy"></a></td><td>Cast-iron cauldron with feet</td><td>Alchemy cauldron — the station's workhorse</td><td></td></tr>
+          <tr><td data-v="42">42</td><td><a href="production/item.html?n=42"><img src="props/prop-42-leaf-dish.jpg?v=2" alt="Item 42 photo" loading="lazy"></a></td><td>Maple leaf dish (fall colors)</td><td>Serving dish — autumn feast table</td><td></td></tr>
+          <tr><td data-v="43">43</td><td><a href="production/item.html?n=43"><img src="props/prop-43-glitter.jpg?v=2" alt="Item 43 photo" loading="lazy"></a></td><td>Glitter bottles — red, gold, silver (×3)</td><td>Craft glitter — for prop finishing</td><td></td></tr>
+          <tr><td data-v="44">44</td><td><a href="production/item.html?n=44"><img src="props/prop-44-rhinestones.jpg?v=2" alt="Item 44 photo" loading="lazy"></a></td><td>Rhinestone sticker sheets (×4 colors)</td><td>Gem stickers — embellishing props and cards</td><td></td></tr>
+          <tr><td data-v="45">45</td><td><a href="production/item.html?n=45"><img src="props/prop-45-skeletons.jpg?v=2" alt="Item 45 photo" loading="lazy"></a></td><td>Mini plastic skeletons (×3)</td><td>Draugr remains — crypt corner dressing</td><td></td></tr>
+          <tr><td data-v="46">46</td><td><a href="production/item.html?n=46"><img src="props/prop-46-tier-stand.jpg?v=2" alt="Item 46 photo" loading="lazy"></a></td><td>Black metal tiered plate stand</td><td>Tiered display — for the alchemy station or feast table</td><td></td></tr>
+          <tr><td data-v="47">47</td><td><a href="production/item.html?n=47"><img src="props/prop-47-leather-jacket.jpg?v=2" alt="Item 47 photo" loading="lazy"></a></td><td>Brown leather jacket</td><td>Traveler's garb — costume piece for the Hearth keeper</td><td></td></tr>
+          <tr><td data-v="48">48</td><td><a href="production/item.html?n=48"><img src="props/prop-48-tall-case.jpg?v=2" alt="Item 48 photo" loading="lazy"></a></td><td>Tall brown case with snakeskin pattern and top handle</td><td>Traveler's case — scrolls or a guest welcome kit</td><td></td></tr>
+          <tr><td data-v="49">49</td><td><a href="production/item.html?n=49"><img src="props/prop-49-floral-chest.jpg?v=2" alt="Item 49 photo" loading="lazy"></a></td><td>Small chest with gold-brown floral pattern and front latch</td><td>Treasure chest — quest rewards or guest tokens</td><td></td></tr>
+          <tr><td data-v="50">50</td><td><a href="production/item.html?n=50"><img src="props/prop-50-woven-basket.jpg?v=2" alt="Item 50 photo" loading="lazy"></a></td><td>Woven basket box with lid</td><td>Storage basket — linens or alchemy supplies</td><td></td></tr>
+          <tr><td data-v="51">51</td><td><a href="production/item.html?n=51"><img src="props/prop-51-glass-bowl.jpg?v=2" alt="Item 51 photo" loading="lazy"></a></td><td>Large clear glass bowl</td><td>Scrying bowl — feast-table centerpiece</td><td></td></tr>
+          <tr><td data-v="52">52</td><td><a href="production/item.html?n=52"><img src="props/prop-52-triner-scale.jpg?v=2" alt="Item 52 photo" loading="lazy"></a></td><td>Triner metal scale (rusty)</td><td>Merchant's scale — market stall dressing</td><td></td></tr>
+          <tr><td data-v="53">53</td><td><a href="production/item.html?n=53"><img src="props/prop-53-metal-vase.jpg?v=2" alt="Item 53 photo" loading="lazy"></a></td><td>Metal vase with worn gray-blue finish</td><td>Urn vase — dried flora by the hearth</td><td></td></tr>
+          <tr><td data-v="54">54</td><td><a href="production/item.html?n=54"><img src="props/prop-54-wire-basket.jpg?v=2" alt="Item 54 photo" loading="lazy"></a></td><td>Dark wire basket with scrollwork</td><td>Fruit basket — feast table or market stall</td><td></td></tr>
+          <tr><td data-v="55">55</td><td><a href="production/item.html?n=55"><img src="props/prop-55-emblem-dish.jpg?v=2" alt="Item 55 photo" loading="lazy"></a></td><td>Round black dish with crown-and-C emblem</td><td>Offering dish — altar or entry table</td><td></td></tr>
+          <tr><td data-v="56">56</td><td><a href="production/item.html?n=56"><img src="props/prop-56-silver-canister.jpg?v=2" alt="Item 56 photo" loading="lazy"></a></td><td>Silver canister with cut-out pattern and lid</td><td>Lantern jar — a candle inside throws patterned light</td><td></td></tr>
+          <tr><td data-v="57">57</td><td><a href="production/item.html?n=57"><img src="props/prop-57-corked-bottle.jpg?v=2" alt="Item 57 photo" loading="lazy"></a></td><td>Small clear glass bottle with cork</td><td>Potion bottle — alchemy shelf dressing</td><td></td></tr>
+          <tr><td data-v="58">58</td><td><a href="production/item.html?n=58"><img src="props/prop-58-decanter.jpg?v=2" alt="Item 58 photo" loading="lazy"></a></td><td>Square glass decanter with agave design</td><td>Skooma decanter — tavern shelf</td><td></td></tr>
+          <tr><td data-v="59">59</td><td><a href="production/item.html?n=59"><img src="props/prop-59-black-vase.jpg?v=2" alt="Item 59 photo" loading="lazy"></a></td><td>Black vase with gold ribbed bands</td><td>Ceremony vase — altar corner</td><td></td></tr>
+          <tr><td data-v="60">60</td><td><a href="production/item.html?n=60"><img src="props/prop-60-goblets.jpg?v=2" alt="Item 60 photo" loading="lazy"></a></td><td>Silver goblets with grape design (×2)</td><td>Mead goblets — feast table pair</td><td></td></tr>
+          <tr><td data-v="61">61</td><td><a href="production/item.html?n=61"><img src="props/prop-61-blue-bottle.jpg?v=2" alt="Item 61 photo" loading="lazy"></a></td><td>Small cobalt-blue glass bottle</td><td>Potion bottle — alchemy shelf color</td><td></td></tr>
+          <tr><td data-v="62">62</td><td><a href="production/item.html?n=62"><img src="props/prop-62-knit-scarf.jpg?v=2" alt="Item 62 photo" loading="lazy"></a></td><td>Chunky knit tan scarf</td><td>Traveler's garb — costume piece or guest wrap</td><td></td></tr>
+          <tr><td data-v="63">63</td><td><a href="production/item.html?n=63"><img src="props/prop-63-leather-gloves.jpg?v=2" alt="Item 63 photo" loading="lazy"></a></td><td>Black leather gloves with long cuffs</td><td>Traveler's garb — costume gloves</td><td></td></tr>
+          <tr><td data-v="64">64</td><td><a href="production/item.html?n=64"><img src="props/prop-64-black-bowls.jpg?v=2" alt="Item 64 photo" loading="lazy"></a></td><td>Small black bowls (×2)</td><td>Ingredient bowls — alchemy station pair</td><td></td></tr>
+          <tr><td data-v="65">65</td><td><a href="production/item.html?n=65"><img src="props/prop-65-braided-belt.jpg?v=2" alt="Item 65 photo" loading="lazy"></a></td><td>Braided brown leather belt with brass studs</td><td>Traveler's garb — costume belt</td><td></td></tr>
+          <tr><td data-v="66">66</td><td><a href="production/item.html?n=66"><img src="props/prop-66-orange-cups.jpg?v=2" alt="Item 66 photo" loading="lazy"></a></td><td>Small orange custard cups, marked 141 USA (×2)</td><td>Ingredient cups — alchemy station</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <a class="to-top" href="#top">↑ Back to top</a>
+    </section>
+
+    <section class="section" id="journal">
+      <div class="section-head">
+        <div>
+          <p class="kicker">Notes from the workshop</p>
+          <h2>Build journal</h2>
+        </div>
+        <p class="section-lede">Short entries will keep the decisions and stories with the pictures, so the finished project still remembers how it was made.</p>
+      </div>
+      <article class="journal-card">
+        <div class="journal-date">
+          <strong>Opening entry</strong>
+          <span>Date to be added</span>
+        </div>
+        <div class="journal-body">
+          <h3>The hearth gets a home of its own</h3>
+          <p>The project page is ready for its first real photos: an opening “before” view, close-ups from the workshop, and the matching “after” view when each chapter is complete.</p>
+        </div>
+      </article>
+      <div class="next-callout">
+        <strong>Next addition</strong>
+        <span>Send a photo with a short note about what changed; it can become the next journal entry.</span>
+      </div>
+      <a class="to-top" href="#top">↑ Back to top</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <strong>Built on the Mogollon Rim</strong>
+      <span>Guest house project journal · Payson, Arizona</span>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    var table = document.getElementById('prop-table');
+    if (!table) return;
+    var tbody = table.querySelector('tbody');
+    var dir = 1, lastCol = -1;
+    table.querySelectorAll('thead th').forEach(function (th, col) {
+      th.addEventListener('click', function () {
+        var type = th.getAttribute('data-type');
+        if (!type) return;
+        if (col === lastCol) { dir = -dir; } else { dir = 1; lastCol = col; }
+        table.querySelectorAll('thead .dir').forEach(function (el) { el.textContent = ''; });
+        th.querySelector('.dir').textContent = dir === 1 ? '\u25B2' : '\u25BC';
+        var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+        rows.sort(function (a, b) {
+          var av = a.children[col].getAttribute('data-v') || a.children[col].textContent.trim();
+          var bv = b.children[col].getAttribute('data-v') || b.children[col].textContent.trim();
+          var cmp;
+          if (type === 'num') { cmp = parseFloat(av) - parseFloat(bv); }
+          else { cmp = av.localeCompare(bv); }
+          return cmp * dir;
+        });
+        rows.forEach(function (r) { tbody.appendChild(r); });
+      });
+    });
+  })();
+  </script>
+
+<script>
+// Return road (added 2026-10-25): the "← Menu" link takes the visitor back
+// to the menu they came from. The menu that opened this page named itself in
+// the address (?from=...). No name in the address: the link printed in this
+// page stands as the default. The same name is carried forward on links to
+// our other pages, so the road home survives the whole visit.
+(function(){
+  var MENUS={
+    "admin":"https://claypnw.github.io/menu/admin-menu.html",
+    "locals":"https://claypnw.github.io/menu/locals-menu.html",
+    "locals-admin":"https://claypnw.github.io/menu/locals-menu.html?from=admin",
+    "hearth":"https://claypnw.github.io/menu/hearth-menu.html",
+    "hearth-admin":"https://claypnw.github.io/menu/hearth-menu.html?from=admin",
+    "front":"https://claypnw.github.io/menu/"
+  };
+  var from=new URLSearchParams(window.location.search).get("from");
+  if(!from||!MENUS[from])return;
+  var back=document.querySelectorAll("a.menu-back");
+  for(var i=0;i<back.length;i++)back[i].href=MENUS[from];
+  var links=document.querySelectorAll("a[href]");
+  for(var j=0;j<links.length;j++){
+    var a=links[j];
+    if(a.classList&&a.classList.contains("menu-back"))continue;
+    var h=a.getAttribute("href");
+    if(!h||h.charAt(0)==="#")continue;
+    if(/\.pdf($|\?)/i.test(h))continue;
+    if(/^https?:\/\//i.test(h)&&h.indexOf("claypnw.github.io")<0)continue;
+    if(!/(\.html|\/)([?#]|$)/.test(h))continue;
+    if(/[?&]from=/.test(h))continue;
+    a.setAttribute("href",h+(h.indexOf("?")<0?"?":"&")+"from="+from);
+  }
+})();
+</script>
+</body>
+</html>
