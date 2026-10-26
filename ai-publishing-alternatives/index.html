@@ -1,0 +1,1053 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>AI Publishing Alternatives — Research Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --serif:"Newsreader",Georgia,"Times New Roman",serif;
+    --sans:"Archivo",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --bg:#faf9f5; --bg-deep:#f1efe6; --card:#ffffff; --card-soft:#f5f4ed;
+    --ink:#1c1a14; --ink-soft:#4a473c; --muted:#726e5f;
+    --line:#e2ded0; --line-soft:#ece9db;
+    --accent:#8f2c1f; --accent-ink:#fdf8f3;
+    --link:#1d50c4;
+    --ok:#1e7648; --ok-bg:#e8f4ec;
+    --warn:#94660f; --warn-bg:#f8f1dd;
+    --bad:#b3261e; --bad-bg:#f9e9e6;
+    --mix:#7c4a12; --mix-bg:#f6ecdc;
+    --chip:#eeebdd; --chip-ink:#4a473c;
+    --cite:#1d50c4;
+    --shadow:0 1px 2px rgba(28,26,20,.05),0 6px 22px -12px rgba(28,26,20,.14);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#121310; --bg-deep:#0c0d0a; --card:#181912; --card-soft:#15160f;
+      --ink:#eceadf; --ink-soft:#c8c5b4; --muted:#98947f;
+      --line:#2d2d23; --line-soft:#23231b;
+      --accent:#e0705c; --accent-ink:#241009;
+      --link:#8fb3ff;
+      --ok:#57c184; --ok-bg:rgba(87,193,132,.12);
+      --warn:#d9a844; --warn-bg:rgba(217,168,68,.12);
+      --bad:#ef7d72; --bad-bg:rgba(239,125,114,.12);
+      --mix:#dda457; --mix-bg:rgba(221,164,87,.12);
+      --chip:#23241b; --chip-ink:#d7d3c1;
+      --cite:#8fb3ff;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px -14px rgba(0,0,0,.5);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--sans); font-size:16px; line-height:1.62;
+    -webkit-font-smoothing:antialiased; text-wrap:pretty;
+  }
+  ::selection{background:color-mix(in srgb,var(--accent) 28%,transparent)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  a{color:var(--link);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+  a:hover{color:var(--ink)}
+  :focus-visible{outline:2px solid var(--link);outline-offset:2px;border-radius:2px}
+
+  /* ---------- masthead ---------- */
+  .masthead{border-bottom:1px solid var(--line);padding:30px 0 26px}
+  .meta-line{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.02em;color:var(--muted);
+    display:flex;flex-wrap:wrap;gap:6px 14px;margin-bottom:14px;
+  }
+  .meta-line .tag{
+    display:inline-block;background:var(--chip);color:var(--chip-ink);
+    padding:3px 10px;border-radius:999px;font-weight:500;
+  }
+  h1{
+    font-family:var(--serif);font-weight:600;font-size:clamp(38px,5.4vw,58px);
+    line-height:1.04;letter-spacing:-.01em;margin:0 0 14px;max-width:16em;
+  }
+  .lede{font-size:clamp(16px,2vw,19px);color:var(--ink-soft);max-width:46em;margin:0}
+  .lede em{font-family:var(--serif);font-size:1.06em}
+  .scope{
+    margin:18px 0 0;padding:13px 16px;background:var(--card-soft);border:1px solid var(--line-soft);
+    border-radius:8px;font-size:13.5px;color:var(--ink-soft);max-width:62em;
+  }
+  .scope strong{color:var(--ink);font-weight:600}
+
+  /* ---------- on this page ---------- */
+  .onpage{margin:22px 0 0;padding-bottom:24px}
+  .onpage .op-label{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-bottom:10px}
+  .op-chips{display:flex;flex-wrap:wrap;gap:8px}
+  .op-chips a{
+    text-decoration:none;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);
+    border-radius:999px;padding:6px 13px;font-size:13px;font-weight:500;transition:border-color .15s;
+  }
+  .op-chips a:hover{color:var(--ink);border-color:var(--muted)}
+
+  /* ---------- sections ---------- */
+  section{padding:44px 0 8px;scroll-margin-top:16px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+  .sec-no{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:600;white-space:nowrap}
+  h2{font-family:var(--serif);font-weight:600;font-size:clamp(26px,3.4vw,34px);line-height:1.15;margin:0;letter-spacing:-.005em}
+  .sec-sub{color:var(--muted);font-size:14.5px;margin:8px 0 20px;max-width:56em}
+  h3{font-family:var(--serif);font-size:21px;font-weight:600;margin:0 0 6px}
+  p{margin:0 0 12px}
+  section:target{animation:spotlight 1.6s ease-out}
+  @keyframes spotlight{0%{background:color-mix(in srgb,var(--accent) 10%,transparent)}100%{background:transparent}}
+
+  /* ---------- citations ---------- */
+  a.cite{
+    font-family:var(--mono);font-size:10.5px;font-weight:500;color:var(--cite);
+    text-decoration:none;border:1px solid color-mix(in srgb,var(--cite) 35%,transparent);
+    border-radius:4px;padding:1px 5px;margin:0 1px;vertical-align:2px;white-space:nowrap;
+  }
+  a.cite:hover{background:var(--cite);color:#fff;border-color:var(--cite)}
+  .neg{
+    font-family:var(--mono);font-size:10.5px;color:var(--muted);border:1px dashed var(--line);
+    border-radius:4px;padding:1px 6px;white-space:nowrap;
+  }
+
+  /* ---------- flags / chips ---------- */
+  .flag{
+    font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:lowercase;
+    padding:2px 8px;border-radius:999px;white-space:nowrap;vertical-align:1px;
+  }
+  .flag.unverified{background:var(--warn-bg);color:var(--warn);border:1px solid color-mix(in srgb,var(--warn) 40%,transparent)}
+  .flag.conflict{background:var(--mix-bg);color:var(--mix);border:1px solid color-mix(in srgb,var(--mix) 40%,transparent)}
+  .flag.caveat{background:var(--card);color:var(--muted);border:1px solid var(--line)}
+
+  .st{
+    display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:24px;
+    font-family:var(--mono);font-size:12.5px;font-weight:600;border-radius:6px;margin-right:8px;vertical-align:1px;
+  }
+  .st-v{background:var(--ok-bg);color:var(--ok)}
+  .st-p{background:var(--warn-bg);color:var(--warn)}
+  .st-x{background:var(--bad-bg);color:var(--bad)}
+  .st-m{background:var(--mix-bg);color:var(--mix);font-size:11px;padding:0 6px}
+
+  /* ---------- verdict cards ---------- */
+  .verdict-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+  .vcard{
+    background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px;
+    box-shadow:var(--shadow);position:relative;overflow:hidden;
+  }
+  .vcard::before{content:"";display:block;height:4px;margin:-22px -22px 18px;background:var(--accent)}
+  .vcard.alt::before{background:var(--ok)}
+  .vcard .v-kicker{font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--accent);margin-bottom:8px}
+  .vcard.alt .v-kicker{color:var(--ok)}
+  .vcard h3{font-size:23px;margin-bottom:10px}
+  .vcard p{font-size:14.5px;color:var(--ink-soft)}
+  .vcard p:last-child{margin-bottom:0}
+  .vcard .cost{font-family:var(--mono);font-size:12.5px;background:var(--card-soft);border:1px solid var(--line-soft);
+    border-radius:7px;padding:9px 12px;margin-top:12px}
+  .ruled-out{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:8px;
+  }
+  .ro{
+    background:var(--card);border:1px solid var(--line);border-radius:8px;padding:13px 14px;font-size:13px;
+  }
+  .ro .ro-name{font-weight:700;font-size:14px;margin-bottom:3px}
+  .ro p{color:var(--muted);margin:0;font-size:12.8px;line-height:1.5}
+  
+
+  /* ---------- scorecard table ---------- */
+  .table-shell{background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:10px}
+  .table-note{
+    padding:12px 18px;border-bottom:1px solid var(--line-soft);font-size:13px;color:var(--muted);
+    display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;
+  }
+  .table-note .st{margin-right:4px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  thead th{
+    text-align:left;font-family:var(--mono);font-size:11px;font-weight:600;color:var(--muted);
+    padding:12px 14px;border-bottom:1px solid var(--line);background:var(--card-soft);vertical-align:bottom;
+  }
+  thead th .cand{display:block;font-family:var(--serif);font-size:16px;font-weight:600;color:var(--ink);margin-bottom:2px}
+  tbody th{
+    text-align:left;font-weight:600;font-size:13.5px;padding:12px 14px;border-bottom:1px solid var(--line-soft);
+    vertical-align:top;width:170px;line-height:1.4;
+  }
+  tbody td{padding:12px 14px;border-bottom:1px solid var(--line-soft);vertical-align:top;color:var(--ink-soft);line-height:1.55}
+  tbody tr:last-child th,tbody tr:last-child td{border-bottom:none}
+  tbody tr.verdict-row th{background:var(--card-soft)}
+  tbody tr.verdict-row td{background:var(--card-soft);font-weight:600;color:var(--ink);font-size:13px}
+  .verdict-chip{
+    display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;border-radius:999px;
+    padding:3px 11px;margin-bottom:5px;
+  }
+  .vc-good{background:var(--ok-bg);color:var(--ok)}
+  .vc-mid{background:var(--warn-bg);color:var(--warn)}
+  .vc-bad{background:var(--bad-bg);color:var(--bad)}
+  .vc-mix{background:var(--mix-bg);color:var(--mix)}
+  @media(max-width:860px){
+    thead{display:none}
+    tbody th{display:block;width:auto;padding:14px 16px 2px;border-bottom:none}
+    tbody td{display:block;padding:5px 16px 8px;border-bottom:none;color:var(--ink-soft)}
+    tbody td::before{
+      content:attr(data-cand);display:block;font-family:var(--mono);font-size:10.5px;font-weight:600;
+      color:var(--muted);margin-bottom:2px;
+    }
+    tbody tr{border-bottom:1px solid var(--line)}
+    tbody tr:last-child{border-bottom:none}
+    tbody tr.verdict-row th{background:transparent}
+    tbody tr.verdict-row td{background:transparent}
+  }
+
+  /* ---------- candidate accordions ---------- */
+  details.cand{
+    background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:12px;
+    box-shadow:var(--shadow);overflow:hidden;
+  }
+  details.cand summary{
+    list-style:none;cursor:pointer;padding:18px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  }
+  details.cand summary::-webkit-details-marker{display:none}
+  details.cand summary .c-name{font-family:var(--serif);font-size:19px;font-weight:600}
+  details.cand summary .c-tier{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+  details.cand summary .chev{margin-left:auto;color:var(--muted);font-size:18px;line-height:1;transition:transform .2s}
+  details.cand[open] summary .chev{transform:rotate(45deg)}
+  details.cand summary:hover{background:var(--card-soft)}
+  .c-body{padding:2px 20px 20px;border-top:1px dashed var(--line)}
+  .c-body h4{font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--muted);margin:16px 0 8px;letter-spacing:.03em}
+  .c-body p,.c-body li{font-size:14.5px;color:var(--ink-soft)}
+  .c-body ul{margin:0 0 12px;padding-left:20px}
+  .c-body li{margin-bottom:6px}
+  .c-body .steps{list-style:none;padding:0;margin:0 0 12px;counter-reset:step}
+  .c-body .steps li{counter-increment:step;position:relative;padding-left:34px;margin-bottom:7px}
+  .c-body .steps li::before{
+    content:counter(step);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;
+    background:var(--chip);color:var(--chip-ink);font-family:var(--mono);font-size:11px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .c-body .gate-line{
+    background:var(--card-soft);border:1px solid var(--line-soft);border-radius:8px;padding:12px 15px;margin-top:10px;
+  }
+  .c-body .gate-line p{margin:0;font-size:13.8px}
+
+  /* ---------- review section ---------- */
+  .gate-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:16px;margin-bottom:16px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px;box-shadow:var(--shadow)}
+  .panel h3{font-size:20px;margin-bottom:8px}
+  .panel p,.panel li{font-size:14.5px;color:var(--ink-soft)}
+  .panel ul{margin:0;padding-left:20px}
+  .panel li{margin-bottom:10px}
+  .exact{font-family:var(--mono);font-size:12.5px;background:var(--card-soft);border:1px solid var(--line-soft);
+    border-radius:6px;padding:8px 12px;margin:12px 0;overflow-wrap:anywhere}
+
+  /* ---------- host cards ---------- */
+  .host-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+  .host{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px;box-shadow:var(--shadow)}
+  .host .h-name{font-family:var(--serif);font-size:19px;font-weight:600}
+  .host .h-price{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ok);margin:2px 0 10px}
+  .host .h-price.warn{color:var(--warn)}
+  .host ul{margin:0;padding-left:18px;font-size:13.5px;color:var(--ink-soft)}
+  .host li{margin-bottom:6px;line-height:1.55}
+  .routine-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+  .callout{
+    background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-bottom:12px;
+    font-size:14.5px;color:var(--ink-soft);box-shadow:var(--shadow);
+  }
+  .callout strong{color:var(--ink)}
+  .callout.warn{border-color:color-mix(in srgb,var(--warn) 45%,transparent)}
+  .callout p:last-child{margin-bottom:0}
+
+  /* ---------- pricing ---------- */
+  .price-table td:first-child{font-weight:700;color:var(--ink)}
+
+  /* ---------- switching ---------- */
+  .switch-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+  .slist{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px;box-shadow:var(--shadow)}
+  .slist h3{font-size:19px}
+  .slist ul{list-style:none;margin:12px 0 0;padding:0}
+  .slist li{font-size:14px;color:var(--ink-soft);padding:9px 0 9px 28px;border-top:1px solid var(--line-soft);position:relative;line-height:1.55}
+  .slist li::before{position:absolute;left:2px;font-family:var(--mono);font-weight:700}
+  .slist.travels li::before{content:"→";color:var(--ok)}
+  .slist.lost li::before{content:"✕";color:var(--bad);font-size:12px;top:12px}
+  .plat-notes{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+
+  /* ---------- open questions ---------- */
+  ol.open{list-style:none;margin:0 0 16px;padding:0;counter-reset:oq}
+  ol.open>li{
+    counter-increment:oq;background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:16px 18px 14px;margin-bottom:10px;box-shadow:var(--shadow);position:relative;padding-left:56px;
+  }
+  ol.open>li::before{
+    content:counter(oq,decimal-leading-zero);position:absolute;left:18px;top:17px;
+    font-family:var(--mono);font-size:13px;font-weight:600;color:var(--warn);
+  }
+  ol.open .oq-q{font-family:var(--serif);font-size:17px;font-weight:600;margin-bottom:4px}
+  ol.open p{font-size:13.8px;color:var(--ink-soft);margin-bottom:6px}
+  ol.open .oq-resolve{font-size:12.8px;color:var(--muted)}
+  ol.open .oq-resolve strong{color:var(--ink-soft)}
+
+  /* ---------- sources ---------- */
+  .src-group{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--muted);margin:22px 0 10px;letter-spacing:.02em}
+  .src{
+    display:grid;grid-template-columns:52px 1fr;gap:12px;background:var(--card);
+    border:1px solid var(--line);border-radius:8px;padding:13px 16px;margin-bottom:8px;
+    scroll-margin-top:16px;
+  }
+  .src .n{
+    font-family:var(--mono);font-size:13px;font-weight:600;color:var(--ink-soft);
+    background:var(--card-soft);border:1px solid var(--line-soft);border-radius:7px;
+    display:flex;align-items:center;justify-content:center;height:34px;
+  }
+  .src h4{margin:0 0 3px;font-size:14.5px;font-weight:600}
+  .src .meta{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:5px}
+  .src p{font-size:13px;color:var(--ink-soft);margin:0 0 6px}
+  .src a.url{font-family:var(--mono);font-size:11.5px;overflow-wrap:anywhere;word-break:break-all}
+  .vbadge{font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-left:6px;vertical-align:1px}
+  .vbadge.v{background:var(--ok-bg);color:var(--ok)}
+  .vbadge.i{background:var(--warn-bg);color:var(--warn)}
+
+  footer{
+    border-top:1px solid var(--line);margin-top:48px;padding:22px 0 40px;
+    font-size:13px;color:var(--muted);line-height:1.6;
+  }
+
+  @media(max-width:900px){
+    .verdict-grid,.gate-grid,.routine-grid,.switch-grid,.plat-notes{grid-template-columns:1fr}
+    .host-grid{grid-template-columns:1fr}
+    .ruled-out{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:560px){
+    .ruled-out{grid-template-columns:1fr}
+    .ro{margin-bottom:0}
+  }
+  @media print{
+    .onpage{display:none}
+    section:target{animation:none}
+    details.cand>summary .chev{display:none}
+    .vcard,.panel,.host,.callout,.slist,.src,.table-shell{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ masthead ============ -->
+  <header class="masthead">
+    <div class="meta-line">
+      <span class="tag">Research brief</span>
+      <span>Researched live Wed, Sep&nbsp;30,&nbsp;2026</span>
+      <span>·</span>
+      <span>Signed-out research — no live accounts tested</span>
+      <span>·</span>
+      <span>25 sources, linked below</span>
+    </div>
+    <h1>AI publishing alternatives</h1>
+    <p class="lede">Can another AI run the whole daily flow — <em>the morning briefing, the styled PDF, and a public archive anyone can open</em> — and publish each edition <em>without</em> an unexplained pre-publication content gate? Five platforms, compared from their own documentation, with the self-hosted escape route.</p>
+    <div class="scope">
+      <strong>What's being replicated:</strong> a scheduled daily morning briefing (tasks, calendar, weather, local events), a multi-page newspaper-style PDF attached to it, and a public web archive at a stable URL that grows daily — newest first, PDF downloadable for every edition. The current failure point is the publishing step: an automated review blocks sharing with only a generic reason and never identifies the flagged content.
+    </div>
+    <nav class="onpage" aria-label="On this page">
+      <div class="op-label">On this page</div>
+      <div class="op-chips">
+        <a href="#verdict">Bottom line</a>
+        <a href="#scorecard">Scorecard</a>
+        <a href="#candidates">How publishing works</a>
+        <a href="#review">The review gate</a>
+        <a href="#selfhost">Self-hosted route</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#switching">Switching costs</a>
+        <a href="#open">Open questions</a>
+        <a href="#sources">Sources</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+  <!-- ============ 01 verdict ============ -->
+  <section id="verdict">
+    <div class="sec-head"><span class="sec-no">01</span><h2>The bottom line</h2></div>
+    <p class="sec-sub">Two arrangements survive the hard requirement — a daily public page with no unexplained pre-publication gate — one structurally, one practically.</p>
+
+    <div class="verdict-grid">
+      <article class="vcard alt">
+        <div class="v-kicker">Structural fix · removes the risk, not just relocates it</div>
+        <h3>The split model: an AI builds it, you host it</h3>
+        <p><span class="st st-v">✓</span><strong>This is the only arrangement that structurally guarantees no pre-publication gate.</strong> Any of the five assistants generates each morning's briefing, PDF, and archive HTML; the files go on hosting you control — <strong>GitHub Pages</strong>, <strong>Cloudflare Pages</strong>, or Netlify. The platform running the review that currently blocks the workflow is simply not in this publish path, so nothing pre-screens each edition: the only constraints are the host's terms of service, enforced <em>after the fact</em>, not per-edition pre-screening.<a class="cite" href="#src-14">[14]</a><a class="cite" href="#src-15">[15]</a></p>
+        <p>A disputed edition can be re-hosted in minutes because you hold the files — no morning's page is blocked <em>before</em> it exists publicly.<a class="cite" href="#src-14">[14]</a></p>
+        <div class="cost">$0–9/mo hosting + the AI subscription. Setup is the real cost: a one-time technical job (repo, DNS, agent credentials) you'd want help with once.</div>
+      </article>
+      <article class="vcard">
+        <div class="v-kicker">Closest single platform</div>
+        <h3>ChatGPT&nbsp;Plus + Sites</h3>
+        <p><strong>The only candidate documented end-to-end for this exact pattern:</strong> recurring scheduled tasks <a class="cite" href="#src-2">[2]</a>, a public Site anyone can open at a stable URL (later versions publish to the <em>same</em> URL), cloud schedules that update the published Site, and custom domains.<a class="cite" href="#src-1">[1]</a></p>
+        <p>Crucially, OpenAI documents <em>post</em>-publication enforcement — it "may remove or restrict a Site" on policy/safety risk — with an <strong>appeal path</strong> via the email notification link or an intake form. The pre-publish step is a self-review checklist for <em>you</em>, not an automated block that withholds what it flagged.<a class="cite" href="#src-1">[1]</a> One caveat: the article doesn't promise a removal notice pinpoints the offending content.<a class="cite" href="#src-1">[1]</a></p>
+        <div class="cost">Requires Plus ($20/mo) or higher — Sites not on Free/Go.<a class="cite" href="#src-1">[1]</a><a class="cite" href="#src-3">[3]</a></div>
+      </article>
+    </div>
+
+    <div class="ruled-out" aria-label="The other candidates at a glance">
+      <div class="ro"><span class="st st-m">✓/✗</span>
+        <div class="ro-name">Claude</div>
+        <p>Public artifact links exist, but a growing archive under one stable URL being auto-republished daily is not documented.<a class="cite" href="#src-4">[4]</a><a class="cite" href="#src-5">[5]</a></p>
+      </div>
+      <div class="ro"><span class="st st-p">~</span>
+        <div class="ro-name">Gemini</div>
+        <p>Public Canvas links exist — but for apps, <em>anyone with the link can view and edit</em> the app's data. Poor fit for a read-only archive.<a class="cite" href="#src-7">[7]</a></p>
+      </div>
+      <div class="ro"><span class="st st-x">?</span>
+        <div class="ro-name">Perplexity</div>
+        <p>Strong scheduling, but a current, stable, public archive-publishing surface could not be verified in official sources.<span class="flag unverified">unverified</span></p>
+      </div>
+      <div class="ro"><span class="st st-x">✗</span>
+        <div class="ro-name">Microsoft Copilot</div>
+        <p><strong>Disqualified:</strong> recipients of shared links "must sign in before they can view the shared content." No anonymous public page.<a class="cite" href="#src-12">[12]</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 scorecard ============ -->
+  <section id="scorecard">
+    <div class="sec-head"><span class="sec-no">02</span><h2>Capability scorecard</h2></div>
+    <p class="sec-sub">Every capability below was checked against the vendor's own documentation. <strong>V</strong> = page was fetched live in this research session; <strong>I</strong> = search-result text only.</p>
+
+    <div class="table-shell">
+      <div class="table-note">
+        <span><span class="st st-v">✓</span>verified in docs</span>
+        <span><span class="st st-p">~</span>partial / not fully documented</span>
+        <span><span class="st st-x">✗</span>fails the requirement</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Capability</th>
+            <th scope="col"><span class="cand">ChatGPT</span>Plus/Pro + Sites</th>
+            <th scope="col"><span class="cand">Claude</span>Pro/Max + Cowork</th>
+            <th scope="col"><span class="cand">Gemini</span>AI Pro + Canvas</th>
+            <th scope="col"><span class="cand">Perplexity</span>Pro/Max + Computer</th>
+            <th scope="col"><span class="cand">Copilot</span>M365 Premium</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Scheduled / recurring tasks</th>
+            <td data-cand="ChatGPT"><span class="st st-v">✓</span>Scheduled tasks; Plus allows 5 active, hourly/exact times on paid plans.<a class="cite" href="#src-2">[2]</a></td>
+            <td data-cand="Claude"><span class="st st-v">✓</span>Cowork scheduled tasks run remotely even if the computer is asleep.<a class="cite" href="#src-5">[5]</a></td>
+            <td data-cand="Gemini"><span class="st st-v">✓</span>Scheduled actions — daily/weekly/monthly, max 10 active.<a class="cite" href="#src-8">[8]</a> <span class="flag conflict">plan gating disputed</span></td>
+            <td data-cand="Perplexity"><span class="st st-v">✓</span>Automations run on schedules/events and remember prior runs.<a class="cite" href="#src-11">[11]</a></td>
+            <td data-cand="Copilot"><span class="st st-v">✓</span>Cowork runs prompts on a schedule.<a class="cite" href="#src-13">[13]</a></td>
+          </tr>
+          <tr>
+            <th scope="row">Web research</th>
+            <td data-cand="ChatGPT"><span class="st st-v">✓</span>Deep Research on Plus where available.<a class="cite" href="#src-3">[3]</a></td>
+            <td data-cand="Claude"><span class="st st-v">✓</span>Cowork tasks "run web research"; pricing lists web search + Research.<a class="cite" href="#src-5">[5]</a><a class="cite" href="#src-6">[6]</a></td>
+            <td data-cand="Gemini"><span class="st st-v">✓</span>Deep Research listed on the subscription page.<a class="cite" href="#src-9">[9]</a></td>
+            <td data-cand="Perplexity"><span class="st st-v">✓</span>Research is the core product; Automations use connected sources.<a class="cite" href="#src-11">[11]</a></td>
+            <td data-cand="Copilot"><span class="st st-v">✓</span>"Research topics across multiple sources."<a class="cite" href="#src-13">[13]</a></td>
+          </tr>
+          <tr>
+            <th scope="row">Persistent memory &amp; custom instructions</th>
+            <td data-cand="ChatGPT"><span class="st st-v">✓</span>Saved memories + custom instructions exist as account features (shared task links deliberately exclude them — proof they exist separately).<a class="cite" href="#src-2">[2]</a></td>
+            <td data-cand="Claude"><span class="st st-v">✓</span>"Memory across conversations" even on Free; user preferences; Projects on Pro.<a class="cite" href="#src-6">[6]</a></td>
+            <td data-cand="Gemini"><span class="st st-v">✓</span>Saved info ("Instructions for Gemini"), Gems/skills instructions.<a class="cite" href="#src-10">[10]</a></td>
+            <td data-cand="Perplexity"><span class="st st-p">~</span>Projects/Spaces context; Automations remember prior work.<a class="cite" href="#src-11">[11]</a></td>
+            <td data-cand="Copilot"><span class="st st-p">~</span>Memory exists — but Tasks memories notably do <em>not</em> migrate to Cowork. <span class="flag caveat">index-only · prior session</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Styled PDF generation</th>
+            <td data-cand="ChatGPT"><span class="st st-p">~</span>File upload/analysis verified; PDF <em>creation</em> not named on the official pages fetched — plausible via Work/Codex, not verified here.<a class="cite" href="#src-3">[3]</a> <span class="flag unverified">unverified</span></td>
+            <td data-cand="Claude"><span class="st st-v">✓</span>"Create files and execute code" (Free and up); Docs/Slides on Pro.<a class="cite" href="#src-6">[6]</a></td>
+            <td data-cand="Gemini"><span class="st st-v">✓</span>LaTeX Canvas docs export to PDF with preview.<a class="cite" href="#src-7">[7]</a></td>
+            <td data-cand="Perplexity"><span class="st st-p">~</span>Labs/Computer deliverables (DOCX/PDF/etc.) claimed by secondary sources only. <span class="flag unverified">unverified</span></td>
+            <td data-cand="Copilot"><span class="st st-v">✓</span>Create/edit PDFs explicitly supported.<a class="cite" href="#src-13">[13]</a></td>
+          </tr>
+          <tr>
+            <th scope="row">Public page at a stable URL, anyone can open</th>
+            <td data-cand="ChatGPT"><span class="st st-v">✓</span><strong>Sites:</strong> "anyone on the internet" → Publish → public Site viewable without a ChatGPT workspace; later versions publish to the <strong>same Site URL</strong>; custom domains supported.<a class="cite" href="#src-1">[1]</a></td>
+            <td data-cand="Claude"><span class="st st-m">✓/✗</span>Artifacts shareable with "anyone who has the link" (Pro/Max+); legacy artifacts can be <strong>Published</strong>. But a <em>growing archive</em> (index + per-edition pages under one stable URL) is not documented.<a class="cite" href="#src-4">[4]</a></td>
+            <td data-cand="Gemini"><span class="st st-p">~</span><code>g.co/gemini/share</code> links are public — but for apps "anyone with that public link can view and <strong>edit</strong> data associated with the app."<a class="cite" href="#src-7">[7]</a></td>
+            <td data-cand="Perplexity"><span class="st st-x">✗</span>Pages were publishable per 2024-era secondary coverage, but current availability and archive behavior were <strong>not verified</strong> (help-center fetch blocked, HTTP 403). <span class="flag unverified">unverified</span></td>
+            <td data-cand="Copilot"><span class="st st-x">✗</span><strong>No.</strong> Recipients "must sign in before they can view the shared content" — both work/school and personal accounts.<a class="cite" href="#src-12">[12]</a></td>
+          </tr>
+          <tr>
+            <th scope="row">Daily auto-update of the published page</th>
+            <td data-cand="ChatGPT"><span class="st st-v">✓</span>Site Automations: attach a cloud schedule for recurring work on a published Site.<a class="cite" href="#src-1">[1]</a></td>
+            <td data-cand="Claude"><span class="st st-p">~</span>A scheduled Cowork task can regenerate a report, but wiring output back to republish the <em>same</em> artifact URL daily is not documented.<a class="cite" href="#src-4">[4]</a><a class="cite" href="#src-5">[5]</a></td>
+            <td data-cand="Gemini"><span class="st st-p">~</span>Scheduled actions prepare content in the background; republishing the same Canvas/archive daily is not documented.<a class="cite" href="#src-7">[7]</a><a class="cite" href="#src-8">[8]</a></td>
+            <td data-cand="Perplexity"><span class="st st-p">~</span>Automations can deliver to Slack/Gmail drafts/spreadsheets — a public URL is not among the documented destinations.<a class="cite" href="#src-11">[11]</a></td>
+            <td data-cand="Copilot"><span class="st st-p">~</span>Scheduled Cowork tasks exist; there is no public destination for them.<a class="cite" href="#src-13">[13]</a></td>
+          </tr>
+          <tr class="verdict-row">
+            <th scope="row">Verdict</th>
+            <td data-cand="ChatGPT"><span class="verdict-chip vc-good">closest all-in-one</span><br />Documented end-to-end: schedule → publish → auto-update.<a class="cite" href="#src-1">[1]</a></td>
+            <td data-cand="Claude"><span class="verdict-chip vc-mid">workable · glue needed</span><br />All powers present; the archive-under-one-URL isn't documented.<a class="cite" href="#src-4">[4]</a></td>
+            <td data-cand="Gemini"><span class="verdict-chip vc-mix">poor fit</span><br />Public link opens the app's data to viewer edits.<a class="cite" href="#src-7">[7]</a></td>
+            <td data-cand="Perplexity"><span class="verdict-chip vc-bad">unverified</span><br />Publishing surface can't be confirmed from official sources.</td>
+            <td data-cand="Copilot"><span class="verdict-chip vc-bad">disqualified</span><br />Sign-in wall on every shared link.<a class="cite" href="#src-12">[12]</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <!-- ============ 03 candidates ============ -->
+  <section id="candidates">
+    <div class="sec-head"><span class="sec-no">03</span><h2>How the publish step works, per candidate</h2></div>
+    <p class="sec-sub">The concrete mechanics of getting a daily edition onto a public page — transcribed from each vendor's documentation, caveats included.</p>
+
+    <details class="cand" open>
+      <summary>
+        <span class="c-name">ChatGPT + Sites</span>
+        <span class="c-tier">Plus/Pro + Work</span>
+        <span class="verdict-chip vc-good">best all-in-one</span>
+        <span class="chev">+</span>
+      </summary>
+      <div class="c-body">
+        <h4>Publish mechanics</h4>
+        <ol class="steps">
+          <li>Build the site in Work (web) or Work/Codex (desktop); preview privately.</li>
+          <li>Share → <strong>"Anyone on the internet"</strong> (only where public publishing is enabled) → Publish → Visit/Copy link.<a class="cite" href="#src-1">[1]</a></li>
+          <li>New Sites are owner/admin-only until the access level is changed; a published Site needs no ChatGPT workspace access to view.<a class="cite" href="#src-1">[1]</a></li>
+          <li>After the owner's first publish, collaborators with <strong>Can edit</strong> can publish later versions to the <strong>same Site URL</strong>.<a class="cite" href="#src-1">[1]</a></li>
+          <li>Site Automations attach a <strong>cloud schedule</strong> for recurring updates to the published Site.<a class="cite" href="#src-1">[1]</a></li>
+        </ol>
+        <p>Sites is in public beta for workspaces, Plus and Pro — <strong>not</strong> Free or Go. Custom domains are supported where available if you already own the domain and can change DNS (not in Enterprise at launch).<a class="cite" href="#src-1">[1]</a></p>
+        <h4>Schedule · memory · PDF</h4>
+        <ul>
+          <li>Scheduled tasks: Plus allows 5 active (Free/Go 3, Business/Edu 10, Pro/Enterprise 15); paid plans get hourly or exact-time schedules.<a class="cite" href="#src-2">[2]</a></li>
+          <li>Saved memories and custom instructions exist as account features.<a class="cite" href="#src-2">[2]</a></li>
+          <li>Styled PDF creation: <strong>not named</strong> on the official pages fetched — plausible via Work/Codex, but not verified here. Treat as an open item.<a class="cite" href="#src-3">[3]</a> <span class="flag unverified">unverified</span></li>
+        </ul>
+        <div class="gate-line">
+          <h4>Review / appeal behavior</h4>
+          <p>The publish flow includes no automated gate in the help article — instead you're asked to check before publishing that the Site contains no confidential/sensitive data or third-party content without rights. Enforcement is retrospective: "OpenAI may remove or restrict a Site if there is a risk that it violates OpenAI policies or platform safety requirements." If removed in error, appeal via <strong>the link in the email notification</strong>, or an intake form if the email is inaccessible; third parties report via a content form with the full Site URL.<a class="cite" href="#src-1">[1]</a></p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cand">
+      <summary>
+        <span class="c-name">Claude + Cowork / Artifacts</span>
+        <span class="c-tier">Pro/Max</span>
+        <span class="verdict-chip vc-mid">workable · glue needed</span>
+        <span class="chev">+</span>
+      </summary>
+      <div class="c-body">
+        <h4>Publish mechanics</h4>
+        <ol class="steps">
+          <li>Artifacts start private. On Pro/Max (and Team/Enterprise) you can share with <strong>"anyone who has the link"</strong>; legacy chat artifacts on Free/Pro/Max can be <strong>Published</strong>.<a class="cite" href="#src-4">[4]</a></li>
+          <li>Publishing a legacy artifact also adds it to the Artifacts sidebar and offers <strong>embed code</strong> with an allowed-domains list; <strong>Unpublish</strong> revokes access.<a class="cite" href="#src-4">[4]</a></li>
+          <li>Cowork scheduled tasks can regenerate the daily report in the background, running remotely even if the computer is asleep.<a class="cite" href="#src-5">[5]</a></li>
+        </ol>
+        <p><strong>The gap:</strong> the documented model is one artifact per link — a daily newspaper becomes either one artifact edited in place, or a new link per edition. An auto-updating archive (index page + per-edition pages under one stable URL) is not documented anywhere.<a class="cite" href="#src-4">[4]</a> Also note: the help article's viewer sign-in subsections rendered truncated, so don't overstate whether link viewers must sign in.<a class="cite" href="#src-4">[4]</a> <span class="flag unverified">unverified</span></p>
+        <h4>Schedule · memory · PDF</h4>
+        <ul>
+          <li>Cowork scheduled tasks include connectors/skills/plugins and can run web research and generate reports.<a class="cite" href="#src-5">[5]</a></li>
+          <li>"Memory across conversations" even on Free; user preferences; Projects on Pro.<a class="cite" href="#src-6">[6]</a></li>
+          <li><strong>"Create files and execute code"</strong> from Free up; Docs/Slides on Pro — PDF generation is explicitly documented.<a class="cite" href="#src-6">[6]</a></li>
+        </ul>
+        <div class="gate-line">
+          <h4>Review / appeal behavior</h4>
+          <p>The sharing article documents access controls, unpublish/unshare, and reporting an unexpected invitation — but <strong>no pre-publication review, removal, or appeal process for published artifacts</strong> was found in the article or targeted searches.<a class="cite" href="#src-4">[4]</a> Anthropic's general usage-policy enforcement exists at the account level; a page-level opaque gate is not publicly documented.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cand">
+      <summary>
+        <span class="c-name">Gemini + Canvas</span>
+        <span class="c-tier">AI Pro (likely — see hedge)</span>
+        <span class="verdict-chip vc-mix">poor fit for an archive</span>
+        <span class="chev">+</span>
+      </summary>
+      <div class="c-body">
+        <h4>Publish mechanics</h4>
+        <ol class="steps">
+          <li>Share &amp; export → Share produces a <code>g.co/gemini/share</code> link.<a class="cite" href="#src-7">[7]</a></li>
+          <li>For <strong>docs</strong> this is a viewable page; for <strong>apps</strong>, Google warns that anyone with the public link can view <strong>and edit</strong> data associated with the app.<a class="cite" href="#src-7">[7]</a></li>
+          <li>Shared links open only in <code>gemini.google.com</code>, not the mobile app; viewers can Copy Canvas into their own account.<a class="cite" href="#src-7">[7]</a></li>
+        </ol>
+        <p>The view-and-edit behavior for apps makes Canvas a weak choice as a controlled, read-only public archive.<a class="cite" href="#src-7">[7]</a></p>
+        <h4>Schedule · memory · PDF</h4>
+        <ul>
+          <li>Scheduled actions: daily/weekly/monthly, max 10 active. <strong>Hedge:</strong> the official page as fetched requires only a personal Google Account and Keep Activity on, with a gradual rollout — while secondary coverage says AI Pro/Ultra. Until the free rollout reaches an account, AI Pro at $19.99 is the practical tier.<a class="cite" href="#src-8">[8]</a><a class="cite" href="#src-9">[9]</a> <span class="flag conflict">sources conflict</span></li>
+          <li>Instructions in Gems/skills and "Saved info"; public links managed under "Your public links."<a class="cite" href="#src-10">[10]</a></li>
+          <li><strong>LaTeX Canvas docs export to PDF</strong> with preview — PDF generation is documented.<a class="cite" href="#src-7">[7]</a></li>
+        </ul>
+        <div class="gate-line">
+          <h4>Review / appeal behavior</h4>
+          <p>Google documents user-side management: review/revoke your public links, request the removal of content under policies or applicable laws, export via Takeout.<a class="cite" href="#src-10">[10]</a> <strong>No official pre-publication content-review block or appeal specific to Gemini share/Canvas links was located.</strong></p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cand">
+      <summary>
+        <span class="c-name">Perplexity + Computer / Automations</span>
+        <span class="c-tier">Pro/Max</span>
+        <span class="verdict-chip vc-bad">unverified</span>
+        <span class="chev">+</span>
+      </summary>
+      <div class="c-body">
+        <h4>Publish mechanics</h4>
+        <ol class="steps">
+          <li>Automations can run the daily research job on schedule or event triggers, "remember prior work," and deliver to destinations like Slack channels or Gmail drafts.<a class="cite" href="#src-11">[11]</a></li>
+          <li>A public URL is <strong>not</strong> among the documented output destinations.<a class="cite" href="#src-11">[11]</a></li>
+        </ol>
+        <p>The older "Pages" publishing feature is attested only by 2024-era secondary coverage (publishable, Google-indexed). Its current status could not be verified: the help-center Pages article returned HTTP 403 and has not been retried, and sources disagree — one secondary source claims the create-page feature was temporarily retired in early 2026. <span class="flag unverified">cannot confirm</span></p>
+        <h4>Schedule · memory · PDF</h4>
+        <ul>
+          <li><strong>Automations</strong> replace Scheduled Tasks: scheduled or event triggers (Slack/Gmail/Outlook/Linear/GitHub), run history reviewable, human review can be required before sharing, credits charged only when Computer runs.<a class="cite" href="#src-11">[11]</a></li>
+          <li>Projects/Spaces context; Automations remember prior work.<a class="cite" href="#src-11">[11]</a></li>
+          <li>PDF/document deliverables claimed by secondary sources only — <strong>not verified</strong>. <span class="flag unverified">unverified</span></li>
+        </ul>
+        <div class="gate-line">
+          <h4>Review / appeal behavior</h4>
+          <p>No official documentation of a pre-publication review or appeal for Pages/public outputs was located; the current status of Pages itself is unverified.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cand">
+      <summary>
+        <span class="c-name">Microsoft Copilot</span>
+        <span class="c-tier">M365 Premium</span>
+        <span class="verdict-chip vc-bad">disqualified</span>
+        <span class="chev">+</span>
+      </summary>
+      <div class="c-body">
+        <h4>Publish mechanics</h4>
+        <ol class="steps">
+          <li>Sharing produces a snapshot link of a conversation or a single response.<a class="cite" href="#src-12">[12]</a></li>
+          <li>Recipients <strong>"must sign in before they can view the shared content"</strong> — a work/school account for org shares, a Microsoft account for personal shares.<a class="cite" href="#src-12">[12]</a></li>
+        </ol>
+        <p>There is no anonymous public web page, so the daily-public-archive requirement fails regardless of Cowork's scheduling and PDF strengths.<a class="cite" href="#src-12">[12]</a><a class="cite" href="#src-13">[13]</a></p>
+        <h4>Schedule · memory · PDF</h4>
+        <ul>
+          <li>Cowork runs prompts on a schedule, drafts email and briefings, researches across sources.<a class="cite" href="#src-13">[13]</a></li>
+          <li>Memory exists — but Microsoft is migrating Copilot Tasks to Cowork, and per prior-session search results, Tasks' saved memories won't move and existing shared links to Tasks content will stop working. Even staying with the same vendor can strand accumulated context. <span class="flag caveat">index-only · prior session</span></li>
+          <li>Create/edit PDFs explicitly supported.<a class="cite" href="#src-13">[13]</a></li>
+        </ul>
+        <div class="gate-line">
+          <h4>Review / appeal behavior</h4>
+          <p>Moot for this use case: Microsoft notes some content "might not be available to share because of your organization's sharing policies or sensitivity label protections" — an org-policy gate, not a consumer public-publishing review.<a class="cite" href="#src-12">[12]</a></p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ 04 review ============ -->
+  <section id="review">
+    <div class="sec-head"><span class="sec-no">04</span><h2>The core question: who blocks you, and do they say why?</h2></div>
+    <p class="sec-sub">The exact incumbent failure — an opaque pre-publication review blocking sharing without identifying the flagged content — was hunted for across all five candidates.</p>
+
+    <div class="gate-grid">
+      <div class="panel">
+        <h3>Nobody publicly documents that behavior</h3>
+        <p>The phrase from the current gate was searched verbatim along with share/AI variants:</p>
+        <div class="exact">"may contain personal details about other people"</div>
+        <p><strong>No platform document using that wording as a publish/share block was located</strong> — results were unrelated privacy guidance. So no candidate can be tied to <em>or</em> cleared from that behavior from their public docs. <span class="neg">negative result</span></p>
+        <p>And this matters: <strong>absence of documentation is not proof of absence of enforcement.</strong> Post-publication removal under general policy language is the residual risk on any vendor-hosted surface — which is precisely why the self-hosted route is the only option that removes the risk rather than re-locating it.</p>
+      </div>
+      <div class="panel">
+        <h3>What each vendor does document</h3>
+        <ul>
+          <li><strong>OpenAI</strong> — the <em>only</em> vendor documenting removal <strong>and</strong> an appeal path for published pages: removal is post-publication, appeal via the notification email link or an intake form. The pre-publish step is a user self-review checklist, not an automated block.<a class="cite" href="#src-1">[1]</a></li>
+          <li><strong>Anthropic</strong> — access controls and unpublish documented; no pre-publication review or artifact-level appeal found.<a class="cite" href="#src-4">[4]</a></li>
+          <li><strong>Google</strong> — user-side link management and removal requests documented; no pre-publication block or share-link appeal found.<a class="cite" href="#src-10">[10]</a></li>
+          <li><strong>Perplexity</strong> — nothing on pre-publication review or appeal found; Pages status itself unverified. <span class="flag unverified">unverified</span></li>
+          <li><strong>Microsoft</strong> — org-policy gate only, for signed-in sharing; no consumer public-publishing review. Moot: no public page exists.<a class="cite" href="#src-12">[12]</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 selfhost ============ -->
+  <section id="selfhost">
+    <div class="sec-head"><span class="sec-no">05</span><h2>The self-hosted route: "AI builds it, you host it"</h2></div>
+    <p class="sec-sub">How the split model works in practice: the assistant generates each morning's briefing, styled PDF, and static HTML (one page per edition plus a newest-first index page), and those files land on hosting you control. No vendor sits in the publish path.</p>
+
+    <div class="host-grid">
+      <div class="host">
+        <div class="h-name">GitHub Pages</div>
+        <div class="h-price">Free</div>
+        <ul>
+          <li>Free with GitHub Free for <strong>public</strong> repositories.<a class="cite" href="#src-14">[14]</a></li>
+          <li>Published site up to <strong>1 GB</strong>; soft bandwidth limit <strong>100 GB/month</strong>.<a class="cite" href="#src-14">[14]</a></li>
+          <li>Deployments time out at 10 minutes; soft 10 builds/hour (custom GitHub Actions exempt).<a class="cite" href="#src-14">[14]</a></li>
+          <li>Over quota → GitHub may stop serving or email suggesting a CDN, releases, or another host.<a class="cite" href="#src-14">[14]</a></li>
+          <li>A daily newspaper archive fits comfortably for years at small-town readership scale; individual PDFs count toward the 1 GB cap, so large image-heavy PDFs are the long-term constraint.</li>
+        </ul>
+      </div>
+      <div class="host">
+        <div class="h-name">Cloudflare Pages</div>
+        <div class="h-price">Free</div>
+        <ul>
+          <li>Free tier: <strong>500 builds/month</strong> (a daily deploy uses ~30), 1 concurrent build, 20-minute timeout.<a class="cite" href="#src-15">[15]</a></li>
+          <li><strong>20,000 files</strong> per site; up to <strong>100 custom domains</strong> per project.<a class="cite" href="#src-15">[15]</a></li>
+          <li><strong>25 MiB max per single file</strong> — the main design rule for the PDF.<a class="cite" href="#src-15">[15]</a></li>
+          <li>Unlimited preview deployments.<a class="cite" href="#src-15">[15]</a></li>
+          <li>Generous for this use; deploys on every git push.<a class="cite" href="#src-15">[15]</a></li>
+        </ul>
+      </div>
+      <div class="host">
+        <div class="h-name">Netlify</div>
+        <div class="h-price warn">$9/mo realistic</div>
+        <ul>
+          <li>Credit-based for new accounts: Free $0 = <strong>300 credits/month</strong>; Personal $9/mo = 1,000; Pro from $20/mo = 3,000.<a class="cite" href="#src-18">[18]</a><a class="cite" href="#src-19">[19]</a> <span class="flag caveat">index-only</span></li>
+          <li>A production deploy costs <strong>15 credits</strong>; bandwidth 20/GB; requests 2 per 10k.<a class="cite" href="#src-18">[18]</a></li>
+          <li>Daily deploys ≈ <strong>450 credits/month</strong> in deploy charges alone — exceeds Free's 300; projects pause when credits run out.<a class="cite" href="#src-18">[18]</a></li>
+          <li><strong>Realistically: Personal at $9/month</strong> for this workflow.<a class="cite" href="#src-18">[18]</a><a class="cite" href="#src-19">[19]</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin:6px 0 12px">The daily routine, honestly assessed</h3>
+    <div class="routine-grid">
+      <div class="callout">
+        <strong>Fully automated variant (recommended).</strong> A scheduled agent (e.g., ChatGPT Site Automations, a Cowork/Automations job, or a hosted agent with repository access) generates the edition and pushes the files; the host builds and deploys on push. Your effort: read the morning briefing; intervene only on failures.<a class="cite" href="#src-1">[1]</a><a class="cite" href="#src-15">[15]</a> The real cost is <strong>setup</strong>: connecting the repo, domain DNS, and the agent's credentials is a one-time technical task worth getting help with once.
+      </div>
+      <div class="callout warn">
+        <strong>Semi-manual variant (fragile).</strong> The assistant produces the PDF + HTML each morning; you drag the files into a deploy or commit them via the GitHub web UI. A 5–10 minute daily ritual with several failure points (wrong folder, stale index) — and the index page must be regenerated daily so "newest first" stays true, exactly the kind of step an agent should own. The research flags this as the part most likely to be abandoned.
+      </div>
+    </div>
+    <div class="callout">
+      <strong>Cost summary:</strong> hosting <strong>$0–9/month</strong> (GitHub Pages or Cloudflare Pages free tiers; Netlify Personal $9/month) plus the assistant subscription — so self-hosting isn't mainly a money saving, it buys <em>control of the publish path</em>. Add a custom domain registration if you want one (pricing not verified here). <span class="flag caveat">registrar pricing unverified</span>
+    </div>
+    <div class="callout">
+      <strong>Caveat — "no pre-publication gate" does not mean "no rules."</strong> GitHub Pages is subject to the GitHub Terms (the limits page lists prohibited categories), and all hosts can remove content after reports.<a class="cite" href="#src-14">[14]</a> What changes is the <em>failure mode</em>: a disputed edition can be re-hosted in minutes because you hold the files, and no edition is ever blocked <em>before</em> it exists publicly.
+    </div>
+    <p style="font-size:13.5px;color:var(--muted)">Not evaluated to citation standard here: Wix/Squarespace pricing and daily-update mechanics. They remove the git/upload friction but reintroduce a vendor platform between you and publication — the thing this option exists to avoid — and make per-edition PDF+HTML file management clumsier than a static file tree. <span class="flag unverified">not researched</span></p>
+  </section>
+
+  <!-- ============ 06 pricing ============ -->
+  <section id="pricing">
+    <div class="sec-head"><span class="sec-no">06</span><h2>Subscription pricing</h2></div>
+    <p class="sec-sub">Tiers relevant to heavy daily use. For this workflow the binding constraints are <strong>feature gates</strong> (Sites needs Plus+<a class="cite" href="#src-1">[1]</a>; Claude's new-experience scheduling is surfaced for Pro/Max<a class="cite" href="#src-5">[5]</a>), not message caps — one scheduled daily run plus a PDF and a page is light by "heavy use" standards.</p>
+
+    <div class="table-shell">
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th scope="col">Platform</th>
+            <th scope="col">Entry paid tier</th>
+            <th scope="col">Heavy-use tier</th>
+            <th scope="col">Notes from the docs</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-cand="Platform">ChatGPT</td>
+            <td data-cand="Entry paid tier"><strong>$20/month</strong> Plus (billed monthly); Sites requires Plus/Pro — not Free/Go.<a class="cite" href="#src-3">[3]</a><a class="cite" href="#src-1">[1]</a></td>
+            <td data-cand="Heavy-use tier">Pro exists as a higher tier. <strong>Price not verified from an official page this session</strong> — secondary sources conflict ($100 vs $200 tiers). <span class="flag unverified">unverified</span></td>
+            <td data-cand="Notes">—</td>
+          </tr>
+          <tr>
+            <td data-cand="Platform">Claude</td>
+            <td data-cand="Entry paid tier"><strong>$17/mo annual</strong> ($200 upfront) <strong>or $20/mo monthly</strong> Pro — includes scheduled tasks, Projects, Claude Code-class features.<a class="cite" href="#src-6">[6]</a></td>
+            <td data-cand="Heavy-use tier"><strong>Max from $100/mo</strong> (5× or 20× Pro usage); Max 20× listed at $200/mo on a secondary mirror of official pricing.<a class="cite" href="#src-6">[6]</a> <span class="flag caveat">index-only</span></td>
+            <td data-cand="Notes">Limits are rolling 5-hour/weekly pools with no fixed message count — <strong>test Pro before paying Max prices</strong> for a long daily PDF job.<a class="cite" href="#src-6">[6]</a></td>
+          </tr>
+          <tr>
+            <td data-cand="Platform">Gemini</td>
+            <td data-cand="Entry paid tier"><strong>$4.99/mo</strong> AI Plus (2× Free); <strong>$19.99/mo</strong> AI Pro (4× Free, Deep Research).<a class="cite" href="#src-9">[9]</a></td>
+            <td data-cand="Heavy-use tier"><strong>$99.99/mo</strong> AI Ultra (5× vs Pro) or <strong>$199.99/mo</strong> (20× vs Pro).<a class="cite" href="#src-9">[9]</a></td>
+            <td data-cand="Notes">One secondary source listed AI Plus at $7.99 — <strong>superseded</strong> by the live official page fetched here.<a class="cite" href="#src-9">[9]</a></td>
+          </tr>
+          <tr>
+            <td data-cand="Platform">Perplexity</td>
+            <td data-cand="Entry paid tier"><strong>$20/mo</strong> Pro (~$17/mo annual).<a class="cite" href="#src-16">[16]</a><a class="cite" href="#src-17">[17]</a></td>
+            <td data-cand="Heavy-use tier"><strong>$200/mo</strong> Max (~$167/mo annual); Education Pro $10.<a class="cite" href="#src-16">[16]</a><a class="cite" href="#src-17">[17]</a></td>
+            <td data-cand="Notes"><strong>Hedge:</strong> the official /pro page returned only cookie text this session — pricing rests on corroborated secondary sources. <span class="flag caveat">index-only</span></td>
+          </tr>
+          <tr>
+            <td data-cand="Platform">Microsoft Copilot <span class="neg">no public page</span></td>
+            <td data-cand="Entry paid tier">Premium <strong>$19.99/mo</strong> — the top consumer tier (highest Copilot limits).<a class="cite" href="#src-24">[24]</a><a class="cite" href="#src-25">[25]</a></td>
+            <td data-cand="Heavy-use tier">Premium is the ceiling.<a class="cite" href="#src-24">[24]</a></td>
+            <td data-cand="Notes">Microsoft 365 Personal $9.99 / Family $12.99 per secondary coverage (no dedicated source link carried in the research). <span class="flag caveat">index-only</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13.5px;color:var(--muted)">Gemini scheduled-actions gating, repeated here because it affects which tier you buy: the official page as fetched only requires a personal Google Account with Keep Activity on, while secondary coverage says AI Pro/Ultra. Both positions are reported, not resolved — if the free rollout hasn't reached the account, AI Pro is the practical tier.<a class="cite" href="#src-8">[8]</a><a class="cite" href="#src-9">[9]</a> <span class="flag conflict">sources conflict</span></p>
+  </section>
+
+  <!-- ============ 07 switching ============ -->
+  <section id="switching">
+    <div class="sec-head"><span class="sec-no">07</span><h2>Switching costs: what survives, what doesn't</h2></div>
+    <p class="sec-sub">Months of accumulated context means: saved memories, custom instructions/editorial rules, project instructions and files, scheduled-task definitions, shared links, and the daily series' run history and logs.</p>
+
+    <div class="switch-grid">
+      <div class="slist travels">
+        <h3>Travels well everywhere</h3>
+        <ul>
+          <li><strong>The portable core:</strong> a plain-text bundle of preferences, editorial rules, and recurring-series definitions — also an argument for maintaining that bundle as a document <em>you</em> own from day one.</li>
+          <li><strong>Project files</strong> re-upload as files anywhere.</li>
+        </ul>
+      </div>
+      <div class="slist lost">
+        <h3>Lost or stranded in a switch</h3>
+        <ul>
+          <li><strong>Scheduled task definitions</strong> — ChatGPT explicitly excludes them, shared task links, and snapshots from personal-data exports; they must be re-created by hand.<a class="cite" href="#src-2">[2]</a></li>
+          <li><strong>Run history and series continuity</strong> — Automations/monitoring tasks use prior-run memory that does not transfer.<a class="cite" href="#src-11">[11]</a><a class="cite" href="#src-2">[2]</a></li>
+          <li><strong>Published URLs</strong> — editions under a vendor subdomain/link die with the account or an unpublish action — <strong>another reason the archive-of-record should live on user-controlled hosting</strong>, even if production stays on a consumer assistant.<a class="cite" href="#src-4">[4]</a></li>
+          <li><strong>Saved memories via export</strong> — contested for ChatGPT (see below): manual copy at worst, partial at best.<a class="cite" href="#src-22">[22]</a><a class="cite" href="#src-23">[23]</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="plat-notes">
+      <div class="callout">
+        <strong>Out of ChatGPT:</strong> shared task links include only title/instructions/schedule/timezone — never the creator's saved memories, custom instructions, files, or connected-app data — so a shared task is <em>not</em> a context-transfer mechanism.<a class="cite" href="#src-2">[2]</a> Whether data export includes saved memories/custom instructions is <strong>contested in secondary sources</strong>: one tooling source claims the official export omits saved memories (and newer exports omit custom instructions) — copy them manually from Settings → Personalization; another claims OpenAI confirms custom instructions <em>are</em> included while memories still don't transfer by upload. <strong>Verify in-account before relying on it.</strong><a class="cite" href="#src-22">[22]</a><a class="cite" href="#src-23">[23]</a> <span class="flag conflict">sources conflict</span>
+      </div>
+      <div class="callout">
+        <strong>Into Claude — the lowest-friction inbound path found.</strong> Anthropic's import flow is explicitly copy/paste: prompt your <em>current</em> assistant to "list every memory you have stored about me… output everything in a single code block," then paste into Claude's Settings → Memory → "Start import"; export from Claude is likewise copy-the-memory-text.<a class="cite" href="#src-20">[20]</a> Corroborated by press coverage — "just a prompt that you copy and paste," memory available on the free plan, "you can export them whenever you want."<a class="cite" href="#src-21">[21]</a> Because the mechanism is vendor-agnostic text, it works <em>from</em> almost any assistant: the practical cost is an afternoon of review, not data loss. <span class="flag caveat">index-only sources</span>
+      </div>
+      <div class="callout">
+        <strong>Into/from Gemini:</strong> instructions live in Gems/skills and "Saved info"; saved info, Gems, public links and activity are each managed in their own settings; information can be exported via Google Takeout; dedicated sections exist for data imported from other AI platforms and for Canvas data.<a class="cite" href="#src-10">[10]</a> Takeout gives an archive, not a live transfer of editorial rules into another assistant's instruction fields — expect the same copy/paste-into-instructions work as Claude's flow.
+      </div>
+      <div class="callout">
+        <strong>Copilot caution:</strong> Microsoft is migrating Copilot Tasks to Cowork; per prior-session search results, Tasks' saved memories won't move and existing shared links to Tasks content will stop working. Even staying with the same vendor can strand accumulated context. <span class="flag caveat">index-only · prior session</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 08 open ============ -->
+  <section id="open">
+    <div class="sec-head"><span class="sec-no">08</span><h2>Open questions — couldn't be verified</h2></div>
+    <p class="sec-sub">Plainly marked; each carries what it would take to resolve it.</p>
+
+    <ol class="open">
+      <li>
+        <div class="oq-q">Perplexity Pages — does it still exist as a publishable surface?</div>
+        <p>Whether Pages creation/publishing is currently available, on which plans, and whether Automations can publish to a stable public URL. Secondary sources conflict (2024-era "publishable and Google-indexed" vs. a claim the create-page feature was temporarily retired in early 2026). <strong>Resolve:</strong> an in-account check, or Perplexity's help pages accessible.</p>
+      </li>
+      <li>
+        <div class="oq-q">ChatGPT Pro's exact price.</div>
+        <p>Plus at $20/month is verified from an official page<a class="cite" href="#src-3">[3]</a>, but Pro's price was not read from an official OpenAI page this session, and secondary figures differ ($100 vs $200 tiers). <strong>Resolve:</strong> read it from an official OpenAI pricing page.</p>
+      </li>
+      <li>
+        <div class="oq-q">Does ChatGPT's data export include saved memories and custom instructions?</div>
+        <p>Secondary sources directly conflict<a class="cite" href="#src-22">[22]</a><a class="cite" href="#src-23">[23]</a>; no official export-contents page was opened. <strong>Resolve:</strong> an in-account export, or OpenAI's official export-contents documentation.</p>
+      </li>
+      <li>
+        <div class="oq-q">Claude: must "anyone with the link" viewers — or viewers of published artifacts — sign in?</div>
+        <p>The fetched help article's relevant subsections rendered truncated.<a class="cite" href="#src-4">[4]</a> <strong>Resolve:</strong> the full article or a signed-out link test.</p>
+      </li>
+      <li>
+        <div class="oq-q">Can ChatGPT create styled PDFs — documented anywhere?</div>
+        <p>File <em>analysis</em> is documented on Plus; an official page naming PDF/document <em>creation</em> was not located (Claude's "create files"<a class="cite" href="#src-6">[6]</a>, Gemini's LaTeX→PDF export<a class="cite" href="#src-7">[7]</a>, and Copilot's PDF creation<a class="cite" href="#src-13">[13]</a> all <em>are</em> documented). <strong>Resolve:</strong> an official OpenAI page, or a live test.</p>
+      </li>
+      <li>
+        <div class="oq-q">Gemini scheduled actions — is it actually paywalled?</div>
+        <p>The official page as fetched requires a personal Google Account + Keep Activity on and describes a gradual rollout<a class="cite" href="#src-8">[8]</a>; secondary coverage says AI Pro/Ultra. Reported, not resolved. <strong>Resolve:</strong> the current docs or an in-account check.</p>
+      </li>
+      <li>
+        <div class="oq-q">Wix/Squarespace pricing and daily-update mechanics; custom-domain registrar pricing.</div>
+        <p>Not researched to citation standard in this session. <strong>Resolve:</strong> targeted research with payment-page checks.</p>
+      </li>
+      <li>
+        <div class="oq-q">The incumbent isn't named; no candidate was tested with a live account.</div>
+        <p>The research mission didn't name the current platform, so the negative exact-phrase result can neither be attributed to nor cleared from a specific vendor — and signed-out research can't catch paywalled behavior, rollout differences, or docs that lag the product. <strong>Resolve:</strong> a live trial account test on any candidate shortlisted here.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============ 09 sources ============ -->
+  <section id="sources">
+    <div class="sec-head"><span class="sec-no">09</span><h2>Sources</h2></div>
+    <p class="sec-sub">Every numbered citation above resolves to a row below. <strong>V</strong> = page fetched live with browser text on Wed, Sep 30, 2026; <strong>I</strong> = index only (search-result text, page not opened).</p>
+
+    <div class="src-group">Verified live — fetched Wed, Sep 30, 2026</div>
+
+    <div class="src" id="src-1">
+      <div class="n">1</div>
+      <div><h4>OpenAI — Creating and using ChatGPT Sites<span class="vbadge v">V</span></h4>
+      <div class="meta">help.openai.com · official help article</div>
+      <p>Public beta for workspaces/Plus/Pro (not Free/Go); Share → "Anyone on the internet" → Publish; public Sites viewable without workspace access; later versions to the same URL; custom domains; Site Automations cloud schedules; user self-review checklist before publishing; post-publication removal with appeal via email link or intake form; no pre-publication automated block documented.</p>
+      <a class="url" rel="noopener" href="https://help.openai.com/en/articles/20001339-creating-and-using-chatgpt-sites">https://help.openai.com/en/articles/20001339-creating-and-using-chatgpt-sites</a></div>
+    </div>
+    <div class="src" id="src-2">
+      <div class="n">2</div>
+      <div><h4>OpenAI — Scheduled tasks in ChatGPT<span class="vbadge v">V</span></h4>
+      <div class="meta">help.openai.com · official help article</div>
+      <p>One-time/recurring tasks; active-task limits (Free/Go 3, Plus 5, Business/Edu 10, Pro/Enterprise 15); hourly/exact times on paid; shared task links exclude creator name, memories, custom instructions, files; data exports exclude scheduled tasks, shared task links, and snapshots.</p>
+      <a class="url" rel="noopener" href="https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt">https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt</a></div>
+    </div>
+    <div class="src" id="src-3">
+      <div class="n">3</div>
+      <div><h4>OpenAI — What is ChatGPT Plus?<span class="vbadge v">V</span></h4>
+      <div class="meta">help.openai.com · official help article</div>
+      <p>Plus $20/month billed monthly; priority access, higher limits, file uploads/analysis, Deep Research where available.</p>
+      <a class="url" rel="noopener" href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus">https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus</a></div>
+    </div>
+    <div class="src" id="src-4">
+      <div class="n">4</div>
+      <div><h4>Anthropic — Share artifacts<span class="vbadge v">V</span></h4>
+      <div class="meta">support.claude.com · official support article</div>
+      <p>Artifacts start private; "anyone with the link" (Pro/Max/Team/Enterprise); legacy chat artifacts can be Published (Free/Pro/Max); embed code with allowed domains; Unpublish revokes. Some "who can open" subsections rendered truncated — viewer sign-in requirement unverified. No pre-publication review found.</p>
+      <a class="url" rel="noopener" href="https://support.claude.com/en/articles/9547008-publish-and-share-artifacts">https://support.claude.com/en/articles/9547008-publish-and-share-artifacts</a></div>
+    </div>
+    <div class="src" id="src-5">
+      <div class="n">5</div>
+      <div><h4>Anthropic — Schedule recurring tasks in Claude Cowork<span class="vbadge v">V</span></h4>
+      <div class="meta">support.claude.com · official support article</div>
+      <p>Recurring/on-demand tasks with connectors, skills, plugins; web research and report generation; runs remotely even if the computer is asleep; scheduled-task creation surfaced for Pro/Max.</p>
+      <a class="url" rel="noopener" href="https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork">https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork</a></div>
+    </div>
+    <div class="src" id="src-6">
+      <div class="n">6</div>
+      <div><h4>Anthropic — Plans &amp; Pricing<span class="vbadge v">V</span></h4>
+      <div class="meta">claude.com · official pricing page</div>
+      <p>Free $0 (web search, create files, run code, memory across conversations, Artifacts); Pro $17/mo annual ($200 upfront) or $20 monthly; Max from $100/mo (5× or 20× Pro); rolling 5-hour + weekly paid caps, no fixed message count.</p>
+      <a class="url" rel="noopener" href="https://claude.com/pricing">https://claude.com/pricing</a></div>
+    </div>
+    <div class="src" id="src-7">
+      <div class="n">7</div>
+      <div><h4>Google — Create docs, apps &amp; more with Canvas<span class="vbadge v">V</span></h4>
+      <div class="meta">support.google.com · official support article</div>
+      <p>LaTeX docs export to PDF with preview; Share → g.co/gemini/share link; public app links let anyone with the link view <em>and</em> edit associated data; shared links open only in gemini.google.com; Copy Canvas allowed.</p>
+      <a class="url" rel="noopener" href="https://support.google.com/gemini/answer/16047321?hl=en&co=GENIE.Platform%3DDesktop">https://support.google.com/gemini/answer/16047321?hl=en&amp;co=GENIE.Platform%3DDesktop</a></div>
+    </div>
+    <div class="src" id="src-8">
+      <div class="n">8</div>
+      <div><h4>Google — Schedule actions in Gemini Apps<span class="vbadge v">V</span></h4>
+      <div class="meta">support.google.com · official support article</div>
+      <p>Recurring daily/weekly/monthly actions with delivery time; personal Google Account + Keep Activity required; max 10 active; per-plan behavior differences; located-once reused location; may auto-turn-off for inactivity. Page as fetched is not paid-gated — conflicts with secondary coverage.</p>
+      <a class="url" rel="noopener" href="https://support.google.com/gemini/answer/16316416">https://support.google.com/gemini/answer/16316416</a></div>
+    </div>
+    <div class="src" id="src-9">
+      <div class="n">9</div>
+      <div><h4>Google — Google AI subscriptions<span class="vbadge v">V</span></h4>
+      <div class="meta">gemini.google.com · official subscriptions page</div>
+      <p>Free $0; AI Plus $4.99/mo (2× Free); AI Pro $19.99/mo (4× Free, Deep Research); AI Ultra $99.99/mo (5× vs Pro) and $199.99/mo (20× vs Pro). Supersedes secondary AI Plus pricing.</p>
+      <a class="url" rel="noopener" href="https://gemini.google/us/subscriptions/?hl=en">https://gemini.google/us/subscriptions/?hl=en</a></div>
+    </div>
+    <div class="src" id="src-10">
+      <div class="n">10</div>
+      <div><h4>Google — Gemini Apps Privacy Hub<span class="vbadge v">V</span></h4>
+      <div class="meta">support.google.com · official privacy hub · updated Sep 24, 2026</div>
+      <p>Instructions in Gems/skills and "Saved info"; "Your public links" management; Takeout export; content-removal requests; sections for memory/chats imported from other AI platforms and Canvas data.</p>
+      <a class="url" rel="noopener" href="https://support.google.com/gemini/answer/13594961?hl=en-GB">https://support.google.com/gemini/answer/13594961?hl=en-GB</a></div>
+    </div>
+    <div class="src" id="src-11">
+      <div class="n">11</div>
+      <div><h4>Perplexity — Computer adds Automations for ongoing work<span class="vbadge v">V</span></h4>
+      <div class="meta">perplexity.ai · official blog</div>
+      <p>Automations replace Scheduled Tasks; schedule/event triggers; remembers prior work; destinations include Slack channels and Gmail drafts; human review option; credits only when Computer runs. No public stable archive URL documented. (The /pro pricing page fetch returned only cookie text.)</p>
+      <a class="url" rel="noopener" href="https://www.perplexity.ai/hub/blog/computer-adds-automations-for-ongoing-work">https://www.perplexity.ai/hub/blog/computer-adds-automations-for-ongoing-work</a></div>
+    </div>
+    <div class="src" id="src-12">
+      <div class="n">12</div>
+      <div><h4>Microsoft — Share conversations and responses in Microsoft Copilot<span class="vbadge v">V</span></h4>
+      <div class="meta">support.microsoft.com · official support article</div>
+      <p>Share links are snapshots (whole conversation or single response); recipients must sign in before viewing — org sign-in for work/school, Microsoft account for personal shares; org can disable sharing or block by sensitivity label.</p>
+      <a class="url" rel="noopener" href="https://support.microsoft.com/en-us/microsoft-365-copilot/share-conversations-responses-in-microsoft-copilot">https://support.microsoft.com/en-us/microsoft-365-copilot/share-conversations-responses-in-microsoft-copilot</a></div>
+    </div>
+    <div class="src" id="src-13">
+      <div class="n">13</div>
+      <div><h4>Microsoft — Get started with Microsoft Copilot Cowork<span class="vbadge v">V</span></h4>
+      <div class="meta">support.microsoft.com · official support article</div>
+      <p>Create/edit Word, Excel, PowerPoint, PDF; draft/send email; calendar; OneDrive; research across multiple sources; daily briefings; run prompts on a schedule. Personal accounts in Preview; personal use requires an eligible Microsoft 365 subscription.</p>
+      <a class="url" rel="noopener" href="https://support.microsoft.com/microsoft-365-copilot/get-started-with-cowork">https://support.microsoft.com/microsoft-365-copilot/get-started-with-cowork</a></div>
+    </div>
+    <div class="src" id="src-14">
+      <div class="n">14</div>
+      <div><h4>GitHub — GitHub Pages limits<span class="vbadge v">V</span></h4>
+      <div class="meta">docs.github.com · official docs</div>
+      <p>Available in public repos with GitHub Free; published site max 1 GB; soft 100 GB/month bandwidth; 10-min deploy timeout; soft 10 builds/hour (custom Actions exempt); subject to GitHub Terms; over-quota serving may stop.</p>
+      <a class="url" rel="noopener" href="https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits">https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits</a></div>
+    </div>
+    <div class="src" id="src-15">
+      <div class="n">15</div>
+      <div><h4>Cloudflare — Pages limits<span class="vbadge v">V</span></h4>
+      <div class="meta">developers.cloudflare.com · official docs</div>
+      <p>Free tier: 1 concurrent build, 500 builds/month, 20-min timeout, 100 custom domains/project, 20,000 files/site, 25 MiB max single asset, unlimited preview deployments; deploys on each git push.</p>
+      <a class="url" rel="noopener" href="https://developers.cloudflare.com/pages/platform/limits/">https://developers.cloudflare.com/pages/platform/limits/</a></div>
+    </div>
+
+    <div class="src-group">Index only — search-result text, not opened</div>
+
+    <div class="src" id="src-16">
+      <div class="n">16</div>
+      <div><h4>CloudZero — Perplexity pricing<span class="vbadge i">I</span></h4>
+      <div class="meta">cloudzero.com · secondary · dated Sep 21, 2026</div>
+      <p>Corroborates Perplexity Pro $20/mo, Max $200/mo, enterprise from $40/seat.</p>
+      <a class="url" rel="noopener" href="https://www.cloudzero.com/blog/perplexity-pricing/">https://www.cloudzero.com/blog/perplexity-pricing/</a></div>
+    </div>
+    <div class="src" id="src-17">
+      <div class="n">17</div>
+      <div><h4>dev.to — Perplexity pricing (verified Sep 15, 2026)<span class="vbadge i">I</span></h4>
+      <div class="meta">dev.to · secondary</div>
+      <p>Corroborates Pro $20/mo or $17 annual, Max $200/mo or $167 annual, Education Pro $10.</p>
+      <a class="url" rel="noopener" href="https://dev.to/shaam_ai/perplexica-vs-perplexity-2026-vane-wins-on-price-27j0">https://dev.to/shaam_ai/perplexica-vs-perplexity-2026-vane-wins-on-price-27j0</a></div>
+    </div>
+    <div class="src" id="src-18">
+      <div class="n">18</div>
+      <div><h4>agentdeals.dev — Netlify vendor pricing<span class="vbadge i">I</span></h4>
+      <div class="meta">agentdeals.dev · secondary citing netlify.com/pricing · checked 2026-09-22</div>
+      <p>Netlify: Free $0 (300 credits/mo), Personal $9 (1,000), Pro from $20 (3,000); production deploy 15 credits; bandwidth 20/GB; requests 2/10k; sites pause at zero credits.</p>
+      <a class="url" rel="noopener" href="https://agentdeals.dev/vendor/netlify">https://agentdeals.dev/vendor/netlify</a></div>
+    </div>
+    <div class="src" id="src-19">
+      <div class="n">19</div>
+      <div><h4>flexprice.io — Netlify pricing guide<span class="vbadge i">I</span></h4>
+      <div class="meta">flexprice.io · secondary citing netlify.com/pricing</div>
+      <p>Corroborates Netlify's credit-based plans and per-deploy/bandwidth/request rates.</p>
+      <a class="url" rel="noopener" href="https://flexprice.io/blog/complete-guide-to-netlify-pricing-and-plans">https://flexprice.io/blog/complete-guide-to-netlify-pricing-and-plans</a></div>
+    </div>
+    <div class="src" id="src-20">
+      <div class="n">20</div>
+      <div><h4>Anthropic support mirror — import/export your memory from Claude<span class="vbadge i">I</span></h4>
+      <div class="meta">github.com · mirror of Anthropic support article 12123587</div>
+      <p>Memory import: prompt the current assistant to list every memory in a single code block, paste into Claude Settings → Memory → "Start import"; export by copying the memory text. Underlies the "lowest-friction import" assessment.</p>
+      <a class="url" rel="noopener" href="https://github.com/thevibeworks/claude-code-docs/blob/HEAD/content/support/12123587-import-and-export-your-memory-from-claude.md">https://github.com/thevibeworks/claude-code-docs/blob/HEAD/content/support/12123587-import-and-export-your-memory-from-claude.md</a></div>
+    </div>
+    <div class="src" id="src-21">
+      <div class="n">21</div>
+      <div><h4>9to5Mac — free Claude users can use memory and import context from rivals<span class="vbadge i">I</span></h4>
+      <div class="meta">9to5mac.com · press · 2026-03-02</div>
+      <p>Corroborates that memory import is "just a prompt that you copy and paste," memory available on the free plan, and Anthropic stating "You can export them whenever you want."</p>
+      <a class="url" rel="noopener" href="https://9to5mac.com/2026/03/02/free-claude-users-can-now-use-memory-and-import-context-from-rivals/">https://9to5mac.com/2026/03/02/free-claude-users-can-now-use-memory-and-import-context-from-rivals/</a></div>
+    </div>
+    <div class="src" id="src-22">
+      <div class="n">22</div>
+      <div><h4>memhaul — ChatGPT export omits saved memories<span class="vbadge i">I</span></h4>
+      <div class="meta">github.com · tooling source</div>
+      <p>Claims the official ChatGPT export does <em>not</em> include saved memories — and newer exports omit custom instructions too — so they must be copied manually from Settings → Personalization. <strong>Conflicts with [23].</strong></p>
+      <a class="url" rel="noopener" href="https://github.com/tempreon/memhaul">https://github.com/tempreon/memhaul</a></div>
+    </div>
+    <div class="src" id="src-23">
+      <div class="n">23</div>
+      <div><h4>Bluehost — how to export ChatGPT conversations<span class="vbadge i">I</span></h4>
+      <div class="meta">bluehost.com · guide</div>
+      <p>Claims OpenAI confirms custom instructions <em>are</em> included in exports, while memories (and GPTs/files) do not transfer via upload. <strong>Conflicts with [22].</strong></p>
+      <a class="url" rel="noopener" href="https://www.bluehost.com/blog/how-to-export-chatgpt-conversations/">https://www.bluehost.com/blog/how-to-export-chatgpt-conversations/</a></div>
+    </div>
+    <div class="src" id="src-24">
+      <div class="n">24</div>
+      <div><h4>Microsoft 365 blog — Microsoft 365 Premium, $19.99/month<span class="vbadge i">I</span></h4>
+      <div class="meta">microsoft.com · official blog · 2025-10-01</div>
+      <p>Announces Microsoft 365 Premium at $19.99/month, the top consumer tier.</p>
+      <a class="url" rel="noopener" href="https://www.microsoft.com/en-us/microsoft-365/blog/2025/10/01/meet-microsoft-365-premium-your-ai-and-productivity-powerhouse/">https://www.microsoft.com/en-us/microsoft-365/blog/2025/10/01/meet-microsoft-365-premium-your-ai-and-productivity-powerhouse/</a></div>
+    </div>
+    <div class="src" id="src-25">
+      <div class="n">25</div>
+      <div><h4>Reuters — Microsoft launches 365 Premium bundle<span class="vbadge i">I</span></h4>
+      <div class="meta">reuters.com · press · 2025-10-01</div>
+      <p>Corroborates Microsoft 365 Premium at $19.99/month.</p>
+      <a class="url" rel="noopener" href="https://www.reuters.com/technology/microsoft-launches-ai-powered-365-premium-bundle-1999-per-month-2025-10-01/">https://www.reuters.com/technology/microsoft-launches-ai-powered-365-premium-bundle-1999-per-month-2025-10-01/</a></div>
+    </div>
+
+    <p style="font-size:13.5px;color:var(--muted);margin-top:18px">Also consulted: a verbatim exact-phrase search of the incumbent's block wording ("may contain personal details about other people" + share/AI variants) — <strong>no platform document matched</strong>, so there is nothing to link; and targeted searches for pre-publication review/appeal behavior on Claude, Gemini, and Perplexity, which located no matching official documentation.</p>
+  </section>
+
+  </main>
+
+  <footer>
+    <p>Compiled from research run live on Wed, Sep 30, 2026 — signed-out, no trial accounts tested, vendors' own documentation as fetched that day. Prices, limits, and help articles change; re-verify anything you're about to pay for. Nothing here names the current platform; the research was commissioned against the workflow, not against it.</p>
+  </footer>
+
+</div>
+</body>
+</html>
