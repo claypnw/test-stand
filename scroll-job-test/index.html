@@ -775,6 +775,8 @@
 <style>
 .scroll-read-btn{font:inherit;font-size:0.9em;padding:8px 16px;border:1px solid #8a6d3b;border-radius:6px;background:#f7f0dc;color:#3a2f16;cursor:pointer}
 .scroll-read-btn.reading{background:#8a6d3b;color:#fff}
+.scroll-read-note{display:block;margin-top:6px;font-size:0.9em;color:#7a1f1f}
+.scroll-read-note[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -807,8 +809,8 @@
               <span class="date-range-track" aria-hidden="true"></span>
               <span class="date-range-fill" id="date-range-fill" aria-hidden="true"></span>
               <!-- Bounds emitted from the ordered distinct dates in scroll-search-index.json during this build. -->
-              <input id="date-range-start" type="range" min="0" max="31" step="1" value="0" data-min-date="2026-09-24" data-max-date="2026-10-26" aria-label="Start edition date" />
-              <input id="date-range-end" type="range" min="0" max="31" step="1" value="31" data-min-date="2026-09-24" data-max-date="2026-10-26" aria-label="End edition date" />
+              <input id="date-range-start" type="range" min="0" max="32" step="1" value="0" data-min-date="2026-09-24" data-max-date="2026-10-27" aria-label="Start edition date" />
+              <input id="date-range-end" type="range" min="0" max="32" step="1" value="32" data-min-date="2026-09-24" data-max-date="2026-10-27" aria-label="End edition date" />
             </div>
           </div>
           <p class="search-status" id="search-status" aria-live="polite" hidden></p>
@@ -818,8 +820,9 @@
         <details class="month" open>
           <summary>
             <span>October 2026</span>
-            <span class="count">25 editions</span>
+            <span class="count">26 editions</span>
           </summary>
+                                        <div class="issue-link"><a class="issue-open" href="#edition-2026-10-27" aria-label="Read the Tuesday, October 27, 2026 edition: Halloween Week Opens With Music, Pumpkins, and Grey Skies"></a><div class="issue-date"><strong>Tuesday,</strong> October 27, 2026</div><div class="issue-copy"><p class="greeting">"PAYSON — Hail, wayfarer, and good Morndas to you! Grey clouds ride over the Rim this morning, yet the Holds are merry: bards tune up in Pine tonight, the library in Payson keeps its doors wide, story…"</p><h2 class="issue-title">Halloween Week Opens With Music, Pumpkins, and Grey Skies</h2><div class="issue-number">Vol. 2610 · No. 27</div></div><div class="issue-actions"><span class="read-mark" aria-hidden="true">→</span><a class="pdf-button" href="https://claypnw.github.io/morning-scroll/payson-morning-scroll-2026-10-27.pdf" target="_blank" rel="noopener" referrerpolicy="origin" type="application/pdf" aria-label="Download the Tuesday, October 27, 2026 PDF">Download PDF</a></div></div>
                                         <div class="issue-link"><a class="issue-open" href="#edition-2026-10-26" aria-label="Read the Monday, October 26, 2026 edition: Halloween Week Opens With Music, Pumpkins, and Grey Skies"></a><div class="issue-date"><strong>Monday,</strong> October 26, 2026</div><div class="issue-copy"><p class="greeting">"PAYSON — Hail, wayfarer, and good Morndas to you! Grey clouds ride over the Rim this morning, yet the Holds are merry: bards tune up in Pine tonight, the library in Payson keeps its doors wide, story…"</p><h2 class="issue-title">Halloween Week Opens With Music, Pumpkins, and Grey Skies</h2><div class="issue-number">Vol. 2610 · No. 26</div></div><div class="issue-actions"><span class="read-mark" aria-hidden="true">→</span><a class="pdf-button" href="https://claypnw.github.io/morning-scroll/payson-morning-scroll-2026-10-26.pdf" target="_blank" rel="noopener" referrerpolicy="origin" type="application/pdf" aria-label="Download the Monday, October 26, 2026 PDF">Download PDF</a></div></div>
                                         <div class="issue-link"><a class="issue-open" href="#edition-2026-10-25" aria-label="Read the Sunday, October 25, 2026 edition: Sunshine, Markets, and Music Fill a Fine Sundas"></a><div class="issue-date"><strong>Sunday,</strong> October 25, 2026</div><div class="issue-copy"><p class="greeting">"PAYSON — Hail, wayfarer, and a bright good morning to you, under a clear sky and a kind sun over the pines! Today the Hold offers a farmers market in Sedona, a thoughtful discussion circle here in Pay…"</p><h2 class="issue-title">Sunshine, Markets, and Music Fill a Fine Sundas</h2><div class="issue-number">Vol. 2610 · No. 25</div></div><div class="issue-actions"><span class="read-mark" aria-hidden="true">→</span><a class="pdf-button" href="https://claypnw.github.io/morning-scroll/payson-morning-scroll-2026-10-25.pdf" target="_blank" rel="noopener" referrerpolicy="origin" type="application/pdf" aria-label="Download the Sunday, October 25, 2026 PDF">Download PDF</a></div></div>
                                         <div class="issue-link"><a class="issue-open" href="#edition-2026-10-24" aria-label="Read the Saturday, October 24, 2026 edition: Monster Mash Tonight, and Art and Airplanes Across the Holds"></a><div class="issue-date"><strong>Saturday,</strong> October 24, 2026</div><div class="issue-copy"><p class="greeting">"Well met, wayfarer, and good Loredas morning — the pines stand tall under a partly cloudy sky, the day warms to 61, and the Holds are dressed for a festival Saturday, by the Nine. Payson dances into i…"</p><h2 class="issue-title">Monster Mash Tonight, and Art and Airplanes Across the Holds</h2><div class="issue-number">Vol. 2610 · No. 24</div></div><div class="issue-actions"><span class="read-mark" aria-hidden="true">→</span><a class="pdf-button" href="https://claypnw.github.io/morning-scroll/payson-morning-scroll-2026-10-24.pdf" target="_blank" rel="noopener" referrerpolicy="origin" type="application/pdf" aria-label="Download the Saturday, October 24, 2026 PDF">Download PDF</a></div></div>
@@ -988,6 +991,32 @@
 
                                 
 
+                                <section class="edition-view" id="edition-2026-10-27" hidden aria-labelledby="edition-title-2026-10-27">
+        <nav class="back-row" aria-label="Archive navigation">
+          <a class="back-link" href="#archive"><span aria-hidden="true">←</span> All editions</a>
+          <a class="pdf-button" href="https://claypnw.github.io/morning-scroll/payson-morning-scroll-2026-10-27.pdf" target="_blank" rel="noopener" referrerpolicy="origin" type="application/pdf" aria-label="Download the Tuesday, October 27, 2026 PDF">Download PDF</a>
+          <span class="issue-number">Vol. 2610 · No. 27</span>
+        </nav>
+        <article class="edition-sheet">
+          <header class="edition-heading">
+            <div>
+              <p class="date">Tuesday, October 27, 2026</p>
+              <h1 id="edition-title-2026-10-27">Halloween Week Opens With Music, Pumpkins, and Grey Skies</h1>
+              <p class="edition-greeting">“PAYSON — Hail, wayfarer, and good Morndas to you! Grey clouds ride over the Rim this morning, yet the Holds are merry: bards tune up in Pine tonight, the library in Payson keeps its doors wide, story time rings out in Show Low, and Sedona hangs fresh paintings still smelling of pine air. All week the road runs toward Halloween — trail work, murals, gravel racers, and a lantern-lit fort await. Draw up a chair, pour something warm, and plan your week by the Nine.”</p>
+            </div>
+          </header>
+          <div class="reader-label">
+            <p>Tap a page to read it full-size.</p>
+          </div>
+          <div class="page-reader">
+          <img src="scroll-2026-10-27-page-1-r1-ae236d86.png" alt="Page 1 of the Tuesday, October 27, 2026 edition">
+          <img src="scroll-2026-10-27-page-2-r1-601ced01.png" alt="Page 2 of the Tuesday, October 27, 2026 edition">
+          <img src="scroll-2026-10-27-page-3-r1-39582875.png" alt="Page 3 of the Tuesday, October 27, 2026 edition">
+          <img src="scroll-2026-10-27-page-4-r1-16efb285.png" alt="Page 4 of the Tuesday, October 27, 2026 edition">
+          </div>
+        </article>
+      </section>
+
                                 <section class="edition-view" id="edition-2026-10-26" hidden aria-labelledby="edition-title-2026-10-26">
         <nav class="back-row" aria-label="Archive navigation">
           <a class="back-link" href="#archive"><span aria-hidden="true">←</span> All editions</a>
@@ -1007,10 +1036,10 @@
             <p>Tap a page to read it full-size.</p>
           </div>
           <div class="page-reader">
-          <img src="scroll-2026-10-26-page-1-r1-6f1688da.png" alt="Page 1 of the Monday, October 26, 2026 edition">
-          <img src="scroll-2026-10-26-page-2-r1-99ab9b14.png" alt="Page 2 of the Monday, October 26, 2026 edition">
-          <img src="scroll-2026-10-26-page-3-r1-dd9d0702.png" alt="Page 3 of the Monday, October 26, 2026 edition">
-          <img src="scroll-2026-10-26-page-4-r1-244c49d5.png" alt="Page 4 of the Monday, October 26, 2026 edition">
+          <img src="scroll-2026-10-26-page-1-r1-ae236d86.png" alt="Page 1 of the Monday, October 26, 2026 edition">
+          <img src="scroll-2026-10-26-page-2-r1-601ced01.png" alt="Page 2 of the Monday, October 26, 2026 edition">
+          <img src="scroll-2026-10-26-page-3-r1-39582875.png" alt="Page 3 of the Monday, October 26, 2026 edition">
+          <img src="scroll-2026-10-26-page-4-r1-16efb285.png" alt="Page 4 of the Monday, October 26, 2026 edition">
           </div>
         </article>
       </section>
@@ -2497,6 +2526,9 @@
     (function () {
       var archive = document.getElementById('archive');
       var editions = {
+                                '#edition-2026-10-27': {
+            element: document.getElementById('edition-2026-10-27'),
+          },
                                 '#edition-2026-10-26': {
             element: document.getElementById('edition-2026-10-26'),
           },
@@ -3213,7 +3245,7 @@
         updateDateRange(dateRangeEnd);
         renderSearch();
       });
-      fetch('scroll-search-index.json?v=20261026')
+      fetch('scroll-search-index.json?v=20261027')
         .then(function (response) {
           if (!response.ok) throw new Error('Search index unavailable');
           return response.json();
@@ -3303,6 +3335,15 @@
   if (!btn) return;
   var section = btn.closest('section');
   var date = section ? section.id.replace('edition-', '') : '';
+  var note = document.createElement('span');
+  note.className = 'scroll-read-note';
+  note.setAttribute('role', 'status');
+  note.hidden = true;
+  btn.after(note);
+  function showNote(){
+    note.textContent = 'The reading could not be played. The recording for this edition is not available right now.';
+    note.hidden = false;
+  }
   function stopAll(){
     audio.pause();
     try { audio.currentTime = 0; } catch(e) {}
@@ -3310,13 +3351,18 @@
     btn.classList.remove('reading');
   }
   audio.addEventListener('ended', stopAll);
+  audio.addEventListener('error', function(){
+    if (btn.classList.contains('reading')){ stopAll(); showNote(); }
+  });
   btn.addEventListener('click', function(){
     if (!audio.paused){ stopAll(); return; }
+    note.hidden = true;
+    if (!date){ showNote(); return; }
     if (!audio.src) audio.src = 'audio/morning-scroll-' + date + '.mp3';
     btn.textContent = 'Stop';
     btn.classList.add('reading');
     var p = audio.play();
-    if (p && p.catch) p.catch(function(){ stopAll(); });
+    if (p && p.catch) p.catch(function(){ stopAll(); showNote(); });
   });
 })();
 </script>
