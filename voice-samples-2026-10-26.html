@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Voice Samples — October 26, 2026</title>
+<style>
+  body { margin:0; background:#f3efe4; color:#111; font-family: Georgia, 'Times New Roman', serif; }
+  .paper { max-width:760px; margin:0 auto; background:#fffdf5; padding:28px 30px 40px; }
+  h1 { font-size:26px; margin:0 0 6px; }
+  p.sub { color:#444; margin:0 0 22px; }
+  .sample { border-top:2px solid #111; padding:16px 0 20px; }
+  .sample h2 { font-size:19px; margin:0 0 4px; }
+  .sample p { margin:0 0 10px; color:#333; }
+  button { font:inherit; font-size:17px; padding:10px 22px; border:2px solid #111; background:#111; color:#fffdf5; border-radius:6px; cursor:pointer; }
+  button.reading { background:#7a1f1f; border-color:#7a1f1f; }
+</style></head><body>
+<div class="paper">
+<h1>Voice Samples</h1>
+<p class="sub">Four readings, made Monday, October 26, 2026. Two read the first story of today's Daily Review. Two read the hedge-fund story. Tap Play, tap again to stop.</p>
+
+<div class="sample">
+<h2>Sample 1 — Direct and hard</h2>
+<p>A man's voice, American, direct and plain-spoken. Reads the first story.</p>
+<button type="button" data-audio="audio/sample-gruff-brick.mp3">Play</button>
+</div>
+
+<div class="sample">
+<h2>Sample 2 — Loud, with a New York edge</h2>
+<p>A man's voice, loud and raspy, New York. Reads the first story.</p>
+<button type="button" data-audio="audio/sample-loud-gravel.mp3">Play</button>
+</div>
+
+<div class="sample">
+<h2>Sample 3 — The easy talker</h2>
+<p>A man's voice, American, warm and easy, a storyteller's pace. Reads the hedge-fund story.</p>
+<button type="button" data-audio="audio/sample-easy-talker.mp3">Play</button>
+</div>
+
+<div class="sample">
+<h2>Sample 4 — The easy talker, excited</h2>
+<p>The same storyteller, faster and wound up — the big-fight feel. Reads the hedge-fund story.</p>
+<button type="button" data-audio="audio/sample-easy-talker-excited.mp3">Play</button>
+</div>
+
+<script>
+(function(){
+  var audio = new Audio();
+  var currentBtn = null;
+  function stopAll(){
+    audio.pause();
+    try { audio.currentTime = 0; } catch(e) {}
+    if (currentBtn){ currentBtn.textContent = 'Play'; currentBtn.classList.remove('reading'); currentBtn = null; }
+  }
+  audio.addEventListener('ended', stopAll);
+  document.querySelectorAll('button[data-audio]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if (currentBtn === btn){ stopAll(); return; }
+      stopAll();
+      audio.src = btn.getAttribute('data-audio');
+      currentBtn = btn;
+      btn.textContent = 'Stop';
+      btn.classList.add('reading');
+      var p = audio.play();
+      if (p && p.catch) p.catch(function(){ stopAll(); });
+    });
+  });
+})();
+</script>
+</div>
+</body></html>
