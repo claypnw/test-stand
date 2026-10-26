@@ -3293,62 +3293,24 @@
 
 <script>
 (function(){
-
-  function pickVoice(){
-    var vs = window.speechSynthesis.getVoices();
-    if (!vs.length) return null;
-    function score(v){
-      var n = (v.name || '').toLowerCase();
-      var lang = (v.lang || '').toLowerCase();
-      var s = 0;
-      if (n.indexOf('google us english') >= 0) s += 100;
-      else if (n.indexOf('google') >= 0 && lang.indexOf('en') === 0) s += 80;
-      if (n.indexOf('natural') >= 0) s += 60;
-      if (n.indexOf('neural') >= 0) s += 60;
-      if (lang === 'en-us') s += 30; else if (lang.indexOf('en') === 0) s += 15;
-      if (v.default) s += 1;
-      return s;
-    }
-    var best = null, bestScore = -1;
-    vs.forEach(function(v){ var s = score(v); if (s > bestScore){ bestScore = s; best = v; } });
-    return best;
-  }
-  var chosenVoice = pickVoice();
-  if (!chosenVoice && 'onvoiceschanged' in window.speechSynthesis){
-    window.speechSynthesis.onvoiceschanged = function(){ chosenVoice = pickVoice(); };
-  }
-  var TEXT = "Halloween Week Opens With Music, Pumpkins, and Grey Skies. Monday, October 26, 2026. PAYSON \u2014 Hail, wayfarer, and good Morndas to you! Grey clouds ride over the Rim this morning, yet the Holds are merry: bards tune up in Pine tonight, the library in Payson keeps its doors wide, story time rings out in Show Low, and Sedona hangs fresh paintings still smelling of pine air. All week the road runs toward Halloween \u2014 trail work, murals, gravel racers, and a lantern-lit fort await. Draw up a chair, pour something warm, and plan your week by the Nine.. [hero_caption] A bard tunes up in a timber village square as Halloween week opens across the Holds.. Overcast high 68 low 44 rain 0% sunrise 6:40 AM sunset 5:37 PM tomorrow Overcast, 70/48. [weather_caption] Gandy dozes through the grey morning while Maevy stalks one brave leaf.. [today Payson] Payson Public Library \u2014 Tai Chi and Sit & Stitch \u2014 The library at 328 N. McLane Road opens the week in its usual kindly way, with Tai Chi in the morning and the Sit & Stitch circle later in the day. Bring a project, borrow a book, or simply sit a spell among neighbors. It is the quiet, friendly start to a busy Halloween week, and the staff are glad to point guests toward more doings about town. To register for library events, call 928-474-9260.. [today Pine-Strawberry] Open Mic Night: Music with a Purpose \u2014 THAT Brewery & Pub, Pine \u2014 Tonight from 4 o\u2019clock at 3270 N. Highway 87, the microphones open and the whole village is the band. Rotating members of the Pine Strawberry Fuel Reduction team host the evening, and tips go to their work keeping the forest safer for everyone. Sing a song, tell a tale, or just cheer the brave \u2014 a mead-hall night in the pines, with a good cause in every cup.. [today Sedona] Sedona Plein Air Exhibition Opens \u2014 Fresh from the festival fields, the paintings made outdoors among the red rocks go on show today, running through November 22. Artists spent the festival chasing desert light, and now guests can walk the walls at leisure and see the canyons as a painter\u2019s eye caught them. A fine, unhurried stop paired with a stroll through Sedona\u2019s galleries and courtyards.. [today Show Low] Story Time \u2014 Show Low Public Library \u2014 Mondays at 10:00 to 10:30 in the morning, the Kids Room fills with picture books, songs, and small happy chaos. The free drop-in session is made for ages 0 to 5 and builds the first steps toward reading, one story at a time. No sign-up is needed \u2014 just bring your smallest traveler. For word, call the library at 928-532-4070.. [week Tue, Oct. 27] Trail Day Volunteer Build \u2014 Pine \u2014 From 7 in the morning to noon off Highway 87 in Pine, volunteers clear brush, move rocks, and shape a trail built to serve the Hold for years. The work also opens better access for firefighters, so every armful of brush does double duty. Tools are provided; bring water, sunscreen, gloves, and sturdy shoes. To volunteer, write to trails@psfuelreduction.org for directions.. [week Thu, Oct. 29] Halloween Spooktacular Carnival \u2014 Show Low Public Library \u2014 The library turns carnival at 3 o\u2019clock, with games, activities, treats for everyone, and a costume contest at 4 o\u2019clock with fun prizes. Ghosts, goblins, and one very serious small dragon or two are all welcome. It is free family fun in the heart of Show Low, and a fine warm-up for the big night itself. | Marigold Mural Project Begins \u2014 Tlaquepaque, Sedona \u2014 From today through November 1, visitors are invited to paint a tribute to a loved one on the community remembrance wall at Tlaquepaque Arts & Shopping Village. The mural grows flower by flower all week, bright marigolds against the courtyards and sycamores. Come add a name, a color, and a memory \u2014 the village supplies the wall, you supply the heart.. [week Fri, Oct. 30] Prescott \u2014 The Rough Rider Gravel Race Begins \u2014 Three days of wild riding open today at Prescott Courthouse Square, 120 South Cortez Street, and run through Sunday, November 1. This bold new three-stage gravel race sends riders out over high-desert roads and brings them home to historic downtown each day. Not riding? The square itself is the show \u2014 cheer the starts, watch the finishes, and enjoy Prescott at its autumn best.. [week Sat, Oct. 31] A Haunting at the Fort \u2014 Fort Verde State Historic Park, Camp Verde \u2014 From 6 to 8 in the evening at 125 E. Hollamon Street, the old fort opens after hours for a ghostly lantern-lit walk. Hear the ghost stories, wander the parade ground by lantern glow, and visit with those who, the rangers say, still call the fort home after 150 years. Spooky, merry, and made for Halloween night itself. | Uptown Trick or Treat \u2014 Sedona \u2014 From 5 to 8 in the evening along Uptown Sedona, 200 N. State Route 89A, the shops open their doors to costumed travelers great and small. Bring a bag, mind the ghouls, and gather sweets beneath the red rocks as the light fades. A beloved Sedona Halloween custom, right in the heart of town. | Morning Caf\u00e9 \u2014 Unity of Payson \u2014 Start Halloween morning gently at 9:30, in person at 110 E. Bonita Street in Payson or by Zoom from your own fireside. Morning Caf\u00e9 is an inspirational hour of talk and good company to open the day. Costumes are not required \u2014 but by the Nine, nobody will stop you.. [week Sun, Nov. 1] D\u00eda de los Muertos \u2014 Tlaquepaque, Sedona \u2014 Sedona closes the week in remembrance and celebration, with altars, music, and cultural performances honoring loved ones who have died. The Marigold Mural, painted by visitors all week, stands at the heart of it. Go gently, go gladly \u2014 this is one of the most beautiful days of the Sedona year.. Persnikkity\u2019s Cafe. Show Low. An eclectic cafe-bakery with a full espresso bar, fruit smoothies, baked-from-scratch sweet treats, sandwiches, wraps, bountiful salads, and stacked-up burgers \u2014 as if a kindly alchemist had enchanted a diner. The signature bite is the Famous Brown Sugar French Toast, made with thick-cut brioche; regulars also swear by the Cowboy Burger and the Banana Pecan Waffles.. Coffee and pastries, sandwiches for lunch, yummy sides - and TWO locations, the second featuring even more desserts. The cupcakes are beyond epic. 100% recommend!. [merchant review_src] Google review. Great Praise is Great! The Hearth sends guests east to Persnikkity\u2019s when the road calls for French toast worth crossing a Hold for \u2014 Valley Dwellers trading lowland heat for White Mountain air will find it a merry stop.. 161 E. Deuce of Clubs, Show Low. Open Monday\u2013Thursday 9 AM\u20133 PM and Friday\u2013Saturday 9 AM\u20138 PM (closed Sundays). Phone (928) 251-1965. Moderate prices. Good to know: the cupcakes and baked treats go fast \u2014 arrive before the lunch crowd if your heart is set on one.. Persnikkity\u2019s, as the bards picture it: an alchemist\u2019s espresso bench and a counter of wonders.. Design & prep the torch sconces Measure the flame bulb and socket, then scale the sconce model to fit.. Print the torch sconces Print two torches plus the socket test piece and test-fit before finishing.. Finish & install the torches Paint, UV-seal, and wire the sockets with the breaker off.. Build the Mogollon\u2019s Hearth shield Cut and engrave the shield, sized for its place by the door.. Mount the shield by the front door Hang it on a French cleat beside the front door, facing the walkway.. Doors \u2014 Mogollon Hearth Front and side door work for the guest house.. Longest waiting: the torch sconces, first due September 26 \u2014 the Hearth\u2019s torches have waited a full month for their flame.. The shield takes its place by the door while the torch sconces wait their turn on the bench.. The Pumpkin Boat Parade. Morndas dawned grey over the Hearth, and Mabel (a wood elf) declared the clearing wanted a pumpkin garland before Halloween. She strung the little pumpkins stem to stem along the porch rail while Flurry (a young ice-breathing dragon) breathed a careful frost on every stem to keep the whole chain stiff and straight. It was, for nearly a minute, the finest garland in the Hold.. Then Henny (the Hearth\u2019s plump chicken) found the one hollow pumpkin Mabel had set aside for a lantern. Henny climbed in, settled herself like a jarl launching a longship, and refused every order to disembark. Flurry, delighted, frosted a tiny prow. Mabel sighed her longest sigh, tied the garland\u2019s end to the pumpkin, and led the slowest parade in Rim Country history twice around the clearing \u2014 one frosted dragon marching, one elf conducting, and Henny, unbothered and magnificent, sailing six inches above the pine needles in her pumpkin boat.. Henny launches the pumpkin boat while Mabel conducts and Flurry frosts the prow.";
-  var btn = document.getElementById('scroll-read-btn');
-  var runId = 0, reading = false;
-  function chunks(text){
-    var parts = text.match(/[^.!?]+[.!?]+["')\]]*|[^.!?]+$/g) || [text];
-    return parts.map(function(s){ return s.trim(); }).filter(function(s){ return s.length > 0; });
-  }
-  function stop(){
-    runId++; reading = false;
-    window.speechSynthesis.cancel();
+  var audio = new Audio();
+  audio.preload = 'none';
+  var btn = document.querySelector('.scroll-read-btn');
+  if (!btn) return;
+  function stopAll(){
+    audio.pause();
+    try { audio.currentTime = 0; } catch(e) {}
     btn.textContent = 'Read this edition aloud';
     btn.classList.remove('reading');
   }
+  audio.addEventListener('ended', stopAll);
   btn.addEventListener('click', function(){
-    if (reading){ stop(); return; }
-    var parts = chunks(TEXT);
-    var myRun = ++runId;
-    reading = true;
-    btn.textContent = 'Stop reading';
+    if (!audio.paused){ stopAll(); return; }
+    if (!audio.src) audio.src = 'audio/morning-scroll-2026-10-26.mp3';
+    btn.textContent = 'Stop';
     btn.classList.add('reading');
-    var i = 0;
-    function next(){
-      if (myRun !== runId || !reading) return;
-      if (i >= parts.length){ stop(); return; }
-      var u = new SpeechSynthesisUtterance(parts[i]);
-        if (chosenVoice) u.voice = chosenVoice;
-      i++;
-      u.onend = next;
-      u.onerror = next;
-      window.speechSynthesis.speak(u);
-    }
-    next();
+    var p = audio.play();
+    if (p && p.catch) p.catch(function(){ stopAll(); });
   });
 })();
 </script>
