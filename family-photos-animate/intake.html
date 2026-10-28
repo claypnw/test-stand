@@ -33,12 +33,11 @@
 <script>
 /* TEST STAND STUB — this copy sends nothing anywhere. Every call to
    the back-end program is caught here and answered as if it worked.
-   Test names: sign in as "Viewer" to see the viewer view; sign in as
-   "Stale" and the Just animate ask answers as a run-out sign-in.
-   A second Just animate ask answers "already in". */
+   Test names: "Viewer" sees the viewer view; "Stale" gets a run-out
+   sign-in answer on the ask. Once a Just animate ask lands, the
+   picture counts as already asked (by Clay) everywhere. */
 (function () {
   var realFetch = window.fetch.bind(window);
-  var justAsked = false;
   window.fetch = function (url, opts) {
     var u = String(url);
     if (u.indexOf('ipapi.co') >= 0) {
@@ -47,23 +46,27 @@
     if (u.indexOf('script.google.com') >= 0) {
       var body = (opts && opts.body) ? String(opts.body) : u;
       var out = { ok: true };
-      if (body.indexOf('action=signin') >= 0 || body.indexOf('action%3Dsignin') >= 0 || body.indexOf('signin') >= 0 && body.indexOf('sessionCheck') < 0 && body.indexOf('animateRequest') < 0 && body.indexOf('upload') < 0 && body.indexOf('approve') < 0) {
-        if (body.indexOf('Viewer') >= 0) out = { ok: true, session: 'tok-viewer', name: 'Viewer', role: 'viewer' };
-        else if (body.indexOf('Stale') >= 0) out = { ok: true, session: 'tok-stale', name: 'Stale', role: 'contributor' };
-        else out = { ok: true, session: 'tok-admin', name: 'Clay', role: 'admin' };
+      if (body.indexOf('animateState') >= 0 || u.indexOf('animateState') >= 0) {
+        if (sessionStorage.getItem('stub-just-asked') === '1') out = { ok: true, open: true, by: 'Clay', mode: 'just' };
+        else out = { ok: true, open: false };
       }
-      if (body.indexOf('sessionCheck') >= 0) {
+      else if (body.indexOf('animateRequest') >= 0) {
+        if (body.indexOf('tok-stale') >= 0) out = { ok: false, error: 'sign-in needed' };
+        else if (sessionStorage.getItem('stub-just-asked') === '1') out = { ok: true, already: true, by: 'Clay' };
+        else { sessionStorage.setItem('stub-just-asked', '1'); out = { ok: true }; }
+      }
+      else if (body.indexOf('sessionCheck') >= 0) {
         if (body.indexOf('tok-viewer') >= 0) out = { ok: true, name: 'Viewer', role: 'viewer' };
         else if (body.indexOf('tok-stale') >= 0) out = { ok: true, name: 'Stale', role: 'contributor' };
         else out = { ok: true, name: 'Clay', role: 'admin' };
       }
-      if (body.indexOf('animateRequest') >= 0) {
-        if (body.indexOf('tok-stale') >= 0) out = { ok: false, error: 'sign-in needed' };
-        else if (justAsked) out = { ok: true, already: true };
-        else { justAsked = true; out = { ok: true }; }
+      else if (body.indexOf('signin') >= 0 && body.indexOf('upload') < 0 && body.indexOf('approve') < 0 && body.indexOf('abandon') < 0 && body.indexOf('sendNote') < 0) {
+        if (body.indexOf('Viewer') >= 0) out = { ok: true, session: 'tok-viewer', name: 'Viewer', role: 'viewer' };
+        else if (body.indexOf('Stale') >= 0) out = { ok: true, session: 'tok-stale', name: 'Stale', role: 'contributor' };
+        else out = { ok: true, session: 'tok-admin', name: 'Clay', role: 'admin' };
       }
       if (u.indexOf('action=audio') >= 0) out = { ok: false };
-      if (u.indexOf('takeId=') >= 0 && u.indexOf('action') < 0) out = { ok: true, status: 'new' };
+      if (u.indexOf('takeId=') >= 0 && u.indexOf('action') < 0 && u.indexOf('animateState') < 0) out = { ok: true, status: 'new' };
       return Promise.resolve({ json: function () { return Promise.resolve(out); } });
     }
     return realFetch(url, opts);
@@ -207,6 +210,20 @@
   }
 
   var mediaRecorder = null, chunks = [], audioBlob = null, audioUrl = null;
+  var askOpen = false;
+
+  /* One open animation ask per picture: in directions mode, ask the
+     back end on load. If an ask is already in, say whose it is and
+     keep the recorder closed — no wasted recording. */
+  if (MODE === 'animate') {
+    helperGet({ action: 'animateState', picture: PICTURE }).then(function (res) {
+      if (res && res.ok && res.open) {
+        askOpen = true;
+        btnRecord.disabled = true;
+        setStatus('An animation ask for this picture is already in — made by ' + (res.by || 'another contributor') + '. Only one ask at a time for a picture.');
+      }
+    }).catch(function () { /* no answer — the send itself still checks */ });
+  }
   var timer = null, startedAt = 0;
   var takeId = null, sending = false, capStopped = false, busy = false;
 
@@ -255,7 +272,7 @@
 
   whoInput.addEventListener('input', function () {
     if (busy) return;
-    btnRecord.disabled = !whoInput.value.trim() || !!takeId;
+    btnRecord.disabled = !whoInput.value.trim() || !!takeId || askOpen;
   });
   /* The name box starts empty on every visit (Clay, 2026-10-15): never
      restore a saved name, and clear any name saved by an older version. */
@@ -272,7 +289,7 @@
     reviewBox.classList.add('hidden'); doneBox.classList.add('hidden');
     recordRow.classList.remove('hidden');
     busy = false; whoInput.disabled = false;
-    btnRecord.disabled = !whoInput.value.trim();
+    btnRecord.disabled = !whoInput.value.trim() || askOpen;
     btnStop.disabled = true;
     clockEl.textContent = '';
   }
@@ -341,6 +358,11 @@
     }).then(function (res) {
       sending = false;
       btnSend.disabled = false;
+      if (res && res.error === 'already asked') {
+        takeId = null;
+        setStatus('An animation ask for this picture is already in — made by ' + (res.by || 'another contributor') + '. Only one ask at a time for a picture.');
+        return;
+      }
       if (!res || !res.ok) throw new Error('send failed');
       saveTake();
       choiceRow.classList.add('hidden');
@@ -436,7 +458,7 @@
     document.getElementById('intakeGate').style.display = 'none';
     whoInput.value = sess.name;
     whoInput.disabled = true;
-    if (!takeId) btnRecord.disabled = false;
+    if (!takeId && !askOpen) btnRecord.disabled = false;
   };
 
   (function resume() {
