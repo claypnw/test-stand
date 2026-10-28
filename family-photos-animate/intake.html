@@ -31,11 +31,12 @@
   .note { font-size:14px; color:#5b554b; margin-top:10px; }
 </style>
 <script>
-/* TEST STAND STUB — this copy sends nothing anywhere. Every call to
-   the back-end program is caught here and answered as if it worked.
-   Test names: "Viewer" sees the viewer view; "Stale" gets a run-out
-   sign-in answer on the ask. Once a Just animate ask lands, the
-   picture counts as already asked (by Clay) everywhere. */
+/* TEST STAND STUB v5 — this copy sends nothing anywhere. Sign-in is
+   simulated by NAME: "Viewer" viewer; "Stale" run-out sign-in on the
+   ask; "Maxed" allowance used up (done 20, left 0); "Low" allowance
+   low (done 17, left 3); any other name is Clay the admin (done 2,
+   left 18). Once a Just animate ask lands, the picture counts as
+   already asked (by Clay) everywhere. */
 (function () {
   var realFetch = window.fetch.bind(window);
   window.fetch = function (url, opts) {
@@ -45,24 +46,37 @@
     }
     if (u.indexOf('script.google.com') >= 0) {
       var body = (opts && opts.body) ? String(opts.body) : u;
+      var both = u + ' ' + body;
       var out = { ok: true };
-      if (body.indexOf('animateState') >= 0 || u.indexOf('animateState') >= 0) {
+      if (both.indexOf('animateState') >= 0) {
+        var allow = null;
+        if (both.indexOf('tok-maxed') >= 0) allow = { done: 20, left: 0, out: true };
+        else if (both.indexOf('tok-low') >= 0) allow = { done: 17, left: 3, out: false };
+        else if (both.indexOf('tok-viewer') >= 0) allow = null;
+        else if (both.indexOf('tok-stale') >= 0) allow = { done: 0, left: 20, out: false };
+        else allow = { done: 2, left: 18, out: false };
         if (sessionStorage.getItem('stub-just-asked') === '1') out = { ok: true, open: true, by: 'Clay', mode: 'just' };
         else out = { ok: true, open: false };
+        if (allow) out.allow = allow;
       }
       else if (body.indexOf('animateRequest') >= 0) {
         if (body.indexOf('tok-stale') >= 0) out = { ok: false, error: 'sign-in needed' };
+        else if (body.indexOf('tok-maxed') >= 0) out = { ok: false, error: 'allowance out', done: 20, left: 0 };
         else if (sessionStorage.getItem('stub-just-asked') === '1') out = { ok: true, already: true, by: 'Clay' };
         else { sessionStorage.setItem('stub-just-asked', '1'); out = { ok: true }; }
       }
       else if (body.indexOf('sessionCheck') >= 0) {
         if (body.indexOf('tok-viewer') >= 0) out = { ok: true, name: 'Viewer', role: 'viewer' };
         else if (body.indexOf('tok-stale') >= 0) out = { ok: true, name: 'Stale', role: 'contributor' };
+        else if (body.indexOf('tok-maxed') >= 0) out = { ok: true, name: 'Maxed', role: 'contributor' };
+        else if (body.indexOf('tok-low') >= 0) out = { ok: true, name: 'Low', role: 'contributor' };
         else out = { ok: true, name: 'Clay', role: 'admin' };
       }
       else if (body.indexOf('signin') >= 0 && body.indexOf('upload') < 0 && body.indexOf('approve') < 0 && body.indexOf('abandon') < 0 && body.indexOf('sendNote') < 0) {
         if (body.indexOf('Viewer') >= 0) out = { ok: true, session: 'tok-viewer', name: 'Viewer', role: 'viewer' };
         else if (body.indexOf('Stale') >= 0) out = { ok: true, session: 'tok-stale', name: 'Stale', role: 'contributor' };
+        else if (body.indexOf('Maxed') >= 0) out = { ok: true, session: 'tok-maxed', name: 'Maxed', role: 'contributor' };
+        else if (body.indexOf('Low') >= 0) out = { ok: true, session: 'tok-low', name: 'Low', role: 'contributor' };
         else out = { ok: true, session: 'tok-admin', name: 'Clay', role: 'admin' };
       }
       if (u.indexOf('action=audio') >= 0) out = { ok: false };
@@ -211,26 +225,35 @@
 
   var mediaRecorder = null, chunks = [], audioBlob = null, audioUrl = null;
   var askOpen = false;
+  var allowOut = false;
   var askGate = (MODE === 'animate');
+  function balanceLine(done, left) {
+    return "You've done " + done + " animations this week and you may have " + left + " left. Your allowance starts over on Tuesday.";
+  }
 
   /* One open animation ask per picture: in directions mode, ask the
      back end on load. If an ask is already in, say whose it is and
      keep the recorder closed — no wasted recording. */
   if (MODE === 'animate') {
-    helperGet({ action: 'animateState', picture: PICTURE }).then(function (res) {
+    helperGet({ action: 'animateState', picture: PICTURE, session: sessToken() }).then(function (res) {
       askGate = false;
       if (res && res.ok && res.open) {
         askOpen = true;
         btnRecord.disabled = true;
         setStatus('An animation ask for this picture is already in — made by ' + (res.by || 'another contributor') + '. Only one ask at a time for a picture.');
+      } else if (res && res.ok && res.allow && res.allow.out) {
+        allowOut = true;
+        btnRecord.disabled = true;
+        setStatus(balanceLine(res.allow.done, 0));
       } else {
-        btnRecord.disabled = !whoInput.value.trim() || !!takeId || askOpen;
+        btnRecord.disabled = !whoInput.value.trim() || !!takeId || askOpen || allowOut;
+        if (res && res.ok && res.allow) setStatus(balanceLine(res.allow.done, res.allow.left));
       }
     }).catch(function () {
       /* No answer — the gate lifts so the person is not locked out;
          the send itself still checks. */
       askGate = false;
-      btnRecord.disabled = !whoInput.value.trim() || !!takeId || askOpen;
+      btnRecord.disabled = !whoInput.value.trim() || !!takeId || askOpen || allowOut;
     });
   }
   var timer = null, startedAt = 0;
@@ -281,7 +304,7 @@
 
   whoInput.addEventListener('input', function () {
     if (busy) return;
-    btnRecord.disabled = !whoInput.value.trim() || !!takeId || askOpen || askGate;
+    btnRecord.disabled = !whoInput.value.trim() || !!takeId || askOpen || askGate || allowOut;
   });
   /* The name box starts empty on every visit (Clay, 2026-10-15): never
      restore a saved name, and clear any name saved by an older version. */
@@ -298,7 +321,7 @@
     reviewBox.classList.add('hidden'); doneBox.classList.add('hidden');
     recordRow.classList.remove('hidden');
     busy = false; whoInput.disabled = false;
-    btnRecord.disabled = !whoInput.value.trim() || askOpen || askGate;
+    btnRecord.disabled = !whoInput.value.trim() || askOpen || askGate || allowOut;
     btnStop.disabled = true;
     clockEl.textContent = '';
   }
@@ -372,6 +395,12 @@
         setStatus('An animation ask for this picture is already in — made by ' + (res.by || 'another contributor') + '. Only one ask at a time for a picture.');
         return;
       }
+      if (res && res.error === 'allowance out') {
+        takeId = null;
+        allowOut = true;
+        setStatus(balanceLine(res.done || 0, 0));
+        return;
+      }
       if (!res || !res.ok) throw new Error('send failed');
       saveTake();
       choiceRow.classList.add('hidden');
@@ -413,6 +442,10 @@
     reviewStatus.textContent = 'Sending your approval…';
     helperPost({ action: 'approve', takeId: takeId }).then(function (res) {
       btn.disabled = false;
+      if (res && res.error === 'allowance out') {
+        reviewStatus.textContent = balanceLine(res.done || 0, 0);
+        return;
+      }
       if (!res || !res.ok) throw new Error('x');
       clearTake();
       reviewBox.classList.add('hidden');
@@ -467,7 +500,7 @@
     document.getElementById('intakeGate').style.display = 'none';
     whoInput.value = sess.name;
     whoInput.disabled = true;
-    if (!takeId && !askOpen && !askGate) btnRecord.disabled = false;
+    if (!takeId && !askOpen && !askGate && !allowOut) btnRecord.disabled = false;
   };
 
   (function resume() {
