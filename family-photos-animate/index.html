@@ -119,9 +119,9 @@
 <script>
 /* TEST STAND STUB — this copy sends nothing anywhere. Every call to
    the back-end program is caught here and answered as if it worked.
-   Test names: sign in as "Viewer" to see the viewer view; sign in as
-   "Stale" and the Just animate ask answers as a run-out sign-in.
-   A second Just animate ask (even after a reload) answers "already in". */
+   Test names: "Viewer" sees the viewer view; "Stale" gets a run-out
+   sign-in answer on the ask. Once a Just animate ask lands, the
+   picture counts as already asked (by Clay) everywhere. */
 (function () {
   var realFetch = window.fetch.bind(window);
   window.fetch = function (url, opts) {
@@ -132,23 +132,27 @@
     if (u.indexOf('script.google.com') >= 0) {
       var body = (opts && opts.body) ? String(opts.body) : u;
       var out = { ok: true };
-      if (body.indexOf('signin') >= 0 && body.indexOf('sessionCheck') < 0 && body.indexOf('animateRequest') < 0 && body.indexOf('upload') < 0 && body.indexOf('approve') < 0 && body.indexOf('abandon') < 0 && body.indexOf('sendNote') < 0) {
-        if (body.indexOf('Viewer') >= 0) out = { ok: true, session: 'tok-viewer', name: 'Viewer', role: 'viewer' };
-        else if (body.indexOf('Stale') >= 0) out = { ok: true, session: 'tok-stale', name: 'Stale', role: 'contributor' };
-        else out = { ok: true, session: 'tok-admin', name: 'Clay', role: 'admin' };
+      if (body.indexOf('animateState') >= 0 || u.indexOf('animateState') >= 0) {
+        if (sessionStorage.getItem('stub-just-asked') === '1') out = { ok: true, open: true, by: 'Clay', mode: 'just' };
+        else out = { ok: true, open: false };
       }
-      if (body.indexOf('sessionCheck') >= 0) {
+      else if (body.indexOf('animateRequest') >= 0) {
+        if (body.indexOf('tok-stale') >= 0) out = { ok: false, error: 'sign-in needed' };
+        else if (sessionStorage.getItem('stub-just-asked') === '1') out = { ok: true, already: true, by: 'Clay' };
+        else { sessionStorage.setItem('stub-just-asked', '1'); out = { ok: true }; }
+      }
+      else if (body.indexOf('sessionCheck') >= 0) {
         if (body.indexOf('tok-viewer') >= 0) out = { ok: true, name: 'Viewer', role: 'viewer' };
         else if (body.indexOf('tok-stale') >= 0) out = { ok: true, name: 'Stale', role: 'contributor' };
         else out = { ok: true, name: 'Clay', role: 'admin' };
       }
-      if (body.indexOf('animateRequest') >= 0) {
-        if (body.indexOf('tok-stale') >= 0) out = { ok: false, error: 'sign-in needed' };
-        else if (sessionStorage.getItem('stub-just-asked') === '1') out = { ok: true, already: true };
-        else { sessionStorage.setItem('stub-just-asked', '1'); out = { ok: true }; }
+      else if (body.indexOf('signin') >= 0 && body.indexOf('upload') < 0 && body.indexOf('approve') < 0 && body.indexOf('abandon') < 0 && body.indexOf('sendNote') < 0) {
+        if (body.indexOf('Viewer') >= 0) out = { ok: true, session: 'tok-viewer', name: 'Viewer', role: 'viewer' };
+        else if (body.indexOf('Stale') >= 0) out = { ok: true, session: 'tok-stale', name: 'Stale', role: 'contributor' };
+        else out = { ok: true, session: 'tok-admin', name: 'Clay', role: 'admin' };
       }
       if (u.indexOf('action=audio') >= 0) out = { ok: false };
-      if (u.indexOf('takeId=') >= 0 && u.indexOf('action') < 0) out = { ok: true, status: 'new' };
+      if (u.indexOf('takeId=') >= 0 && u.indexOf('action') < 0 && u.indexOf('animateState') < 0) out = { ok: true, status: 'new' };
       return Promise.resolve({ json: function () { return Promise.resolve(out); } });
     }
     return realFetch(url, opts);
@@ -202,6 +206,9 @@
   <figure class="photo">
     <img id="photo-img" src="" alt="Family photograph — picture 001">
   </figure>
+  <p style="text-align:center;max-width:760px;margin:10px auto 0;">
+    <a class="btn" id="download-picture" href="" download style="text-decoration:none;">Download this picture</a>
+  </p>
 
   <section class="voices" aria-label="Hear the voices">
     <h2>Tap a name to hear that person's memory of this picture.</h2>
@@ -219,11 +226,12 @@
 
   <div id="animation-box" style="display:none;max-width:760px;margin:26px auto 0;text-align:center;">
     <h2>This picture, moving</h2>
-    <video id="animation-video" controls preload="metadata" style="max-width:100%;"></video>
-    <p id="animation-fallback" style="display:none;">The animation couldn't be played just now.</p>
+    <div id="animation-thumbs" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;"></div>
+    <p style="font-size:14px;">Tap a small picture to watch that animation in a new window.</p>
   </div>
 
   <section class="animate" id="animate-section" aria-label="Animate this picture" style="display:none;max-width:760px;margin:26px auto 0;text-align:center;">
+    <p id="animate-cap" style="display:none;">This picture has its three animations.</p>
     <p><button class="btn" type="button" id="animate-btn">Animate picture</button></p>
     <div id="animate-panel" style="display:none;">
       <p>The animation is made by the admin from this picture and added to this page. It is not instant.</p>
@@ -259,7 +267,10 @@
 const PHOTO = {
   id: "001",
   image: "3ffb9a0ae8c7d8617122d37fcd87c307.jpg",
-  animation: "missing-file-test.mp4",
+  animations: [
+    { file: "anim-sample-1.mp4", poster: "anim-poster-1.jpg" },
+    { file: "anim-sample-2.mp4", poster: "anim-poster-2.jpg" }
+  ],
   contributors: [
     { name: "Clay", audio: "6f9059b5677780d00432fa3e672928b9.m4a" },
     { name: "Bill", audio: "d5790d06e2beaebe4c67186a3a3356cf.mp3" },
@@ -285,6 +296,7 @@ window.fpSignedIn = function (sess) {
 
 /* ---------------- page build from the data model ---------------- */
 document.getElementById("photo-img").src = PHOTO.image;
+document.getElementById("download-picture").href = PHOTO.image;
 
 const buttonsBox = document.getElementById("voice-buttons");
 const contributorButtons = [];
@@ -599,14 +611,36 @@ refreshButtons();
   var HKEY = "test-key-not-real";
   var section = document.getElementById('animate-section');
   if (!section) return;
-  if (typeof PHOTO !== 'undefined' && PHOTO.animation) {
-    var vid = document.getElementById('animation-video');
-    vid.addEventListener('error', function () {
-      vid.style.display = 'none';
-      document.getElementById('animation-fallback').style.display = 'block';
-    }, true);
-    vid.src = PHOTO.animation;
+  /* The animations themselves: small copies of the picture, one per
+     animation (three at most), each opening its clip in a new window.
+     The picture stays the main thing on the page. */
+  if (typeof PHOTO !== 'undefined' && PHOTO.animations && PHOTO.animations.length) {
+    var thumbs = document.getElementById('animation-thumbs');
+    PHOTO.animations.forEach(function (a) {
+      var cell = document.createElement('div');
+      var link = document.createElement('a');
+      link.href = a.file;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      var img = document.createElement('img');
+      img.src = a.poster;
+      img.alt = 'Watch this picture move';
+      img.style.cssText = 'width:180px;max-width:40vw;border:1px solid #bbb;display:block;';
+      link.appendChild(img);
+      cell.appendChild(link);
+      var dl = document.createElement('a');
+      dl.href = a.file;
+      dl.setAttribute('download', '');
+      dl.textContent = 'Download this animation';
+      dl.style.cssText = 'display:inline-block;margin-top:6px;font-size:14px;';
+      cell.appendChild(dl);
+      thumbs.appendChild(cell);
+    });
     document.getElementById('animation-box').style.display = 'block';
+    if (PHOTO.animations.length >= 3) {
+      document.getElementById('animate-cap').style.display = 'block';
+      document.getElementById('animate-btn').style.display = 'none';
+    }
   }
   function showFor(sess) {
     if (sess && sess.role && sess.role !== 'viewer') section.style.display = 'block';
@@ -623,9 +657,31 @@ refreshButtons();
   var panel = document.getElementById('animate-panel');
   var statusEl = document.getElementById('animate-status');
   var justBtn = document.getElementById('animate-just');
+  var dirBtn = document.getElementById('animate-directions');
   function showStatus(t) { statusEl.textContent = t; statusEl.style.display = 'block'; }
+  function alreadyLine(by) {
+    return 'An animation ask for this picture is already in — made by ' + (by || 'another contributor') + '. Only one ask at a time for a picture.';
+  }
+  function get(params) {
+    var q = new URLSearchParams();
+    q.set('key', HKEY);
+    Object.keys(params).forEach(function (k) { q.set(k, params[k]); });
+    return fetch(HELPER + '?' + q.toString()).then(function (r) { return r.json(); });
+  }
   document.getElementById('animate-btn').addEventListener('click', function () {
-    panel.style.display = (panel.style.display === 'none') ? 'block' : 'none';
+    var opening = (panel.style.display === 'none');
+    panel.style.display = opening ? 'block' : 'none';
+    if (opening) {
+      /* One open ask per picture: if an ask is already in, say so and
+         close both roads before anyone records or taps. */
+      get({ action: 'animateState', picture: 'pilot' }).then(function (res) {
+        if (res && res.ok && res.open) {
+          justBtn.disabled = true;
+          dirBtn.disabled = true;
+          showStatus(alreadyLine(res.by));
+        }
+      }).catch(function () { /* no answer — the ask itself still checks */ });
+    }
   });
   document.getElementById('animate-directions').addEventListener('click', function () {
     location.href = 'intake.html?mode=animate';
@@ -644,8 +700,9 @@ refreshButtons();
     fetch(HELPER, { method: 'POST', body: body }).then(function (r) { return r.json(); }).then(function (res) {
       if (res && res.ok) {
         showStatus(res.already
-          ? 'Your ask is already in. The animation will be added to this page when it is made.'
+          ? alreadyLine(res.by)
           : 'Your ask is in. The animation will be added to this page when it is made.');
+        if (res.already) justBtn.disabled = false;
       } else if (res && res.error === 'sign-in needed') {
         try { sessionStorage.removeItem('fps-session'); } catch (e) {}
         showStatus('Your sign-in has run out. Sign in again, then tap Animate picture.');
