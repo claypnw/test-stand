@@ -211,18 +211,27 @@
 
   var mediaRecorder = null, chunks = [], audioBlob = null, audioUrl = null;
   var askOpen = false;
+  var askGate = (MODE === 'animate');
 
   /* One open animation ask per picture: in directions mode, ask the
      back end on load. If an ask is already in, say whose it is and
      keep the recorder closed — no wasted recording. */
   if (MODE === 'animate') {
     helperGet({ action: 'animateState', picture: PICTURE }).then(function (res) {
+      askGate = false;
       if (res && res.ok && res.open) {
         askOpen = true;
         btnRecord.disabled = true;
         setStatus('An animation ask for this picture is already in — made by ' + (res.by || 'another contributor') + '. Only one ask at a time for a picture.');
+      } else {
+        btnRecord.disabled = !whoInput.value.trim() || !!takeId || askOpen;
       }
-    }).catch(function () { /* no answer — the send itself still checks */ });
+    }).catch(function () {
+      /* No answer — the gate lifts so the person is not locked out;
+         the send itself still checks. */
+      askGate = false;
+      btnRecord.disabled = !whoInput.value.trim() || !!takeId || askOpen;
+    });
   }
   var timer = null, startedAt = 0;
   var takeId = null, sending = false, capStopped = false, busy = false;
@@ -272,7 +281,7 @@
 
   whoInput.addEventListener('input', function () {
     if (busy) return;
-    btnRecord.disabled = !whoInput.value.trim() || !!takeId || askOpen;
+    btnRecord.disabled = !whoInput.value.trim() || !!takeId || askOpen || askGate;
   });
   /* The name box starts empty on every visit (Clay, 2026-10-15): never
      restore a saved name, and clear any name saved by an older version. */
@@ -289,7 +298,7 @@
     reviewBox.classList.add('hidden'); doneBox.classList.add('hidden');
     recordRow.classList.remove('hidden');
     busy = false; whoInput.disabled = false;
-    btnRecord.disabled = !whoInput.value.trim() || askOpen;
+    btnRecord.disabled = !whoInput.value.trim() || askOpen || askGate;
     btnStop.disabled = true;
     clockEl.textContent = '';
   }
@@ -458,7 +467,7 @@
     document.getElementById('intakeGate').style.display = 'none';
     whoInput.value = sess.name;
     whoInput.disabled = true;
-    if (!takeId && !askOpen) btnRecord.disabled = false;
+    if (!takeId && !askOpen && !askGate) btnRecord.disabled = false;
   };
 
   (function resume() {
