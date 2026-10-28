@@ -121,10 +121,9 @@
    the back-end program is caught here and answered as if it worked.
    Test names: sign in as "Viewer" to see the viewer view; sign in as
    "Stale" and the Just animate ask answers as a run-out sign-in.
-   A second Just animate ask answers "already in". */
+   A second Just animate ask (even after a reload) answers "already in". */
 (function () {
   var realFetch = window.fetch.bind(window);
-  var justAsked = false;
   window.fetch = function (url, opts) {
     var u = String(url);
     if (u.indexOf('ipapi.co') >= 0) {
@@ -133,7 +132,7 @@
     if (u.indexOf('script.google.com') >= 0) {
       var body = (opts && opts.body) ? String(opts.body) : u;
       var out = { ok: true };
-      if (body.indexOf('action=signin') >= 0 || body.indexOf('action%3Dsignin') >= 0 || body.indexOf('signin') >= 0 && body.indexOf('sessionCheck') < 0 && body.indexOf('animateRequest') < 0 && body.indexOf('upload') < 0 && body.indexOf('approve') < 0) {
+      if (body.indexOf('signin') >= 0 && body.indexOf('sessionCheck') < 0 && body.indexOf('animateRequest') < 0 && body.indexOf('upload') < 0 && body.indexOf('approve') < 0 && body.indexOf('abandon') < 0 && body.indexOf('sendNote') < 0) {
         if (body.indexOf('Viewer') >= 0) out = { ok: true, session: 'tok-viewer', name: 'Viewer', role: 'viewer' };
         else if (body.indexOf('Stale') >= 0) out = { ok: true, session: 'tok-stale', name: 'Stale', role: 'contributor' };
         else out = { ok: true, session: 'tok-admin', name: 'Clay', role: 'admin' };
@@ -145,8 +144,8 @@
       }
       if (body.indexOf('animateRequest') >= 0) {
         if (body.indexOf('tok-stale') >= 0) out = { ok: false, error: 'sign-in needed' };
-        else if (justAsked) out = { ok: true, already: true };
-        else { justAsked = true; out = { ok: true }; }
+        else if (sessionStorage.getItem('stub-just-asked') === '1') out = { ok: true, already: true };
+        else { sessionStorage.setItem('stub-just-asked', '1'); out = { ok: true }; }
       }
       if (u.indexOf('action=audio') >= 0) out = { ok: false };
       if (u.indexOf('takeId=') >= 0 && u.indexOf('action') < 0) out = { ok: true, status: 'new' };
@@ -600,7 +599,7 @@ refreshButtons();
   var HKEY = "test-key-not-real";
   var section = document.getElementById('animate-section');
   if (!section) return;
-  if (window.PHOTO && PHOTO.animation) {
+  if (typeof PHOTO !== 'undefined' && PHOTO.animation) {
     var vid = document.getElementById('animation-video');
     vid.addEventListener('error', function () {
       vid.style.display = 'none';
