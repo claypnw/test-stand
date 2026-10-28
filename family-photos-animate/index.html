@@ -117,11 +117,12 @@
   }
 </style>
 <script>
-/* TEST STAND STUB — this copy sends nothing anywhere. Every call to
-   the back-end program is caught here and answered as if it worked.
-   Test names: "Viewer" sees the viewer view; "Stale" gets a run-out
-   sign-in answer on the ask. Once a Just animate ask lands, the
-   picture counts as already asked (by Clay) everywhere. */
+/* TEST STAND STUB v5 — this copy sends nothing anywhere. Sign-in is
+   simulated by NAME: "Viewer" viewer; "Stale" run-out sign-in on the
+   ask; "Maxed" allowance used up (done 20, left 0); "Low" allowance
+   low (done 17, left 3); any other name is Clay the admin (done 2,
+   left 18). Once a Just animate ask lands, the picture counts as
+   already asked (by Clay) everywhere. */
 (function () {
   var realFetch = window.fetch.bind(window);
   window.fetch = function (url, opts) {
@@ -131,24 +132,37 @@
     }
     if (u.indexOf('script.google.com') >= 0) {
       var body = (opts && opts.body) ? String(opts.body) : u;
+      var both = u + ' ' + body;
       var out = { ok: true };
-      if (body.indexOf('animateState') >= 0 || u.indexOf('animateState') >= 0) {
+      if (both.indexOf('animateState') >= 0) {
+        var allow = null;
+        if (both.indexOf('tok-maxed') >= 0) allow = { done: 20, left: 0, out: true };
+        else if (both.indexOf('tok-low') >= 0) allow = { done: 17, left: 3, out: false };
+        else if (both.indexOf('tok-viewer') >= 0) allow = null;
+        else if (both.indexOf('tok-stale') >= 0) allow = { done: 0, left: 20, out: false };
+        else allow = { done: 2, left: 18, out: false };
         if (sessionStorage.getItem('stub-just-asked') === '1') out = { ok: true, open: true, by: 'Clay', mode: 'just' };
         else out = { ok: true, open: false };
+        if (allow) out.allow = allow;
       }
       else if (body.indexOf('animateRequest') >= 0) {
         if (body.indexOf('tok-stale') >= 0) out = { ok: false, error: 'sign-in needed' };
+        else if (body.indexOf('tok-maxed') >= 0) out = { ok: false, error: 'allowance out', done: 20, left: 0 };
         else if (sessionStorage.getItem('stub-just-asked') === '1') out = { ok: true, already: true, by: 'Clay' };
         else { sessionStorage.setItem('stub-just-asked', '1'); out = { ok: true }; }
       }
       else if (body.indexOf('sessionCheck') >= 0) {
         if (body.indexOf('tok-viewer') >= 0) out = { ok: true, name: 'Viewer', role: 'viewer' };
         else if (body.indexOf('tok-stale') >= 0) out = { ok: true, name: 'Stale', role: 'contributor' };
+        else if (body.indexOf('tok-maxed') >= 0) out = { ok: true, name: 'Maxed', role: 'contributor' };
+        else if (body.indexOf('tok-low') >= 0) out = { ok: true, name: 'Low', role: 'contributor' };
         else out = { ok: true, name: 'Clay', role: 'admin' };
       }
       else if (body.indexOf('signin') >= 0 && body.indexOf('upload') < 0 && body.indexOf('approve') < 0 && body.indexOf('abandon') < 0 && body.indexOf('sendNote') < 0) {
         if (body.indexOf('Viewer') >= 0) out = { ok: true, session: 'tok-viewer', name: 'Viewer', role: 'viewer' };
         else if (body.indexOf('Stale') >= 0) out = { ok: true, session: 'tok-stale', name: 'Stale', role: 'contributor' };
+        else if (body.indexOf('Maxed') >= 0) out = { ok: true, session: 'tok-maxed', name: 'Maxed', role: 'contributor' };
+        else if (body.indexOf('Low') >= 0) out = { ok: true, session: 'tok-low', name: 'Low', role: 'contributor' };
         else out = { ok: true, session: 'tok-admin', name: 'Clay', role: 'admin' };
       }
       if (u.indexOf('action=audio') >= 0) out = { ok: false };
@@ -239,6 +253,7 @@
         <button class="btn" type="button" id="animate-just">Just animate</button>
         <button class="btn" type="button" id="animate-directions">Animate with my directions</button>
       </p>
+      <p id="animate-allow" style="display:none;"></p>
       <p id="animate-status" style="display:none;"></p>
     </div>
   </section>
@@ -662,6 +677,13 @@ refreshButtons();
   function alreadyLine(by) {
     return 'An animation ask for this picture is already in — made by ' + (by || 'another contributor') + '. Only one ask at a time for a picture.';
   }
+  function balanceLine(done, left) {
+    return "You've done " + done + " animations this week and you may have " + left + " left. Your allowance starts over on Tuesday.";
+  }
+  function sessToken() {
+    try { var s = JSON.parse(sessionStorage.getItem('fps-session') || 'null'); return (s && s.token) || ''; }
+    catch (e) { return ''; }
+  }
   function get(params) {
     var q = new URLSearchParams();
     q.set('key', HKEY);
@@ -672,13 +694,25 @@ refreshButtons();
     var opening = (panel.style.display === 'none');
     panel.style.display = opening ? 'block' : 'none';
     if (opening) {
-      /* One open ask per picture: if an ask is already in, say so and
-         close both roads before anyone records or taps. */
-      get({ action: 'animateState', picture: 'pilot' }).then(function (res) {
-        if (res && res.ok && res.open) {
+      /* One open ask per picture, and the asker's own weekly
+         allowance: the state answer carries both. An open ask closes
+         both roads; a used-up allowance closes them too, with the
+         person's own numbers as the reason. */
+      get({ action: 'animateState', picture: 'pilot', session: sessToken() }).then(function (res) {
+        if (!res || !res.ok) return;
+        if (res.allow) {
+          var allowEl = document.getElementById('animate-allow');
+          allowEl.textContent = balanceLine(res.allow.done, res.allow.left);
+          allowEl.style.display = 'block';
+        }
+        if (res.open) {
           justBtn.disabled = true;
           dirBtn.disabled = true;
           showStatus(alreadyLine(res.by));
+        } else if (res.allow && res.allow.out) {
+          justBtn.disabled = true;
+          dirBtn.disabled = true;
+          showStatus(balanceLine(res.allow.done, res.allow.left));
         }
       }).catch(function () { /* no answer — the ask itself still checks */ });
     }
@@ -703,6 +737,9 @@ refreshButtons();
           ? alreadyLine(res.by)
           : 'Your ask is in. The animation will be added to this page when it is made.');
         if (res.already) justBtn.disabled = false;
+      } else if (res && res.error === 'allowance out') {
+        dirBtn.disabled = true;
+        showStatus(balanceLine(res.done || 0, 0));
       } else if (res && res.error === 'sign-in needed') {
         try { sessionStorage.removeItem('fps-session'); } catch (e) {}
         showStatus('Your sign-in has run out. Sign in again, then tap Animate picture.');
