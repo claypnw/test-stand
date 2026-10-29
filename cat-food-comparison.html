@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cat food numbers — Gandy's urinary foods compared</title>
+<style>
+body { font-family: Georgia, serif; margin: 16px; color: #111; background: #fff; }
+h1 { font-size: 22px; }
+p { font-size: 16px; max-width: 900px; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { border: 1px solid #888; padding: 6px 8px; text-align: left; vertical-align: top; }
+th { background: #eee; cursor: pointer; position: sticky; top: 0; }
+tr:nth-child(even) td { background: #f7f7f7; }
+</style>
+</head>
+<body>
+<h1>Cat food numbers — Gandy's urinary foods compared</h1>
+<p>Amounts are in each 100 grams of food, from each maker's own published figures. Tap a column head to sort by that column. Tap it again to flip the order.</p>
+<table id="t">
+<thead><tr><th data-i="0">Food &#9650;&#9660;</th><th data-i="1">Prescription needed &#9650;&#9660;</th><th data-i="2">Kind &#9650;&#9660;</th><th data-i="3">Serving size &#9650;&#9660;</th><th data-i="4">Serving weight (g) &#9650;&#9660;</th><th data-i="5">Calories per serving &#9650;&#9660;</th><th data-i="6">Protein (per 100 g) &#9650;&#9660;</th><th data-i="7">Fat (per 100 g) &#9650;&#9660;</th><th data-i="8">Magnesium mg (per 100 g) &#9650;&#9660;</th><th data-i="9">Phosphorus mg (per 100 g) &#9650;&#9660;</th><th data-i="10">Calcium mg (per 100 g) &#9650;&#9660;</th><th data-i="11">Sodium mg (per 100 g) &#9650;&#9660;</th><th data-i="12">Acid tools in the food &#9650;&#9660;</th><th data-i="13">Price per pound &#9650;&#9660;</th><th data-i="14">What the numbers rest on &#9650;&#9660;</th></tr></thead>
+<tbody>
+<tr><td>Royal Canin Urinary SO dry</td><td>Yes</td><td>Dry</td><td>1 cup</td><td>86</td><td>315</td><td>34.5 g</td><td>15 g</td><td>50</td><td>900</td><td>900</td><td>1300</td><td>DL-methionine 390 mg + calcium sulfate 1.25 g</td><td>$5.15</td><td>Maker's typical figures, as fed</td></tr>
+<tr><td>Hill's c/d Multicare dry</td><td>Yes</td><td>Dry</td><td>1 cup</td><td>91</td><td>353</td><td>33.9 g (dry matter)</td><td>16.1 g (dry matter)</td><td>80 (dry matter)</td><td>810 (dry matter)</td><td>820 (dry matter)</td><td>390 (dry matter)</td><td>Lactic acid, calcium sulfate, DL-methionine, potassium citrate</td><td>—</td><td>Hill's published dry-matter figures</td></tr>
+<tr><td>Hill's c/d canned stew (the canned food he feeds)</td><td>Yes</td><td>Canned</td><td>1 can (his serving: 1/4 can, about 20 g)</td><td>82</td><td>not checked</td><td>—</td><td>—</td><td>58 (dry matter)</td><td>660 (dry matter)</td><td>790 (dry matter)</td><td>350 (dry matter)</td><td>DL-methionine, potassium citrate</td><td>$10.21</td><td>Hill's published dry-matter figures</td></tr>
+<tr><td>Purina Pro Plan Urinary Tract Health dry</td><td>No</td><td>Dry</td><td>1 cup</td><td>—</td><td>not checked</td><td>31 g or more (label floor)</td><td>14 g or more (label floor)</td><td>75 at most (label cap)</td><td>600 or more (label floor)</td><td>700 or more (label floor)</td><td>not published</td><td>Phosphoric acid only</td><td>$3.45</td><td>US label bounds; price Chewy 22 lb bag</td></tr>
+<tr><td>Hill's Science Diet Urinary & Hairball Control dry</td><td>No</td><td>Dry</td><td>1 cup</td><td>88</td><td>324</td><td>34.2 g (dry matter)</td><td>18.8 g (dry matter)</td><td>77 (dry matter)</td><td>620 (dry matter)</td><td>740 (dry matter)</td><td>350 (dry matter)</td><td>Lactic acid, calcium sulfate, DL-methionine, potassium citrate</td><td>$4.58</td><td>Hill's dry-matter figures; price Tractor Supply 15.5 lb bag</td></tr>
+<tr><td>Royal Canin Urinary Care dry</td><td>No</td><td>Dry</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>130 at most (label cap)</td><td>not published</td><td>not published</td><td>not published</td><td>Calcium sulfate, sodium bisulfate, DL-methionine</td><td>$5.72</td><td>US label bounds; price Chewy 14 lb bag</td></tr>
+<tr><td>Purina ONE Urinary Tract Health dry</td><td>No</td><td>Dry</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>80 at most (label cap)</td><td>700 or more (label floor)</td><td>800 or more (label floor)</td><td>not published</td><td>Phosphoric acid only</td><td>$2.12</td><td>Purina label data; price Chewy 16 lb bag</td></tr>
+<tr><td>Wysong Uretic dry</td><td>No</td><td>Dry</td><td>—</td><td>—</td><td>—</td><td>42 g</td><td>15 g</td><td>not published</td><td>not published</td><td>not published</td><td>not published</td><td>DL-methionine</td><td>$4.40</td><td>Maker publishes no mineral figures; price one store, 5 lb bag</td></tr>
+</tbody>
+</table>
+<script>
+const table = document.getElementById('t');
+let lastCol = -1, asc = true;
+table.querySelectorAll('th').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = +th.dataset.i;
+    asc = (col === lastCol) ? !asc : true;
+    lastCol = col;
+    const rows = Array.from(table.tBodies[0].rows);
+    rows.sort((a, b) => {
+      const x = a.cells[col].innerText, y = b.cells[col].innerText;
+      const nx = parseFloat(x), ny = parseFloat(y);
+      const both = !isNaN(nx) && !isNaN(ny);
+      const cmp = both ? nx - ny : x.localeCompare(y);
+      return asc ? cmp : -cmp;
+    });
+    rows.forEach(r => table.tBodies[0].appendChild(r));
+  });
+});
+</script>
+</body>
+</html>
