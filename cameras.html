@@ -133,9 +133,14 @@
   <div class="barright">
     <span class="pickwords">Show:</span>
     <span id="boxes"></span>
+    <button id="soundbtn" class="countbtn" type="button">Sound: Off</button>
   </div>
 </div>
 <div id="status">Loading…</div>
+<div id="talkbar" style="display:none; padding:8px 12px; background:#111;">
+  <button id="talkbtn" class="countbtn" type="button">Hold to talk</button>
+  <span style="font-size:20px; margin-left:10px;">Hold the button down and speak; let go to stop.</span>
+</div>
 <div id="emptymsg">No cameras picked — tick a box in the top bar.</div>
 <div id="grid"></div>
 
@@ -200,6 +205,12 @@ const statusEl = document.getElementById('status');
 const buttonsEl = document.getElementById('buttons');
 const boxesEl = document.getElementById('boxes');
 const emptyEl = document.getElementById('emptymsg');
+const soundBtn = document.getElementById('soundbtn');
+const talkBar = document.getElementById('talkbar');
+const talkBtn = document.getElementById('talkbtn');
+let soundOn = false;     // the Sound button in the top bar
+let talkPC = null;       // live talk-back connection, or null
+let talkStream = null;   // microphone stream while talking
 const COUNTS = [1, 2, 4, 6, 8, 10];
 const camNames = Object.keys(SETTINGS.STREAMS);
 /* picked[i] is true when camera i+1's box is ticked. All ten start
@@ -329,6 +340,92 @@ function buildTiles() {
   }
 }
 
+/* Sound: the cameras' sound rides the same stream as the picture
+   (G.711 sound, per the cameras' spec sheet). Sound plays only
+   from the big camera — or the only camera, when just one is
+   showing. In a grid of several cameras sound stays off even when
+   the Sound button is on: several sound feeds at once would be
+   noise, not information. Browsers also require a tap before any
+   sound plays, and the Sound button is that tap. */
+function soundTargetTile() {
+  if (bigTile) return bigTile;
+  if (showing === 1) {
+    for (const tile of grid.children) {
+      if (picked[camNames.indexOf(tile.dataset.cam)]) return tile;
+    }
+  }
+  return null;
+}
+
+function applySound() {
+  const target = soundOn ? soundTargetTile() : null;
+  for (const tile of grid.children) {
+    const v = tile.querySelector('video');
+    if (v) v.muted = (tile !== target);
+  }
+  talkBar.style.display = bigTile ? 'block' : 'none';
+  if (!bigTile) stopTalk();
+}
+
+/* --- talk-back: hold the button, speak, the camera plays it ---
+   Wired to go2rtc's published two-way sound shape: a second
+   WebRTC talk to POST {TRANSLATOR_ADDRESS}/api/webrtc?src={stream}
+   carrying a send-only microphone track, for streams whose camera
+   has a backchannel (a speaker path back to the camera).
+   *** NOT tested against Clay's unit. *** Whether his unit passes
+   talk-back over this road settles at the house test; if it does
+   not, holding the button simply fails to join and says so. */
+async function startTalk() {
+  if (!bigTile || talkPC) return;
+  const streamName = SETTINGS.STREAMS[bigTile.dataset.cam];
+  talkBtn.textContent = 'Joining…';
+  try {
+    talkStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const pc = new RTCPeerConnection({ iceServers: [] });
+    talkPC = pc;
+    for (const track of talkStream.getAudioTracks()) {
+      pc.addTransceiver(track, { direction: 'sendonly' });
+    }
+    const offer = await pc.createOffer();
+    await pc.setLocalDescription(offer);
+    const url = SETTINGS.TRANSLATOR_ADDRESS + '/api/webrtc?src=' +
+      encodeURIComponent(streamName);
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/sdp' },
+      body: offer.sdp
+    });
+    if (!resp.ok) throw new Error('translator said no');
+    const answer = await resp.text();
+    await pc.setRemoteDescription({ type: 'answer', sdp: answer });
+    talkBtn.textContent = 'Talking — let go to stop';
+  } catch (e) {
+    stopTalk();
+    talkBtn.textContent = 'Talk did not join — hold to try again';
+  }
+}
+
+function stopTalk() {
+  if (talkPC) { try { talkPC.close(); } catch (e) {} talkPC = null; }
+  if (talkStream) {
+    for (const t of talkStream.getTracks()) t.stop();
+    talkStream = null;
+  }
+  if (talkBtn && !talkPC) talkBtn.textContent = 'Hold to talk';
+}
+
+talkBtn.addEventListener('pointerdown', (e) => { e.preventDefault(); startTalk(); });
+talkBtn.addEventListener('pointerup', stopTalk);
+talkBtn.addEventListener('pointerleave', stopTalk);
+talkBtn.addEventListener('pointercancel', stopTalk);
+
+soundBtn.addEventListener('click', () => {
+  soundOn = !soundOn;
+  soundBtn.textContent = soundOn ? 'Sound: On' : 'Sound: Off';
+  soundBtn.classList.toggle('picked', soundOn);
+  layOut();
+});
+
 function layOut() {
   showing = picked.filter(Boolean).length;
   grid.classList.toggle('onebig', !!bigTile);
@@ -343,6 +440,7 @@ function layOut() {
     tile.style.display = (bigTile || picked[idx]) ? 'block' : 'none';
   }
   sayWords();
+  applySound();
 }
 
 function toggleBig(tile) {
