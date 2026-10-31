@@ -15,7 +15,7 @@
      black space is ever left under the tiles. */
   body { display: flex; flex-direction: column; height: 100vh; height: 100dvh;
     overflow: hidden; }
-  #topbar, #status { flex: 0 0 auto; }
+  #topbar, #picker, #status { flex: 0 0 auto; }
   #topbar { padding: 10px 12px; background: #111; }
   #topbar .howmany { font-size: 26px; font-weight: bold; margin: 0 10px 8px 0;
     display: inline-block; vertical-align: middle; }
@@ -23,6 +23,22 @@
     margin: 0 6px 8px 0; padding: 8px 14px; border: 3px solid #fff; border-radius: 10px;
     background: #222; color: #fff; cursor: pointer; }
   .countbtn.picked { background: #ffd400; color: #000; border-color: #ffd400; }
+  /* The pick boxes: one big tick box per camera, numbered 1 to 10.
+     The whole label is the tap target, so a finger cannot miss. */
+  #picker { padding: 4px 12px 10px; background: #111; }
+  #picker .pickwords { font-size: 26px; font-weight: bold; margin: 0 10px 8px 0;
+    display: inline-block; vertical-align: middle; }
+  .pickbox { display: inline-block; vertical-align: middle; margin: 0 4px 8px 0;
+    padding: 6px 10px 6px 6px; border: 3px solid #fff; border-radius: 10px;
+    background: #222; color: #fff; font-size: 26px; font-weight: bold;
+    cursor: pointer; }
+  .pickbox input { width: 34px; height: 34px; margin: 0 6px 0 2px;
+    vertical-align: middle; cursor: pointer; accent-color: #ffd400; }
+  .pickbox.off { border-color: #666; color: #999; background: #161616; }
+  /* Shown in the grid area when every box is unticked. */
+  #emptymsg { display: none; flex: 1 1 auto; align-items: center;
+    justify-content: center; text-align: center; font-size: 30px;
+    font-weight: bold; color: #ffd400; padding: 20px; }
   #status { font-size: 22px; padding: 8px 12px; color: #ffd400; background: #000; }
   /* flex: 1 makes the grid fill the leftover screen height; the 1fr
      rows split that height evenly, and the tiles stretch to fill
@@ -56,7 +72,12 @@
   <span class="howmany">Cameras on screen:</span>
   <span id="buttons"></span>
 </div>
+<div id="picker">
+  <span class="pickwords">Cameras to show:</span>
+  <span id="boxes"></span>
+</div>
 <div id="status">Loading…</div>
+<div id="emptymsg">No cameras picked — tick a box above.</div>
 <div id="grid"></div>
 
 <script>
@@ -109,25 +130,36 @@ const SETTINGS = {
 const grid = document.getElementById('grid');
 const statusEl = document.getElementById('status');
 const buttonsEl = document.getElementById('buttons');
+const boxesEl = document.getElementById('boxes');
+const emptyEl = document.getElementById('emptymsg');
 const COUNTS = [1, 2, 4, 6, 8, 10];
 const camNames = Object.keys(SETTINGS.STREAMS);
+/* picked[i] is true when camera i+1's box is ticked. All ten start
+   ticked, so the page opens showing every camera. */
+const picked = camNames.map(() => true);
 let showing = 10;        // how many tiles are on screen right now
 let bigTile = null;      // the tile element picked big, or null
 const players = {};      // camName -> {pc} live WebRTC connections
 
 function columnsFor(count) {
   const wide = window.innerWidth >= window.innerHeight;
-  if (count === 1) return 1;
+  if (count <= 1) return 1;
   if (count === 2) return wide ? 2 : 1;
+  if (count === 3) return wide ? 3 : 2;
   if (count === 4) return 2;
+  if (count === 5) return wide ? 3 : 2;
   if (count === 6) return wide ? 3 : 2;
+  if (count === 7) return wide ? 4 : 2;
   if (count === 8) return wide ? 4 : 2;
+  if (count === 9) return 3;
   if (count === 10) return wide ? 5 : 2;
   return 2;
 }
 
 function sayWords() {
-  if (bigTile) {
+  if (showing === 0) {
+    statusEl.textContent = 'No cameras picked — tick a box above.';
+  } else if (bigTile) {
     statusEl.textContent = 'One camera, big. Tap the picture to go back to all cameras.';
   } else {
     statusEl.textContent = 'Showing ' + showing + (showing === 1 ? ' camera' : ' cameras') +
@@ -230,14 +262,17 @@ function buildTiles() {
 }
 
 function layOut() {
+  showing = picked.filter(Boolean).length;
   grid.classList.toggle('onebig', !!bigTile);
   grid.style.gridTemplateColumns = bigTile
-    ? '1fr' : 'repeat(' + columnsFor(showing) + ', 1fr)';
+    ? '1fr' : 'repeat(' + columnsFor(Math.max(showing, 1)) + ', 1fr)';
+  /* No cameras picked: plain words in the grid's place, not black. */
+  grid.style.display = showing === 0 ? 'none' : '';
+  emptyEl.style.display = showing === 0 ? 'flex' : 'none';
   for (const tile of grid.children) {
-    const name = tile.dataset.cam;
-    const idx = camNames.indexOf(name);
+    const idx = camNames.indexOf(tile.dataset.cam);
     tile.classList.toggle('big', tile === bigTile);
-    tile.style.display = (bigTile || idx < showing) ? 'block' : 'none';
+    tile.style.display = (bigTile || picked[idx]) ? 'block' : 'none';
   }
   sayWords();
 }
@@ -247,24 +282,78 @@ function toggleBig(tile) {
   layOut();
 }
 
+/* The count buttons are a quick set: tapping one ticks the first
+   that-many boxes and unticks the rest. After any change, a count
+   button lights up only when the ticked boxes are exactly the
+   first that-many cameras. */
+function syncCountButtons() {
+  for (const b of buttonsEl.children) {
+    const n = Number(b.dataset.n);
+    let match = true;
+    for (let i = 0; i < picked.length; i++) {
+      if (picked[i] !== (i < n)) { match = false; break; }
+    }
+    b.classList.toggle('picked', match);
+  }
+}
+
+function syncBoxLook() {
+  for (const label of boxesEl.children) {
+    const input = label.querySelector('input');
+    label.classList.toggle('off', !input.checked);
+  }
+}
+
 function buildButtons() {
   for (const n of COUNTS) {
     const b = document.createElement('button');
-    b.className = 'countbtn' + (n === showing ? ' picked' : '');
+    b.className = 'countbtn';
+    b.dataset.n = n;
     b.textContent = n;
     b.addEventListener('click', () => {
-      showing = n; bigTile = null;
-      for (const x of buttonsEl.children) x.classList.remove('picked');
-      b.classList.add('picked');
+      for (let i = 0; i < picked.length; i++) {
+        picked[i] = i < n;
+        boxesEl.children[i].querySelector('input').checked = picked[i];
+      }
+      bigTile = null;
+      syncBoxLook();
+      syncCountButtons();
       layOut();
     });
     buttonsEl.appendChild(b);
   }
 }
 
+/* One tick box per camera, numbered 1 to 10, all ticked at first.
+   Ticking or unticking swaps which cameras show; the grid keeps
+   camera-number order whatever the mix. */
+function buildBoxes() {
+  camNames.forEach((name, i) => {
+    const label = document.createElement('label');
+    label.className = 'pickbox';
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.checked = true;
+    input.setAttribute('aria-label', name);
+    input.addEventListener('change', () => {
+      picked[i] = input.checked;
+      bigTile = null;
+      syncBoxLook();
+      syncCountButtons();
+      layOut();
+    });
+    label.appendChild(input);
+    label.appendChild(document.createTextNode(String(i + 1)));
+    boxesEl.appendChild(label);
+  });
+}
+
 window.addEventListener('resize', layOut);
+buildBoxes();
 buildButtons();
 buildTiles();
+syncBoxLook();
+syncCountButtons();
 layOut();
 </script>
 </body>
