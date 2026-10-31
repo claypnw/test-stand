@@ -21,6 +21,9 @@ rem settings file (go2rtc.yaml) from this folder.
 start "House cameras - leave this window open" go2rtc.exe -config go2rtc.yaml
 
 rem Give the translator a few seconds to get going,
-rem then open the camera page in Chrome.
+rem then open the camera page in Chrome. The ?t= part of the
+rem page address tells the page where the translator lives:
+rem on this PC itself (localhost), port 1984. Without that
+rem part the page would only show test pictures.
 timeout /t 3 /nobreak >nul
-start "" chrome "https://claypnw.github.io/test-stand/cameras.html"
+start "" chrome "https://claypnw.github.io/test-stand/cameras.html?t=http://localhost:1984"
