@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>House Cameras</title>
+<style>
+  /* Plain look: black background, big white words, yellow for the picked button.
+     Made to be read at a glance, from across a room if need be. */
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #000; color: #fff;
+    font-family: Arial, Helvetica, sans-serif; }
+  #topbar { padding: 10px 12px; background: #111; }
+  #topbar .howmany { font-size: 26px; font-weight: bold; margin: 0 10px 8px 0;
+    display: inline-block; vertical-align: middle; }
+  .countbtn { font-size: 26px; font-weight: bold; min-width: 64px; min-height: 56px;
+    margin: 0 6px 8px 0; padding: 8px 14px; border: 3px solid #fff; border-radius: 10px;
+    background: #222; color: #fff; cursor: pointer; }
+  .countbtn.picked { background: #ffd400; color: #000; border-color: #ffd400; }
+  #status { font-size: 22px; padding: 8px 12px; color: #ffd400; background: #000; }
+  #grid { display: grid; gap: 6px; padding: 6px; }
+  .tile { position: relative; background: #1a1a1a; border: 2px solid #444;
+    aspect-ratio: 16 / 9; overflow: hidden; cursor: pointer; }
+  .tile video, .tile canvas { position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; display: block; }
+  .tile .camname { position: absolute; top: 0; left: 0; z-index: 3;
+    background: rgba(0,0,0,0.75); color: #fff; font-size: 24px; font-weight: bold;
+    padding: 4px 12px; border-bottom-right-radius: 8px; }
+  .tile .demotext { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+    background: rgba(0,0,0,0.75); color: #ffd400; font-size: 22px; font-weight: bold;
+    text-align: center; padding: 6px 4px; }
+  .tile .bigwords { position: absolute; inset: 0; z-index: 2; display: flex;
+    align-items: center; justify-content: center; text-align: center;
+    font-size: 24px; font-weight: bold; color: #fff; padding: 10px; }
+  /* One tile picked big: it fills the whole screen area, the rest hide. */
+  #grid.onebig .tile { display: none; }
+  #grid.onebig .tile.big { display: block; aspect-ratio: auto;
+    height: calc(100vh - 170px); }
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <span class="howmany">Cameras on screen:</span>
+  <span id="buttons"></span>
+</div>
+<div id="status">Loading…</div>
+<div id="grid"></div>
+
+<script>
+/* ================================================================
+   SETTINGS — the ONE place the at-home addresses go.
+   When the cameras are joined up at the house, only this block
+   changes. Nothing below it needs touching.
+   ----------------------------------------------------------------
+   DEMO_MODE: true  = the tiles show a test picture (no cameras).
+              false = the tiles show the real cameras.
+   TRANSLATOR_ADDRESS: where the go2rtc translator program lives
+              on the home network (the program running on the home
+              PC that turns the recorder's streams into web streams).
+   STREAMS: camera name on the left, the stream name the translator
+              knows it by on the right.
+   ================================================================ */
+const SETTINGS = {
+  DEMO_MODE: true,
+  TRANSLATOR_ADDRESS: "http://192.168.1.50:1984",
+  STREAMS: {
+    "Camera 1":  "camera1",
+    "Camera 2":  "camera2",
+    "Camera 3":  "camera3",
+    "Camera 4":  "camera4",
+    "Camera 5":  "camera5",
+    "Camera 6":  "camera6",
+    "Camera 7":  "camera7",
+    "Camera 8":  "camera8",
+    "Camera 9":  "camera9",
+    "Camera 10": "camera10"
+  }
+};
+/* ==================== end of SETTINGS ==================== */
+
+/* ----------------------------------------------------------------
+   What the player code assumes (go2rtc shape):
+   - go2rtc serves each stream for web browsers at its address,
+     port 1984.
+   - A browser picture is opened by sending a WebRTC offer to
+     POST  {TRANSLATOR_ADDRESS}/api/webrtc?src={stream name}
+     with the offer text as the body; go2rtc sends back an answer
+     and the picture follows. (That is go2rtc's own web-player way
+     of working, the same road its built-in stream.html page uses.)
+   - Tiles show the sub (small) picture in the grid where the
+     translator offers one under the name "<stream>_sub"; if not,
+     the main stream is used. This test copy keeps it simple and
+     uses the stream named in SETTINGS for every tile.
+   ---------------------------------------------------------------- */
+
+const grid = document.getElementById('grid');
+const statusEl = document.getElementById('status');
+const buttonsEl = document.getElementById('buttons');
+const COUNTS = [1, 2, 4, 6, 8, 10];
+const camNames = Object.keys(SETTINGS.STREAMS);
+let showing = 10;        // how many tiles are on screen right now
+let bigTile = null;      // the tile element picked big, or null
+const players = {};      // camName -> {pc} live WebRTC connections
+
+function columnsFor(count) {
+  const wide = window.innerWidth >= window.innerHeight;
+  if (count === 1) return 1;
+  if (count === 2) return wide ? 2 : 1;
+  if (count === 4) return 2;
+  if (count === 6) return wide ? 3 : 2;
+  if (count === 8) return wide ? 4 : 2;
+  if (count === 10) return wide ? 5 : 2;
+  return 2;
+}
+
+function sayWords() {
+  if (bigTile) {
+    statusEl.textContent = 'One camera, big. Tap the picture to go back to all cameras.';
+  } else {
+    statusEl.textContent = 'Showing ' + showing + (showing === 1 ? ' camera' : ' cameras') +
+      '. Tap a picture to make it big.';
+  }
+}
+
+/* --- demo picture: moving bars on a canvas, plainly marked --- */
+function startDemo(canvas, index) {
+  const ctx = canvas.getContext('2d');
+  const hue = (index * 36) % 360;
+  let t = index * 20;
+  function frame() {
+    const w = canvas.width = canvas.clientWidth || 320;
+    const h = canvas.height = canvas.clientHeight || 180;
+    ctx.fillStyle = 'hsl(' + hue + ', 60%, 22%)';
+    ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = 'hsl(' + hue + ', 80%, 45%)';
+    const bw = 60;
+    for (let x = -h; x < w + h; x += bw * 2) {
+      ctx.beginPath();
+      const off = (t * 2) % (bw * 2);
+      ctx.moveTo(x + off, h);
+      ctx.lineTo(x + off + bw, h);
+      ctx.lineTo(x + off + bw + h, 0);
+      ctx.lineTo(x + off + h, 0);
+      ctx.fill();
+    }
+    // a sweeping second hand, so the eye can tell the picture moves
+    const cx = w / 2, cy = h / 2, r = Math.min(w, h) * 0.28;
+    const a = (t * 0.02) % (Math.PI * 2);
+    ctx.strokeStyle = '#fff'; ctx.lineWidth = 5;
+    ctx.beginPath(); ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + r * Math.cos(a), cy + r * Math.sin(a)); ctx.stroke();
+    t++;
+    if (canvas.isConnected) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+/* --- live picture: one WebRTC talk to the translator program --- */
+async function startLive(video, streamName) {
+  const pc = new RTCPeerConnection({ iceServers: [] });
+  pc.addTransceiver('video', { direction: 'recvonly' });
+  pc.addTransceiver('audio', { direction: 'recvonly' });
+  pc.ontrack = (ev) => { video.srcObject = ev.streams[0]; };
+  const offer = await pc.createOffer();
+  await pc.setLocalDescription(offer);
+  const url = SETTINGS.TRANSLATOR_ADDRESS + '/api/webrtc?src=' +
+    encodeURIComponent(streamName);
+  const resp = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/sdp' },
+    body: offer.sdp
+  });
+  if (!resp.ok) throw new Error('translator said no');
+  const answer = await resp.text();
+  await pc.setRemoteDescription({ type: 'answer', sdp: answer });
+  return pc;
+}
+
+function buildTiles() {
+  grid.innerHTML = '';
+  for (const name of camNames) {
+    const tile = document.createElement('div');
+    tile.className = 'tile';
+    tile.dataset.cam = name;
+
+    const label = document.createElement('div');
+    label.className = 'camname';
+    label.textContent = name;
+    tile.appendChild(label);
+
+    if (SETTINGS.DEMO_MODE) {
+      const canvas = document.createElement('canvas');
+      tile.appendChild(canvas);
+      const demo = document.createElement('div');
+      demo.className = 'demotext';
+      demo.textContent = 'Test picture — no camera joined yet';
+      tile.appendChild(demo);
+      requestAnimationFrame(() => startDemo(canvas, camNames.indexOf(name)));
+    } else {
+      const video = document.createElement('video');
+      video.autoplay = true; video.muted = true; video.playsInline = true;
+      tile.appendChild(video);
+      const wait = document.createElement('div');
+      wait.className = 'bigwords';
+      wait.textContent = 'Joining the camera…';
+      tile.appendChild(wait);
+      startLive(video, SETTINGS.STREAMS[name])
+        .then((pc) => { players[name] = pc; wait.remove(); })
+        .catch(() => {
+          wait.textContent = 'No picture. The translator program may be off.';
+        });
+    }
+
+    tile.addEventListener('click', () => toggleBig(tile));
+    grid.appendChild(tile);
+  }
+}
+
+function layOut() {
+  grid.classList.toggle('onebig', !!bigTile);
+  grid.style.gridTemplateColumns = bigTile
+    ? '1fr' : 'repeat(' + columnsFor(showing) + ', 1fr)';
+  for (const tile of grid.children) {
+    const name = tile.dataset.cam;
+    const idx = camNames.indexOf(name);
+    tile.classList.toggle('big', tile === bigTile);
+    tile.style.display = (bigTile || idx < showing) ? 'block' : 'none';
+  }
+  sayWords();
+}
+
+function toggleBig(tile) {
+  bigTile = (bigTile === tile) ? null : tile;
+  layOut();
+}
+
+function buildButtons() {
+  for (const n of COUNTS) {
+    const b = document.createElement('button');
+    b.className = 'countbtn' + (n === showing ? ' picked' : '');
+    b.textContent = n;
+    b.addEventListener('click', () => {
+      showing = n; bigTile = null;
+      for (const x of buttonsEl.children) x.classList.remove('picked');
+      b.classList.add('picked');
+      layOut();
+    });
+    buttonsEl.appendChild(b);
+  }
+}
+
+window.addEventListener('resize', layOut);
+buildButtons();
+buildTiles();
+layOut();
+</script>
+</body>
+</html>
