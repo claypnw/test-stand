@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Set up the house cameras on your PC</title>
+<style>
+  /* Plain look, same as the camera page: black background, big
+     white words, yellow for the parts that matter most. */
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 24px 18px 60px; background: #000; color: #fff;
+    font-family: Arial, Helvetica, sans-serif; font-size: 21px;
+    line-height: 1.5; }
+  .wrap { max-width: 880px; margin: 0 auto; }
+  h1 { font-size: 36px; margin: 0 0 14px; }
+  h2 { font-size: 27px; color: #ffd400; margin: 38px 0 8px; }
+  p { margin: 8px 0; }
+  ol, ul { margin: 8px 0 8px 0; padding-left: 30px; }
+  li { margin: 7px 0; }
+  a { color: #ffd400; font-weight: bold; }
+  .honest { border: 3px solid #ffd400; border-radius: 10px;
+    padding: 12px 16px; margin: 18px 0; }
+  .fileline { background: #161616; border: 2px solid #444; border-radius: 10px;
+    padding: 10px 14px; margin: 10px 0; }
+  .mono { font-family: Consolas, "Courier New", monospace; font-size: 20px;
+    background: #161616; padding: 1px 7px; border-radius: 6px; }
+  .tryline { background: #161616; border: 2px solid #444; border-radius: 10px;
+    padding: 8px 14px; margin: 9px 0; font-family: Consolas, "Courier New", monospace;
+    font-size: 19px; word-break: break-all; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Set up the house cameras on your PC</h1>
+
+<p>This page walks you through putting the camera viewer on your
+Windows PC. One folder, three small files, and a few settings.
+Nothing here changes anything else on your PC, and you can stop
+the whole thing at any time by closing one window (step 8).</p>
+
+<div class="honest">
+<p><strong>One honest word first:</strong> this setup has
+<strong>not</strong> been tried on your unit yet. Your cameras and
+your unit are at your house, on your home network, and no one can
+reach them from outside the house — so the first real try happens
+at your house, with you there. The address forms in step 7 are the
+ones your unit's family is known to use, but each one is a
+candidate, not a promise. Trying them in order is how the right
+one gets found.</p>
+</div>
+
+<h2>Step 1 — Make one folder</h2>
+<ol>
+  <li>On your PC desktop, right-click an empty spot.</li>
+  <li>Pick <strong>New</strong>, then <strong>Folder</strong>.</li>
+  <li>Name the folder <span class="mono">Cameras</span>.</li>
+</ol>
+<p>Every file in this setup goes in that one folder.</p>
+
+<h2>Step 2 — Get the translator program</h2>
+<p>The viewer page is a web page, and web pages cannot take a
+camera picture straight from your unit. A small free program does
+that middle job: it takes the pictures from the unit and hands
+them to the web page. The program is called
+<strong>go2rtc</strong>. It costs nothing and needs no
+account.</p>
+<ol>
+  <li>Open the maker's download page:
+    <a href="https://github.com/AlexxIT/go2rtc/releases">go2rtc releases page on GitHub</a>.</li>
+  <li>On that page, find the newest release at the top, and in its
+    list of files pick the Windows one:
+    <span class="mono">go2rtc_win64.zip</span>
+    (that is the build for a Windows PC like yours).</li>
+  <li>Save the file, then open it and pull out the program inside,
+    <span class="mono">go2rtc.exe</span>.</li>
+  <li>Put <span class="mono">go2rtc.exe</span> in your
+    <span class="mono">Cameras</span> folder.</li>
+</ol>
+
+<h2>Step 3 — Put the two package files in the same folder</h2>
+<p>These two files were made for your cameras. Save each one into
+the same <span class="mono">Cameras</span> folder: right-click the
+link, pick <strong>Save link as…</strong>, and choose the
+<span class="mono">Cameras</span> folder.</p>
+<div class="fileline">
+  <a href="https://claypnw.github.io/test-stand/pc/go2rtc.yaml">go2rtc.yaml</a>
+  — the settings file. It holds the ten camera stream lines the
+  translator will use.
+</div>
+<div class="fileline">
+  <a href="https://claypnw.github.io/test-stand/pc/start-cameras.bat">start-cameras.bat</a>
+  — the start file. You will double-click this one to start
+  everything. It is a plain word file: you can open it in Notepad
+  and read every word in it, and all it does is start the
+  translator and open the camera page.
+</div>
+<p>Your <span class="mono">Cameras</span> folder should now hold
+three files: <span class="mono">go2rtc.exe</span>,
+<span class="mono">go2rtc.yaml</span>, and
+<span class="mono">start-cameras.bat</span>.</p>
+
+<h2>Step 4 — Find the unit's address</h2>
+<p>Your unit (the box your ten cameras talk to) has an address on
+your home network. It looks like numbers with dots, for
+example <span class="mono">192.168.1.120</span>. Find the real
+one like this:</p>
+<ol>
+  <li>Go to the unit and look at its own screen (the monitor
+    hooked to the unit).</li>
+  <li>Open the unit's menu and find the page called
+    <strong>Fast Network</strong>.</li>
+  <li>The address is on that page, marked as the IP address.
+    Write it down exactly.</li>
+</ol>
+<p><strong>Do not use 192.168.1.205.</strong> That address showed
+up in alert mail from March 2024. It is old, and the unit's
+address may have changed since. Only the address on the unit's
+screen today counts.</p>
+
+<h2>Step 5 — Write the address and login into the settings file</h2>
+<ol>
+  <li>In the <span class="mono">Cameras</span> folder, right-click
+    <span class="mono">go2rtc.yaml</span>, pick <strong>Open
+    with</strong>, and choose <strong>Notepad</strong>.</li>
+  <li>Use <strong>Edit &gt; Replace</strong> three times:
+    <ul>
+      <li>Replace <span class="mono">UNIT-ADDRESS</span> with the
+        address you wrote down in step 4.</li>
+      <li>Replace <span class="mono">UNIT-USER</span> with the
+        unit's login name.</li>
+      <li>Replace <span class="mono">UNIT-PASS</span> with the
+        unit's password.</li>
+    </ul>
+    Pick <strong>Replace All</strong> each time, so all ten camera
+    lines get changed at once.</li>
+  <li>Save the file and close Notepad.</li>
+</ol>
+<p>About the login: the unit ships with the login name
+<span class="mono">admin</span> and a <strong>blank</strong>
+password. If you never changed them, use <span class="mono">admin</span>,
+and for the password just erase the words
+<span class="mono">UNIT-PASS</span> and leave the rest of the line
+as it is — the line will read <span class="mono">rtsp://admin:@…</span>
+and that is right. If you did set a login or password on the
+unit, use yours.</p>
+
+<h2>Step 6 — Start it</h2>
+<ol>
+  <li>Double-click <span class="mono">start-cameras.bat</span> in
+    the <span class="mono">Cameras</span> folder.</li>
+  <li>A black window opens. That is the translator running.
+    <strong>Leave that window open</strong> the whole time you
+    watch the cameras.</li>
+  <li>Chrome opens the house camera page on its own.</li>
+</ol>
+
+<h2>Step 7 — What you should see, and what to try if you don't</h2>
+<p>You should see the camera page with a real, moving picture in
+each square — your ten cameras, live. Tap a picture to make it
+big; tap it again to go back.</p>
+<p>If the squares stay black, work down this list:</p>
+<ol>
+  <li>Check the black translator window is still open. If it was
+    closed, double-click <span class="mono">start-cameras.bat</span>
+    again.</li>
+  <li>Check the address from step 4 was written into the settings
+    file exactly, dots and all, and that the login is right.</li>
+  <li>Try the next address form. The settings file now uses the
+    first form. The other forms your unit's family is known to use
+    are below, in order. Each one is a <strong>candidate</strong> —
+    none is proven on your unit yet. To try one: change the ten
+    stream lines in <span class="mono">go2rtc.yaml</span> to the
+    new form (same address and login, only the part after the
+    address changes), save, close the translator window, and
+    double-click <span class="mono">start-cameras.bat</span>
+    again.</li>
+</ol>
+<p>The form already in the file (form 1):</p>
+<div class="tryline">rtsp://admin:PASSWORD@ADDRESS:554/ch0/main … ch9/main</div>
+<p>Form 2 — channels counted from 1, in the last digits
+(101 is camera 1, 201 is camera 2, up to 1001 for camera 10):</p>
+<div class="tryline">rtsp://admin:PASSWORD@ADDRESS:554/Streaming/Channels/101</div>
+<p>Form 3 — a short two-digit form (11, 12, … or 01, 02, …):</p>
+<div class="tryline">rtsp://admin:PASSWORD@ADDRESS:554/11</div>
+<p>Form 4 — the first form, but on port 80 instead of 554:</p>
+<div class="tryline">rtsp://admin:PASSWORD@ADDRESS:80/ch0/main … ch9/main</div>
+<p>Last road: your unit may also speak a standard called ONVIF —
+a way for programs to ask the unit itself what its stream
+addresses are. A small free program named <strong>ONVIF Device
+Manager</strong> can read the true addresses straight off the
+unit, which settles the question in one step. If you get this far
+and still have black squares, stop there; that road is easier
+with a walk-through than with a written page.</p>
+
+<h2>Step 8 — How to stop it</h2>
+<p>Close the black translator window. That stops the sending, and
+the camera page will have no pictures until you start again with
+<span class="mono">start-cameras.bat</span>. Closing the Chrome
+tab is fine at any time.</p>
+
+</div>
+</body>
+</html>
