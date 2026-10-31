@@ -150,12 +150,21 @@
    TRANSLATOR_ADDRESS: where the go2rtc translator program lives
               on the home network (the program running on the home
               PC that turns the recorder's streams into web streams).
+   PAGE ADDRESS PARAMETER: if the page is opened with ?t=<address>
+              in its address (the start file on the PC opens it as
+              cameras.html?t=http://localhost:1984, pointing at the
+              PC itself), demo mode is off and that address is the
+              translator. With no parameter, the page runs as a
+              demo, exactly as it does on the test stand.
    STREAMS: camera name on the left, the stream name the translator
               knows it by on the right.
    ================================================================ */
+/* The ?t= parameter, when present, turns demo mode off and
+   names the translator program's address. */
+const T_PARAM = new URLSearchParams(window.location.search).get('t');
 const SETTINGS = {
-  DEMO_MODE: true,
-  TRANSLATOR_ADDRESS: "http://192.168.1.50:1984",
+  DEMO_MODE: !T_PARAM,
+  TRANSLATOR_ADDRESS: T_PARAM || "http://192.168.1.50:1984",
   STREAMS: {
     "Camera 1":  "camera1",
     "Camera 2":  "camera2",
