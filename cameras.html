@@ -69,6 +69,58 @@
      fills the screen exactly, with no sliver of another tile showing. */
   #grid.onebig .tile { display: none !important; }
   #grid.onebig .tile.big { display: block !important; }
+  /* The pick number rides as its own span so the phone rules below
+     can print it inside the box; on ordinary screens it just sits
+     beside the box as before. */
+  .pickbox .num { display: inline-block; vertical-align: middle; }
+
+  /* ---- Phone widths (up to 600px): the whole top bar on ONE line ----
+     Everything shrinks: the word labels go away (the numbers carry
+     the meaning), the count buttons become small chips, and each
+     pick box is a 22px square with its number printed inside it —
+     a yellow square means ticked, a dark square means not.
+     The sizes add up at 360px wide: count buttons 113px (five
+     one-digit chips at 17px, the "10" chip at 23px, five 1px gaps),
+     pick boxes 229px (ten 22px squares, nine 1px gaps), bar side
+     padding 6px — 348px in all, inside the 360px screen. */
+  @media (max-width: 600px) {
+    #topbar { flex-wrap: nowrap; align-items: center; padding: 6px 3px; }
+    #topbar .howmany, #topbar .pickwords { display: none; }
+    #buttons { display: inline-flex; gap: 1px; }
+    #boxes { display: inline-flex; gap: 1px; }
+    .countbtn { font-size: 11px; min-width: 0; min-height: 34px;
+      margin: 0; padding: 3px; border-width: 2px; border-radius: 7px; }
+    .pickbox { position: relative; margin: 0; padding: 5px 0;
+      border: none; background: none; font-size: 11px; }
+    .pickbox.off { background: none; }
+    .pickbox input { appearance: none; -webkit-appearance: none;
+      display: block; width: 22px; height: 22px; margin: 0;
+      border: 2px solid #fff; border-radius: 6px; background: #222; }
+    .pickbox input:checked { background: #ffd400; border-color: #ffd400; }
+    .pickbox .num { position: absolute; left: 0; top: 5px; width: 22px;
+      height: 22px; line-height: 22px; text-align: center;
+      font-size: 11px; pointer-events: none; color: #fff; }
+    .pickbox input:checked ~ .num { color: #000; }
+    #status { font-size: 16px; padding: 6px 8px; }
+    #emptymsg { font-size: 20px; }
+    .tile .camname { font-size: 15px; padding: 3px 8px; }
+    .tile .demotext { font-size: 13px; padding: 4px 2px; }
+    .tile .bigwords { font-size: 16px; }
+  }
+
+  /* ---- Very wide screens (TV, 1800px and up): a step larger ---- */
+  @media (min-width: 1800px) {
+    #topbar .howmany, #topbar .pickwords { font-size: 32px; }
+    .countbtn { font-size: 32px; min-width: 76px; min-height: 68px;
+      padding: 10px 18px; }
+    .pickbox { font-size: 32px; padding: 8px 12px 8px 8px; }
+    .pickbox input { width: 42px; height: 42px; }
+    #status { font-size: 27px; }
+    #emptymsg { font-size: 36px; }
+    .tile .camname { font-size: 29px; }
+    .tile .demotext { font-size: 26px; }
+    .tile .bigwords { font-size: 29px; }
+  }
 </style>
 </head>
 <body>
@@ -350,7 +402,10 @@ function buildBoxes() {
       layOut();
     });
     label.appendChild(input);
-    label.appendChild(document.createTextNode(String(i + 1)));
+    const num = document.createElement('span');
+    num.className = 'num';
+    num.textContent = String(i + 1);
+    label.appendChild(num);
     boxesEl.appendChild(label);
   });
 }
