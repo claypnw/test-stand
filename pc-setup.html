@@ -50,6 +50,57 @@ candidate, not a promise. Trying them in order is how the right
 one gets found.</p>
 </div>
 
+<h2>Before the steps — a one-click test of the unit's password and address</h2>
+<p>Your unit signs in with a login (the name
+<span class="mono">admin</span>) and a password, and it hands out
+its camera pictures at an address that follows one of a few known
+forms. This test asks the unit both questions at once: is the
+password still <strong>blank</strong>, and which address form
+does the unit answer to? It costs one double-click.</p>
+<p>You need the <span class="mono">Cameras</span> folder and the
+translator program in it first — steps 1 and 2 below do that.
+Then:</p>
+<ol>
+  <li>Save these two test files into the same
+    <span class="mono">Cameras</span> folder, next to
+    <span class="mono">go2rtc.exe</span> (right-click the link,
+    pick <strong>Save link as…</strong>):
+    <div class="fileline">
+      <a href="https://claypnw.github.io/test-stand/pc/test-config.yaml">test-config.yaml</a>
+      — the test settings. Your unit's address and the blank
+      password are already written in. There is nothing to change
+      in this file.
+    </div>
+    <div class="fileline">
+      <a href="https://claypnw.github.io/test-stand/pc/run-test.bat">run-test.bat</a>
+      — the test starter. This is the file you double-click.
+    </div>
+  </li>
+  <li>Double-click <span class="mono">run-test.bat</span>. A black
+    window opens — leave it open — and a moment later a page opens
+    in your browser, listing the test streams.</li>
+  <li>On that page, click each name once —
+    <span class="mono">test-form1</span>,
+    <span class="mono">test-form2</span>, and the rest. Clicking a
+    name wakes its test.</li>
+  <li>Send a picture of that page, and a picture of the black
+    window.</li>
+</ol>
+<p>What the pictures will say:</p>
+<ul>
+  <li>A real camera picture beside any test-form name means the
+    <strong>blank password is right</strong>, and that form is
+    <strong>the road</strong> — the one the full setup in the
+    steps below will use for all ten cameras.</li>
+  <li>The number <strong>401</strong> beside every form means a
+    <strong>password stands on the unit</strong> — the blank one
+    is not it, and the unit's real password has to be found before
+    the setup can go on.</li>
+  <li>Any other error means the address forms need deeper work.
+    That digging is not yours — send the pictures and leave it
+    there.</li>
+</ul>
+
 <h2>Step 1 — Make one folder</h2>
 <ol>
   <li>On your PC desktop, right-click an empty spot.</li>
