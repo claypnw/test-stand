@@ -70,10 +70,10 @@
 <div class="wrap">
   <div class="card">
     <h1>Guest Tablet Setup</h1>
-    <p>This page is for the host, at setup time. One tap below saves a small mark in this tablet&rsquo;s browser. Pages of the Hearth then know this is Clay&rsquo;s guest tablet, and links that would ask for a login show as plain words instead &mdash; no login wall for a guest. The mark stands only in this browser, on this tablet. No other tablet carries it.</p>
-    <p id="status">Reading the mark&hellip;</p>
+    <p>This page is for the host, at setup time. One tap below saves a small flag in this tablet&rsquo;s browser. Pages of the Hearth then know this is Clay&rsquo;s guest tablet, and links that would ask for a login show as plain words instead &mdash; no login wall for a guest. The flag stands only in this browser, on this tablet. No other tablet carries it.</p>
+    <p id="status">Reading the flag&hellip;</p>
     <button id="set-mark" type="button">This is Clay&rsquo;s guest tablet</button>
-    <button id="clear-mark" type="button">Take the mark off</button>
+    <button id="clear-mark" type="button">Take the flag off</button>
   </div>
 </div>
 <script>
@@ -84,8 +84,8 @@
   }
   function show() {
     document.getElementById('status').textContent = stands()
-      ? 'The mark stands on this tablet now.'
-      : 'No mark stands on this tablet.';
+      ? 'The flag stands on this tablet now.'
+      : 'No flag stands on this tablet.';
   }
   document.getElementById('set-mark').addEventListener('click', function () {
     try { window.localStorage.setItem(KEY, '1'); } catch (e) {}
