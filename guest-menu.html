@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mogollon's Hearth — Guest Menu</title>
+<style>
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    background: #2b1a0e linear-gradient(180deg, #3a2412 0%, #2b1a0e 55%, #1e1108 100%);
+    color: #2a1a08;
+  }
+  .wrap {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: clamp(0.75rem, 3vw, 2rem);
+  }
+  header {
+    background: #f6ead2 linear-gradient(180deg, #fbf3df 0%, #f3e5c8 100%);
+    border: 0.25rem solid #7a4d1f;
+    border-radius: 1rem;
+    padding: clamp(1rem, 4vw, 2rem);
+    text-align: center;
+    box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.5);
+  }
+  h1 {
+    margin: 0 0 0.5rem 0;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: clamp(1.9rem, 6.5vw, 3.2rem);
+    line-height: 1.15;
+    color: #3a1f08;
+  }
+  .welcome {
+    margin: 0;
+    font-size: clamp(1.1rem, 3.8vw, 1.5rem);
+    line-height: 1.4;
+  }
+  nav { margin-top: clamp(1rem, 3.5vw, 1.75rem); }
+  a.door {
+    display: block;
+    text-decoration: none;
+    background: #4a2c14 linear-gradient(180deg, #5d3a1c 0%, #432a12 100%);
+    border: 0.2rem solid #c9973f;
+    border-radius: 1rem;
+    padding: clamp(1.1rem, 4vw, 1.6rem) clamp(1.1rem, 4.5vw, 1.8rem);
+    margin-bottom: clamp(0.9rem, 3vw, 1.4rem);
+    min-height: 5.5rem;
+    box-shadow: 0 0.4rem 1rem rgba(0,0,0,0.45);
+  }
+  a.door:active { background: #68431f linear-gradient(180deg, #755024 0%, #5d3a1c 100%); }
+  .door-name {
+    display: block;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: clamp(1.6rem, 5.5vw, 2.4rem);
+    line-height: 1.2;
+    color: #f9efdb;
+  }
+  .door-line {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: clamp(1.05rem, 3.6vw, 1.35rem);
+    line-height: 1.4;
+    color: #efdcbc;
+  }
+  section {
+    background: #f6ead2 linear-gradient(180deg, #fbf3df 0%, #f3e5c8 100%);
+    border: 0.2rem solid #7a4d1f;
+    border-radius: 1rem;
+    padding: clamp(1rem, 4vw, 1.75rem);
+    margin-top: clamp(1rem, 3.5vw, 1.6rem);
+  }
+  section h2 {
+    margin: 0 0 0.6rem 0;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: clamp(1.45rem, 5vw, 2.1rem);
+    line-height: 1.2;
+    color: #3a1f08;
+  }
+  section p {
+    margin: 0 0 0.7rem 0;
+    font-size: clamp(1.05rem, 3.8vw, 1.3rem);
+    line-height: 1.5;
+  }
+  section p:last-child { margin-bottom: 0; }
+  footer {
+    text-align: center;
+    color: #efdcbc;
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
+    line-height: 1.4;
+    padding: clamp(1rem, 4vw, 1.5rem) 0.5rem clamp(0.5rem, 2vw, 1rem);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Mogollon&rsquo;s Hearth &mdash; Guest Menu</h1>
+    <p class="welcome">Well met, guest. This tablet is your guide to the Hearth &mdash; tap a door to begin.</p>
+  </header>
+
+  <nav>
+    <a class="door" href="https://claypnw.github.io/morning-scroll/">
+      <span class="door-name">The Morning Scroll</span>
+      <span class="door-line">The daily paper of the Hearth &mdash; today&rsquo;s news, weather, and tales of the Holds.</span>
+    </a>
+
+    <a class="door" href="#trails">
+      <span class="door-name">Trails and Finds</span>
+      <span class="door-line">Trails to walk, murals and painted elk to find, and things to do around Payson.</span>
+    </a>
+
+    <a class="door" href="#visit-book">
+      <span class="door-name">The Visit Book</span>
+      <span class="door-line">Take pictures of your visit, and tell each one in your own words.</span>
+    </a>
+
+    <a class="door" href="#story">
+      <span class="door-name">The Hearth&rsquo;s Story</span>
+      <span class="door-line">What this hall is, and how it came to stand here.</span>
+    </a>
+  </nav>
+
+  <section id="trails">
+    <h2>Trails and Finds</h2>
+    <p>The trails list is coming to this menu. It will hold the trails in and around Payson, the murals, the painted elk, and the things to do here.</p>
+    <p>Until it stands here, ask your host &mdash; he can point you to the trails and the finds.</p>
+  </section>
+
+  <section id="visit-book">
+    <h2>The Visit Book</h2>
+    <p>The Visit Book is this tablet&rsquo;s own book for your visit. It stands on the tablet&rsquo;s home screen.</p>
+    <p>In it, you take a picture as you wander, and then you tell that picture &mdash; in your own voice, or in your own written words. Each picture and its tale are kept together in the book.</p>
+    <p>Nothing in the book is sent anywhere. It stays here, for the making of your visit&rsquo;s story.</p>
+  </section>
+
+  <section id="story">
+    <h2>The Hearth&rsquo;s Story</h2>
+    <p>Mogollon&rsquo;s Hearth is a guest house in Payson, Arizona. Its host built it as a real-life hearth hall in the Skyrim way &mdash; full size, raised by hand, not a model.</p>
+    <p>Guests rest here by the fire, walk the trails, and ride out to see the holds of the country round about.</p>
+    <p>Welcome to the Hearth. The fire is lit.</p>
+  </section>
+
+  <footer>Ask your host if anything here does not open.</footer>
+
+</div>
+</body>
+</html>
