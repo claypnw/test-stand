@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guest Tablet Setup — Mogollon's Hearth</title>
+<style>
+  body {
+    margin: 0;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    background: #2b1a0e linear-gradient(180deg, #3a2412 0%, #2b1a0e 55%, #1e1108 100%);
+    color: #2a1a08;
+  }
+  .wrap {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: clamp(0.75rem, 3vw, 2rem);
+  }
+  .card {
+    background: #f6ead2 linear-gradient(180deg, #fbf3df 0%, #f3e5c8 100%);
+    border: 0.25rem solid #7a4d1f;
+    border-radius: 1rem;
+    padding: clamp(1rem, 4vw, 2rem);
+    box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.5);
+  }
+  h1 {
+    margin: 0 0 0.6rem 0;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: clamp(1.7rem, 6vw, 2.8rem);
+    line-height: 1.15;
+    color: #3a1f08;
+  }
+  p {
+    margin: 0 0 0.8rem 0;
+    font-size: clamp(1.05rem, 3.8vw, 1.35rem);
+    line-height: 1.5;
+  }
+  #status {
+    font-weight: bold;
+    background: #fff8e8;
+    border: 0.15rem solid #7a4d1f;
+    border-radius: 0.6rem;
+    padding: 0.7rem 1rem;
+  }
+  button {
+    display: block;
+    width: 100%;
+    font-family: inherit;
+    cursor: pointer;
+    border-radius: 1rem;
+    padding: clamp(1.1rem, 4vw, 1.6rem);
+    margin-top: clamp(0.9rem, 3vw, 1.4rem);
+  }
+  #set-mark {
+    background: #4a2c14 linear-gradient(180deg, #5d3a1c 0%, #432a12 100%);
+    border: 0.2rem solid #c9973f;
+    color: #f9efdb;
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    min-height: 5.5rem;
+  }
+  #clear-mark {
+    background: #fbf3df;
+    border: 0.15rem solid #7a4d1f;
+    color: #3a1f08;
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h1>Guest Tablet Setup</h1>
+    <p>This page is for the host, at setup time. One tap below saves a small mark in this tablet&rsquo;s browser. Pages of the Hearth then know this is Clay&rsquo;s guest tablet, and links that would ask for a login show as plain words instead &mdash; no login wall for a guest. The mark stands only in this browser, on this tablet. No other tablet carries it.</p>
+    <p id="status">Reading the mark&hellip;</p>
+    <button id="set-mark" type="button">This is Clay&rsquo;s guest tablet</button>
+    <button id="clear-mark" type="button">Take the mark off</button>
+  </div>
+</div>
+<script>
+  var KEY = 'hearthGuestTablet';
+  function stands() {
+    try { return window.localStorage.getItem(KEY) === '1'; }
+    catch (e) { return false; }
+  }
+  function show() {
+    document.getElementById('status').textContent = stands()
+      ? 'The mark stands on this tablet now.'
+      : 'No mark stands on this tablet.';
+  }
+  document.getElementById('set-mark').addEventListener('click', function () {
+    try { window.localStorage.setItem(KEY, '1'); } catch (e) {}
+    show();
+  });
+  document.getElementById('clear-mark').addEventListener('click', function () {
+    try { window.localStorage.removeItem(KEY); } catch (e) {}
+    show();
+  });
+  show();
+</script>
+</body>
+</html>
