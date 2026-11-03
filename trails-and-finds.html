@@ -27,6 +27,8 @@
   .notice h2 { margin:0 0 6px; font-size:1.3rem; font-style:normal; }
   .small { color:var(--muted); font-size:.88rem; font-style:italic; }
   #count { font-family:Georgia, "Times New Roman", serif; font-size:.9rem; color:var(--muted); }
+  #count.zero { font-size:1.6rem; font-weight:bold; color:#2f1a12; }
+  #noMatch { font-size:1.05rem; color:#2f1a12; margin:2px 0 10px; }
   .talebtn { display:inline-block; margin-top:8px; border:1.5px solid var(--wood-deep); color:var(--wood-deep); border-radius:999px; padding:3px 12px 3px 8px; font-family:Georgia, "Times New Roman", serif; font-size:.82rem; cursor:pointer; background:#fff; }
   .talebtn:hover { background:#efe6cf; }
   .veil { display:none; position:fixed; inset:0; background:rgba(24,15,9,.62); z-index:50; }
@@ -58,6 +60,7 @@
   <div id="chips"><span class="chip" data-tag="art">art</span><span class="chip" data-tag="basketball">basketball</span><span class="chip" data-tag="biking">biking</span><span class="chip" data-tag="bird watching">bird watching</span><span class="chip" data-tag="books">books</span><span class="chip" data-tag="classes">classes</span><span class="chip" data-tag="creek">creek</span><span class="chip" data-tag="dogs">dogs</span><span class="chip" data-tag="events">events</span><span class="chip" data-tag="falls">falls</span><span class="chip" data-tag="fishing">fishing</span><span class="chip" data-tag="hiking">hiking</span><span class="chip" data-tag="history">history</span><span class="chip" data-tag="horses">horses</span><span class="chip" data-tag="indoors">indoors</span><span class="chip" data-tag="kids">kids</span><span class="chip" data-tag="murals">murals</span><span class="chip" data-tag="picnics">picnics</span><span class="chip" data-tag="playgrounds">playgrounds</span><span class="chip" data-tag="sunset">sunset</span><span class="chip" data-tag="trails">trails</span><span class="chip" data-tag="views">views</span><span class="chip" data-tag="walking">walking</span><span class="chip" data-tag="water">water</span><span class="chip" data-tag="wildlife">wildlife</span></div>
   <input id="q" type="text" placeholder="Or write your own words — try: frisbee, swimming, old clothes, water" />
   <p id="count"></p>
+  <p id="noMatch" style="display:none;">Nothing matched both picks — try dropping one.</p>
   <div id="list"></div>
   <noscript>
 <div>
@@ -812,6 +815,9 @@ var SKETCH = "\n<div style=\"margin:6px 0;max-width:336px;\">\n<svg viewBox=\"0 
     if (!h) { var allw = Array.from(picked).concat(words); var pw = allw.join("” and “"); listEl.innerHTML = '<p class="facts">Nothing in the Holds answers to “' + pw + '” together. Loosen one word, and the road opens again.</p>'; } else { listEl.innerHTML = h; }
     document.getElementById("writeups").style.display = (picked.size > 0 || document.getElementById("q").value.trim() !== "") ? "none" : "";
     countEl.textContent = "Showing " + shown.length + " of " + ENTRIES.length + " entries" + (showThrift ? ", and the Gilded Pages pointer" : "");
+    var zeroHit = shown.length === 0 && !showThrift;
+    countEl.classList.toggle("zero", zeroHit);
+    document.getElementById("noMatch").style.display = zeroHit ? "" : "none";
   }
   document.querySelectorAll(".chip[data-tag]").forEach(function(c) {
     c.addEventListener("click", function() {
