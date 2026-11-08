@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mogollon's Hearth Guest Book</title>
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
+<style>
+  :root { --ink:#2b1d12; --paper:#f7efe2; --card:#fffaf1; --line:#8a6d4a; --fire:#b3541e; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: Georgia, 'Times New Roman', serif; background: var(--paper); color: var(--ink); }
+  header { text-align:center; padding: 18px 12px 6px; }
+  header h1 { font-size: 34px; margin: 4px 0; }
+  header p { font-size: 19px; margin: 4px auto 10px; max-width: 640px; line-height: 1.45; }
+  main { max-width: 760px; margin: 0 auto; padding: 10px 14px 40px; }
+  .screen { display:none; }
+  .screen.on { display:block; }
+  button { font-family: inherit; cursor: pointer; border: 2px solid var(--line); background: var(--card); color: var(--ink); border-radius: 12px; }
+  #btn-take { display:block; width:100%; font-size: 34px; padding: 30px 10px; background: var(--fire); color:#fff; border-color:#7a3a12; margin: 14px 0 20px; }
+  .big { display:block; width:100%; font-size: 24px; padding: 18px 10px; margin: 12px 0; }
+  .plain { font-size: 20px; padding: 12px 18px; margin: 6px 4px; }
+  .piece { background: var(--card); border: 2px solid var(--line); border-radius: 12px; padding: 12px; margin: 12px 0; }
+  .piece img { max-width: 100%; border-radius: 8px; }
+  .piece .place { font-size: 22px; font-weight: bold; margin: 8px 0 2px; }
+  .piece .tale { font-size: 19px; line-height: 1.5; white-space: pre-wrap; }
+  .piece .state { font-size: 17px; margin-top: 8px; }
+  label { font-size: 20px; display:block; margin: 14px 0 6px; }
+  input[type=text], textarea { width:100%; font-family: inherit; font-size: 20px; padding: 10px; border: 2px solid var(--line); border-radius: 8px; background:#fff; }
+  textarea { min-height: 110px; }
+  video, canvas { max-width: 100%; border-radius: 8px; }
+  .note { font-size: 18px; line-height: 1.5; }
+  .warn { background:#fdf3e3; border:2px solid var(--fire); border-radius:12px; padding:14px; font-size:20px; line-height:1.5; }
+  footer { text-align:center; font-size:16px; padding: 12px; }
+  @media print {
+    header, footer, .noprint { display:none !important; }
+    .screen { display:none !important; }
+    #screen-print { display:block !important; }
+    .piece { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Mogollon's Hearth Guest Book</h1>
+  <p>Take pictures of your visit, and tell each one in your own words. The pictures and tales you approve are sent to the host, and the printed book of your visit is made from them. There is no button in this app to send them anywhere else.</p>
+</header>
+<main>
+  <!-- First screen -->
+  <section id="screen-home" class="screen on">
+    <button id="btn-take">Take a Picture</button>
+    <input type="file" id="file-picture" accept="image/*" capture="environment" style="display:none">
+    <div id="home-pieces"></div>
+    <button id="btn-done" class="big">My Visit Is Done, Print My Copy</button>
+  </section>
+
+  <!-- Camera screen -->
+  <section id="screen-camera" class="screen">
+    <video id="camera-view" autoplay playsinline style="display:none"></video>
+    <canvas id="camera-snap" style="display:none"></canvas>
+    <button id="btn-shutter" class="big" style="display:none">Take the Picture</button>
+    <p class="note" id="camera-note">The camera is opening.</p>
+    <button id="btn-camera-back" class="plain">Back</button>
+  </section>
+
+  <!-- Tale screen: join the place and the tale to the picture -->
+  <section id="screen-tale" class="screen">
+    <img id="tale-photo" alt="Your picture" style="max-width:100%; border-radius:8px">
+    <label for="tale-place">Where was this picture taken?</label>
+    <input type="text" id="tale-place" placeholder="The hearth hall, the garden, the trail...">
+    <label for="tale-words">Tell this picture in your own words</label>
+    <textarea id="tale-words" placeholder="Write the tale of this picture here."></textarea>
+    <label>Or tell it out loud</label>
+    <div>
+      <button id="btn-voice-start" class="plain">Start Talking</button>
+      <button id="btn-voice-stop" class="plain" style="display:none">Stop</button>
+      <span id="voice-state" class="note"></span>
+    </div>
+    <audio id="voice-play" controls style="display:none; width:100%"></audio>
+    <button id="btn-tale-save" class="big">Keep This Picture and Its Tale</button>
+    <button id="btn-tale-drop" class="plain">Throw This Picture Away</button>
+  </section>
+
+  <!-- Review screen -->
+  <section id="screen-review" class="screen">
+    <div id="review-piece"></div>
+    <button id="btn-approve" class="big">Approve — Send This One to the House</button>
+    <button id="btn-notyet" class="plain">Not Yet</button>
+  </section>
+
+  <!-- Close-out blocked screen -->
+  <section id="screen-blocked" class="screen">
+    <div class="warn" id="blocked-words"></div>
+    <button id="btn-save-first" class="big">Save Them First</button>
+    <button id="btn-finish-without" class="big">Finish Without Them</button>
+  </section>
+
+  <!-- Save them first screen -->
+  <section id="screen-savefirst" class="screen">
+    <p class="note">Carry the tablet back near the house, and tap Send Again. Each piece will say Sent when it lands.</p>
+    <div id="unsent-list"></div>
+    <button id="btn-savefirst-back" class="plain">Back</button>
+  </section>
+
+  <!-- Print copy screen (also the print view) -->
+  <section id="screen-print" class="screen">
+    <h2 id="print-title">Your Visit</h2>
+    <div id="print-pieces"></div>
+    <button id="btn-print" class="big noprint">Print My Copy</button>
+    <button id="btn-printed" class="big noprint">My Copy Is Printed</button>
+  </section>
+
+  <!-- Thank-you screen -->
+  <section id="screen-thanks" class="screen">
+    <h2>Thank You</h2>
+    <p class="note">Thank you for your visit to Mogollon's Hearth. The book of your visit is made from the pieces you approved. Please put the tablet back on the charging station.</p>
+  </section>
+</main>
+<footer>Mogollon's Hearth &middot; Payson, Arizona</footer>
+
+<script>
+/*__CORE_START__*/
+'use strict';
+var GuestBookCore = (function () {
+  var STORE_KEY = 'mogollonsHearthGuestBookVisitV1';
+  var RESET_MS = 5 * 60 * 1000; // five minutes on the charger
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function stamp(d) {
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  }
+  function newVisit(now) {
+    return { visitId: 'visit-' + stamp(now) + '-' + now.getTime(),
+             date: stamp(now), startedAt: now.getTime(),
+             seq: 0, pieces: [], closed: false, closedAt: null };
+  }
+  // File names a piece will carry in the house folder. A picture always has a
+  // picture file and a tale file (place + words). A voice tale adds a voice file.
+  function fileNames(visit, piece) {
+    var base = visit.date + '-piece-' + piece.n;
+    var names = { picture: base + '-picture.jpg', tale: base + '-tale.txt' };
+    if (piece.hasVoice) names.voice = base + '-voice.webm';
+    return names;
+  }
+  function addPiece(visit, now, photoDataUrl) {
+    visit.seq += 1;
+    var piece = { id: 'piece-' + visit.seq, n: visit.seq, takenAt: now.getTime(),
+                  photo: photoDataUrl, place: '', taleWords: '',
+                  hasVoice: false, voice: null,
+                  approved: false, sentFiles: [] };
+    visit.pieces.push(piece);
+    return piece;
+  }
+  function joinTale(piece, place, words) { piece.place = place || ''; piece.taleWords = words || ''; }
+  function approve(piece) { piece.approved = true; }
+  function unapprove(piece) { piece.approved = false; }
+  function approvedPieces(visit) { return visit.pieces.filter(function (p) { return p.approved; }); }
+  // Files a piece still owes the house: its named files not yet confirmed sent.
+  function owedFiles(visit, piece) {
+    var names = fileNames(visit, piece);
+    return Object.keys(names).map(function (k) { return names[k]; })
+      .filter(function (name) { return piece.sentFiles.indexOf(name) === -1; });
+  }
+  function markSent(piece, name) { if (piece.sentFiles.indexOf(name) === -1) piece.sentFiles.push(name); }
+  // The close-out check. folderNames is the house folder's own listing — the
+  // check trusts the folder, not the tablet. Every approved piece must stand
+  // received there before anything is deleted.
+  function closeOutCheck(visit, folderNames) {
+    var missing = [];
+    approvedPieces(visit).forEach(function (p) {
+      var names = fileNames(visit, p);
+      var gone = Object.keys(names).map(function (k) { return names[k]; })
+        .filter(function (name) { return folderNames.indexOf(name) === -1; });
+      if (gone.length) missing.push({ piece: p, files: gone });
+    });
+    return { ok: missing.length === 0, missing: missing };
+  }
+  function unsentApproved(visit) {
+    return approvedPieces(visit).filter(function (p) { return owedFiles(visit, p).length > 0; });
+  }
+  // Deleting covers only the files made during this visit: the whole visit
+  // record goes, and nothing else in storage is named here.
+  function deleteVisitFiles(storage) { storage.removeItem(STORE_KEY); }
+  function shouldReset(visit, nowMs, charging) {
+    return !!(visit && visit.closed && charging && (nowMs - visit.closedAt) >= RESET_MS);
+  }
+  function taleText(visit, piece) {
+    var lines = ['Place: ' + piece.place, '', piece.taleWords];
+    if (piece.hasVoice) lines.push('', '[This tale was also told out loud; the voice recording stands beside this file.]');
+    return lines.join('\n');
+  }
+  return { STORE_KEY: STORE_KEY, RESET_MS: RESET_MS, newVisit: newVisit,
+           fileNames: fileNames, addPiece: addPiece, joinTale: joinTale,
+           approve: approve, unapprove: unapprove, approvedPieces: approvedPieces,
+           owedFiles: owedFiles, markSent: markSent, closeOutCheck: closeOutCheck,
+           unsentApproved: unsentApproved, deleteVisitFiles: deleteVisitFiles,
+           shouldReset: shouldReset, taleText: taleText };
+})();
+/*__CORE_END__*/
+
+/* House send seam: a sender may be attached by the house setup as
+   window.HearthHouseSend(piece, files) -> Promise of the file names that
+   landed, and window.HearthFolderList() -> Promise of the folder's names.
+   With no sender attached, approved pieces wait as "Waiting to send" and the
+   close-out check counts them as not received — nothing is ever faked. */
+(function () {
+  var C = GuestBookCore;
+  var store = window.localStorage;
+  var visit = load() || C.newVisit(new Date());
+  var draft = null;      // piece being told
+  var reviewing = null;  // piece under review
+  var recorder = null, voiceChunks = [];
+
+  function load() {
+    try { var raw = store.getItem(C.STORE_KEY); return raw ? JSON.parse(raw) : null; }
+    catch (e) { return null; }
+  }
+  function save() { store.setItem(C.STORE_KEY, JSON.stringify(visit)); }
+  function show(id) {
+    document.querySelectorAll('.screen').forEach(function (s) { s.classList.remove('on'); });
+    document.getElementById(id).classList.add('on');
+  }
+  function pieceById(id) { return visit.pieces.filter(function (p) { return p.id === id; })[0]; }
+
+  function renderHome() {
+    var box = document.getElementById('home-pieces');
+    box.innerHTML = '';
+    if (!visit.pieces.length) {
+      box.innerHTML = '<p class="note">No pictures yet. Take your first picture of the visit.</p>';
+    }
+    visit.pieces.forEach(function (p) {
+      var div = document.createElement('div');
+      div.className = 'piece';
+      var state = !p.approved ? 'Not approved yet'
+        : (C.owedFiles(visit, p).length ? 'Approved — waiting to send' : 'Approved — Sent');
+      div.innerHTML = '<img alt="Your picture"><div class="place"></div><div class="tale"></div><div class="state"></div>';
+      div.querySelector('img').src = p.photo;
+      div.querySelector('.place').textContent = p.place || '(no place yet)';
+      div.querySelector('.tale').textContent = p.taleWords || '(no tale yet)';
+      div.querySelector('.state').textContent = state;
+      var b = document.createElement('button');
+      b.className = 'plain'; b.textContent = 'Look at This One';
+      b.addEventListener('click', function () { openReview(p.id); });
+      div.appendChild(b);
+      box.appendChild(div);
+    });
+    show('screen-home');
+  }
+
+  function downscale(dataUrl, done) {
+    var img = new Image();
+    img.onload = function () {
+      var max = 1280, w = img.width, h = img.height;
+      if (w > max || h > max) { var r = max / Math.max(w, h); w = Math.round(w * r); h = Math.round(h * r); }
+      var cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+      cv.getContext('2d').drawImage(img, 0, 0, w, h);
+      done(cv.toDataURL('image/jpeg', 0.85));
+    };
+    img.src = dataUrl;
+  }
+  function beginPiece(photoDataUrl) {
+    downscale(photoDataUrl, function (small) {
+      draft = C.addPiece(visit, new Date(), small); save();
+      document.getElementById('tale-photo').src = small;
+      document.getElementById('tale-place').value = '';
+      document.getElementById('tale-words').value = '';
+      document.getElementById('voice-state').textContent = '';
+      document.getElementById('voice-play').style.display = 'none';
+      show('screen-tale');
+    });
+  }
+
+  var stream = null;
+  function openCamera() {
+    show('screen-camera');
+    var view = document.getElementById('camera-view');
+    var shutter = document.getElementById('btn-shutter');
+    var note = document.getElementById('camera-note');
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false })
+        .then(function (s) {
+          stream = s; view.srcObject = s; view.style.display = 'block';
+          shutter.style.display = 'block'; note.textContent = 'When you are ready, take the picture.';
+        })
+        .catch(function () { note.textContent = 'The camera would not open here. Use the picture button instead.'; document.getElementById('file-picture').click(); show('screen-home'); });
+    } else {
+      document.getElementById('file-picture').click(); show('screen-home');
+    }
+  }
+  function stopCamera() { if (stream) { stream.getTracks().forEach(function (t) { t.stop(); }); stream = null; } }
+
+  function openReview(id) {
+    reviewing = pieceById(id);
+    var box = document.getElementById('review-piece');
+    box.innerHTML = '<div class="piece"><img alt="Your picture"><div class="place"></div><div class="tale"></div></div>';
+    box.querySelector('img').src = reviewing.photo;
+    box.querySelector('.place').textContent = reviewing.place || '(no place yet)';
+    box.querySelector('.tale').textContent = reviewing.taleWords || '(no tale yet)';
+    show('screen-review');
+  }
+
+  function sender() { return (typeof window.HearthHouseSend === 'function') ? window.HearthHouseSend : null; }
+  function sendPiece(p, done) {
+    var s = sender();
+    if (!s) { done(); return; }
+    var names = C.fileNames(visit, p);
+    var files = [{ name: names.picture, kind: 'picture', dataUrl: p.photo },
+                 { name: names.tale, kind: 'tale', text: C.taleText(visit, p) }];
+    if (p.hasVoice && names.voice) files.push({ name: names.voice, kind: 'voice', dataUrl: p.voice });
+    Promise.resolve(s(p, files)).then(function (landed) {
+      (landed || []).forEach(function (name) { C.markSent(p, name); });
+      save(); done();
+    }).catch(function () { done(); });
+  }
+  function sendAllApproved(done) {
+    var list = C.unsentApproved(visit);
+    var i = 0;
+    (function next() { if (i >= list.length) { done(); return; } sendPiece(list[i++], next); })();
+  }
+  function folderNames(done) {
+    if (typeof window.HearthFolderList === 'function') {
+      Promise.resolve(window.HearthFolderList()).then(done).catch(function () { done([]); });
+    } else {
+      // No house listing attached: the folder's word is the send receipts.
+      var names = [];
+      C.approvedPieces(visit).forEach(function (p) { names = names.concat(p.sentFiles); });
+      done(names);
+    }
+  }
+
+  function buildPrint() {
+    var box = document.getElementById('print-pieces');
+    box.innerHTML = '';
+    document.getElementById('print-title').textContent = 'Your Visit — ' + visit.date;
+    C.approvedPieces(visit).forEach(function (p) {
+      var div = document.createElement('div');
+      div.className = 'piece';
+      div.innerHTML = '<img alt="Your picture"><div class="place"></div><div class="tale"></div>';
+      div.querySelector('img').src = p.photo;
+      div.querySelector('.place').textContent = p.place;
+      div.querySelector('.tale').textContent = p.taleWords;
+      box.appendChild(div);
+    });
+  }
+
+  function closeOut(finishingWithout) {
+    folderNames(function (names) {
+      var check = C.closeOutCheck(visit, names);
+      if (!check.ok && !finishingWithout) {
+        var lost = check.missing.length;
+        document.getElementById('blocked-words').textContent =
+          lost + (lost === 1 ? ' picture and its tale have' : ' pictures and their tales have') +
+          ' not reached the house — the tablet was out of reach when they were made. ' +
+          'If you finish now, ' + (lost === 1 ? 'that one is' : 'those ' + lost + ' are') + ' gone for good.';
+        show('screen-blocked');
+        return;
+      }
+      buildPrint();
+      show('screen-print');
+    });
+  }
+  function finishVisit() {
+    visit.closed = true; visit.closedAt = Date.now(); save();
+    C.deleteVisitFiles(store);
+    visit = C.newVisit(new Date()); visit.closed = true; visit.closedAt = Date.now();
+    try { store.setItem(C.STORE_KEY, JSON.stringify(visit)); } catch (e) {}
+    show('screen-thanks');
+    watchCharger();
+  }
+  function watchCharger() {
+    if (!navigator.getBattery) return;
+    navigator.getBattery().then(function (battery) {
+      setInterval(function () {
+        if (C.shouldReset(visit, Date.now(), battery.charging)) {
+          visit = C.newVisit(new Date()); save(); renderHome();
+        }
+      }, 30000);
+    });
+  }
+
+  document.getElementById('btn-take').addEventListener('click', openCamera);
+  document.getElementById('file-picture').addEventListener('change', function (ev) {
+    var f = ev.target.files && ev.target.files[0];
+    if (!f) return;
+    var r = new FileReader();
+    r.onload = function () { beginPiece(r.result); };
+    r.readAsDataURL(f);
+  });
+  document.getElementById('btn-shutter').addEventListener('click', function () {
+    var view = document.getElementById('camera-view');
+    var cv = document.getElementById('camera-snap');
+    cv.width = view.videoWidth; cv.height = view.videoHeight;
+    cv.getContext('2d').drawImage(view, 0, 0);
+    stopCamera();
+    beginPiece(cv.toDataURL('image/jpeg', 0.9));
+  });
+  document.getElementById('btn-camera-back').addEventListener('click', function () { stopCamera(); renderHome(); });
+  document.getElementById('btn-tale-save').addEventListener('click', function () {
+    C.joinTale(draft,
+      document.getElementById('tale-place').value.trim(),
+      document.getElementById('tale-words').value.trim());
+    save(); draft = null; renderHome();
+  });
+  document.getElementById('btn-tale-drop').addEventListener('click', function () {
+    visit.pieces = visit.pieces.filter(function (p) { return p !== draft; });
+    save(); draft = null; renderHome();
+  });
+  document.getElementById('btn-voice-start').addEventListener('click', function () {
+    if (!navigator.mediaDevices || !window.MediaRecorder) {
+      document.getElementById('voice-state').textContent = 'Talking is not offered on this tablet. Please write the tale instead.';
+      return;
+    }
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (s) {
+      voiceChunks = [];
+      recorder = new MediaRecorder(s);
+      recorder.ondataavailable = function (e) { voiceChunks.push(e.data); };
+      recorder.onstop = function () {
+        var blob = new Blob(voiceChunks, { type: recorder.mimeType || 'audio/webm' });
+        var r = new FileReader();
+        r.onload = function () {
+          draft.hasVoice = true; draft.voice = r.result; save();
+          var play = document.getElementById('voice-play');
+          play.src = r.result; play.style.display = 'block';
+          document.getElementById('voice-state').textContent = 'Your talking is kept with this picture.';
+        };
+        r.readAsDataURL(blob);
+        s.getTracks().forEach(function (t) { t.stop(); });
+      };
+      recorder.start();
+      document.getElementById('btn-voice-start').style.display = 'none';
+      document.getElementById('btn-voice-stop').style.display = 'inline-block';
+      document.getElementById('voice-state').textContent = 'Talking now.';
+    }).catch(function () {
+      document.getElementById('voice-state').textContent = 'The microphone would not open. Please write the tale instead.';
+    });
+  });
+  document.getElementById('btn-voice-stop').addEventListener('click', function () {
+    if (recorder) recorder.stop();
+    document.getElementById('btn-voice-start').style.display = 'inline-block';
+    document.getElementById('btn-voice-stop').style.display = 'none';
+  });
+  document.getElementById('btn-approve').addEventListener('click', function () {
+    C.approve(reviewing); save();
+    sendPiece(reviewing, function () { reviewing = null; renderHome(); });
+  });
+  document.getElementById('btn-notyet').addEventListener('click', function () { reviewing = null; renderHome(); });
+  document.getElementById('btn-done').addEventListener('click', function () {
+    sendAllApproved(function () { closeOut(false); });
+  });
+  document.getElementById('btn-save-first').addEventListener('click', function () {
+    var box = document.getElementById('unsent-list');
+    box.innerHTML = '';
+    C.unsentApproved(visit).forEach(function (p) {
+      var div = document.createElement('div');
+      div.className = 'piece';
+      div.innerHTML = '<img alt="Your picture"><div class="place"></div><div class="state"></div>';
+      div.querySelector('img').src = p.photo;
+      div.querySelector('.place').textContent = p.place || '(no place yet)';
+      div.querySelector('.state').textContent = C.owedFiles(visit, p).length ? 'Waiting to send' : 'Sent';
+      var b = document.createElement('button');
+      b.className = 'plain'; b.textContent = 'Send Again';
+      b.addEventListener('click', function () {
+        sendPiece(p, function () {
+          div.querySelector('.state').textContent = C.owedFiles(visit, p).length ? 'Waiting to send' : 'Sent';
+          if (!C.unsentApproved(visit).length) closeOut(false);
+        });
+      });
+      div.appendChild(b);
+      box.appendChild(div);
+    });
+    show('screen-savefirst');
+  });
+  document.getElementById('btn-savefirst-back').addEventListener('click', function () { closeOut(false); });
+  document.getElementById('btn-finish-without').addEventListener('click', function () {
+    if (window.confirm('Finish without them? The pieces that have not reached the house will be gone for good.')) {
+      closeOut(true);
+    }
+  });
+  document.getElementById('btn-print').addEventListener('click', function () { window.print(); });
+  document.getElementById('btn-printed').addEventListener('click', finishVisit);
+
+  if (visit.closed) { show('screen-thanks'); watchCharger(); } else { renderHome(); }
+})();
+</script>
+</body>
+</html>
