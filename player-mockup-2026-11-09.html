@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Story player — mockup for approval</title>
+<style>
+  body { background:#ffffff; color:#1a1a1a; font-family: Georgia, 'Times New Roman', serif; margin:0; padding:16px; }
+  main { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; margin: 8px 0 4px; }
+  .note { color:#444; font-size: 0.95rem; margin: 0 0 14px; }
+  .player { border: 1px solid #888; border-radius: 8px; padding: 14px; margin: 12px 0 20px; background:#fdfdfd; }
+  .now { font-size: 1.15rem; font-weight: bold; margin: 0 0 4px; }
+  .time { font-size: 1rem; color:#333; margin: 0 0 12px; font-variant-numeric: tabular-nums; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .row button { flex: 1 1 30%; min-height: 72px; font-size: 1rem; background:#f2f2f2; border:1px solid #666; border-radius: 8px; cursor: pointer; padding: 8px 4px; }
+  .row button:active { background:#ddd; }
+  .row button .sym { display:block; font-size: 1.6rem; line-height: 1.2; }
+  .row button .word { display:block; font-size: 0.85rem; margin-top: 2px; }
+  .story { border-top: 1px solid #ccc; padding: 10px 0; }
+  .story h2 { font-size: 1.15rem; margin: 0 0 4px; }
+  .story p { margin: 0; color:#333; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Story player — mockup for approval</h1>
+  <p class="note">This is a sample page. The player at the top is the design to approve — it sits here the way it would sit at the top of a report page, over three sample stories.</p>
+
+  <div class="player">
+    <p class="now" id="now-playing">Story 1 of 3 — Sample story one</p>
+    <p class="time" id="time-line">0:00 of 0:00</p>
+    <div class="row">
+      <button id="btn-begin" type="button"><span class="sym">⏮</span><span class="word">Beginning</span></button>
+      <button id="btn-back" type="button"><span class="sym">⏪</span><span class="word">Back 10 seconds</span></button>
+      <button id="btn-play" type="button"><span class="sym">▶</span><span class="word">Play all stories</span></button>
+      <button id="btn-fwd" type="button"><span class="sym">⏩</span><span class="word">Forward 10 seconds</span></button>
+      <button id="btn-skip" type="button"><span class="sym">⏭</span><span class="word">Skip — next story</span></button>
+      <button id="btn-stop" type="button"><span class="sym">⏹</span><span class="word">Stop</span></button>
+    </div>
+    <audio id="edition-audio" preload="metadata"></audio>
+  </div>
+
+  <div class="story"><h2>Sample story one</h2><p>A short sample story, standing in for a real report story so the player can be tried.</p></div>
+  <div class="story"><h2>Sample story two</h2><p>A second sample story. When the first one ends on its own, this one starts playing.</p></div>
+  <div class="story"><h2>Sample story three</h2><p>The last sample story. When it ends, play stops and the player line says the set is done.</p></div>
+</main>
+<script>
+(function () {
+  var tracks = [
+    { title: "Sample story one",   src: "audio/daily-review-story-1.mp3" },
+    { title: "Sample story two",   src: "audio/daily-review-story-2.mp3" },
+    { title: "Sample story three", src: "audio/daily-review-story-3.mp3" }
+  ];
+  var audio = document.getElementById('edition-audio');
+  var nowEl = document.getElementById('now-playing');
+  var timeEl = document.getElementById('time-line');
+  var playBtn = document.getElementById('btn-play');
+  var idx = 0, done = false;
+
+  function fmt(s) {
+    if (!isFinite(s) || s < 0) s = 0;
+    s = Math.floor(s);
+    return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+  }
+  function setPlayLabel() {
+    if (audio.paused) {
+      playBtn.innerHTML = '<span class="sym">▶</span><span class="word">' + (done ? 'Play again from the start' : 'Play all stories') + '</span>';
+    } else {
+      playBtn.innerHTML = '<span class="sym">⏸</span><span class="word">Pause</span>';
+    }
+  }
+  function showLine() {
+    if (done) {
+      nowEl.textContent = 'All 3 stories are done';
+    } else {
+      nowEl.textContent = 'Story ' + (idx + 1) + ' of ' + tracks.length + ' — ' + tracks[idx].title;
+    }
+    timeEl.textContent = fmt(audio.currentTime) + ' of ' + fmt(audio.duration);
+    if ('mediaSession' in navigator) {
+      try {
+        navigator.mediaSession.metadata = new MediaMetadata({ title: tracks[idx].title, artist: 'Story player mockup' });
+      } catch (e) {}
+    }
+  }
+  function load(i, autoplay) {
+    idx = i; done = false;
+    audio.src = tracks[idx].src;
+    audio.load();
+    showLine(); setPlayLabel();
+    if (autoplay) { audio.play(); }
+  }
+  playBtn.addEventListener('click', function () {
+    if (done) { load(0, true); return; }
+    if (audio.paused) { audio.play(); } else { audio.pause(); }
+  });
+  document.getElementById('btn-stop').addEventListener('click', function () {
+    audio.pause(); load(0, false);
+  });
+  document.getElementById('btn-begin').addEventListener('click', function () {
+    if (done) { load(0, false); return; }
+    audio.currentTime = 0; showLine();
+  });
+  document.getElementById('btn-back').addEventListener('click', function () {
+    audio.currentTime = Math.max(0, audio.currentTime - 10); showLine();
+  });
+  document.getElementById('btn-fwd').addEventListener('click', function () {
+    var d = audio.duration;
+    if (isFinite(d) && audio.currentTime + 10 >= d) {
+      if (idx < tracks.length - 1) { load(idx + 1, !audio.paused); }
+      else { audio.currentTime = d; }
+    } else {
+      audio.currentTime = Math.min(d || 0, audio.currentTime + 10);
+    }
+    showLine();
+  });
+  document.getElementById('btn-skip').addEventListener('click', function () {
+    if (done) { load(0, true); return; }
+    if (idx < tracks.length - 1) { load(idx + 1, true); }
+  });
+  audio.addEventListener('play', setPlayLabel);
+  audio.addEventListener('pause', setPlayLabel);
+  audio.addEventListener('timeupdate', showLine);
+  audio.addEventListener('loadedmetadata', showLine);
+  audio.addEventListener('ended', function () {
+    if (idx < tracks.length - 1) { load(idx + 1, true); }
+    else { done = true; showLine(); setPlayLabel(); }
+  });
+  if ('mediaSession' in navigator) {
+    try {
+      navigator.mediaSession.setActionHandler('nexttrack', function () {
+        if (idx < tracks.length - 1) load(idx + 1, true);
+      });
+      navigator.mediaSession.setActionHandler('previoustrack', function () { audio.currentTime = 0; showLine(); });
+    } catch (e) {}
+  }
+  load(0, false);
+})();
+</script>
+</body>
+</html>
