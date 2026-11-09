@@ -9,25 +9,92 @@
          margin:0; padding:24px 16px 48px; text-align:center; }
   h1 { font-size:1.6rem; margin:8px 0 4px; }
   p { max-width:34em; margin:10px auto; line-height:1.45; }
-  video { width:min(92vw, 560px); height:auto; border-radius:10px;
-          box-shadow:0 4px 18px rgba(60,40,10,.25); background:#e2e9ee; }
-  a { color:#7a5228; }
   .small { font-size:.92rem; }
+  .stage { width:min(92vw, 560px); margin:6px auto 0; }
+  .globe { position:relative; width:100%; aspect-ratio:1/1; border-radius:50%;
+           overflow:hidden; background:#e2e9ee; cursor:grab;
+           box-shadow: 0 0 0 7px #7a5228, 0 6px 22px rgba(60,40,10,.30),
+                       inset 0 0 60px rgba(70,90,110,.35);
+           touch-action:none; user-select:none; -webkit-user-select:none; }
+  .globe.dragging { cursor:grabbing; }
+  .globe img.scene { position:absolute; left:0; top:0; max-width:none;
+                     pointer-events:none; -webkit-user-drag:none; }
+  .shine { position:absolute; inset:0; border-radius:50%; pointer-events:none;
+           background:
+             radial-gradient(ellipse 34% 24% at 32% 18%, rgba(255,255,255,.34), rgba(255,255,255,0) 70%),
+             radial-gradient(ellipse 16% 10% at 74% 76%, rgba(255,255,255,.16), rgba(255,255,255,0) 70%),
+             radial-gradient(ellipse 120% 120% at 50% 50%, rgba(0,0,0,0) 78%, rgba(70,90,110,.20) 100%); }
+  .base { width:64%; margin:-7% auto 0; position:relative; }
+  .base .wood { height:0; padding-bottom:34%;
+           background:linear-gradient(#926030, #7c4f27);
+           clip-path:polygon(14% 0, 86% 0, 100% 100%, 0 100%); }
+  .base .plaque { position:absolute; left:50%; top:46%; transform:translate(-50%,-50%);
+           width:34%; height:26%; background:#c69e4a; border:3px solid #6e4420;
+           border-radius:8px; }
 </style>
 </head>
 <body>
 <h1>Snow-globe sample</h1>
 <p>A sample only. It is not on the real album.</p>
-<video controls autoplay muted loop playsinline
-       poster="snow-globe-poster-2026-11-09.jpg"
-       src="snow-globe-sample-2026-11-09.mp4"></video>
-<p>The photo was first widened past its edges.
+<div class="stage">
+  <div class="globe" id="globe">
+    <img class="scene" id="scene" src="snow-globe-scene-drag-2026-11-09.jpg" alt="The Ripple Wagon photo, widened past its edges" draggable="false">
+    <div class="shine"></div>
+  </div>
+  <div class="base"><div class="wood"></div><div class="plaque"></div></div>
+</div>
+<p>Hold the picture and drag it.
+It moves inside the globe.
+Left and right, up and down.</p>
+<p class="small">The photo was first widened past its edges.
 More of the same street, trees, sky, and lawn, at the same size.
 Then the globe was cut out of that one picture.
-The photo in the middle is the true photo, whole and unbent.
-No snow falls.
-The view drifts a little and comes back.</p>
-<p class="small"><a href="snow-globe-sample-2026-11-09.mp4">Open the animation full size</a></p>
+The photo in the middle is the true photo, whole and unbent.</p>
+<script>
+(function () {
+  var globe = document.getElementById('globe');
+  var scene = document.getElementById('scene');
+  // The widened picture is 2200 units square. In those units the true
+  // photo sits at 518..1593 across and 576..1651 down (its centre is
+  // 1055.5, 1113.5). The globe shows the photo 604 units wide when the
+  // globe itself is 880 units wide.
+  var SCENE = 2200, PHOTO_W = 1075, PHOTO_CX = 1055.5, PHOTO_CY = 1113.5;
+  var offX = -153.2, offY = -185.5; // rest position, in globe units (globe = 880)
+  var dragging = false, startX = 0, startY = 0, startOX = 0, startOY = 0;
+
+  function render() {
+    var g = globe.clientWidth;         // globe size on screen, px
+    var k = g / 880;                   // screen px per globe unit
+    var scenePx = SCENE * (604 / PHOTO_W) * k;
+    scene.style.width = scenePx + 'px';
+    scene.style.height = scenePx + 'px';
+    var range = scenePx / k - 880;     // how far it may move, globe units
+    offX = Math.max(-range, Math.min(0, offX));
+    offY = Math.max(-range, Math.min(0, offY));
+    scene.style.transform = 'translate(' + (offX * k) + 'px,' + (offY * k) + 'px)';
+  }
+  function pos(e) { return { x: e.clientX, y: e.clientY }; }
+  globe.addEventListener('pointerdown', function (e) {
+    dragging = true; globe.classList.add('dragging');
+    var p = pos(e); startX = p.x; startY = p.y; startOX = offX; startOY = offY;
+    globe.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  });
+  globe.addEventListener('pointermove', function (e) {
+    if (!dragging) return;
+    var k = globe.clientWidth / 880;
+    var p = pos(e);
+    offX = startOX + (p.x - startX) / k;
+    offY = startOY + (p.y - startY) / k;
+    render();
+  });
+  function end() { dragging = false; globe.classList.remove('dragging'); }
+  globe.addEventListener('pointerup', end);
+  globe.addEventListener('pointercancel', end);
+  window.addEventListener('resize', render);
+  if (scene.complete) render(); else scene.addEventListener('load', render);
+  render();
+})();
+</script>
 </body>
 </html>
-
