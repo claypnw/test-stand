@@ -5,32 +5,16 @@
 #  from your camera unit and hands them to your web browser,
 #  which cannot take them straight.
 #
-#  BEFORE THIS FILE WILL WORK, fill in three things. They are
-#  marked in the stream lines at the bottom:
+#  This file is ready to use. Your unit's address
+#  (192.168.7.194), the login name (admin), and the blank
+#  password are already written into the ten stream lines
+#  below. There is nothing to fill in and nothing to edit.
 #
-#    UNIT-ADDRESS  — your unit's address on your home network.
-#                    It looks like numbers with dots, for example
-#                    192.168.1.120. Step 4 of the setup sheet
-#                    shows where to find it on the unit's screen.
-#    UNIT-USER     — the unit's login name. The unit ships with
-#                    the name:  admin
-#    UNIT-PASS     — the unit's password. The unit ships with a
-#                    BLANK password. If yours is still blank,
-#                    just erase the words UNIT-PASS and leave
-#                    the rest of the line as it is (the line
-#                    will read rtsp://admin:@... and that is
-#                    right). If you set a password on the unit,
-#                    put that password in place of UNIT-PASS.
-#
-#  How to change the lines: open this file in Notepad, use
-#  Edit > Replace to swap each marked word for the real one in
-#  all ten lines at once, then save the file.
-#
-#  The ten stream lines use the FIRST address form to try:
-#  port 554, channels counted ch0 to ch9, main picture.
-#  If the pictures do not come up, the setup sheet (step 7)
-#  lists the other address forms to try, in order. Each one
-#  is a candidate only — none is proven on your unit yet.
+#  The ten lines use the first address form (port 554,
+#  channels ch0 to ch9, main picture). If the one-click
+#  test shows a different form is the road your unit
+#  answers to, this file gets rewritten on Muggy's side
+#  and you save the fresh copy — you never edit it.
 # ============================================================
 
 # The door the viewer page knocks on. Leave this as it is.
@@ -38,13 +22,13 @@ api:
   listen: ":1984"
 
 streams:
-  camera1:  rtsp://UNIT-USER:UNIT-PASS@UNIT-ADDRESS:554/ch0/main
-  camera2:  rtsp://UNIT-USER:UNIT-PASS@UNIT-ADDRESS:554/ch1/main
-  camera3:  rtsp://UNIT-USER:UNIT-PASS@UNIT-ADDRESS:554/ch2/main
-  camera4:  rtsp://UNIT-USER:UNIT-PASS@UNIT-ADDRESS:554/ch3/main
-  camera5:  rtsp://UNIT-USER:UNIT-PASS@UNIT-ADDRESS:554/ch4/main
-  camera6:  rtsp://UNIT-USER:UNIT-PASS@UNIT-ADDRESS:554/ch5/main
-  camera7:  rtsp://UNIT-USER:UNIT-PASS@UNIT-ADDRESS:554/ch6/main
-  camera8:  rtsp://UNIT-USER:UNIT-PASS@UNIT-ADDRESS:554/ch7/main
-  camera9:  rtsp://UNIT-USER:UNIT-PASS@UNIT-ADDRESS:554/ch8/main
-  camera10: rtsp://UNIT-USER:UNIT-PASS@UNIT-ADDRESS:554/ch9/main
+  camera1:  rtsp://admin:@192.168.7.194:554/ch0/main
+  camera2:  rtsp://admin:@192.168.7.194:554/ch1/main
+  camera3:  rtsp://admin:@192.168.7.194:554/ch2/main
+  camera4:  rtsp://admin:@192.168.7.194:554/ch3/main
+  camera5:  rtsp://admin:@192.168.7.194:554/ch4/main
+  camera6:  rtsp://admin:@192.168.7.194:554/ch5/main
+  camera7:  rtsp://admin:@192.168.7.194:554/ch6/main
+  camera8:  rtsp://admin:@192.168.7.194:554/ch7/main
+  camera9:  rtsp://admin:@192.168.7.194:554/ch8/main
+  camera10: rtsp://admin:@192.168.7.194:554/ch9/main
