@@ -16,15 +16,21 @@
   .state { font-weight:bold; }
   .none { font-size:17px; margin:0 0 12px; }
   .foot { font-size:14px; color:#444; margin-top:24px; line-height:1.5; }
+  .toprow { display:flex; justify-content:space-between; align-items:flex-start; }
+  .refresh { font-family: Georgia, serif; font-size:16px; padding:8px 20px; background:#111; color:#fffdf5; border:2px solid #111; border-radius:6px; cursor:pointer; }
+  .refresh:active { background:#444; }
 </style>
 </head>
 <body>
 <div class="page">
-  <h1>Work now</h1>
-  <p class="updated">Updated Tuesday, November 10, 2026, 9:20 AM Arizona time</p>
+  <div class="toprow">
+    <h1>Work now</h1>
+    <button class="refresh" type="button" onclick="location.reload()">Refresh</button>
+  </div>
+  <p class="updated">Updated Tuesday, November 10, 2026, 9:28 AM Arizona time</p>
 
   <h2>Running now</h2>
-  <p class="none">No big job is running right now. The all-day watches listed at the bottom keep running.</p>
+  <p class="job"><span class="state">Running —</span> Story player bar fix: rebuilding the player as the one black bar from your picture, on every page that plays audio, the Morning Scroll too.</p>
 
   <h2>Waiting in line</h2>
   <p class="none">Nothing is waiting in line.</p>
