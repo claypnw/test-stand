@@ -14,10 +14,16 @@ echo  The translator program (go2rtc) is about to start in
 echo  THIS window. In a few seconds a page will open in your
 echo  web browser. That page lists the test streams.
 echo.
-echo  On that page, click each test-form name once - that
-echo  wakes its test - then send a picture of the page and a
-echo  picture of this black window. The words in the two
-echo  pictures say what the test found.
+echo  On that page, each test stands on its own line, with
+echo  its name on the left and the word STREAM at the right
+echo  end of the line. Click the word STREAM on the first
+echo  line - that is the click that wakes its test. Count
+echo  to ten, click Back, and do the same on each line.
+echo  Clicking a name only ticks a box and starts nothing.
+echo.
+echo  Then send a picture of the page and a picture of this
+echo  black window. The words in the two pictures say what
+echo  the test found.
 echo.
 echo  LEAVE THIS WINDOW OPEN the whole time. Closing it
 echo  stops the test.
