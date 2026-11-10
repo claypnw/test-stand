@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Effort log</title>
+<style>
+  body { background:#f3efe4; color:#111; font-family: Georgia, serif; margin:0; padding:24px 16px; }
+  .page { background:#fffdf5; max-width:820px; margin:0 auto; padding:24px 28px 28px; border:1px solid #d8d2c0; }
+  h1 { font-size:30px; margin:0 0 6px; }
+  h2 { font-size:21px; margin:26px 0 8px; border-bottom:2px solid #111; padding-bottom:4px; }
+  p, li { font-size:16px; line-height:1.5; }
+  table { border-collapse:collapse; width:100%; margin:6px 0 4px; }
+  th, td { text-align:left; font-size:15px; padding:5px 8px; border-bottom:1px solid #d8d2c0; }
+  th { border-bottom:2px solid #111; }
+  td.n, th.n { text-align:right; }
+  .note { font-size:13.5px; color:#444; }
+  .total td { font-weight:bold; border-top:2px solid #111; }
+</style></head><body><div class="page">
+<h1>Effort log</h1>
+<p>What each job costs to run, day by day: how many times it ran, how many minutes it took, and how much it read in and wrote out, in tokens. A token is a small piece of a word — the meter Muse's work is counted in.</p>
+<p>How to read the token counts: "read in" counts the standing pages a job reads again at every step, so a long job's count runs into the millions without meaning millions of new words. Some jobs run with no agent and leave no token record; those lines say so. Your plan's own meter — the weekly percent — does not split by job, so it is not on this page.</p>
+
+<h2>2026-11-10</h2><table><tr><th>Job</th><th class="n">Runs</th><th class="n">Minutes</th><th class="n">Tokens read in</th><th class="n">Tokens written out</th></tr>
+<tr><td>Open work watch (checks every 5 minutes) <span class="note">(grouped — runs all day)</span></td><td class="n">113</td><td class="n">107</td><td class="n">68,140,186</td><td class="n">176,385</td></tr>
+<tr><td>Community report idle watch <span class="note">(grouped — runs all day)</span></td><td class="n">56</td><td class="n">59.5</td><td class="n">23,959,549</td><td class="n">106,633</td></tr>
+<tr><td>Production review idle watch <span class="note">(grouped — runs all day)</span></td><td class="n">28</td><td class="n">34.7</td><td class="n">14,925,202</td><td class="n">76,887</td></tr>
+<tr><td>Stalled run watch <span class="note">(grouped — runs all day)</span></td><td class="n">19</td><td class="n">34.9</td><td class="n">14,174,680</td><td class="n">99,135</td></tr>
+<tr><td>GitHub letter watch <span class="note">(grouped)</span></td><td class="n">5</td><td class="n">9.4</td><td class="n">3,899,929</td><td class="n">17,381</td></tr>
+<tr><td>Heartbeat <span class="note">(no record stands — a plain pulse with no agent work)</span></td><td class="n">19</td><td class="n">—</td><td class="n">—</td><td class="n">—</td></tr>
+<tr><td>Deterministic doctor <span class="note">(no record stands — runs without an agent)</span></td><td class="n">10</td><td class="n">—</td><td class="n">—</td><td class="n">—</td></tr>
+<tr><td>Feed pulses (9 small checks) <span class="note">(no token record stands — runs without an agent)</span></td><td class="n">9</td><td class="n">0.3</td><td class="n">—</td><td class="n">—</td></tr>
+<tr><td>Report notes nightly purge</td><td class="n">1</td><td class="n">1.1</td><td class="n">619,508</td><td class="n">2,324</td></tr>
+<tr><td>Escrow daily update</td><td class="n">1</td><td class="n">16.9</td><td class="n">2,965,674</td><td class="n">10,126</td></tr>
+<tr><td>AI community report <span class="note">(two runs — the night build and a finish run)</span></td><td class="n">2</td><td class="n">30.0</td><td class="n">6,950,625</td><td class="n">23,573</td></tr>
+<tr><td>GitHub production cleanup</td><td class="n">1</td><td class="n">4.2</td><td class="n">1,267,936</td><td class="n">7,022</td></tr>
+<tr><td>AI stories podcast nightly</td><td class="n">1</td><td class="n">8.7</td><td class="n">2,960,940</td><td class="n">15,694</td></tr>
+<tr><td>Nightly orphan check</td><td class="n">1</td><td class="n">1.6</td><td class="n">908,489</td><td class="n">4,838</td></tr>
+<tr><td>Gilded Pages healthcare rollout</td><td class="n">1</td><td class="n">18.2</td><td class="n">5,086,871</td><td class="n">23,362</td></tr>
+<tr><td>Health sync watch</td><td class="n">2</td><td class="n">2.3</td><td class="n">878,211</td><td class="n">5,391</td></tr>
+<tr><td>Morning agenda briefing</td><td class="n">1</td><td class="n">8.3</td><td class="n">3,159,258</td><td class="n">7,639</td></tr>
+<tr><td>Yard and estate sales refresh</td><td class="n">1</td><td class="n">16.6</td><td class="n">4,725,336</td><td class="n">9,215</td></tr>
+<tr><td>Maker finds watch</td><td class="n">1</td><td class="n">4.3</td><td class="n">2,000,050</td><td class="n">11,426</td></tr>
+<tr><td>GitHub billing watch</td><td class="n">1</td><td class="n">9.2</td><td class="n">2,896,999</td><td class="n">12,249</td></tr>
+<tr><td>Steward's Ledger daily</td><td class="n">1</td><td class="n">7.3</td><td class="n">3,716,725</td><td class="n">23,281</td></tr>
+<tr><td>Family photo access count</td><td class="n">1</td><td class="n">0.8</td><td class="n">911,638</td><td class="n">2,863</td></tr>
+<tr><td>GitHub traffic count</td><td class="n">1</td><td class="n">2.5</td><td class="n">571,018</td><td class="n">2,659</td></tr>
+<tr><td>My Daily Review</td><td class="n">1</td><td class="n">17.9</td><td class="n">7,067,200</td><td class="n">36,600</td></tr>
+<tr><td>Daily walk watch</td><td class="n">1</td><td class="n">6.0</td><td class="n">1,551,903</td><td class="n">7,502</td></tr>
+<tr><td>Connectors report</td><td class="n">1</td><td class="n">2.3</td><td class="n">1,041,004</td><td class="n">4,649</td></tr>
+<tr><td>Morning jobs finished check</td><td class="n">1</td><td class="n">6.2</td><td class="n">3,584,573</td><td class="n">10,844</td></tr>
+<tr><td>Morning menu</td><td class="n">1</td><td class="n">7.2</td><td class="n">2,666,515</td><td class="n">11,396</td></tr>
+<tr><td>Feed switches daily sync</td><td class="n">1</td><td class="n">1.9</td><td class="n">1,078,836</td><td class="n">3,917</td></tr>
+<tr><td>Stale work check (morning)</td><td class="n">1</td><td class="n">1.5</td><td class="n">510,210</td><td class="n">2,025</td></tr>
+<tr><td>Failed jobs proof watch</td><td class="n">1</td><td class="n">0.9</td><td class="n">327,466</td><td class="n">1,588</td></tr>
+<tr><td>Yard and estate sales recheck</td><td class="n">1</td><td class="n">8.6</td><td class="n">2,964,695</td><td class="n">7,518</td></tr>
+<tr><td>Muse credit watch</td><td class="n">1</td><td class="n">0.9</td><td class="n">400,787</td><td class="n">2,466</td></tr>
+<tr><td>Story player button set <span class="note">(the one-time job Clay ran early today)</span></td><td class="n">1</td><td class="n">21.8</td><td class="n">6,064,095</td><td class="n">32,459</td></tr>
+<tr class="total"><td>Day total so far</td><td class="n">287</td><td class="n">453</td><td class="n">191,976,108</td><td class="n">759,047</td></tr></table>
+<h2>First week self-count — what this log itself costs</h2>
+<p>Clay asked for this count for the first week, November 10–17, so the cost of keeping the log stands next to the log.</p><ul>
+<li>Setup, November 10, done by hand in chat: about 15 minutes of chat work, shared with other work in the same stretch. No separate token record stands for chat work, so this line is minutes only.</li>
+<li>The nightly log job itself: no runs yet — its first run is the morning of November 11, and each run lands in the next day's table.</li>
+</ul>
+</div></body></html>
