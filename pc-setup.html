@@ -17,34 +17,55 @@
 
 <h1>Set up the house cameras on your PC</h1>
 
-<p>This page puts a small free program on your PC. The program takes the pictures from your camera unit and hands them to the camera page, so you can watch your ten cameras in your browser. Part One is a short test. Part Two — watching the cameras — comes after the test passes.</p>
+<p>This page puts a small free program on your PC. The program takes the pictures from your camera unit and hands them to the camera page, so you can watch your ten cameras in Chrome. Part One is a short test. Part Two — watching the cameras — comes after the test passes.</p>
 
-<p>Every file in this setup goes in your <b>Downloads</b> folder, the folder already on your PC. No new folder gets made. The files sit together in that one place for one reason: each starter file looks for the program and its settings right beside itself, so they have to stand together. When all of this is done, Downloads holds the translator program, its settings file, and the start file — they stay while you use the viewer. The test files can be deleted once the test is done.</p>
+<p><b>The one folder rule.</b> Every camera file stands together in ONE folder on your PC. That folder can be Downloads itself, or a folder inside Downloads. The starter files only work when the program and the settings stand in the same folder, side by side. There is no setup file to open — <b>this page is the instructions</b>, and the files below are the only files there are.</p>
 
-<p class="note">How to save a file from this page, the same way every time: right-click the file name, click <b>Save link as…</b>, then in the window that opens click <b>Downloads</b> on the left of the window, and click <b>Save</b>. A plain click on a file name does not save it — it shows the file's words on the screen. If that happens, go back and use the right-click.</p>
+<p><b>Every file, and where it comes from:</b></p>
+<ul>
+<li><span class="fname">go2rtc.exe</span> — the translator program. It comes inside a zip file from the maker's own page (step 1). The maker is AlexxIT. The program is free, and it is not made by Muggy.</li>
+<li><span class="fname">test-config.yaml</span> and <span class="fname">run-test.bat</span> — the test files. They come from this page (step 4).</li>
+<li><span class="fname">go2rtc.yaml</span> and <span class="fname">start-cameras.bat</span> — the everyday files for Part Two. They come from this page (step 16).</li>
+<li><span class="fname">test2-config.yaml</span> and <span class="fname">run-test2.bat</span> — the second test files, only if Part Three is needed. They come from this page (step 24).</li>
+</ul>
+
+<p class="note">How to save a file from a link on this page, the same way every time: right-click the file name, click <b>Save link as…</b>, then in the window that opens pick your camera folder, and click <b>Save</b>. A plain click on a file name does not save it — it shows the file's words on the screen. If that happens, go back and use the right-click.</p>
 
 <h2>Part One — the test</h2>
 
 <p>The test asks your camera unit two things: is its password still blank, and which address form does it answer to? It takes a few minutes.</p>
 
 <ol>
-<li><b>Get the translator program.</b> Open the maker's page: <a href="https://github.com/AlexxIT/go2rtc/releases">go2rtc releases page</a>. The newest release stands at the top of that page. In its list of files — click <b>Assets</b> first if the list is folded shut — click <span class="fname">go2rtc_win64.zip</span> and let it save. Open the saved zip and drag the program inside it, <span class="fname">go2rtc.exe</span>, into your Downloads folder.</li>
+<li><b>Get the program.</b> Open the maker's page: <a href="https://github.com/AlexxIT/go2rtc/releases">go2rtc releases page</a>. The newest version stands at the top of that page — today it is <b>v1.9.15</b>. What stands under it is that version's notes, a long list of changes. Scroll down past the notes, past the word <b>Contributors</b>, to the word <b>Assets</b>. If the file list under Assets is shut, click the word <b>Assets</b> once and the list opens. In that list, click the name <span class="fname">go2rtc_win64.zip</span> — that name exactly — and the zip saves into your Downloads folder.
+<br>If <span class="fname">go2rtc.exe</span> already stands in your camera folder, skip to step 4.</li>
 
-<li><b>Save the two test files</b> into your Downloads folder, the way the note at the top says:
+<li><b>Open the zip.</b> In your Downloads folder, double-click <span class="fname">go2rtc_win64.zip</span>. A window opens and shows one file inside it: <span class="fname">go2rtc.exe</span>.</li>
+
+<li><b>Put the program in your camera folder.</b> Drag <span class="fname">go2rtc.exe</span> out of the zip window and drop it into your camera folder — the one folder that will hold every camera file.</li>
+
+<li><b>Save the two test files</b> into that same folder, the way the note at the top says:
 <br><a href="https://claypnw.github.io/test-stand/pc/test-config.yaml">test-config.yaml</a> — the test settings. Your unit's address and the blank password are already written in. There is nothing to change.
 <br><a href="https://claypnw.github.io/test-stand/pc/run-test.bat">run-test.bat</a> — the test starter. This is the file you double-click.</li>
 
-<li><b>Run the test.</b> Double-click <span class="fname">run-test.bat</span> in your Downloads folder. A black window opens — leave it open the whole time. In a few seconds a page opens in your browser: a table with five lines, one for each test. Each line holds a name on the left — <span class="fname">test-form1</span>, <span class="fname">test-form2</span>, and so on — and three words at the right end of the line: <b>stream</b>, <b>links</b>, <b>delete</b>.
-<br>If a blue window says <b>Windows protected your PC</b>, click <b>More info</b>, then click <b>Run anyway</b>. That window is Windows being careful with a program it has not seen before.</li>
+<li><b>Check the folder.</b> Your camera folder now holds three files together: <span class="fname">go2rtc.exe</span>, <span class="fname">test-config.yaml</span>, and <span class="fname">run-test.bat</span>. If one is missing, get it from the step above before you go on.</li>
 
-<li><b>Wake each test — the click that matters.</b> On the line for <span class="fname">test-form1</span>, click the word <b>stream</b> at the right end of that line. A new page opens and tries to show camera 1's picture. Count to ten and look: either a real camera picture, or a black square. Then click your browser's <b>Back</b> button to return to the table, and do the same on the next line — <b>stream</b>, count to ten, <b>Back</b> — through <span class="fname">test-form5</span>.
-<br>Clicking a name itself only ticks the small box beside it and starts nothing. The tick boxes play no part in this test — leave them alone.</li>
+<li><b>Run the test.</b> Double-click <span class="fname">run-test.bat</span> in your camera folder. A black window opens — leave it open the whole time.</li>
+
+<li><b>If Windows asks about networks.</b> A window may ask: do you want to allow public and private networks to access this app? Click <b>Allow</b>.</li>
+
+<li><b>If Windows blocks the program.</b> A blue window may say <b>Windows protected your PC</b>. Click <b>More info</b>, then click <b>Run anyway</b>. That window is Windows being careful with a program it has not seen before.</li>
+
+<li><b>The test page opens.</b> In a few seconds a page opens in Chrome: a table with five lines, one for each test. Each line holds a name on the left — <span class="fname">test-form1</span>, <span class="fname">test-form2</span>, and so on — and three words at the right end of the line: <b>stream</b>, <b>links</b>, <b>delete</b>.</li>
+
+<li><b>Wake the first test — the click that matters.</b> On the line for <span class="fname">test-form1</span>, click the word <b>stream</b> at the right end of that line. A new page opens and tries to show camera 1's picture. Count to ten and look: either a real camera picture, or a black square.</li>
+
+<li><b>Do the same on each line.</b> Click Chrome's <b>Back</b> button to return to the table. On the next line click <b>stream</b>, count to ten, click <b>Back</b> — through <span class="fname">test-form5</span>. Clicking a name itself only ticks the small box beside it and starts nothing. The tick boxes play no part in this test — leave them alone.</li>
 
 <li><b>Send the pictures.</b> When you are back at the table, send Muggy a picture of that page, and a picture of the black window. Then stop here — what comes next depends on the pictures.</li>
 </ol>
 
 <p><b>What the pictures will say:</b></p>
-<ol start="6">
+<ol start="13">
 <li>A real camera picture opened on any line — that address form is the road, and the blank password is right. Part Two comes next, when Muggy says so.</li>
 <li>The number <b>401</b> in the black window — a password stands on the unit, and the blank one is not it. Stop and tell Muggy.</li>
 <li>The words <b>actively refused</b> in the black window — the unit answered, but its camera-stream switch stands off. Go to Part Three.</li>
@@ -54,12 +75,14 @@
 
 <p>Do this part only after Muggy says the test passed.</p>
 
-<ol start="9">
-<li><b>Save the two working files</b> into your Downloads folder, the same way as before:
+<ol start="16">
+<li><b>Save the two working files</b> into your camera folder, the same way as before:
 <br><a href="https://claypnw.github.io/test-stand/pc/go2rtc.yaml">go2rtc.yaml</a> — the settings for all ten cameras. The address and login are already written in. There is nothing to change.
 <br><a href="https://claypnw.github.io/test-stand/pc/start-cameras.bat">start-cameras.bat</a> — the start file.</li>
 
-<li><b>Start it.</b> Double-click <span class="fname">start-cameras.bat</span>. A black window opens — that is the translator running. Leave it open the whole time you watch. Chrome opens the house camera page on its own, with your ten cameras live.</li>
+<li><b>Start it.</b> Double-click <span class="fname">start-cameras.bat</span>. A black window opens — that is the translator running. Leave it open the whole time you watch.</li>
+
+<li><b>The camera page opens.</b> Chrome opens the house camera page on its own, with your ten cameras live. If Chrome has not opened it after a full minute, tell Muggy — do not hunt for the page yourself.</li>
 
 <li><b>Sound.</b> The page has a <b>Sound</b> button in its top bar. Turn it on, then tap one camera to make it big — that camera's sound plays. With one camera big, a <b>Hold to talk</b> button stands there too; whether your unit passes talk-back is settled by trying it.</li>
 
@@ -70,7 +93,7 @@
 
 <p>Your unit has a switch that lets it hand out camera pictures, and it ships turned off. One tick turns it on.</p>
 
-<ol start="13">
+<ol start="21">
 <li>Go to the unit and look at its own screen. Right-click on the screen and open <b>System Setup</b>.</li>
 <li>Open <b>Network Setup</b>, then <b>Network Service</b>.</li>
 <li>Tick <b>Enable RTSP Server</b>, then click <b>Apply</b>.</li>
@@ -80,8 +103,8 @@
 
 <p>Then run the second test, the same way as the first:</p>
 
-<ol start="16">
-<li><b>Save the two second-test files</b> into your Downloads folder:
+<ol start="24">
+<li><b>Save the two second-test files</b> into your camera folder:
 <br><a href="https://claypnw.github.io/test-stand/pc/test2-config.yaml">test2-config.yaml</a> — the second test settings, already filled in.
 <br><a href="https://claypnw.github.io/test-stand/pc/run-test2.bat">run-test2.bat</a> — the second test starter.</li>
 <li><b>Double-click</b> <span class="fname">run-test2.bat</span>. The black window opens — leave it open — and the browser page opens with the second test's five lines.</li>
