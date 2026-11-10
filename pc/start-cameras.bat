@@ -18,7 +18,7 @@ cd /d "%~dp0"
 
 rem Start the translator in its own window, using the
 rem settings file (go2rtc.yaml) from this folder.
-start "House cameras - leave this window open" go2rtc.exe -config go2rtc.yaml
+start "House cameras - leave this window open" "%~dp0go2rtc.exe" -config "%~dp0go2rtc.yaml"
 
 rem Give the translator a few seconds to get going,
 rem then open the camera page in Chrome. The ?t= part of the
