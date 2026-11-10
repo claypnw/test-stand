@@ -1,0 +1,65 @@
+# ============================================================
+#  HOUSE CAMERAS — SECOND TEST (round 2) settings for go2rtc
+#
+#  What this file is: the settings for a SECOND single TEST
+#  run of the translator program (go2rtc). It is not the
+#  everyday settings file — that is go2rtc.yaml, which
+#  stands in the same folder.
+#
+#  Why a second test: the first test found the unit alive at
+#  its address, but the camera door it knocked on (port 554)
+#  was actively refused — nothing answered there. The
+#  unit's own stream switch stands OFF, and the first
+#  test's address forms were not the forms this unit's
+#  family truly uses.
+#
+#  What this test asks the unit, all in one run — CAMERA 1
+#  only, once under each form:
+#
+#    Forms 1 and 2 — the family's OWN camera-stream form,
+#    with the channel and the stream both counted from 0
+#    (ch0_0 is camera 1, main picture), on the two doors
+#    the family manual names: port 554 and port 80.
+#    THESE TWO NEED THE UNIT'S OWN SWITCH ON FIRST: on the
+#    unit's screen, tick "Enable RTSP Server" (the setup
+#    page tells where). Run this test AFTER that switch is
+#    ticked, or forms 1 and 2 will refuse again, the same
+#    as the first test.
+#
+#    Forms 3, 4, and 5 — the family's OWN talking road (the
+#    private road this family's units and apps speak), on
+#    the three doors it is known to sit on: 34567, 10000,
+#    and 80. THESE THREE DO NOT NEED THE SWITCH — they can
+#    answer even with it off.
+#
+#  Every form signs in as admin with a blank password. If
+#  any form answers with a picture, the blank password is
+#  right and that form is the road. If a form answers 401
+#  instead, a password stands on the unit.
+#
+#  The unit's address (192.168.7.194) and the blank password
+#  are ALREADY filled in on every line. There is nothing to
+#  change in this file.
+#
+#  How to run the test: double-click run-test2.bat, which
+#  stands in the same folder as this file.
+# ============================================================
+
+# The door the test page knocks on. Leave this as it is.
+api:
+  listen: ":1984"
+
+streams:
+  # Form 1 — the family's own stream form, on port 554.
+  # Needs the unit's "Enable RTSP Server" switch ticked.
+  test2-form1: rtsp://admin:@192.168.7.194:554/ch0_0.264
+  # Form 2 — the same form, but on port 80 instead of 554.
+  # Needs the switch ticked too.
+  test2-form2: rtsp://admin:@192.168.7.194:80/ch0_0.264
+  # Form 3 — the family's own talking road, on door 34567.
+  # No switch needed for this one.
+  test2-form3: bubble://admin:@192.168.7.194:34567/bubble/live?ch=0&stream=0
+  # Form 4 — the talking road again, on door 10000.
+  test2-form4: bubble://admin:@192.168.7.194:10000/bubble/live?ch=0&stream=0
+  # Form 5 — the talking road again, on door 80.
+  test2-form5: bubble://admin:@192.168.7.194:80/bubble/live?ch=0&stream=0
