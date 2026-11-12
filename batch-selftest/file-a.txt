@@ -1,2 +1,0 @@
-Batch test file A - line one.
-Batch test file A - line two, added 2026-11-12.
