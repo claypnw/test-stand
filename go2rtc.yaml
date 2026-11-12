@@ -1,0 +1,33 @@
+# ============================================================
+#  HOUSE CAMERAS — everyday settings for the translator
+#  program (go2rtc). This is the file start-cameras.bat
+#  runs. It stands in the same folder as go2rtc.exe.
+#
+#  The ten stream lines below are the form proven at the
+#  house on 2026-11-10: the recorder at 192.168.7.225,
+#  port 80, channels ch0 to ch9, main picture (_0), in
+#  the readable flow form — one camera per line — that
+#  go2rtc 1.9.15 was tested loading, all ten.
+#
+#  ONE fill-in stands in this file: the word
+#  <RECORDER-PASSWORD> appears once in each stream line,
+#  exactly where the recorder's password stands in the
+#  working addresses (written there in percent-coded
+#  form). The swap is made at the house, in one
+#  Replace-All. Everything else in this file is final.
+# ============================================================
+
+# The door the viewer page knocks on. Leave this as it is.
+api:
+  listen: ":1984"
+
+streams: {camera1: "rtsp://admin:<RECORDER-PASSWORD>@192.168.7.225:80/ch0_0.264",
+camera2: "rtsp://admin:<RECORDER-PASSWORD>@192.168.7.225:80/ch1_0.264",
+camera3: "rtsp://admin:<RECORDER-PASSWORD>@192.168.7.225:80/ch2_0.264",
+camera4: "rtsp://admin:<RECORDER-PASSWORD>@192.168.7.225:80/ch3_0.264",
+camera5: "rtsp://admin:<RECORDER-PASSWORD>@192.168.7.225:80/ch4_0.264",
+camera6: "rtsp://admin:<RECORDER-PASSWORD>@192.168.7.225:80/ch5_0.264",
+camera7: "rtsp://admin:<RECORDER-PASSWORD>@192.168.7.225:80/ch6_0.264",
+camera8: "rtsp://admin:<RECORDER-PASSWORD>@192.168.7.225:80/ch7_0.264",
+camera9: "rtsp://admin:<RECORDER-PASSWORD>@192.168.7.225:80/ch8_0.264",
+camera10: "rtsp://admin:<RECORDER-PASSWORD>@192.168.7.225:80/ch9_0.264"}
