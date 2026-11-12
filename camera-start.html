@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>House Cameras — Start Here</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 16px; background: #fdf6e3; color: #111;
+    font-family: Georgia, 'Times New Roman', serif; font-size: 20px; line-height: 1.45; }
+  main { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 32px; margin: 4px 0 8px; }
+  h2 { font-size: 25px; margin: 26px 0 6px; border-top: 2px solid #111; padding-top: 14px; }
+  ol { margin: 6px 0; padding-left: 30px; }
+  li { margin: 10px 0; }
+  .fname { font-family: Consolas, monospace; font-weight: bold; background: #eee;
+    padding: 1px 6px; border-radius: 5px; }
+  a.bigbtn { display: block; text-align: center; background: #111; color: #ffd400;
+    font-size: 23px; font-weight: bold; text-decoration: none;
+    padding: 14px 10px; border-radius: 12px; margin: 12px 0; }
+  a.filelink { font-weight: bold; }
+  input#pcaddr { font-size: 22px; padding: 10px; width: 100%;
+    border: 2px solid #111; border-radius: 10px; margin: 8px 0; }
+  .note { background: #fff3cd; border: 2px solid #b58900; border-radius: 10px;
+    padding: 10px 14px; margin: 14px 0; }
+</style>
+</head>
+<body>
+<main>
+<h1>House Cameras — Start Here</h1>
+<p>This one page holds everything for watching the house cameras.
+Keep it. Open it every time.</p>
+
+<h2>On your PC — do this first, every time</h2>
+<ol>
+<li>The camera program, <span class="fname">go2rtc.exe</span>, stands in
+your <span class="fname">Downloads\test</span> folder. If it is ever
+missing, get it from the maker's page:
+<a class="filelink" href="https://github.com/AlexxIT/go2rtc/releases">go2rtc releases page</a>
+— the file is named <span class="fname">go2rtc_win64.zip</span>.</li>
+<li><b>First time only:</b> save these two files into that same
+<span class="fname">Downloads\test</span> folder. Right-click each name,
+then click <b>Save link as</b>.
+<br><a class="filelink" href="go2rtc.yaml" download>go2rtc.yaml</a> — the settings for all ten cameras.
+<br><a class="filelink" href="start-cameras.bat" download>start-cameras.bat</a> — the start file.</li>
+<li><b>First time only:</b> the settings file holds the words
+<span class="fname">&lt;RECORDER-PASSWORD&gt;</span> where your camera
+box password goes. Open <span class="fname">go2rtc.yaml</span> in Notepad,
+use Replace All to swap those words for your password in its coded form
+(@ is %40, ! is %21, # is %23), and save. Muggy does not hold your
+password, so it is not written in any file here.</li>
+<li><b>Every time:</b> double-click <span class="fname">start-cameras.bat</span>.
+A black window opens. Leave it open the whole time you watch.
+The camera page opens in Chrome on its own.</li>
+<li>To stop: close the black window.</li>
+</ol>
+
+<h2>On your phone or tablet</h2>
+<ol>
+<li>Join the home Wi-Fi. The PC steps above must be done first, with
+the black window open.</li>
+<li>The cameras open at an address that holds your PC's own home
+address. To read that address on your PC: hold the Windows key, tap R,
+type <span class="fname">cmd</span>, tap Enter, type
+<span class="fname">ipconfig</span>, tap Enter, and read the line
+<b>IPv4 Address</b> — it starts 192.168.7.</li>
+<li>Type that address in this box and tap the button. The cameras open
+on this screen.</li>
+</ol>
+<input id="pcaddr" inputmode="decimal" placeholder="192.168.7.">
+<a class="bigbtn" href="#" id="openbtn">Open my cameras on this screen</a>
+
+<div class="note">If the pictures do not come up on the phone or tablet,
+tell Muggy what the screen says. Do not guess at it — one known wall
+can stand between a page like this and the camera program, and its
+fix is Muggy's to make.</div>
+
+<h2>On your PC, the camera page itself</h2>
+<a class="bigbtn" href="cameras.html?t=http://localhost:1984">Open the cameras on this PC</a>
+<p>That button works on the PC only, while the black window is open.
+The start file in step 4 opens this same page for you.</p>
+
+<script>
+document.getElementById('openbtn').addEventListener('click', function (e) {
+  e.preventDefault();
+  var v = document.getElementById('pcaddr').value.trim();
+  if (!v) { alert('Type your PC address in the box first — step 2 says where it stands.'); return; }
+  window.location.href = 'cameras.html?t=http://' + v + ':1984';
+});
+</script>
+</main>
+</body>
+</html>
