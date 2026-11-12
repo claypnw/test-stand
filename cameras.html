@@ -239,7 +239,7 @@ function sayWords() {
   if (showing === 0) {
     statusEl.textContent = 'No cameras picked — tick a box in the top bar.';
   } else if (bigTile) {
-    statusEl.textContent = 'One camera, big. Tap the picture to go back to all cameras.';
+    statusEl.textContent = 'One camera, big. Swipe left or right for the next camera. Tap the picture to go back to all cameras.';
   } else {
     statusEl.textContent = 'Showing ' + showing + (showing === 1 ? ' camera' : ' cameras') +
       '. Tap a picture to make it big.';
@@ -444,9 +444,58 @@ function layOut() {
 }
 
 function toggleBig(tile) {
+  if (swipeHappened) { swipeHappened = false; return; }
   bigTile = (bigTile === tile) ? null : tile;
   layOut();
 }
+
+/* --- swipe in the big view: left for the next camera, right for
+   the one before. Only the cameras whose boxes are ticked take
+   part, in camera-number order, wrapping round at the ends.
+   A swipe is a finger move of more than 50 screen dots sideways
+   and more sideways than up or down. The click that follows a
+   swipe is swallowed (see toggleBig), so a swipe never drops
+   back to the grid by accident. --- */
+let swipeHappened = false;
+let touchStartX = null, touchStartY = null;
+
+function stepBig(dir) {
+  if (!bigTile) return;
+  const order = camNames.filter((name, i) => picked[i]);
+  if (order.length < 2) return;
+  let idx = order.indexOf(bigTile.dataset.cam);
+  if (idx < 0) idx = 0;
+  const next = order[(idx + dir + order.length) % order.length];
+  for (const tile of grid.children) {
+    if (tile.dataset.cam === next) { bigTile = tile; break; }
+  }
+  layOut();
+}
+
+grid.addEventListener('touchstart', (e) => {
+  if (e.touches.length !== 1) { touchStartX = null; return; }
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+
+grid.addEventListener('touchend', (e) => {
+  if (touchStartX === null || !bigTile) { touchStartX = null; return; }
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  touchStartX = null;
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+    swipeHappened = true;
+    setTimeout(() => { swipeHappened = false; }, 400);
+    stepBig(dx < 0 ? 1 : -1);
+  }
+}, { passive: true });
+
+/* Arrow keys do the same step on a PC keyboard. */
+window.addEventListener('keydown', (e) => {
+  if (!bigTile) return;
+  if (e.key === 'ArrowLeft') stepBig(-1);
+  if (e.key === 'ArrowRight') stepBig(1);
+});
 
 /* The count buttons are a quick set: tapping one ticks the first
    that-many boxes and unticks the rest. After any change, a count
