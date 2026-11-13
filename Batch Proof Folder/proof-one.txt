@@ -1,0 +1,2 @@
+batch proof file one — spaced folder test
+line two
