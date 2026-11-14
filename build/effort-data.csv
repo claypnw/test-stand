@@ -1,0 +1,163 @@
+date,job,runs,run_seconds,in_tok,out_tok,note
+2026-11-10,Community report idle watch,144,9766,59601090,261959,grouped — runs all day
+2026-11-10,Open work watch (checks every 5 minutes),129,7947,81996957,220025,grouped — runs all day
+2026-11-10,Stalled run watch,48,6153,38549792,272695,grouped — runs all day
+2026-11-10,Production review idle watch,72,4438,24484601,129326,grouped — runs all day
+2026-11-10,GitHub letter watch,12,1270,7805079,34633,grouped
+2026-11-10,Health sync watch,6,568,3198054,20457,grouped
+2026-11-10,Heartbeat,48,1,0,0,no record stands — a plain pulse with no agent work
+2026-11-10,Deterministic doctor,24,0,0,0,no record stands — runs without an agent
+2026-11-10,Feed pulses (9 small checks),25,76,0,0,no token record stands — runs without an agent
+2026-11-10,Report notes nightly purge,1,67,619508,2324,
+2026-11-10,Escrow daily update,1,1016,2965674,10126,
+2026-11-10,AI community report,3,4512,15357030,68300,
+2026-11-10,GitHub production cleanup,1,250,1267936,7022,
+2026-11-10,AI stories podcast nightly,1,524,2960940,15694,
+2026-11-10,Nightly orphan check,1,99,908489,4838,
+2026-11-10,Gilded Pages healthcare rollout,1,1091,5086871,23362,
+2026-11-10,Morning agenda briefing,1,498,3159258,7639,
+2026-11-10,Yard and estate sales refresh,1,999,4725336,9215,
+2026-11-10,Maker finds watch,1,258,2000050,11426,
+2026-11-10,GitHub billing watch,1,554,2896999,12249,
+2026-11-10,Steward's Ledger daily,1,436,3716725,23281,
+2026-11-10,Family photo access count,1,48,911638,2863,
+2026-11-10,GitHub traffic count,1,150,571018,2659,
+2026-11-10,My Daily Review,1,1077,7067200,36600,
+2026-11-10,Daily walk watch,1,357,1551903,7502,
+2026-11-10,Connectors report,1,140,1041004,4649,
+2026-11-10,Morning jobs finished check,1,371,3584573,10844,
+2026-11-10,Morning menu,1,435,2666515,11396,
+2026-11-10,Feed switches daily sync,1,116,1078836,3917,
+2026-11-10,Stale work check (morning),1,89,510210,2025,
+2026-11-10,Failed jobs proof watch,1,54,327466,1588,
+2026-11-10,Yard and estate sales recheck,1,516,2964695,7518,
+2026-11-10,Muse credit watch,1,56,400787,2466,
+2026-11-10,Story player button set,1,1310,6064095,32459,the one-time job Clay ran early today
+2026-11-10,Filament flash Nov 10 Bambu,1,985,2555216,11489,
+2026-11-10,Price drop watch,1,110,632789,3370,
+2026-11-10,Stale work check (midday),1,90,302215,1146,
+2026-11-10,Hearth prop inventory check-in,1,55,398127,1645,
+2026-11-10,18650 battery weekly check,1,292,2216864,5514,
+2026-11-10,Stale work check (evening),1,103,425783,1622,
+2026-11-10,Gates weekly revisit,1,1468,3510425,23719,
+2026-11-10,Tools and systems weekly check,1,220,1297578,9810,
+2026-11-10,Connectors weekly review,1,497,2505949,17996,
+2026-11-10,Weekly job efficiency review,1,228,1243001,7743,
+2026-11-11,Raven's Reach hourly check,35,19515,51219617,248413,grouped — runs all day
+2026-11-11,Community report idle watch,144,11174,64150964,255313,grouped — runs all day
+2026-11-11,Stalled run watch,48,6953,44027505,312809,grouped — runs all day
+2026-11-11,Production review idle watch,72,5214,25836241,142826,grouped — runs all day
+2026-11-11,GitHub letter watch,12,1516,7360000,32383,grouped
+2026-11-11,Heartbeat,48,1,0,0,no record stands — a plain pulse with no agent work
+2026-11-11,Deterministic doctor,24,0,0,0,no record stands — runs without an agent
+2026-11-11,Feed pulses (9 small checks),25,107,0,0,no token record stands — runs without an agent
+2026-11-11,Report notes nightly purge,1,98,629620,2610,
+2026-11-11,AI community report,2,7392,15780619,64690,
+2026-11-11,Escrow daily update,1,1926,4200140,16481,
+2026-11-11,GitHub production cleanup,1,289,1821375,9386,
+2026-11-11,AI stories podcast nightly,1,1422,3998536,17832,
+2026-11-11,Nightly orphan check,1,148,1141729,5665,
+2026-11-11,Morning agenda briefing,1,833,5352489,17764,
+2026-11-11,Gilded Pages healthcare rollout,1,1366,8208525,23026,
+2026-11-11,Health sync watch,2,262,1093078,9069,
+2026-11-11,Yard and estate sales refresh,1,985,5201074,12333,
+2026-11-11,Maker finds watch,1,272,1797294,12637,
+2026-11-11,GitHub billing watch,1,539,2635702,10305,
+2026-11-11,Steward's Ledger daily,1,501,4295066,17220,
+2026-11-11,Family photo access count,1,69,820823,2883,
+2026-11-11,Open work watch (checks every 5 minutes),4,527,4454095,12695,
+2026-11-11,Effort log nightly,1,262,1277318,10318,
+2026-11-11,GitHub traffic count,1,113,678931,3247,
+2026-11-11,My Daily Review,1,753,7156575,21938,
+2026-11-11,Connectors report,1,152,1167176,5897,
+2026-11-11,Morning jobs finished check,1,699,9245391,25512,
+2026-11-11,Morning menu,1,370,2625698,10618,
+2026-11-11,Feed switches daily sync,1,153,1357373,5661,
+2026-11-11,Stale work check (morning),1,96,330019,1151,
+2026-11-11,Failed jobs proof watch,1,152,982813,4208,
+2026-11-11,Yard and estate sales recheck,1,248,1495181,5051,
+2026-11-11,Muse credit watch,1,77,467778,2329,
+2026-11-11,Filament flash Nov 11 JAYO,1,823,1867659,12486,
+2026-11-11,Price drop watch,1,106,787111,3340,
+2026-11-11,Stale work check (midday),1,30,302749,895,
+2026-11-11,Stale work check (evening),1,73,341972,1443,
+2026-11-12,Raven's Reach hourly check,96,63301,127009897,498869,grouped — runs all day
+2026-11-12,Community report idle watch,144,9433,67035495,272353,grouped — runs all day
+2026-11-12,Stalled run watch,48,9226,44526776,309782,grouped — runs all day
+2026-11-12,Production review idle watch,72,4561,29120179,150251,grouped — runs all day
+2026-11-12,GitHub letter watch,12,1493,9274538,45668,grouped
+2026-11-12,Deterministic doctor,24,1,0,0,no record stands — runs without an agent
+2026-11-12,Heartbeat,48,0,0,0,no record stands — a plain pulse with no agent work
+2026-11-12,Feed pulses (9 small checks),25,115,0,0,no token record stands — runs without an agent
+2026-11-12,Report notes nightly purge,1,61,581028,1872,
+2026-11-12,Escrow daily update,1,1399,4448535,20098,
+2026-11-12,AI community report,2,6931,15995906,59848,
+2026-11-12,GitHub production cleanup,1,218,1526600,8908,
+2026-11-12,AI stories podcast nightly,1,1120,3583052,16698,
+2026-11-12,Gilded Pages healthcare rollout,1,1196,8125327,28648,
+2026-11-12,Nightly orphan check,1,127,1101290,4532,
+2026-11-12,Morning agenda briefing,1,180,1523360,6400,
+2026-11-12,Yard and estate sales refresh,1,941,3195479,11357,
+2026-11-12,Maker finds watch,1,442,1860707,12215,
+2026-11-12,Filament sale check daily,1,461,3844104,15261,
+2026-11-12,GitHub billing watch,1,600,4083299,15762,
+2026-11-12,Steward's Ledger daily,1,409,4319658,10101,
+2026-11-12,Family photo access count,1,91,638171,2660,
+2026-11-12,Open work watch (checks every 5 minutes),4,568,6088771,18973,
+2026-11-12,Effort log nightly,1,206,938779,7026,
+2026-11-12,GitHub traffic count,1,151,782563,3655,
+2026-11-12,My Daily Review,1,373,2613858,8572,
+2026-11-12,Connectors report,1,132,1495954,6489,
+2026-11-12,Morning jobs finished check,1,393,6154880,17526,
+2026-11-12,Morning menu,1,426,2974503,13828,
+2026-11-12,Feed switches daily sync,1,133,1062308,4007,
+2026-11-12,Stale work check (morning),1,72,599052,1890,
+2026-11-12,Failed jobs proof watch,1,33,273930,902,
+2026-11-12,Yard and estate sales recheck,1,644,2669022,10951,
+2026-11-12,Health plan questions tomorrow,1,49,251449,1493,
+2026-11-12,Muse credit watch,1,65,397326,2666,
+2026-11-12,Codex push ask tomorrow,1,110,608830,2886,
+2026-11-12,Price drop watch,1,81,811199,3216,
+2026-11-12,Stale work check (midday),1,91,441743,1715,
+2026-11-12,Stale work check (evening),1,78,267947,976,
+2026-11-12,Evening note,1,229,2138863,10682,
+2026-11-13,Raven's Reach hourly check,96,75168,126082500,459117,grouped — runs all day
+2026-11-13,Community report idle watch,144,16463,93754588,461046,grouped — runs all day
+2026-11-13,Production review idle watch,72,7167,38323252,184223,grouped — runs all day
+2026-11-13,Stalled run watch,48,6828,43050670,302694,grouped — runs all day
+2026-11-13,GitHub letter watch,12,1584,8452875,43200,grouped
+2026-11-13,Heartbeat,48,0,0,0,no record stands — a plain pulse with no agent work
+2026-11-13,Deterministic doctor,24,0,0,0,no record stands — runs without an agent
+2026-11-13,Feed pulses (9 small checks),25,140,0,0,no token record stands — runs without an agent
+2026-11-13,Report notes nightly purge,1,113,672494,2838,
+2026-11-13,Escrow daily update,1,589,2129129,12019,
+2026-11-13,GitHub production cleanup,1,294,1354122,7053,
+2026-11-13,AI stories podcast nightly,1,1333,5180997,20022,
+2026-11-13,Gilded Pages healthcare rollout,1,1164,7916666,22831,
+2026-11-13,Nightly orphan check,1,110,1767531,6963,
+2026-11-13,Morning agenda briefing,1,3262,11791580,23950,
+2026-11-13,Yard and estate sales refresh,1,670,3773605,9898,
+2026-11-13,Maker finds watch,1,371,2738508,16931,
+2026-11-13,Filament sale check daily,1,602,1811534,11582,
+2026-11-13,GitHub billing watch,1,607,2404921,14083,
+2026-11-13,Steward's Ledger daily,1,605,3807496,11936,
+2026-11-13,Family photo access count,1,82,1180818,3690,
+2026-11-13,Open work watch (checks every 5 minutes),4,453,4566810,12843,
+2026-11-13,Effort log nightly,1,231,1182039,8450,
+2026-11-13,GitHub traffic count,1,141,705267,3520,
+2026-11-13,My Daily Review,1,933,5533926,19816,
+2026-11-13,Connectors report,1,247,2041639,9683,
+2026-11-13,Morning jobs finished check,1,414,5099397,18865,
+2026-11-13,Morning menu,1,550,4438084,18390,
+2026-11-13,Feed switches daily sync,1,116,975826,3445,
+2026-11-13,Profile image,1,0,0,0,no record stands
+2026-11-13,Stale work check (morning),1,102,556486,1968,
+2026-11-13,Failed jobs proof watch,1,45,319388,1448,
+2026-11-13,Yard and estate sales recheck,1,276,1539053,4742,
+2026-11-13,Muse credit watch,1,84,416569,2092,
+2026-11-13,Price drop watch,1,156,980170,5099,
+2026-11-13,Stale work check (midday),1,90,375592,1068,
+2026-11-13,Hearth prop inventory check-in,1,24,228367,965,
+2026-11-13,Stale work check (evening),1,75,486281,1538,
+2026-11-13,Evening note,1,297,2884925,11126,
+2026-11-13,Daily community learning check,2,4821,9511778,36889,
