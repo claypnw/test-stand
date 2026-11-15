@@ -159,17 +159,33 @@
               in its address (the start file on the PC opens it as
               cameras.html?t=http://localhost:1984, pointing at the
               PC itself), demo mode is off and that address is the
-              translator. With no parameter, the page runs as a
-              demo, exactly as it does on the test stand.
+              translator. Only an address on this same machine
+              (localhost) is accepted; any other address is refused
+              and the page stays in demo mode, so a crafted link
+              cannot point the page at a stranger's address. With
+              no parameter, the page runs as a demo, exactly as it
+              does on the test stand.
    STREAMS: camera name on the left, the stream name the translator
               knows it by on the right.
    ================================================================ */
 /* The ?t= parameter, when present, turns demo mode off and
-   names the translator program's address. */
+   names the translator program's address. Only an address on
+   this same machine (localhost) is accepted; any other address
+   is refused and the page stays in demo mode. */
 const T_PARAM = new URLSearchParams(window.location.search).get('t');
+function ownMachineAddress(u) {
+  if (!u) return null;
+  try {
+    var x = new URL(u);
+    if ((x.protocol === 'http:' || x.protocol === 'https:') &&
+        (x.hostname === 'localhost' || x.hostname === '127.0.0.1')) return u;
+  } catch (e) { /* not an address at all: refused */ }
+  return null;
+}
+const T_OK = ownMachineAddress(T_PARAM);
 const SETTINGS = {
-  DEMO_MODE: !T_PARAM,
-  TRANSLATOR_ADDRESS: T_PARAM || "http://192.168.1.50:1984",
+  DEMO_MODE: !T_OK,
+  TRANSLATOR_ADDRESS: T_OK || "http://192.168.1.50:1984",
   STREAMS: {
     "Camera 1":  "camera1",
     "Camera 2":  "camera2",
