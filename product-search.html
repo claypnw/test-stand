@@ -31,7 +31,7 @@
   .help { font-size:14.5px; color:#5a4632; line-height:1.5; margin-top:6px; }
   .store { display:flex; gap:9px; align-items:baseline; margin-bottom:7px; font-size:16px; }
   .store .miles { color:#5a4632; font-size:14.5px; }
-  .store .notyet { color:#8a5a00; font-size:14px; font-weight:bold; }
+  .store .byhand { color:#8a5a00; font-size:14px; font-weight:bold; }
   .bigbtn { margin-top:12px; font-size:16px; padding:10px 22px; border-radius:6px; border:1px solid #8a6d3b; background:#8a6d3b; color:#fff; cursor:pointer; }
   .paste { font-family:'Courier New', monospace; font-size:14.5px; white-space:pre-wrap; word-break:break-word; user-select:all; }
   .hidden { display:none; }
@@ -128,18 +128,22 @@
 "use strict";
 // The store list for ZIP 85541 at 25 miles, gathered by the program's
 // store finder on Monday, November 16, 2026, 12:45 PM Arizona time.
-// "searchable" = the program has a product road for the chain today.
+// "road: program" = the program gathers this chain's listings itself.
+// "road: muggy" = the chain has no program road; it still stands
+// pickable, because this search is AI-led — when one is ticked, Muggy
+// searches that store himself and feeds what he finds to Gemini with
+// the rest of the pile.
 var STORE_SETS = {
   "85541|25": {
     gathered: "Monday, November 16, 2026, 12:45 PM Arizona time",
     stores: [
-      {name: "Walmart", detail: "Payson · about 0.8 miles", searchable: true},
-      {name: "Tractor Supply", detail: "Payson · about 0.9 miles", searchable: true},
-      {name: "Ace Hardware", detail: "Payson · about 1.1 miles", searchable: true},
-      {name: "Safeway", detail: "Payson · about 0.7 miles", searchable: false},
-      {name: "The Home Depot", detail: "Payson · about 2.5 miles", searchable: false},
-      {name: "Walgreens", detail: "Payson · about 0.6 miles", searchable: false},
-      {name: "Bealls", detail: "Payson · about 0.4 miles", searchable: false}
+      {name: "Walmart", detail: "Payson · about 0.8 miles", road: "program"},
+      {name: "Tractor Supply", detail: "Payson · about 0.9 miles", road: "program"},
+      {name: "Ace Hardware", detail: "Payson · about 1.1 miles", road: "program"},
+      {name: "Safeway", detail: "Payson · about 0.7 miles", road: "muggy"},
+      {name: "The Home Depot", detail: "Payson · about 2.5 miles", road: "muggy"},
+      {name: "Walgreens", detail: "Payson · about 0.6 miles", road: "muggy"},
+      {name: "Bealls", detail: "Payson · about 0.4 miles", road: "muggy"}
     ]
   }
 };
@@ -213,7 +217,11 @@ function refresh() {
   el("parenWarn").textContent =
     opens > closes ? "The parentheses do not match yet — a group is still open." :
     closes > opens ? "The parentheses do not match yet — a closing parenthesis has no group to close." : "";
-  renderStores();
+  // The store box is NOT re-drawn here. It is drawn once at the start
+  // and again only when the ZIP or radius changes (its own listeners
+  // below). Rebuilding it on every keystroke rebuilt it under the
+  // mouse when a word field lost focus mid-click, and the click on a
+  // store's tick was swallowed — the tick never landed.
 }
 
 // ---------- the store box ----------
@@ -222,6 +230,13 @@ function currentPair() { return el("zip").value.trim() + "|" + (el("radius").val
 function renderStores() {
   var pair = currentPair();
   var box = el("storeBox");
+  // Keep the ticks as they stand: this box is re-drawn whenever the
+  // word test changes, and a tick put on a store must not be wiped
+  // by the next keystroke. Defaults apply only where no tick stands.
+  var prior = {};
+  box.querySelectorAll(".storeTick").forEach(function(t) {
+    prior[t.getAttribute("data-name")] = t.checked;
+  });
   var set = STORE_SETS[pair];
   if (!set) {
     box.innerHTML = '<div class="help" style="font-size:15.5px;">No store list stands gathered for ZIP ' +
@@ -233,15 +248,18 @@ function renderStores() {
   }
   var h = "";
   set.stores.forEach(function(s, i) {
-    if (s.searchable) {
-      h += '<label class="store"><input type="checkbox" class="storeTick" data-name="' + escapeHtml(s.name) + '" checked> <span>' +
-           escapeHtml(s.name) + ' <span class="miles">' + escapeHtml(s.detail) + '</span></span></label>';
+    var ticked = (s.name in prior) ? prior[s.name] : (s.road !== "muggy");
+    var tick = ticked ? " checked" : "";
+    if (s.road === "muggy") {
+      h += '<label class="store"><input type="checkbox" class="storeTick" data-name="' + escapeHtml(s.name) + '" data-road="muggy"' + tick + '> <span>' +
+           escapeHtml(s.name) + ' <span class="miles">' + escapeHtml(s.detail) + '</span> <span class="byhand">Muggy searches this one himself</span></span></label>';
     } else {
-      h += '<label class="store"><input type="checkbox" disabled> <span>' + escapeHtml(s.name) +
-           ' <span class="miles">' + escapeHtml(s.detail) + '</span> <span class="notyet">not yet searchable</span></span></label>';
+      h += '<label class="store"><input type="checkbox" class="storeTick" data-name="' + escapeHtml(s.name) + '" data-road="program"' + tick + '> <span>' +
+           escapeHtml(s.name) + ' <span class="miles">' + escapeHtml(s.detail) + '</span></span></label>';
     }
   });
   h += '<label class="store"><input type="checkbox" checked disabled> <span>Internet sellers — always included. They ship, and the radius never rules them out.</span></label>';
+  h += '<div class="help">Walmart, Tractor Supply, and Ace Hardware are gathered by the program itself. A store marked <b>Muggy searches this one himself</b> has no program road — tick it, and Muggy searches that store himself and feeds what he finds to Gemini with the rest of the pile.</div>';
   box.innerHTML = h;
   el("storeGathered").textContent = "Store list gathered " + set.gathered + " for ZIP " +
     el("zip").value.trim() + " at " + el("radius").value + " miles.";
@@ -292,7 +310,12 @@ function buildRequest() {
   var expr = buildExpression();
   var price = el("price").value;
   var stores = [];
-  document.querySelectorAll(".storeTick").forEach(function(t) { if (t.checked) stores.push(t.getAttribute("data-name")); });
+  var muggyStores = [];
+  document.querySelectorAll(".storeTick").forEach(function(t) {
+    if (!t.checked) return;
+    stores.push(t.getAttribute("data-name"));
+    if (t.getAttribute("data-road") === "muggy") muggyStores.push(t.getAttribute("data-name"));
+  });
   var lines = [];
   lines.push("PRODUCT SEARCH REQUEST");
   var name = el("searchName").value.trim();
@@ -303,6 +326,7 @@ function buildRequest() {
   lines.push("Place: ZIP " + el("zip").value.trim() + ", radius " + (el("radius").value || "—") + " miles");
   lines.push("Stores: " + (stores.length ? stores.join(", ") :
     "the store list for this ZIP and radius is gathered when the search is run"));
+  if (muggyStores.length) lines.push("Stores Muggy searches himself (no program road): " + muggyStores.join(", "));
   lines.push("Internet sellers: always included");
   lines.push("Refresh the store list: " + (el("refreshStores").checked ? "yes" : "no"));
   lines.push("When: " + whenText());
@@ -320,6 +344,7 @@ el("radius").addEventListener("input", renderStores);
 
 addRow("");
 refresh();
+renderStores();
 </script>
 </body>
 </html>
