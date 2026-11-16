@@ -44,27 +44,23 @@
 
   <div class="cols">
     <div class="col">
-      <h2>1 · The search words</h2>
+      <h2>1 · The word test</h2>
       <div class="box">
-        <label class="lab" for="phrases">Search phrases — one per line. The gathering runs on these words.</label>
-        <textarea id="phrases" rows="3" placeholder="USB rechargeable cat toy&#10;moving cat toy USB"></textarea>
-      </div>
-
-      <h2>2 · The word test</h2>
-      <div class="box">
-        <div class="help" style="margin:0 0 10px;">A listing is kept only when its own words pass this test. Each row is one word or phrase. Tick <b>NOT</b> to ban a row's word. The joiner between two rows says how they combine. The <b>(</b> and <b>)</b> buttons group rows together. A term with more than one word is sent as one phrase, in quotes.</div>
+        <div class="help" style="margin:0 0 10px;">This is the only place words are typed. A listing is kept only when its own words pass this test. Each row is one word or phrase. Tick <b>NOT</b> to ban a row's word. The joiner between two rows says how they combine. The <b>(</b> and <b>)</b> buttons group rows together. A term with more than one word is sent as one phrase, in quotes. The page builds the gathering phrases from the rows that are not marked NOT.</div>
         <div id="rows"></div>
         <button class="smallbtn" id="addRow" type="button">+ Add a row</button>
         <label class="lab">The test, exactly as the program will receive it:</label>
         <div class="preview" id="preview"></div>
         <div class="warn" id="parenWarn"></div>
+        <label class="lab">Gathering phrases (built from the word test above):</label>
+        <div class="preview" id="gatherPreview"></div>
         <label class="lab" for="price">Top price, in dollars — leave empty for no price line</label>
         <input type="number" id="price" min="0" step="1" style="width:140px;" placeholder="No line">
       </div>
     </div>
 
     <div class="col">
-      <h2>3 · The place</h2>
+      <h2>2 · The place</h2>
       <div class="box">
         <div class="row">
           <span>ZIP code <input type="text" id="zip" value="85541" style="width:90px;"></span>
@@ -73,7 +69,7 @@
         <div class="help">Every search centers on the ZIP code you type here — never on where you are. You might search a Phoenix ZIP today because you will be in Phoenix tomorrow. The program never asks for or uses your own location.</div>
       </div>
 
-      <h2>4 · The stores</h2>
+      <h2>3 · The stores</h2>
       <div class="box">
         <div id="storeBox"></div>
         <div class="help" id="storeGathered"></div>
@@ -83,7 +79,7 @@
     </div>
 
     <div class="col">
-      <h2>5 · Run it now, or schedule it</h2>
+      <h2>4 · Run it now, or schedule it</h2>
       <div class="box">
         <label class="store"><input type="radio" name="when" value="now" checked> <span><b>Search now</b></span></label>
         <label class="store"><input type="radio" name="when" value="single"> <span><b>One single search</b> at a date and time:</span></label>
@@ -110,7 +106,7 @@
         <input type="text" id="searchName" style="width:100%; box-sizing:border-box;" placeholder="Cat toys">
       </div>
 
-      <h2>6 · The request</h2>
+      <h2>5 · The request</h2>
       <div class="box">
         <button class="bigbtn" id="buildBtn" type="button">Build the request</button>
         <label class="lab">Send this to Muggy:</label>
@@ -151,7 +147,7 @@ var STORE_SETS = {
 function el(id) { return document.getElementById(id); }
 
 // ---------- the word-test rows ----------
-function addRow(term) {
+function addRow(term, focus) {
   var row = document.createElement("div");
   row.className = "row trow";
   row.innerHTML =
@@ -169,6 +165,7 @@ function addRow(term) {
     n.addEventListener("input", refresh); n.addEventListener("change", refresh);
   });
   el("rows").appendChild(row);
+  if (focus) row.querySelector(".term").focus();
   refresh();
 }
 
@@ -197,9 +194,20 @@ function buildExpression() {
   return out;
 }
 
+function buildGatheringPhrases() {
+  var terms = [];
+  document.querySelectorAll(".trow").forEach(function(row) {
+    var term = row.querySelector(".term").value.trim();
+    if (term && !row.querySelector(".notTick").checked) terms.push(term);
+  });
+  return terms.length ? terms.join(" ") : "";
+}
+
 function refresh() {
   var expr = buildExpression();
+  var gather = buildGatheringPhrases();
   el("preview").textContent = expr || "(no word test — every listing the gathering finds is kept)";
+  el("gatherPreview").textContent = gather || "(none yet)";
   var opens = (expr.match(/\(/g) || []).length;
   var closes = (expr.match(/\)/g) || []).length;
   el("parenWarn").textContent =
@@ -276,11 +284,11 @@ el("recurKind").addEventListener("change", function() {
   el("weekdayWrap").classList.toggle("hidden", this.value !== "weekly");
   el("monthdayWrap").classList.toggle("hidden", this.value !== "monthly");
 });
-el("addRow").addEventListener("click", function() { addRow(""); });
+el("addRow").addEventListener("click", function() { addRow("", true); });
 
 // ---------- the request ----------
 function buildRequest() {
-  var phrases = el("phrases").value.split("\n").map(function(s) { return s.trim(); }).filter(Boolean);
+  var gather = buildGatheringPhrases();
   var expr = buildExpression();
   var price = el("price").value;
   var stores = [];
@@ -289,7 +297,7 @@ function buildRequest() {
   lines.push("PRODUCT SEARCH REQUEST");
   var name = el("searchName").value.trim();
   if (name) lines.push("Name: " + name);
-  lines.push("Search words: " + (phrases.join(" | ") || "(none)"));
+  lines.push("Gathering phrases (built from the word test above): " + (gather || "(none)"));
   lines.push("Word test: " + (expr || "none"));
   lines.push("Top price: " + (price ? "$" + price : "none"));
   lines.push("Place: ZIP " + el("zip").value.trim() + ", radius " + (el("radius").value || "—") + " miles");
@@ -310,7 +318,7 @@ el("copyBtn").addEventListener("click", function() {
 el("zip").addEventListener("input", renderStores);
 el("radius").addEventListener("input", renderStores);
 
-addRow("cat"); addRow("toy"); addRow("USB");
+addRow("");
 refresh();
 </script>
 </body>
