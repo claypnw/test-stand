@@ -227,6 +227,16 @@ function refresh() {
 // ---------- the store box ----------
 function currentPair() { return el("zip").value.trim() + "|" + (el("radius").value || ""); }
 
+// The Select all tick stands ticked only while every store in the
+// box stands ticked; a hand change to any one store re-reads it.
+function syncSelectAll() {
+  var selAll = el("selectAllStores");
+  if (!selAll) return;
+  var every = true;
+  el("storeBox").querySelectorAll(".storeTick").forEach(function(t) { if (!t.checked) every = false; });
+  selAll.checked = every;
+}
+
 function renderStores() {
   var pair = currentPair();
   var box = el("storeBox");
@@ -246,9 +256,11 @@ function renderStores() {
     el("storeGathered").textContent = "";
     return;
   }
-  var h = "";
+  var h = '<label class="store"><input type="checkbox" id="selectAllStores"> <span><b>Select all stores</b></span></label>';
+  var allTicked = true;
   set.stores.forEach(function(s, i) {
     var ticked = (s.name in prior) ? prior[s.name] : (s.road !== "muggy");
+    if (!ticked) allTicked = false;
     var tick = ticked ? " checked" : "";
     if (s.road === "muggy") {
       h += '<label class="store"><input type="checkbox" class="storeTick" data-name="' + escapeHtml(s.name) + '" data-road="muggy"' + tick + '> <span>' +
@@ -261,6 +273,19 @@ function renderStores() {
   h += '<label class="store"><input type="checkbox" checked disabled> <span>Internet sellers — always included. They ship, and the radius never rules them out.</span></label>';
   h += '<div class="help">Walmart, Tractor Supply, and Ace Hardware are gathered by the program itself. A store marked <b>Muggy searches this one himself</b> has no program road — tick it, and Muggy searches that store himself and feeds what he finds to Gemini with the rest of the pile.</div>';
   box.innerHTML = h;
+  var selAll = el("selectAllStores");
+  if (selAll) {
+    // Select all stands as the ticks stand: ticked only when every
+    // store stands ticked, so a re-draw keeps the state the ticks
+    // themselves carry. Its own change ticks or clears every store.
+    selAll.checked = allTicked;
+    selAll.addEventListener("change", function() {
+      box.querySelectorAll(".storeTick").forEach(function(t) { t.checked = selAll.checked; });
+    });
+  }
+  box.querySelectorAll(".storeTick").forEach(function(t) {
+    t.addEventListener("change", syncSelectAll);
+  });
   el("storeGathered").textContent = "Store list gathered " + set.gathered + " for ZIP " +
     el("zip").value.trim() + " at " + el("radius").value + " miles.";
 }
