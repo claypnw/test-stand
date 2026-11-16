@@ -5,13 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Product search</title>
 <style>
-  body { background:#E8D7B9; color:#2b2118; font-family: Georgia, 'Times New Roman', serif; margin:0; padding:24px 16px 48px; }
-  .wrap { max-width:820px; margin:0 auto; }
+  body { background:#E8D7B9; color:#2b2118; font-family: Georgia, 'Times New Roman', serif; margin:0; padding:20px 22px 30px; }
+  .wrap { margin:0 auto; }
   h1 { font-size:30px; margin:0 0 4px; }
-  .sub { font-size:16px; color:#5a4632; margin-bottom:20px; line-height:1.5; }
-  h2 { font-size:20px; margin:28px 0 10px; }
-  .box { background:#fffaf0; border:1px solid #c9b896; border-radius:10px; padding:14px 18px; }
-  .note { background:#f4ead3; border:1px solid #c9b896; border-radius:10px; padding:14px 18px; font-size:15.5px; line-height:1.6; }
+  .sub { font-size:16px; color:#5a4632; margin-bottom:14px; line-height:1.5; }
+  h2 { font-size:20px; margin:18px 0 8px; }
+  .cols { display:grid; grid-template-columns: minmax(460px, 1.6fr) minmax(300px, 1fr) minmax(340px, 1.1fr); gap:0 16px; align-items:start; }
+  .cols .col > h2:first-child { margin-top:2px; }
+  .band { margin-top:16px; }
+  .band h2 { margin-top:0; }
+  @media (max-width: 1150px) { .cols { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 760px) { .cols { grid-template-columns: 1fr; } }
+  .box { background:#fffaf0; border:1px solid #c9b896; border-radius:10px; padding:12px 16px; }
+  .note { background:#f4ead3; border:1px solid #c9b896; border-radius:10px; padding:12px 18px; font-size:15.5px; line-height:1.6; }
   label.lab { display:block; font-size:15px; font-weight:bold; margin:10px 0 6px; }
   textarea, input[type=text], input[type=number], input[type=date], input[type=time], select {
     font-family:inherit; font-size:16px; padding:7px 9px; border:1px solid #c9b896; border-radius:6px; background:#fff; color:#2b2118; }
@@ -36,79 +42,89 @@
   <h1>Product search</h1>
   <div class="sub">Fill in what you are looking for, and how and when to search. This page runs nothing itself — at the foot it builds one plain request. Copy the request and send it to Muggy; he runs the search, or sets the schedule.</div>
 
-  <h2>1 · The search words</h2>
-  <div class="box">
-    <label class="lab" for="phrases">Search phrases — one per line. The gathering runs on these words.</label>
-    <textarea id="phrases" rows="3" placeholder="USB rechargeable cat toy&#10;moving cat toy USB"></textarea>
-  </div>
+  <div class="cols">
+    <div class="col">
+      <h2>1 · The search words</h2>
+      <div class="box">
+        <label class="lab" for="phrases">Search phrases — one per line. The gathering runs on these words.</label>
+        <textarea id="phrases" rows="3" placeholder="USB rechargeable cat toy&#10;moving cat toy USB"></textarea>
+      </div>
 
-  <h2>2 · The word test</h2>
-  <div class="box">
-    <div class="help" style="margin:0 0 10px;">A listing is kept only when its own words pass this test. Each row is one word or phrase. Tick <b>NOT</b> to ban a row's word. The joiner between two rows says how they combine. The <b>(</b> and <b>)</b> buttons group rows together. A term with more than one word is sent as one phrase, in quotes.</div>
-    <div id="rows"></div>
-    <button class="smallbtn" id="addRow" type="button">+ Add a row</button>
-    <label class="lab">The test, exactly as the program will receive it:</label>
-    <div class="preview" id="preview"></div>
-    <div class="warn" id="parenWarn"></div>
-    <label class="lab" for="price">Top price, in dollars — leave empty for no price line</label>
-    <input type="number" id="price" min="0" step="1" style="width:140px;" placeholder="No line">
-  </div>
-
-  <h2>3 · The place</h2>
-  <div class="box">
-    <div class="row">
-      <span>ZIP code <input type="text" id="zip" value="85541" style="width:90px;"></span>
-      <span>Radius, in miles <input type="number" id="radius" value="25" min="1" style="width:80px;"></span>
+      <h2>2 · The word test</h2>
+      <div class="box">
+        <div class="help" style="margin:0 0 10px;">A listing is kept only when its own words pass this test. Each row is one word or phrase. Tick <b>NOT</b> to ban a row's word. The joiner between two rows says how they combine. The <b>(</b> and <b>)</b> buttons group rows together. A term with more than one word is sent as one phrase, in quotes.</div>
+        <div id="rows"></div>
+        <button class="smallbtn" id="addRow" type="button">+ Add a row</button>
+        <label class="lab">The test, exactly as the program will receive it:</label>
+        <div class="preview" id="preview"></div>
+        <div class="warn" id="parenWarn"></div>
+        <label class="lab" for="price">Top price, in dollars — leave empty for no price line</label>
+        <input type="number" id="price" min="0" step="1" style="width:140px;" placeholder="No line">
+      </div>
     </div>
-    <div class="help">Every search centers on the ZIP code you type here — never on where you are. You might search a Phoenix ZIP today because you will be in Phoenix tomorrow. The program never asks for or uses your own location.</div>
-  </div>
 
-  <h2>4 · The stores</h2>
-  <div class="box">
-    <div id="storeBox"></div>
-    <div class="help" id="storeGathered"></div>
-    <label class="store" style="margin-top:10px;"><input type="checkbox" id="refreshStores"> <span>Refresh this store list when the search is run</span></label>
-    <div class="help">Only stores whose inventory can be searched online stand in this box — a store with no online inventory, like a thrift store or Goodwill, is never included, however near it is. If you change the ZIP or the radius, the store list for the new pair is gathered when the search is run.</div>
-  </div>
+    <div class="col">
+      <h2>3 · The place</h2>
+      <div class="box">
+        <div class="row">
+          <span>ZIP code <input type="text" id="zip" value="85541" style="width:90px;"></span>
+          <span>Radius, in miles <input type="number" id="radius" value="25" min="1" style="width:80px;"></span>
+        </div>
+        <div class="help">Every search centers on the ZIP code you type here — never on where you are. You might search a Phoenix ZIP today because you will be in Phoenix tomorrow. The program never asks for or uses your own location.</div>
+      </div>
 
-  <h2>5 · Run it now, or schedule it</h2>
-  <div class="box">
-    <label class="store"><input type="radio" name="when" value="now" checked> <span><b>Search now</b></span></label>
-    <label class="store"><input type="radio" name="when" value="single"> <span><b>One single search</b> at a date and time:</span></label>
-    <div class="row hidden" id="singleRow" style="margin-left:26px;">
-      <input type="date" id="singleDate"> <input type="time" id="singleTime">
+      <h2>4 · The stores</h2>
+      <div class="box">
+        <div id="storeBox"></div>
+        <div class="help" id="storeGathered"></div>
+        <label class="store" style="margin-top:10px;"><input type="checkbox" id="refreshStores"> <span>Refresh this store list when the search is run</span></label>
+        <div class="help">Only stores whose inventory can be searched online stand in this box — a store with no online inventory, like a thrift store or Goodwill, is never included, however near it is. If you change the ZIP or the radius, the store list for the new pair is gathered when the search is run.</div>
+      </div>
     </div>
-    <label class="store"><input type="radio" name="when" value="recurring"> <span><b>A recurring search</b>:</span></label>
-    <div class="row hidden" id="recurRow" style="margin-left:26px;">
-      <select id="recurKind">
-        <option value="daily">daily</option>
-        <option value="weekly">weekly</option>
-        <option value="monthly">monthly</option>
-      </select>
-      <span id="weekdayWrap" class="hidden">on
-        <select id="weekday">
-          <option>Monday</option><option>Tuesday</option><option>Wednesday</option>
-          <option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option>
-        </select>
-      </span>
-      <span id="monthdayWrap" class="hidden">on day <input type="number" id="monthday" min="1" max="28" value="1" style="width:60px;"> of the month</span>
-      <span>at <input type="time" id="recurTime"></span>
+
+    <div class="col">
+      <h2>5 · Run it now, or schedule it</h2>
+      <div class="box">
+        <label class="store"><input type="radio" name="when" value="now" checked> <span><b>Search now</b></span></label>
+        <label class="store"><input type="radio" name="when" value="single"> <span><b>One single search</b> at a date and time:</span></label>
+        <div class="row hidden" id="singleRow" style="margin-left:26px;">
+          <input type="date" id="singleDate"> <input type="time" id="singleTime">
+        </div>
+        <label class="store"><input type="radio" name="when" value="recurring"> <span><b>A recurring search</b>:</span></label>
+        <div class="row hidden" id="recurRow" style="margin-left:26px;">
+          <select id="recurKind">
+            <option value="daily">daily</option>
+            <option value="weekly">weekly</option>
+            <option value="monthly">monthly</option>
+          </select>
+          <span id="weekdayWrap" class="hidden">on
+            <select id="weekday">
+              <option>Monday</option><option>Tuesday</option><option>Wednesday</option>
+              <option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option>
+            </select>
+          </span>
+          <span id="monthdayWrap" class="hidden">on day <input type="number" id="monthday" min="1" max="28" value="1" style="width:60px;"> of the month</span>
+          <span>at <input type="time" id="recurTime"></span>
+        </div>
+        <label class="lab" for="searchName">Name this search — needed when you schedule it, so its card and its results page carry the name</label>
+        <input type="text" id="searchName" style="width:100%; box-sizing:border-box;" placeholder="Cat toys">
+      </div>
+
+      <h2>6 · The request</h2>
+      <div class="box">
+        <button class="bigbtn" id="buildBtn" type="button">Build the request</button>
+        <label class="lab">Send this to Muggy:</label>
+        <textarea id="request" class="paste" rows="11" readonly placeholder="The finished request stands here."></textarea>
+        <button class="smallbtn" id="copyBtn" type="button" style="margin-top:10px;">Copy the request</button>
+      </div>
     </div>
-    <label class="lab" for="searchName">Name this search — needed when you schedule it, so its card and its results page carry the name</label>
-    <input type="text" id="searchName" style="width:100%; box-sizing:border-box;" placeholder="Cat toys">
   </div>
 
-  <h2>Stores this program cannot search</h2>
-  <div class="note">
-    Some retailers do not allow this program to view their inventory, and they are named here so a missing store is never a mystery. <b>Amazon</b> is first on the list: it refuses automated access from this machine — checked November 16, 2026 — so no Amazon listings ever stand in a run's results. Every run's results page also carries a Copy-this-search box: the same search in Amazon's own style, ready to paste into Amazon's search box by hand. Any other store that refuses a run is named in that run's results, in the same plain words.
-  </div>
-
-  <h2>6 · The request</h2>
-  <div class="box">
-    <button class="bigbtn" id="buildBtn" type="button">Build the request</button>
-    <label class="lab">Send this to Muggy:</label>
-    <textarea id="request" class="paste" rows="11" readonly placeholder="The finished request stands here."></textarea>
-    <button class="smallbtn" id="copyBtn" type="button" style="margin-top:10px;">Copy the request</button>
+  <div class="band">
+    <h2>Stores this program cannot search</h2>
+    <div class="note">
+      Some retailers do not allow this program to view their inventory, and they are named here so a missing store is never a mystery. <b>Amazon</b> is first on the list: it refuses automated access from this machine — checked November 16, 2026 — so no Amazon listings ever stand in a run's results. Every run's results page also carries a Copy-this-search box: the same search in Amazon's own style, ready to paste into Amazon's search box by hand. Any other store that refuses a run is named in that run's results, in the same plain words.
+    </div>
   </div>
 </div>
 
@@ -260,6 +276,7 @@ el("recurKind").addEventListener("change", function() {
   el("weekdayWrap").classList.toggle("hidden", this.value !== "weekly");
   el("monthdayWrap").classList.toggle("hidden", this.value !== "monthly");
 });
+el("addRow").addEventListener("click", function() { addRow(""); });
 
 // ---------- the request ----------
 function buildRequest() {
