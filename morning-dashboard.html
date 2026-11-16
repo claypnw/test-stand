@@ -6,146 +6,170 @@
 <title>Morning Dashboard — Monday, November 16, 2026</title>
 <style>
   body { margin:0; background:#E8D7B9; color:#2B2118; font-family: Georgia, 'Times New Roman', serif; }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 18px 14px 40px; }
-  header.top { text-align:center; border-bottom: 3px double #6B543A; padding-bottom: 10px; }
-  header.top h1 { margin: 6px 0 2px; font-size: 34px; letter-spacing: 1px; }
-  header.top .date { font-size: 17px; }
-  header.top .sub { font-size: 14px; font-style: italic; margin-top: 4px; }
-  .tiles { display:flex; gap:10px; margin: 16px 0 8px; }
-  .tile { flex:1; background:#FBF6E9; border:1px solid #6B543A; border-radius:8px; text-align:center; padding:10px 6px; }
-  .tile .num { font-size: 28px; font-weight: bold; display:block; }
-  .tile .lab { font-size: 13px; }
-  .strip { display:flex; height:14px; border:1px solid #6B543A; border-radius:7px; overflow:hidden; margin: 6px 0 4px; }
-  .strip .ok { background:#5C7350; }
-  .strip .warn { background:#B98A2F; }
-  .stripnote { font-size: 12.5px; text-align:center; margin-bottom: 6px; }
-  h2.group { font-size: 21px; border-bottom: 2px solid #6B543A; padding-bottom: 3px; margin: 24px 0 10px; }
-  .cards { display:grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-  .card { background:#FBF6E9; border:1px solid #6B543A; border-radius:8px; padding: 12px; display:flex; flex-direction:column; }
-  .card h3 { margin: 0 0 6px; font-size: 17.5px; line-height: 1.25; }
-  .card .status { font-size: 14px; line-height: 1.4; flex: 1; }
-  .card .flag { color:#8A5A00; font-weight: bold; }
-  .btnrow { margin-top: 10px; display:flex; gap:8px; flex-wrap: wrap; }
-  a.btn { display:inline-block; background:#4A3826; color:#FFF8EA; text-decoration:none; padding: 8px 14px; border-radius:6px; font-size: 14.5px; }
-  a.btn:hover { background:#6B543A; }
-  .decisions { background:#FBF6E9; border:1px solid #6B543A; border-radius:8px; padding: 12px 14px; margin-top: 10px; }
-  .decisions h3 { margin: 0 0 4px; font-size: 17.5px; }
-  .decisions p { margin: 0; font-size: 14.5px; }
-  .filament { background:#FBF6E9; border:1px solid #6B543A; border-radius:8px; padding: 12px 14px; }
-  .filament ul { margin: 6px 0; padding-left: 20px; font-size: 14.5px; line-height: 1.5; }
-  .note { font-size: 14px; font-style: italic; margin-top: 10px; }
-  footer { margin-top: 28px; border-top: 3px double #6B543A; padding-top: 10px; font-size: 13.5px; text-align:center; line-height: 1.5; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 14px 16px 42px; }
+  .topbar { display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #6B543A; padding-bottom:8px; }
+  .topbar .brand { font-size:15.5px; font-weight:bold; }
+  .topbar a { color:#4A3826; font-size:14.5px; }
+  .headrow { display:flex; justify-content:space-between; align-items:flex-end; gap:12px; margin-top:10px; }
+  h1 { margin:0; font-size:44px; font-weight:normal; letter-spacing:.5px; }
+  .date { font-size:16.5px; margin-top:2px; }
+  .refresh { text-align:right; }
+  .refresh button { font-family:inherit; font-size:14.5px; background:#FBF6E9; color:#2B2118; border:1.5px solid #6B543A; border-radius:8px; padding:8px 14px; cursor:pointer; }
+  .refresh button:hover { background:#F1E4C8; }
+  .refresh .note { font-size:12.5px; margin-top:5px; }
+  .tiles { display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; margin:18px 0 4px; }
+  .tile { background:#FBF6E9; border:1px solid #6B543A; border-radius:10px; padding:12px 14px; }
+  .tile .lab { font-size:12px; letter-spacing:1.5px; text-transform:uppercase; }
+  .tile .big { font-size:25px; font-weight:bold; margin:5px 0 7px; }
+  .tile .small { font-size:13px; margin-top:5px; }
+  .bar { display:flex; height:9px; background:#DCCBA3; border-radius:5px; overflow:hidden; }
+  .bar .fill { background:#5C7350; }
+  .bar .rest { background:#C9B083; }
+  h2.group { font-size:24px; font-weight:normal; border-bottom:1px solid #6B543A; padding-bottom:4px; margin:26px 0 12px; }
+  .cards { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; }
+  .cards4 { display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; }
+  .card { background:#FBF6E9; border:1px solid #6B543A; border-radius:10px; padding:12px 14px; }
+  .card .row { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+  .card h3 { margin:0; font-size:17px; }
+  .card .st { font-size:12.5px; white-space:nowrap; color:#47603C; font-weight:bold; }
+  .card .st.warn { color:#8A5A00; }
+  .card .det { font-size:14px; margin-top:5px; line-height:1.4; }
+  .card .links { margin-top:8px; font-size:14.5px; }
+  .card .links a { color:#4A3826; margin-right:14px; }
+  .filament { background:#FBF6E9; border:1px solid #6B543A; border-radius:10px; padding:12px 16px; }
+  .filament ul { margin:6px 0; padding-left:20px; font-size:14.5px; line-height:1.55; }
+  .note-line { font-size:14px; font-style:italic; margin-top:12px; }
+  footer { margin-top:30px; border-top:3px double #6B543A; padding-top:10px; font-size:13.5px; text-align:center; line-height:1.55; }
   footer a { color:#4A3826; }
-  @media (max-width: 820px) { .cards { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 540px) { .cards { grid-template-columns: 1fr; } .tiles { flex-direction: column; } header.top h1 { font-size: 27px; } }
+  @media (max-width: 900px) { .tiles, .cards4 { grid-template-columns: repeat(2, 1fr); } .cards { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .tiles, .cards, .cards4 { grid-template-columns: 1fr; } h1 { font-size:32px; } .headrow { flex-direction:column; align-items:flex-start; } .refresh { text-align:left; } }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<header class="top">
-  <h1>Morning Dashboard</h1>
-  <div class="date">Monday, November 16, 2026</div>
-  <div class="sub">Every report in one place — tap a card to open its report.</div>
-</header>
+<div class="topbar">
+  <div class="brand">✦ Mogollon's Hearth</div>
+  <div><a href="https://claypnw.github.io/menu/morning.html">Original Morning Menu</a></div>
+</div>
+
+<div class="headrow">
+  <div>
+    <h1>Morning Dashboard</h1>
+    <div class="date">Monday, November 16, 2026</div>
+  </div>
+  <div class="refresh">
+    <button onclick="location.reload()">↻ Refresh reports</button>
+    <div class="note">Latest reports · checked this morning</div>
+  </div>
+</div>
 
 <div class="tiles">
-  <div class="tile"><span class="num">11</span><span class="lab">reports ready to read</span></div>
-  <div class="tile"><span class="num">0</span><span class="lab">waiting on your word</span></div>
-  <div class="tile"><span class="num">1</span><span class="lab">with a problem named</span></div>
+  <div class="tile">
+    <div class="lab">Overnight run</div>
+    <div class="big">7 / 8 finished</div>
+    <div class="bar"><div class="fill" style="width:87.5%"></div><div class="rest" style="width:12.5%"></div></div>
+    <div class="small">7 finished · 0 failed · 1 no record</div>
+  </div>
+  <div class="tile">
+    <div class="lab">GitHub billing</div>
+    <div class="big">58.03% of cycle</div>
+    <div class="bar"><div class="fill" style="width:58%"></div></div>
+    <div class="small">1,741 minutes used</div>
+  </div>
+  <div class="tile">
+    <div class="lab">Connectors</div>
+    <div class="big">11 / 92 connected</div>
+    <div class="bar"><div class="fill" style="width:12%"></div></div>
+    <div class="small">11 working for you</div>
+  </div>
+  <div class="tile">
+    <div class="lab">Decisions waiting</div>
+    <div class="big" style="font-size:19px; padding-top:5px;">None this morning.</div>
+    <div class="small">No choice or approval is waiting on you.</div>
+  </div>
 </div>
-<div class="strip"><div class="ok" style="width:91%"></div><div class="warn" style="width:9%"></div></div>
-<div class="stripnote">10 of the 11 reports finished clean. 1 finished with a problem named on its card.</div>
 
 <h2 class="group">Morning reports</h2>
 <div class="cards">
 
   <div class="card">
-    <h3>The Payson Morning Scroll</h3>
-    <div class="status">Finished — today's paper, 4 pages, checked and live.</div>
-    <div class="btnrow"><a class="btn" href="https://morning-scroll-53x.pages.dev/edition-2026-11-16.html">Open the Scroll</a></div>
+    <div class="row"><h3>The Payson Morning Scroll</h3><span class="st">Finished</span></div>
+    <div class="det">4 pages, verified</div>
+    <div class="links"><a href="https://morning-scroll-53x.pages.dev/edition-2026-11-16.html">Open report</a></div>
   </div>
 
   <div class="card">
-    <h3>Last night's KPIs</h3>
-    <div class="status"><span class="flag">Finished with a problem</span> — 7 of 8 night jobs finished. 1 has no record: the Daily walk watch, which stands off.</div>
-    <div class="btnrow"><a class="btn" href="https://claypnw.github.io/menu/morning-files/2026-11-16-kpi.pdf">Open the KPI page</a></div>
+    <div class="row"><h3>Last night's KPIs</h3><span class="st warn">Finished with a problem</span></div>
+    <div class="det">7 of 8 finished, 0 failed, 1 no record</div>
+    <div class="links"><a href="https://claypnw.github.io/menu/morning-files/2026-11-16-kpi.pdf">Open PDF</a></div>
   </div>
 
   <div class="card">
-    <h3>GitHub billing</h3>
-    <div class="status">Finished — 1,741 of the month's 3,000 build minutes used, 58%. Nothing billed.</div>
-    <div class="btnrow"><a class="btn" href="https://claypnw.github.io/menu/morning-files/2026-11-16-billing.pdf">Open the billing page</a></div>
+    <div class="row"><h3>GitHub billing</h3><span class="st">Finished</span></div>
+    <div class="det">1,741 minutes, 58.03% of the cycle</div>
+    <div class="links"><a href="https://claypnw.github.io/menu/morning-files/2026-11-16-billing.pdf">Open PDF</a></div>
   </div>
 
   <div class="card">
-    <h3>Yard &amp; estate sales</h3>
-    <div class="status">Finished — no sales on today's sheet and none on the coming-up sheet.</div>
-    <div class="btnrow"><a class="btn" href="https://morning-scroll-53x.pages.dev/payson-yard-estate-sales-today.pdf">Today's sheet</a><a class="btn" href="https://morning-scroll-53x.pages.dev/payson-yard-estate-sales-upcoming.pdf">Coming-up sheet</a></div>
+    <div class="row"><h3>Yard &amp; estate sales</h3><span class="st">Finished</span></div>
+    <div class="det">0 sales today, 0 coming up</div>
+    <div class="links"><a href="https://morning-scroll-53x.pages.dev/payson-yard-estate-sales-today.pdf">Today's sheet</a><a href="https://morning-scroll-53x.pages.dev/payson-yard-estate-sales-upcoming.pdf">Coming-up sheet</a></div>
   </div>
 
   <div class="card">
-    <h3>AI community report</h3>
-    <div class="status">Finished — 102 topics and 51 problems people report with Muse, kept up to date.</div>
-    <div class="btnrow"><a class="btn" href="https://claypnw.github.io/report-on-muse-ai-communities/">Open the report</a></div>
+    <div class="row"><h3>AI community report</h3><span class="st">Finished</span></div>
+    <div class="det">102 topics, 51 problems</div>
+    <div class="links"><a href="https://claypnw.github.io/report-on-muse-ai-communities/">Open report</a></div>
   </div>
 
   <div class="card">
-    <h3>My Daily Review</h3>
-    <div class="status">Finished — 10 stories across 9 subjects, each with its own listen button.</div>
-    <div class="btnrow"><a class="btn" href="https://claypnw.github.io/my-daily-review/">Open My Daily Review</a></div>
+    <div class="row"><h3>My Daily Review</h3><span class="st">Finished</span></div>
+    <div class="det">10 stories across 9 subjects</div>
+    <div class="links"><a href="https://claypnw.github.io/my-daily-review/">Open report</a></div>
   </div>
 
   <div class="card">
-    <h3>Muse connectors report</h3>
-    <div class="status">Finished — 92 connectors in the list, 11 connected and working for you.</div>
-    <div class="btnrow"><a class="btn" href="https://claypnw.github.io/menu/morning-files/2026-11-16-connectors.pdf">Open the connectors report</a></div>
+    <div class="row"><h3>Muse connectors report</h3><span class="st">Finished</span></div>
+    <div class="det">92 connectors, 11 connected</div>
+    <div class="links"><a href="https://claypnw.github.io/menu/morning-files/2026-11-16-connectors.pdf">Open PDF</a></div>
+  </div>
+
+  <div class="card">
+    <div class="row"><h3>Class C motorhome search — the RV report</h3><span class="st">Updated each night</span></div>
+    <div class="det">Class C, under 30 feet, under $25,000 — Payson first. Each listing stands with the seller's full write-up.</div>
+    <div class="links"><a href="https://muse.ai/s/class-c-motorhome-search-payson-xmxv6g1xphxnxzxto/Heh2N9yerFzwNqtAshJRxIV-KvTtSiCHKax04mt0qjI">Open report</a></div>
+  </div>
+
+</div>
+<p class="note-line">Maker finds — the nightly hunt for pieces to make into the Hearth found no true fit last night, so no new pick stands here today.</p>
+
+<h2 class="group">From last night</h2>
+<div class="cards4">
+
+  <div class="card">
+    <h3><a href="https://morning-scroll-53x.pages.dev/stewards-ledger-2026-11-16.html" style="color:#2B2118;">The Steward's Ledger</a></h3>
+    <div class="det">Edition 36, Monday, November 16, 2026</div>
+  </div>
+
+  <div class="card">
+    <h3><a href="https://claypnw.github.io/test-stand/effort-log.html" style="color:#2B2118;">The effort log</a></h3>
+    <div class="det">Updated for Sunday, November 15, 2026</div>
+  </div>
+
+  <div class="card">
+    <h3><a href="https://claypnw.github.io/gilded-pages/" style="color:#2B2118;">The Gilded Pages</a></h3>
+    <div class="det">7 new healthcare listings added last night (Cottonwood)</div>
+  </div>
+
+  <div class="card">
+    <h3><a href="#filament" style="color:#2B2118;">Filament sales</a></h3>
+    <div class="det">15 listings — the full list stands below</div>
   </div>
 
 </div>
 
-<h2 class="group">Reports from last night</h2>
-<div class="cards">
-
-  <div class="card">
-    <h3>The Steward's Ledger</h3>
-    <div class="status">Edition 36 — town government meetings, Monday, November 16, 2026.</div>
-    <div class="btnrow"><a class="btn" href="https://morning-scroll-53x.pages.dev/stewards-ledger-2026-11-16.html">Open the Ledger</a></div>
-  </div>
-
-  <div class="card">
-    <h3>The effort log</h3>
-    <div class="status">What each night job costs to run — updated for Sunday, November 15, 2026.</div>
-    <div class="btnrow"><a class="btn" href="https://claypnw.github.io/test-stand/effort-log.html">Open the effort log</a></div>
-  </div>
-
-  <div class="card">
-    <h3>The Gilded Pages</h3>
-    <div class="status">7 new healthcare listings added last night, in Cottonwood.</div>
-    <div class="btnrow"><a class="btn" href="https://claypnw.github.io/gilded-pages/">Open the Gilded Pages</a></div>
-  </div>
-
-</div>
-
-<h2 class="group">Standing searches</h2>
-<div class="cards">
-
-  <div class="card">
-    <h3>Class C motorhome search — the RV report</h3>
-    <div class="status">The nightly search: Class C, under 30 feet, under $25,000, Payson first. The newest listings stand on the page, each with the seller's full write-up.</div>
-    <div class="btnrow"><a class="btn" href="https://muse.ai/s/class-c-motorhome-search-payson-xmxv6g1xphxnxzxto/Heh2N9yerFzwNqtAshJRxIV-KvTtSiCHKax04mt0qjI">Open the RV report</a></div>
-  </div>
-
-</div>
-<p class="note">Maker finds — the nightly hunt for pieces to make into the Hearth found no true fit last night, so no new pick stands here today.</p>
-
-<h2 class="group">Waiting on your word</h2>
-<div class="decisions">
-  <h3>Nothing this morning</h3>
-  <p>No choice or approval is waiting on you today.</p>
-</div>
-
-<h2 class="group">Filament sales — Monday, November 16</h2>
+<h2 class="group" id="filament">Filament sales — Monday, November 16</h2>
 <div class="filament">
   <ul>
     <li>PETG, White, $159.99 for 15 spools, $10.67 a kilogram, Walmart</li>
@@ -168,7 +192,7 @@
 </div>
 
 <footer>
-  This dashboard is a preview, built from Maggie's design. Your <a href="https://claypnw.github.io/menu/morning.html">Morning Menu page</a> still stands each morning until you say switch.
+  This dashboard is Muggy's own build, in Maggie's dashboard form and the tan Skyrim look. Your <a href="https://claypnw.github.io/menu/morning.html">Morning Menu page</a> still stands each morning until you say switch.
 </footer>
 
 </div>
