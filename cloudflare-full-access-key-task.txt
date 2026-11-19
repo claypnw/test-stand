@@ -1,0 +1,27 @@
+TASK: CREATE ONE FULL-ACCESS CLOUDFLARE API TOKEN
+
+GOAL
+
+Create one Cloudflare API token that gives the holder the same access Clay has in his own Cloudflare account: read, write, and delete, over everything in the account — every site and every store, the ones standing now and any made later.
+
+FACTS
+
+- Account: Clay's Cloudflare account, ID ff015afa0634d0159522bdc5094c5d08
+- Sign-in: dash.cloudflare.com, claypnw@gmail.com
+- Token name: Muggy full access
+- Token expiration: none (leave it blank)
+- The token is shown one time only when it is created. It goes into secure storage. It is never written into a chat, a document, or this file.
+
+STEPS (from the screens as they stand on 2026-11-19)
+
+1. Sign in at dash.cloudflare.com. Click the person icon at the far top right, then My Profile, then API Tokens on the left.
+2. Click Create Token.
+3. Token name: Muggy full access
+4. In the Policies part, click "Start from scratch," then "Start with an Account policy."
+5. The resource line already reads "Include — All accounts." Leave it. Click "Bulk Select," then "Add all Read & Write permissions."
+6. Click the X at the top right of the policy box to close it. (The trash can beside the X deletes the policy.)
+7. In the Policies part, click "Start from scratch," then "Start with a Zone policy." Click "Bulk Select," then "Add all Read & Write permissions." Click the X.
+8. In the Policies part, click "Start from scratch," then "Start with a User policy." Click "Bulk Select," then "Add all Read & Write permissions." Click the X.
+9. Token expiration: leave it blank.
+10. Click Create.
+11. Copy the token at once — it is shown one time only — and put it in secure storage.
