@@ -1,1 +1,0 @@
-Live test 2026-11-19: this file landed in GitHub and nothing was touched on Cloudflare by hand after it.
