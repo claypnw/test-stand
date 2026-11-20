@@ -26,4 +26,4 @@ rem page address tells the page where the translator lives:
 rem on this PC itself (localhost), port 1984. Without that
 rem part the page would only show test pictures.
 timeout /t 3 /nobreak >nul
-start "" chrome "https://claypnw.github.io/test-stand/cameras.html?t=http://localhost:1984"
+start "" chrome "https://test-stand-6ku.pages.dev/cameras.html?t=http://localhost:1984"
