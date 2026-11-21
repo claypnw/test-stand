@@ -1,1 +1,0 @@
-Change-control gate test file, 2026-11-20. Published to prove the shop publisher records every landed publish as a change-control movement (Hearth ITIL 2.11).
