@@ -1,0 +1,1 @@
+Publisher mail-check fix test — 2026-11-23. Harmless test file for the re-routed post-publish mail check.
