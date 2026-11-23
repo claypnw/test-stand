@@ -805,7 +805,7 @@ var SKETCH = "\n<div style=\"margin:6px 0;max-width:336px;\">\n<svg viewBox=\"0 
           var items = bodies.map(function(b) { return b.replace(/(^|\.\s+)([a-z])/g, function(m, a, c) { return a + c.toUpperCase(); }); }); s += '<p class="athead"><strong>At ' + e.n + ':</strong></p><ul class="atlist">' + items.map(function(b) { return '<li>' + b + '</li>'; }).join("") + '</ul>';
         }
       }
-            s += '<span class="talebtn" onclick="openTale(\'' + e.n.replace(/'/g, "\'") + '\')"><svg width="15" height="15" viewBox="0 0 24 24" style="vertical-align:-2px" aria-hidden="true"><path d="M4 21 V11 a8 8 0 0 1 16 0 V21 Z" fill="none" stroke="#2f1a12" stroke-width="2.4"/><path d="M12 20 c-2.6-1.8-3.8-3.7-3.2-6 .8.9 1.3 1.5 1.7 2.3.2-1.8.8-3.2 2-4.6 1.9 2.3 2.3 4.6 1.2 6.4-.5.8-1 1.4-1.7 1.9 Z" fill="#b54f24"/><path d="M7.5 21 h9" stroke="#7a4416" stroke-width="2.2" stroke-linecap="round"/></svg> Leave a tale</span><div class="tales"></div>';
+            s += '<span class="talebtn" onclick="openTale(\'' + e.n.replace(/'/g, "\'") + '\')"><svg width="15" height="15" viewBox="0 0 24 24" style="vertical-align:-2px" aria-hidden="true"><path d="M4 21 V11 a8 8 0 0 1 16 0 V21 Z" fill="none" stroke="#2f1a12" stroke-width="2.4"/><path d="M12 20 c-2.6-1.8-3.8-3.7-3.2-6 .8.9 1.3 1.5 1.7 2.3.2-1.8.8-3.2 2-4.6 1.9 2.3 2.3 4.6 1.2 6.4-.5.8-1 1.4-1.7 1.9 Z" fill="#b54f24"/><path d="M7.5 21 h9" stroke="#7a4416" stroke-width="2.2" stroke-linecap="round"/></svg> Preview a tale</span><div class="tales"></div>';
       var band = PICS[e.n] ? '<img src="' + PICS[e.n] + '" alt="Painted view of ' + e.n + '" style="' + (WIDE[e.n] ? 'width:100%;height:auto' : 'width:100%;height:320px;object-fit:contain') + ';border-radius:8px;display:block;margin-top:8px" />' : '';
       return s + '</div></div>' + band + '</div>';
     }).join(""); }).join("");
@@ -835,25 +835,25 @@ var SKETCH = "\n<div style=\"margin:6px 0;max-width:336px;\">\n<svg viewBox=\"0 
 <div class="veil" id="veil">
   <div class="pop">
     <div id="popform">
-      <h3>Leave your tale</h3>
+      <h3>Preview your tale</h3>
       <p class="facts" id="popplace"></p>
       <label for="tname">Your name, as you would have it stand</label>
       <input id="tname" type="text" placeholder="e.g. Dana of Phoenix" />
       <label for="ttale">Your tale of it</label>
       <textarea id="ttale" placeholder="What you found, what surprised you, what the next traveler should know\u2026"></textarea>
-      <button class="popbtn" type="button" onclick="previewTale()">See it as it will stand</button>
+      <button class="popbtn" type="button" onclick="previewTale()">Preview on this page</button>
       <button class="popbtn plain" type="button" onclick="closeTale()">Not now</button>
     </div>
     <div id="popprev" style="display:none;">
-      <h3>As it will stand</h3>
-      <p class="facts">Read it as the next traveler will read it. If it stands true, publish it.</p>
+      <h3>Your preview</h3>
+      <p class="facts">This is a preview only. Your tale is not saved or sent to the keeper.</p>
       <div class="taleview" id="taleview"></div>
-      <button class="popbtn" type="button" onclick="publishTale()">Yes, publish</button>
+      <button class="popbtn" type="button" onclick="publishTale()">Show on this page</button>
       <button class="popbtn plain" type="button" onclick="backTale()">Back and change</button>
     </div>
     <div id="popdone" style="display:none;">
-      <h3>It stands.</h3>
-      <p>Your tale is live on this place, for every traveler who comes after. The keeper of the Hearth has been told of it.</p>
+      <h3>Shown on this page only</h3>
+      <p>Your tale is shown only in this open page. It has not been saved or sent to the keeper. Reloading this page will remove it.</p>
       <button class="popbtn" type="button" onclick="closeTale()">Close</button>
     </div>
   </div>
