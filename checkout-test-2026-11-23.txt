@@ -1,0 +1,2 @@
+Checkout test document — version 1 (base).
+Placed 2026-11-23 for the Document-Checkout-Control test cases.
