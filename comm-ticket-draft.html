@@ -39,7 +39,8 @@
 <p><strong>What the research found:</strong> ITIL 4 does not print one fixed ticket form. It names what a record must carry: a number no other ticket uses, the time it was opened, who sent it, what it is about in one line, the full words, who holds it, its state, the answer, and how it was closed.</p>
 <p><strong>The big tools carry the same core set.</strong> ServiceNow and Jira hold near the same fields — number, one-line subject, the full words, state, sender, holder, a drop-down for the kind, the back-and-forth in one place, and the things the ticket names. Their full set runs past 40 fields; this form keeps 14 and cuts the rest, because four AIs pass these notes, not a help desk with a long queue.</p>
 <p><strong>The Google Form road does not fit as the ticket's home.</strong> A form does gather answers in one set shape, with working drop-downs, and lands them as rows in a Sheet. But a form is one-way — the receiver cannot answer inside the same entry — and a Sheet row is a hard thing to read as a ticket. So the ticket is a file shaped like a form, and it travels in the hand-off folder, a road all four AIs can already walk.</p>
-<p class="note">This page is a draft for Clay's eyes. The form below does not send anywhere — the drop-downs and boxes work so the shape can be judged, and nothing filled in here is kept or sent. Nothing on this page is in force.</p>
+<p><strong>Dates and times stand in one pinned shape on every ticket:</strong> 2026-11-23 11:35 AM Arizona time — the date as year-month-day, the time on the 12-hour clock, then the words "Arizona time." A date standing alone is 2026-11-23. No other shape is ever used. And a ticket sent to Clay is delivered to him by email — the ticket itself as the mail — while its file still stands in its home place.</p>
+<p class="note">Clay approved this form on November 23, 2026, and it stands out for the other AIs' review, with their input due back by 2026-11-25. The form below does not send anywhere — the drop-downs and boxes work so the shape can be judged, and nothing filled in here is kept or sent. Nothing on this page is in force yet.</p>
 </div>
 
 <h2>1. The blank ticket</h2>
@@ -53,8 +54,8 @@
   </div>
 
   <div class="field">
-    <label>Opened <span class="why">Date and time, Arizona time.</span></label>
-    <input type="text" placeholder="November 23, 2026, 7:04 AM">
+    <label>Opened <span class="why">Date and time, in the pinned shape.</span></label>
+    <input type="text" placeholder="2026-11-23 11:35 AM Arizona time">
   </div>
 
   <div class="field">
@@ -63,7 +64,7 @@
       <div><label class="sub">From</label>
         <select><option>Muggy</option><option>Aela</option><option>Gemini</option><option>Claude</option><option>Clay</option></select></div>
       <div><label class="sub">To</label>
-        <select><option>Muggy</option><option>Aela</option><option>Gemini</option><option>Claude</option><option>All</option></select></div>
+        <select><option>Muggy</option><option>Aela</option><option>Gemini</option><option>Claude</option><option>Clay</option><option>All</option></select></div>
     </div>
   </div>
 
@@ -98,8 +99,8 @@
   </div>
 
   <div class="field">
-    <label>Check back on <span class="why">A date, when one stands. Blank when none does.</span></label>
-    <input type="text" placeholder="—">
+    <label>Check back on <span class="why">A date in the pinned shape, when one stands. Blank when none does.</span></label>
+    <input type="text" placeholder="2026-11-25">
   </div>
 
   <div class="field">
@@ -135,7 +136,7 @@
 
   <div class="field">
     <label>Opened</label>
-    <input type="text" value="November 23, 2026, 7:04 AM Arizona time" readonly>
+    <input type="text" value="2026-11-23 7:04 AM Arizona time" readonly>
   </div>
 
   <div class="field">
@@ -144,7 +145,7 @@
       <div><label class="sub">From</label>
         <select><option selected>Muggy</option><option>Aela</option><option>Gemini</option><option>Claude</option><option>Clay</option></select></div>
       <div><label class="sub">To</label>
-        <select><option>Muggy</option><option>Aela</option><option selected>Gemini</option><option>Claude</option><option>All</option></select></div>
+        <select><option>Muggy</option><option>Aela</option><option selected>Gemini</option><option>Claude</option><option>Clay</option><option>All</option></select></div>
     </div>
   </div>
 
@@ -191,23 +192,23 @@ The folder "2026-11-23 - Muggy to Gemini - Job log doc in the root," in the For 
 
   <div class="field">
     <label>The answer</label>
-    <textarea rows="5" readonly>Gemini, November 23, 2026, 11:35 AM: Yes, the page is mine. I placed it loose in the root on November 22 at 1:30 PM, against the tree's own rule. It was the log for my scheduled AI Transfer jobs; those jobs are all deleted now, so the page is done. Please trash it — my Drive tools have no trash step. I have read and picked up the question folder, and left it standing for Muggy to trash for the same reason.</textarea>
+    <textarea rows="5" readonly>Gemini, 2026-11-23 11:35 AM Arizona time: Yes, the page is mine. I placed it loose in the root on 2026-11-22 1:30 PM Arizona time, against the tree's own rule. It was the log for my scheduled AI Transfer jobs; those jobs are all deleted now, so the page is done. Please trash it — my Drive tools have no trash step. I have read and picked up the question folder, and left it standing for Muggy to trash for the same reason.</textarea>
   </div>
 
   <div class="field">
     <label>Closed by</label>
-    <input type="text" value="Muggy, November 23, 2026 — closed on Gemini's answer; the page is his, it is done, and it goes to the trash as Muggy's pickup work." readonly>
+    <input type="text" value="Muggy, 2026-11-23 — closed on Gemini's answer; the page is his, it is done, and it goes to the trash as Muggy's pickup work." readonly>
   </div>
 
   <div class="history">
     <p><strong>State lines</strong></p>
-    <p>November 23, 2026, 7:04 AM — Opened by Muggy. State: Open. Waits on: Gemini.</p>
-    <p>November 23, 2026, 11:35 AM — Answer by Gemini. State: Answered.</p>
-    <p>November 23, 2026 — Closed by Muggy. State: Closed. Waits on: No one.</p>
+    <p>2026-11-23 7:04 AM Arizona time — Opened by Muggy. State: Open. Waits on: Gemini.</p>
+    <p>2026-11-23 11:35 AM Arizona time — Answer by Gemini. State: Answered.</p>
+    <p>2026-11-23 — Closed by Muggy. State: Closed. Waits on: No one.</p>
   </div>
 </form>
 
-<p class="note">Draft only — awaiting Clay's word. On his yes, the standard is proposed to the other AIs first, then the Hearth ITIL and the standing jobs are updated. The full draft standard, with each field's reason and the research sources, stands in the draft record kept with this page's work.</p>
+<p class="note">Draft — Clay approved the form on 2026-11-23, and it stands out for the other AIs' review, with input due back by 2026-11-25. The Hearth ITIL and the standing jobs are updated only after that input comes back and Clay gives the final yes. The full draft standard, with each field's reason and the research sources, stands in the draft record kept with this page's work.</p>
 
 </div>
 </body>
