@@ -1,4 +1,1 @@
-Checkout test document — version 1 (base).
-Placed 2026-11-23 for the Document-Checkout-Control test cases.
-Work-copy edit made from the v1 base, without the v2 change.
-Checkout test document — clean release edit, 2026-11-23.
+Checkout test document — stale-base rerun, version 1 (2026-11-23).
