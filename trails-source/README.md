@@ -21,6 +21,16 @@ https://test-stand-6ku.pages.dev/trails-and-finds.html).
 - `Trails-Living-Record-0.1.md` — Maggie's living working record built
   from those 27 entries: what each entry says, what is not yet checked,
   and the working process for keeping it current.
+- `inputs/trails-page-sample78-2026-10-25.html` — the last reviewed
+  sample page (sample 78, 2026-10-25) the builder reads as its source:
+  5,612,057 bytes, git blob 55479cac65c46b98e0b39518ec416bce0f9fdca7.
+  Escrowed 2026-11-23 so the build no longer depends on a file standing
+  only on Muggy's machine.
+- `inputs/goat-camp-wide-composite.jpg` — the wide Goat Camp picture
+  the builder reads: 316,443 bytes, git blob
+  db7f934e5dbc4b1cac3e057c1b71a17a5c205765. Escrowed 2026-11-23 with
+  the sample page. The finished page carries all 27 pictures inside
+  itself; these inputs are what a rebuild reads.
 
 ## The 2026-11-23 change (CHG-20261123-trails-preview)
 
@@ -39,3 +49,8 @@ entry, and no picture changed.
 - The builder carries the same eight changes as its step 6, each
   guarded to exactly one match, so a rebuild cannot bring the false
   claim back.
+- Served-page verification, 2026-11-23: the live page was fetched from
+  its public address and its bytes hash to the same git blob as the
+  fixed page above (9ac1b45f…), 5,814,869 bytes served, carrying the
+  27 entries and 27 embedded pictures. What is served is what was
+  promoted.
