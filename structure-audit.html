@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Structure audit — every thing in its own home — 2026-11-23</title>
+<style>
+  body { background:#2b1d12; color:#2a1c10; font-family: Georgia, 'Times New Roman', serif; margin:0; padding:24px; }
+  .sheet { background:#f5e9cf; max-width:1060px; margin:0 auto; padding:32px 36px 40px; border:3px solid #b8912f; border-radius:10px; box-shadow:0 4px 24px rgba(0,0,0,.5); }
+  h1 { color:#6d1420; font-size:34px; margin:0 0 10px; }
+  h2 { color:#6d1420; font-size:25px; margin:34px 0 6px; border-bottom:2px solid #b8912f; padding-bottom:4px; }
+  p, li { font-size:19px; line-height:1.45; }
+  .topbox { background:#fdf6dd; border:2px solid #b8912f; border-radius:8px; padding:14px 20px; margin:16px 0 6px; }
+  .row { display:flex; align-items:stretch; gap:14px; margin:12px 0 4px; flex-wrap:wrap; }
+  .tree { flex:1 1 380px; background:#fdf6dd; border:2px solid #8a6d2f; border-radius:8px; padding:12px 16px; }
+  .tree .cap { font-weight:bold; font-size:16px; letter-spacing:1px; color:#6d1420; margin-bottom:8px; }
+  .box { border:2px solid #5a4020; border-radius:6px; padding:7px 12px; margin:6px 0; font-size:18px; background:#fffdf4; }
+  .box.parent { background:#e9d9ae; font-weight:bold; }
+  .box.wrong { background:#f6cfc4; border-color:#8e2f1d; margin-left:34px; }
+  .box.right { background:#cfe3bd; border-color:#3c6423; margin-left:34px; }
+  .box.own { background:#cfe3bd; border-color:#3c6423; font-weight:bold; }
+  .box.plain { margin-left:34px; }
+  .arrow { align-self:center; font-size:38px; color:#6d1420; font-weight:bold; padding:0 2px; }
+  .caption { font-size:19px; margin:6px 0 0; }
+  .tag { display:inline-block; font-size:15px; font-weight:bold; padding:2px 10px; border-radius:10px; color:#fff; vertical-align:middle; }
+  .tag.before { background:#8e2f1d; } .tag.after { background:#3c6423; }
+  .note { font-size:17px; color:#54432a; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<h1>Every thing in its own home — the structure audit, 2026-11-23</h1>
+
+<div class="topbox">
+<p><strong>What is being done:</strong> every file and folder that stands under an unrelated thing's home is being moved to its own home — its own repository, its own folder, its own place — and each diagram below shows one move: where the thing stands now, and where it goes.</p>
+<p><strong>Why:</strong> Clay's standing rule — a thing is never stored under an unrelated thing's home, where it cannot be found. Every thing stands in its own home; sharing a home is the exception, only for closely linked things. A thing stored in the wrong place is a thing nobody can find by its name.</p>
+<p class="note">This page is the audit and the plan. Nothing has been moved yet. Each move, when it runs, goes in the settled order: the things that point at the old place are updated first, and the old address is turned off last. The full written audit stands with this page's record (audit.md, 2026-11-23).</p>
+</div>
+
+<h2>1. Raven's Reach — out of the Health repository, into its own repository</h2>
+<div class="row">
+  <div class="tree"><div class="cap"><span class="tag before">BEFORE</span></div>
+    <div class="box parent">GitHub repository: Health (Clay's health records)</div>
+    <div class="box plain">standards/</div>
+    <div class="box wrong">Raven's Reach — the AIs' shared message place (920 files)</div>
+  </div>
+  <div class="arrow">&#8594;</div>
+  <div class="tree"><div class="cap"><span class="tag after">AFTER</span></div>
+    <div class="box own">GitHub repository: ravens-reach (its own home, already built)</div>
+    <div class="box right">Raven's Reach — Active, Archive, and all its folders</div>
+    <div class="box parent">GitHub repository: Health</div>
+    <div class="box plain">health records only</div>
+  </div>
+</div>
+<p class="caption">The change: Raven's Reach moves out of the Health repository into its own repository, claypnw/ravens-reach. Maggie's road is repointed first, then the jobs and the dashboard.</p>
+
+<h2>2. The Hearth ITIL copies — out of Health; one source stands</h2>
+<div class="row">
+  <div class="tree"><div class="cap"><span class="tag before">BEFORE</span></div>
+    <div class="box parent">GitHub repository: Health</div>
+    <div class="box plain">standards/</div>
+    <div class="box wrong">The Hearth ITIL — a copy (text and PDF)</div>
+    <div class="box parent">GitHub repository: itil-standards</div>
+    <div class="box plain">The Hearth ITIL — the production copy</div>
+  </div>
+  <div class="arrow">&#8594;</div>
+  <div class="tree"><div class="cap"><span class="tag after">AFTER</span></div>
+    <div class="box own">GitHub repository: itil-standards</div>
+    <div class="box right">The Hearth ITIL — the one source</div>
+    <div class="box parent">GitHub repository: Health</div>
+    <div class="box plain">no ITIL copy stands here</div>
+  </div>
+</div>
+<p class="caption">The change: the ITIL copies inside Health are dropped. The ITIL lives in one place only — its own repository, claypnw/itil-standards.</p>
+
+<h2>3. The shop standards set — out of Health, into the documentation library</h2>
+<div class="row">
+  <div class="tree"><div class="cap"><span class="tag before">BEFORE</span></div>
+    <div class="box parent">GitHub repository: Health</div>
+    <div class="box plain">standards/</div>
+    <div class="box wrong">Small Shops, Production-Programs, System-Map, Standing Instructions, Shared-Words, Onboarding</div>
+  </div>
+  <div class="arrow">&#8594;</div>
+  <div class="tree"><div class="cap"><span class="tag after">AFTER</span></div>
+    <div class="box own">GitHub repository: system-documentation (the documentation library)</div>
+    <div class="box right">Standards/ — the shop standards set stands here</div>
+    <div class="box parent">GitHub repository: Health</div>
+    <div class="box plain">health records only</div>
+  </div>
+</div>
+<p class="caption">The change: the shop and system documents move out of the health repository into the documentation library's own repository, claypnw/system-documentation.</p>
+
+<h2>4. Raven's Reach working files — out of the Small Shops folder</h2>
+<div class="row">
+  <div class="tree"><div class="cap"><span class="tag before">BEFORE</span></div>
+    <div class="box parent">This machine: workspace/small-shops (the Small Shops document's home)</div>
+    <div class="box plain">Small Shops source versions — rightly here</div>
+    <div class="box wrong">ravens-reach-open-state.txt and the Raven's Reach draft notes</div>
+  </div>
+  <div class="arrow">&#8594;</div>
+  <div class="tree"><div class="cap"><span class="tag after">AFTER</span></div>
+    <div class="box own">This machine: workspace/goals/raven-s-reach-automated-communication (Raven's Reach's own work home)</div>
+    <div class="box right">the open-state marker and the draft notes</div>
+    <div class="box parent">This machine: workspace/small-shops</div>
+    <div class="box plain">Small Shops material only</div>
+  </div>
+</div>
+<p class="caption">The change: the Raven's Reach marker and drafts move to the Raven's Reach work's own goal folder, and the check jobs are repointed to the new address.</p>
+
+<h2>5. Gilded Pages assets — out of the Morning Scroll's folder</h2>
+<div class="row">
+  <div class="tree"><div class="cap"><span class="tag before">BEFORE</span></div>
+    <div class="box parent">This machine: workspace/morning-post (the Morning Scroll's home)</div>
+    <div class="box plain">Scroll builders, editions, logs — rightly here</div>
+    <div class="box wrong">gilded-pages-assets — the Gilded Pages' pictures</div>
+  </div>
+  <div class="arrow">&#8594;</div>
+  <div class="tree"><div class="cap"><span class="tag after">AFTER</span></div>
+    <div class="box own">This machine: workspace/gilded-pages (a home of its own, to be made)</div>
+    <div class="box right">gilded-pages-assets</div>
+    <div class="box parent">This machine: workspace/morning-post</div>
+    <div class="box plain">Scroll material only</div>
+  </div>
+</div>
+<p class="caption">The change: the Gilded Pages' assets move into a Gilded Pages folder of their own, and the Gilded Pages jobs are repointed.</p>
+
+<h2>6. A note for Maggie — out of the YouTube transcripts repository</h2>
+<div class="row">
+  <div class="tree"><div class="cap"><span class="tag before">BEFORE</span></div>
+    <div class="box parent">GitHub repository: youtube-transcripts</div>
+    <div class="box plain">transcripts and the programs that gather them — rightly here</div>
+    <div class="box wrong">Review-Maggie-2026-11-20.md — a note to Maggie</div>
+  </div>
+  <div class="arrow">&#8594;</div>
+  <div class="tree"><div class="cap"><span class="tag after">AFTER</span></div>
+    <div class="box own">Raven's Reach (in its own repository, Finding 1)</div>
+    <div class="box right">the review note, where Maggie reads her notes</div>
+  </div>
+</div>
+<p class="caption">The change: the note to Maggie moves to Raven's Reach, the place her notes stand.</p>
+
+<h2>7. Yard and estate sale sheets — out of the Morning Scroll repository</h2>
+<div class="row">
+  <div class="tree"><div class="cap"><span class="tag before">BEFORE</span></div>
+    <div class="box parent">GitHub repository: morning-scroll (the newspaper)</div>
+    <div class="box plain">editions, audio, builders — rightly here</div>
+    <div class="box wrong">payson-yard-estate-sales PDFs — a different page's sheets</div>
+  </div>
+  <div class="arrow">&#8594;</div>
+  <div class="tree"><div class="cap"><span class="tag after">AFTER</span></div>
+    <div class="box own">A repository of its own for the yard and estate sales page (to be made)</div>
+    <div class="box right">the yard and estate sale sheets</div>
+  </div>
+</div>
+<p class="caption">The change: the yard and estate sale sheets get a repository of their own, and the two daily jobs that publish them are repointed.</p>
+
+<h2>8. A loose job log — out of the AI Transfer root (Google Drive)</h2>
+<div class="row">
+  <div class="tree"><div class="cap"><span class="tag before">BEFORE</span></div>
+    <div class="box parent">Google Drive: AI Transfer (the tree's root)</div>
+    <div class="box plain">README, For Gemini, For Muggy, For Maggie, For Claude — rightly here</div>
+    <div class="box wrong">"Gemini AI Transfer Job Log" — standing loose, in no folder</div>
+  </div>
+  <div class="arrow">&#8594;</div>
+  <div class="tree"><div class="cap"><span class="tag after">AFTER</span></div>
+    <div class="box own">Google Drive: AI Transfer / For Gemini, in its own hand-off folder</div>
+    <div class="box right">the job log — or the trash, if Gemini says it is finished</div>
+  </div>
+</div>
+<p class="caption">The change: the loose log goes into For Gemini in its own folder. Gemini was asked about it on 2026-11-23; its answer is outstanding.</p>
+
+<h2>9. Bank statements — out of the Drive root, into Money Records</h2>
+<div class="row">
+  <div class="tree"><div class="cap"><span class="tag before">BEFORE</span></div>
+    <div class="box parent">Google Drive: the top level</div>
+    <div class="box wrong">bank statement PDFs (the eStmt set) — standing loose</div>
+    <div class="box parent">Google Drive: Money Records folder</div>
+    <div class="box plain">the money records stand here</div>
+  </div>
+  <div class="arrow">&#8594;</div>
+  <div class="tree"><div class="cap"><span class="tag after">AFTER</span></div>
+    <div class="box own">Google Drive: Money Records</div>
+    <div class="box right">the bank statements, with the rest of the money records</div>
+  </div>
+</div>
+<p class="caption">The change: the statements are placed into Money Records. This one is Clay's call — files are placed straight into a folder as made, never moved into it, by his standing rule.</p>
+
+<h2>10. The retired "Gemini Dumbass" folder — out of the Drive root</h2>
+<div class="row">
+  <div class="tree"><div class="cap"><span class="tag before">BEFORE</span></div>
+    <div class="box parent">Google Drive: the top level</div>
+    <div class="box wrong">"Gemini Dumbass" folder — a retired road, holding one leftover redline file</div>
+    <div class="box plain">AI Transfer — the road that replaced it (2026-11-20)</div>
+  </div>
+  <div class="arrow">&#8594;</div>
+  <div class="tree"><div class="cap"><span class="tag after">AFTER</span></div>
+    <div class="box own">The folder retires; the redline file goes to the ITIL work's records</div>
+    <div class="box right">3.10-Promotion-Redline-2026-11-19, with the SOP-001 promotion records</div>
+  </div>
+</div>
+<p class="caption">The change: the retired folder is closed out and its one file goes to the ITIL records, once the ITIL 3.10 wording settles with Maggie — the folder's own settled retirement plan.</p>
+
+<h2>Checked and found right</h2>
+<p>16 of the 20 GitHub repositories hold only their own things — among them itil-standards, system-documentation, ravens-reach, menu, gilded-pages, test-stand, family-photos-records, working-system-records, product-search, gemini-task-worker, and x-posts. The local goals tree (103 goal folders, each named for its own work) is right. In Drive, the AI Transfer tree's four AI folders and its two Consolidated folders are right by the tree's own design, and the Drive copy of the ITIL for Gemini is a named, ordered exception.</p>
+<p class="note">Not checked: inside most repositories only the top level was listed (Health was read in full, all 1,167 paths); Drive folders other than AI Transfer were not opened.</p>
+
+</div>
+</body>
+</html>
