@@ -1,0 +1,656 @@
+{
+  "schema": "hearth-trails-source-recovery-v1",
+  "status": "WORKING HANDOFF - not a production replacement",
+  "source": {
+    "repository": "claypnw/test-stand",
+    "path": "trails-and-finds.html",
+    "blob": "dee2507538181dae731622d81d544a895688946d",
+    "date": "2026-11-23",
+    "count": 27,
+    "note": "Original ENTRIES JSON retained unchanged in its original order. Original page uses entry names and array order; no separate stable record IDs were found. Original PICS dictionary contains all 27 matching names."
+  },
+  "entries": [
+    {
+      "n": "American Gulch Trail",
+      "u": "https://discovergilacounty.com/hiking-payson-area-trails-system/",
+      "f": "The trail stands in town, off Main Street, with trailhead posts on Webster Street and Pheasant Lane. Its two linked walks — 0.6 miles on the north side, 1 mile on the south — run in the wash under broken cliffs, past an old concrete water pipe left over from the town's early days. The wash is greener in the wet months, with big rocks to scramble, wildlife tracks in the sand, and thorny plants to step around. Easy on the north side, moderate on the south.",
+      "t": [
+        "hiking",
+        "walking",
+        "trail",
+        "biking"
+      ],
+      "d": "less than 10 minutes from the Hearth — 5 minutes by road, a mile and a half",
+      "g": "Trails of the Town",
+      "more": {
+        "hiking": "For the hiker: the walk runs in the wash under broken cliffs, past an old concrete water pipe from the town's early days — easy on the north side, moderate on the south, with big rocks to scramble.",
+        "walking": "For the walker: two linked walks near Main Street — 0.6 miles on the north side, 1 mile on the south — greener in the wet months, with wildlife tracks in the sand.",
+        "trail": "For the trail-seeker: the path runs in the wash under broken cliffs — two linked trails, north and south of Main Street.",
+        "biking": "For the rider: the south section is open to every kind of traveler, and the county's riding page rates it difficult for bikes — Payson's steep ground shows here."
+      },
+      "r": "Easy on the north side, moderate on the south",
+      "br": "Difficult",
+      "th": "gulch",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a trail under jagged peaks, with pines and a trail banner.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 26 L10 12 L17 20 L26 8 L34 17 L44 6 L52 15 L60 10 L68 19 L68 32 L0 32 Z\" fill=\"#5d7186\"/><path d=\"M0 30 L13 19 L21 26 L33 15 L43 24 L55 16 L68 25 L68 34 L0 34 Z\" fill=\"#46586c\"/><path d=\"M43 6 L47.5 10.5 L43.8 12.2 L41 10 Z M25 8.6 L28.4 12 L25.8 13.4 L23.4 11.4 Z\" fill=\"#e9edf0\" opacity=\"0.92\"/><path d=\"M4 27 l3.4499999999999997 -8.049999999999999 l3.4499999999999997 8.049999999999999 Z M5.38 21.825 l2.07 -4.6 l2.07 4.6 Z\" fill=\"#2c4632\"/><rect x=\"6.76\" y=\"27\" width=\"1.38\" height=\"2.3\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M58 28 l3.9000000000000004 -9.1 l3.9000000000000004 9.1 Z M59.56 22.15 l2.3400000000000003 -5.2 l2.3400000000000003 5.2 Z\" fill=\"#2c4632\"/><rect x=\"61.12\" y=\"28\" width=\"1.56\" height=\"2.6\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M51 29 l2.7 -6.3 l2.7 6.3 Z M52.08 24.95 l1.62 -3.6 l1.62 3.6 Z\" fill=\"#2c4632\"/><rect x=\"53.16\" y=\"29\" width=\"1.08\" height=\"1.8\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M14 33 C22 29 26 27 34 26 C42 25 48 27 56 30\" fill=\"none\" stroke=\"#c9b98a\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><rect x=\"30\" y=\"15\" width=\"1.4\" height=\"13\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M31.4 15.5 h7 v6 l-3.5 -2 l-3.5 2 Z\" fill=\"#b54f24\"/><path d=\"M31.4 15.5 h7\" fill=\"none\" stroke=\"#e8b64c\" stroke-width=\"0.7\" stroke-linecap=\"round\"/></svg>"
+    },
+    {
+      "n": "Boulders Loop Trail",
+      "u": "https://discovergilacounty.com/hiking-payson-area-trails-system/",
+      "f": "In town, the loop runs 2.4 miles through the pale granite of the Granite Dells, past whitish, tooth-like boulders, with trees pressed close and mountains beyond. Wildflowers bloom in spring, and javelina are about. Moderate.",
+      "t": [
+        "hiking",
+        "walking",
+        "trail",
+        "loop",
+        "biking",
+        "wildlife"
+      ],
+      "d": "a short ride in town — its ride from the Hearth is not yet measured",
+      "g": "Trails of the Town",
+      "more": {
+        "hiking": "For the hiker: the loop runs 2.4 miles through the pale granite of the Granite Dells, past tooth-like boulders with mountains beyond — moderate.",
+        "walking": "For the walker: a 2.4-mile loop through the Dells' white boulders and close-pressed trees, with wildflowers in spring.",
+        "trail": "For the trail-seeker: the path loops 2.4 miles through the pale granite of the Granite Dells.",
+        "loop": "For the loop-seeker: the trail runs the full loop — 2.4 miles around the Dells' boulders, ending where you began.",
+        "biking": "For the rider: extremely popular with mountain bikers, by the town's own trail sheet — challenging hills, rocks, and washes. Its bike rating is moderate.",
+        "wildlife": "For the wildlife watcher: javelina are about among the pale boulders and the pressed-close trees."
+      },
+      "r": "Moderate",
+      "br": "Moderate",
+      "th": "boulders",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a trail under jagged peaks, with pines and a trail banner.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 26 L10 12 L17 20 L26 8 L34 17 L44 6 L52 15 L60 10 L68 19 L68 32 L0 32 Z\" fill=\"#5d7186\"/><path d=\"M0 30 L13 19 L21 26 L33 15 L43 24 L55 16 L68 25 L68 34 L0 34 Z\" fill=\"#46586c\"/><path d=\"M43 6 L47.5 10.5 L43.8 12.2 L41 10 Z M25 8.6 L28.4 12 L25.8 13.4 L23.4 11.4 Z\" fill=\"#e9edf0\" opacity=\"0.92\"/><path d=\"M4 27 l3.4499999999999997 -8.049999999999999 l3.4499999999999997 8.049999999999999 Z M5.38 21.825 l2.07 -4.6 l2.07 4.6 Z\" fill=\"#2c4632\"/><rect x=\"6.76\" y=\"27\" width=\"1.38\" height=\"2.3\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M58 28 l3.9000000000000004 -9.1 l3.9000000000000004 9.1 Z M59.56 22.15 l2.3400000000000003 -5.2 l2.3400000000000003 5.2 Z\" fill=\"#2c4632\"/><rect x=\"61.12\" y=\"28\" width=\"1.56\" height=\"2.6\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M51 29 l2.7 -6.3 l2.7 6.3 Z M52.08 24.95 l1.62 -3.6 l1.62 3.6 Z\" fill=\"#2c4632\"/><rect x=\"53.16\" y=\"29\" width=\"1.08\" height=\"1.8\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M14 33 C22 29 26 27 34 26 C42 25 48 27 56 30\" fill=\"none\" stroke=\"#c9b98a\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><rect x=\"30\" y=\"15\" width=\"1.4\" height=\"13\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M31.4 15.5 h7 v6 l-3.5 -2 l-3.5 2 Z\" fill=\"#b54f24\"/><path d=\"M31.4 15.5 h7\" fill=\"none\" stroke=\"#e8b64c\" stroke-width=\"0.7\" stroke-linecap=\"round\"/></svg>"
+    },
+    {
+      "n": "Cypress Trail",
+      "u": "https://discovergilacounty.com/hiking-payson-area-trails-system/",
+      "f": "In town, the trail runs 2 miles through the Granite Dells, off Granite Dells Road. It is a newer trail, hikers only, and it runs over to Boulders Loop. Moderate.",
+      "t": [
+        "hiking",
+        "walking",
+        "trail"
+      ],
+      "d": "a short ride in town — its ride from the Hearth is not yet measured",
+      "g": "Trails of the Town",
+      "more": {
+        "hiking": "For the hiker: two miles through the Granite Dells, hikers only, running over to join Boulders Loop — moderate.",
+        "walking": "For the walker: a newer 2-mile walk in the Dells off Granite Dells Road, running over to Boulders Loop.",
+        "trail": "For the trail-seeker: the path runs 2 miles through the Granite Dells, over to Boulders Loop."
+      },
+      "r": "Moderate",
+      "th": "cypress",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a trail under jagged peaks, with pines and a trail banner.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 26 L10 12 L17 20 L26 8 L34 17 L44 6 L52 15 L60 10 L68 19 L68 32 L0 32 Z\" fill=\"#5d7186\"/><path d=\"M0 30 L13 19 L21 26 L33 15 L43 24 L55 16 L68 25 L68 34 L0 34 Z\" fill=\"#46586c\"/><path d=\"M43 6 L47.5 10.5 L43.8 12.2 L41 10 Z M25 8.6 L28.4 12 L25.8 13.4 L23.4 11.4 Z\" fill=\"#e9edf0\" opacity=\"0.92\"/><path d=\"M4 27 l3.4499999999999997 -8.049999999999999 l3.4499999999999997 8.049999999999999 Z M5.38 21.825 l2.07 -4.6 l2.07 4.6 Z\" fill=\"#2c4632\"/><rect x=\"6.76\" y=\"27\" width=\"1.38\" height=\"2.3\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M58 28 l3.9000000000000004 -9.1 l3.9000000000000004 9.1 Z M59.56 22.15 l2.3400000000000003 -5.2 l2.3400000000000003 5.2 Z\" fill=\"#2c4632\"/><rect x=\"61.12\" y=\"28\" width=\"1.56\" height=\"2.6\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M51 29 l2.7 -6.3 l2.7 6.3 Z M52.08 24.95 l1.62 -3.6 l1.62 3.6 Z\" fill=\"#2c4632\"/><rect x=\"53.16\" y=\"29\" width=\"1.08\" height=\"1.8\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M14 33 C22 29 26 27 34 26 C42 25 48 27 56 30\" fill=\"none\" stroke=\"#c9b98a\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><rect x=\"30\" y=\"15\" width=\"1.4\" height=\"13\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M31.4 15.5 h7 v6 l-3.5 -2 l-3.5 2 Z\" fill=\"#b54f24\"/><path d=\"M31.4 15.5 h7\" fill=\"none\" stroke=\"#e8b64c\" stroke-width=\"0.7\" stroke-linecap=\"round\"/></svg>"
+    },
+    {
+      "n": "Event Center / Gila County Trail",
+      "u": "https://discovergilacounty.com/hiking-payson-area-trails-system/",
+      "f": "In town, the trail runs 3.7 miles from the Event Center's southwest corner to the Peach Orchard Trailhead, which has a vault toilet and a place to sit. It stands across from the fairgrounds and is much loved by the town's mountain bikers. More difficult.",
+      "t": [
+        "hiking",
+        "walking",
+        "biking",
+        "trail"
+      ],
+      "d": "less than 10 minutes from the Hearth — 3 minutes by road, under a mile",
+      "g": "Trails of the Town",
+      "more": {
+        "hiking": "For the hiker: the trail runs 3.7 miles from the Event Center's southwest corner to the Peach Orchard Trailhead — more difficult, across from the fairgrounds.",
+        "walking": "For the walker: a 3.7-mile walk from the Event Center to Peach Orchard, where a vault toilet and a place to sit wait at the end.",
+        "biking": "For the rider: the town's mountain bikers love this ground — 3.7 miles of trail across from the fairgrounds.",
+        "trail": "For the trail-seeker: the path runs 3.7 miles from the Event Center to the Peach Orchard Trailhead."
+      },
+      "r": "More difficult",
+      "br": "TBD",
+      "th": "eventtrail",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a trail under jagged peaks, with pines and a trail banner.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 26 L10 12 L17 20 L26 8 L34 17 L44 6 L52 15 L60 10 L68 19 L68 32 L0 32 Z\" fill=\"#5d7186\"/><path d=\"M0 30 L13 19 L21 26 L33 15 L43 24 L55 16 L68 25 L68 34 L0 34 Z\" fill=\"#46586c\"/><path d=\"M43 6 L47.5 10.5 L43.8 12.2 L41 10 Z M25 8.6 L28.4 12 L25.8 13.4 L23.4 11.4 Z\" fill=\"#e9edf0\" opacity=\"0.92\"/><path d=\"M4 27 l3.4499999999999997 -8.049999999999999 l3.4499999999999997 8.049999999999999 Z M5.38 21.825 l2.07 -4.6 l2.07 4.6 Z\" fill=\"#2c4632\"/><rect x=\"6.76\" y=\"27\" width=\"1.38\" height=\"2.3\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M58 28 l3.9000000000000004 -9.1 l3.9000000000000004 9.1 Z M59.56 22.15 l2.3400000000000003 -5.2 l2.3400000000000003 5.2 Z\" fill=\"#2c4632\"/><rect x=\"61.12\" y=\"28\" width=\"1.56\" height=\"2.6\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M51 29 l2.7 -6.3 l2.7 6.3 Z M52.08 24.95 l1.62 -3.6 l1.62 3.6 Z\" fill=\"#2c4632\"/><rect x=\"53.16\" y=\"29\" width=\"1.08\" height=\"1.8\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M14 33 C22 29 26 27 34 26 C42 25 48 27 56 30\" fill=\"none\" stroke=\"#c9b98a\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><rect x=\"30\" y=\"15\" width=\"1.4\" height=\"13\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M31.4 15.5 h7 v6 l-3.5 -2 l-3.5 2 Z\" fill=\"#b54f24\"/><path d=\"M31.4 15.5 h7\" fill=\"none\" stroke=\"#e8b64c\" stroke-width=\"0.7\" stroke-linecap=\"round\"/></svg>"
+    },
+    {
+      "n": "Goat Camp Trail",
+      "u": "https://discovergilacounty.com/hiking-payson-area-trails-system/",
+      "f": "In town, the trail runs a short 0.2 miles north of Tyler Parkway, joining the Houston Trail — rock-hopping and scrambling over sandstone, with small hidden paths branching off. Easy.",
+      "t": [
+        "hiking",
+        "walking",
+        "trail",
+        "easy"
+      ],
+      "d": "less than 10 minutes from the Hearth — 7 minutes by road, under 3 miles",
+      "g": "Trails of the Town",
+      "more": {
+        "hiking": "For the hiker: a short 0.2 miles of rock-hopping and scrambling over sandstone, with small hidden paths branching off — easy.",
+        "walking": "For the walker: a brief walk north of Tyler Parkway over the sandstone, joining the Houston Trail.",
+        "trail": "For the trail-seeker: the path is short — 0.2 miles over sandstone, joining the Houston Trail.",
+        "easy": "For the easy-seeker: rated easy — 0.2 miles of rock-hopping over sandstone."
+      },
+      "r": "Easy",
+      "th": "goatcamp",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a trail under jagged peaks, with pines and a trail banner.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 26 L10 12 L17 20 L26 8 L34 17 L44 6 L52 15 L60 10 L68 19 L68 32 L0 32 Z\" fill=\"#5d7186\"/><path d=\"M0 30 L13 19 L21 26 L33 15 L43 24 L55 16 L68 25 L68 34 L0 34 Z\" fill=\"#46586c\"/><path d=\"M43 6 L47.5 10.5 L43.8 12.2 L41 10 Z M25 8.6 L28.4 12 L25.8 13.4 L23.4 11.4 Z\" fill=\"#e9edf0\" opacity=\"0.92\"/><path d=\"M4 27 l3.4499999999999997 -8.049999999999999 l3.4499999999999997 8.049999999999999 Z M5.38 21.825 l2.07 -4.6 l2.07 4.6 Z\" fill=\"#2c4632\"/><rect x=\"6.76\" y=\"27\" width=\"1.38\" height=\"2.3\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M58 28 l3.9000000000000004 -9.1 l3.9000000000000004 9.1 Z M59.56 22.15 l2.3400000000000003 -5.2 l2.3400000000000003 5.2 Z\" fill=\"#2c4632\"/><rect x=\"61.12\" y=\"28\" width=\"1.56\" height=\"2.6\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M51 29 l2.7 -6.3 l2.7 6.3 Z M52.08 24.95 l1.62 -3.6 l1.62 3.6 Z\" fill=\"#2c4632\"/><rect x=\"53.16\" y=\"29\" width=\"1.08\" height=\"1.8\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M14 33 C22 29 26 27 34 26 C42 25 48 27 56 30\" fill=\"none\" stroke=\"#c9b98a\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><rect x=\"30\" y=\"15\" width=\"1.4\" height=\"13\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M31.4 15.5 h7 v6 l-3.5 -2 l-3.5 2 Z\" fill=\"#b54f24\"/><path d=\"M31.4 15.5 h7\" fill=\"none\" stroke=\"#e8b64c\" stroke-width=\"0.7\" stroke-linecap=\"round\"/></svg>"
+    },
+    {
+      "n": "Houston Trail",
+      "u": "https://discovergilacounty.com/hiking-payson-area-trails-system/",
+      "f": "In town, the trail runs 4.2 miles from the Houston Mesa Trailhead through ponderosa shade, with a spur to old petroglyphs off to the north. The trailhead has vault toilets, picnic tables, and horse corrals. Moderate.",
+      "t": [
+        "hiking",
+        "walking",
+        "trail",
+        "horses",
+        "biking"
+      ],
+      "d": "a short ride in town — its ride from the Hearth is not yet measured",
+      "g": "Trails of the Town",
+      "more": {
+        "hiking": "For the hiker: 4.2 miles through ponderosa shade from the Houston Mesa Trailhead, with a spur north to old petroglyphs.",
+        "walking": "For the walker: a 4.2-mile walk under the ponderosas, starting where vault toilets, picnic tables, and horse corrals stand.",
+        "trail": "For the trail-seeker: the path runs 4.2 miles through ponderosa shade from the Houston Mesa Trailhead.",
+        "horses": "For the rider of horses: horse corrals stand at the Houston Mesa Trailhead — this trail is ridden as well as walked.",
+        "biking": "For the rider: open to all trail users, by the Forest Service's word — and extremely popular with mountain bikers."
+      },
+      "r": "Moderate",
+      "br": "TBD",
+      "th": "houston",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a trail under jagged peaks, with pines and a trail banner.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 26 L10 12 L17 20 L26 8 L34 17 L44 6 L52 15 L60 10 L68 19 L68 32 L0 32 Z\" fill=\"#5d7186\"/><path d=\"M0 30 L13 19 L21 26 L33 15 L43 24 L55 16 L68 25 L68 34 L0 34 Z\" fill=\"#46586c\"/><path d=\"M43 6 L47.5 10.5 L43.8 12.2 L41 10 Z M25 8.6 L28.4 12 L25.8 13.4 L23.4 11.4 Z\" fill=\"#e9edf0\" opacity=\"0.92\"/><path d=\"M4 27 l3.4499999999999997 -8.049999999999999 l3.4499999999999997 8.049999999999999 Z M5.38 21.825 l2.07 -4.6 l2.07 4.6 Z\" fill=\"#2c4632\"/><rect x=\"6.76\" y=\"27\" width=\"1.38\" height=\"2.3\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M58 28 l3.9000000000000004 -9.1 l3.9000000000000004 9.1 Z M59.56 22.15 l2.3400000000000003 -5.2 l2.3400000000000003 5.2 Z\" fill=\"#2c4632\"/><rect x=\"61.12\" y=\"28\" width=\"1.56\" height=\"2.6\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M51 29 l2.7 -6.3 l2.7 6.3 Z M52.08 24.95 l1.62 -3.6 l1.62 3.6 Z\" fill=\"#2c4632\"/><rect x=\"53.16\" y=\"29\" width=\"1.08\" height=\"1.8\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M14 33 C22 29 26 27 34 26 C42 25 48 27 56 30\" fill=\"none\" stroke=\"#c9b98a\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><rect x=\"30\" y=\"15\" width=\"1.4\" height=\"13\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M31.4 15.5 h7 v6 l-3.5 -2 l-3.5 2 Z\" fill=\"#b54f24\"/><path d=\"M31.4 15.5 h7\" fill=\"none\" stroke=\"#e8b64c\" stroke-width=\"0.7\" stroke-linecap=\"round\"/></svg>"
+    },
+    {
+      "n": "Houston Loop Trail",
+      "u": "https://discovergilacounty.com/hiking-payson-area-trails-system/",
+      "f": "In town, the full loop runs 3.6 miles from the Houston Mesa Trailhead, with a bench set for watching the sun go down. Moderate.",
+      "t": [
+        "hiking",
+        "walking",
+        "trail",
+        "sunset",
+        "loop",
+        "biking"
+      ],
+      "d": "a short ride in town — its ride from the Hearth is not yet measured",
+      "g": "Trails of the Town",
+      "more": {
+        "hiking": "For the hiker: the full loop runs 3.6 miles from the Houston Mesa Trailhead, with a bench set for watching the sun go down.",
+        "walking": "For the walker: a 3.6-mile loop walk from the Houston Mesa Trailhead — take the bench at sundown.",
+        "trail": "For the trail-seeker: the path loops the full 3.6 miles from the Houston Mesa Trailhead.",
+        "sunset": "For the sunset-seeker: a bench set for watching the sun go down waits along the loop.",
+        "loop": "For the loop-seeker: the full loop runs 3.6 miles from the Houston Mesa Trailhead, ending where you began.",
+        "biking": "For the rider: open to all trail users, and rated moderate for bikes on the county's riding page."
+      },
+      "r": "Moderate",
+      "br": "Moderate",
+      "th": "houstonloop",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a trail under jagged peaks, with pines and a trail banner.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 26 L10 12 L17 20 L26 8 L34 17 L44 6 L52 15 L60 10 L68 19 L68 32 L0 32 Z\" fill=\"#5d7186\"/><path d=\"M0 30 L13 19 L21 26 L33 15 L43 24 L55 16 L68 25 L68 34 L0 34 Z\" fill=\"#46586c\"/><path d=\"M43 6 L47.5 10.5 L43.8 12.2 L41 10 Z M25 8.6 L28.4 12 L25.8 13.4 L23.4 11.4 Z\" fill=\"#e9edf0\" opacity=\"0.92\"/><path d=\"M4 27 l3.4499999999999997 -8.049999999999999 l3.4499999999999997 8.049999999999999 Z M5.38 21.825 l2.07 -4.6 l2.07 4.6 Z\" fill=\"#2c4632\"/><rect x=\"6.76\" y=\"27\" width=\"1.38\" height=\"2.3\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M58 28 l3.9000000000000004 -9.1 l3.9000000000000004 9.1 Z M59.56 22.15 l2.3400000000000003 -5.2 l2.3400000000000003 5.2 Z\" fill=\"#2c4632\"/><rect x=\"61.12\" y=\"28\" width=\"1.56\" height=\"2.6\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M51 29 l2.7 -6.3 l2.7 6.3 Z M52.08 24.95 l1.62 -3.6 l1.62 3.6 Z\" fill=\"#2c4632\"/><rect x=\"53.16\" y=\"29\" width=\"1.08\" height=\"1.8\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M14 33 C22 29 26 27 34 26 C42 25 48 27 56 30\" fill=\"none\" stroke=\"#c9b98a\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><rect x=\"30\" y=\"15\" width=\"1.4\" height=\"13\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M31.4 15.5 h7 v6 l-3.5 -2 l-3.5 2 Z\" fill=\"#b54f24\"/><path d=\"M31.4 15.5 h7\" fill=\"none\" stroke=\"#e8b64c\" stroke-width=\"0.7\" stroke-linecap=\"round\"/></svg>"
+    },
+    {
+      "n": "Monument Peak Loop Trail",
+      "u": "https://discovergilacounty.com/hiking-payson-area-trails-system/",
+      "f": "In town, the trail runs 3 miles as an offshoot of the Boulders trails — the trailhead stands 3.3 miles east on Granite Dells Road. The way gives big mountain views, with coyotes and javelina about, and little water or shade. Easy.",
+      "t": [
+        "hiking",
+        "walking",
+        "views",
+        "trail",
+        "loop",
+        "easy",
+        "wildlife"
+      ],
+      "d": "a short ride in town — its ride from the Hearth is not yet measured",
+      "g": "Trails of the Town",
+      "more": {
+        "hiking": "For the hiker: three miles of open ground with big mountain views — and little water or shade on the way — easy.",
+        "walking": "For the walker: a 3-mile walk off Granite Dells Road, all views and open country.",
+        "views": "For the view-seeker: the loop's whole gift is the view — big mountain country on every side, with coyotes and javelina about.",
+        "trail": "For the trail-seeker: the path loops 3 miles of open ground off Granite Dells Road.",
+        "loop": "For the loop-seeker: a 3-mile loop of open ground off Granite Dells Road, ending where you began.",
+        "easy": "For the easy-seeker: rated easy — 3 miles, with big views and little shade.",
+        "wildlife": "For the wildlife watcher: coyotes and javelina are about on this ground, under the big views."
+      },
+      "r": "Easy",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a trail under jagged peaks, with pines and a trail banner.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 26 L10 12 L17 20 L26 8 L34 17 L44 6 L52 15 L60 10 L68 19 L68 32 L0 32 Z\" fill=\"#5d7186\"/><path d=\"M0 30 L13 19 L21 26 L33 15 L43 24 L55 16 L68 25 L68 34 L0 34 Z\" fill=\"#46586c\"/><path d=\"M43 6 L47.5 10.5 L43.8 12.2 L41 10 Z M25 8.6 L28.4 12 L25.8 13.4 L23.4 11.4 Z\" fill=\"#e9edf0\" opacity=\"0.92\"/><path d=\"M4 27 l3.4499999999999997 -8.049999999999999 l3.4499999999999997 8.049999999999999 Z M5.38 21.825 l2.07 -4.6 l2.07 4.6 Z\" fill=\"#2c4632\"/><rect x=\"6.76\" y=\"27\" width=\"1.38\" height=\"2.3\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M58 28 l3.9000000000000004 -9.1 l3.9000000000000004 9.1 Z M59.56 22.15 l2.3400000000000003 -5.2 l2.3400000000000003 5.2 Z\" fill=\"#2c4632\"/><rect x=\"61.12\" y=\"28\" width=\"1.56\" height=\"2.6\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M51 29 l2.7 -6.3 l2.7 6.3 Z M52.08 24.95 l1.62 -3.6 l1.62 3.6 Z\" fill=\"#2c4632\"/><rect x=\"53.16\" y=\"29\" width=\"1.08\" height=\"1.8\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M14 33 C22 29 26 27 34 26 C42 25 48 27 56 30\" fill=\"none\" stroke=\"#c9b98a\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><rect x=\"30\" y=\"15\" width=\"1.4\" height=\"13\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M31.4 15.5 h7 v6 l-3.5 -2 l-3.5 2 Z\" fill=\"#b54f24\"/><path d=\"M31.4 15.5 h7\" fill=\"none\" stroke=\"#e8b64c\" stroke-width=\"0.7\" stroke-linecap=\"round\"/></svg>",
+      "th": "monument"
+    },
+    {
+      "n": "Round Valley Trail",
+      "u": "https://discovergilacounty.com/hiking-payson-area-trails-system/",
+      "f": "In town, the trail runs 4.4 miles from Phoenix Street to Sonic, along the Round Valley Draw, over rocky desert gravel. The draw gives good miles for horses in winter. Easy on the west half, moderate to difficult on the east — and mountain bikes ride it too.",
+      "t": [
+        "hiking",
+        "walking",
+        "biking",
+        "trail",
+        "horses"
+      ],
+      "d": "less than 10 minutes from the Hearth — 5 minutes by road, a mile",
+      "g": "Trails of the Town",
+      "more": {
+        "hiking": "For the hiker: 4.4 miles along the Round Valley Draw over rocky desert gravel.",
+        "walking": "For the walker: a 4.4-mile walk from Phoenix Street to Sonic, along the draw.",
+        "biking": "For the rider: mountain bikes ride this draw too — 4.4 miles of desert gravel.",
+        "trail": "For the trail-seeker: the path runs 4.4 miles along the Round Valley Draw, from Phoenix Street to Sonic.",
+        "horses": "For the rider of horses: good miles for horses in winter, along the Round Valley Draw."
+      },
+      "r": "Easy on the west half, moderate to difficult on the east",
+      "br": "TBD",
+      "th": "roundvalley",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a trail under jagged peaks, with pines and a trail banner.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 26 L10 12 L17 20 L26 8 L34 17 L44 6 L52 15 L60 10 L68 19 L68 32 L0 32 Z\" fill=\"#5d7186\"/><path d=\"M0 30 L13 19 L21 26 L33 15 L43 24 L55 16 L68 25 L68 34 L0 34 Z\" fill=\"#46586c\"/><path d=\"M43 6 L47.5 10.5 L43.8 12.2 L41 10 Z M25 8.6 L28.4 12 L25.8 13.4 L23.4 11.4 Z\" fill=\"#e9edf0\" opacity=\"0.92\"/><path d=\"M4 27 l3.4499999999999997 -8.049999999999999 l3.4499999999999997 8.049999999999999 Z M5.38 21.825 l2.07 -4.6 l2.07 4.6 Z\" fill=\"#2c4632\"/><rect x=\"6.76\" y=\"27\" width=\"1.38\" height=\"2.3\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M58 28 l3.9000000000000004 -9.1 l3.9000000000000004 9.1 Z M59.56 22.15 l2.3400000000000003 -5.2 l2.3400000000000003 5.2 Z\" fill=\"#2c4632\"/><rect x=\"61.12\" y=\"28\" width=\"1.56\" height=\"2.6\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M51 29 l2.7 -6.3 l2.7 6.3 Z M52.08 24.95 l1.62 -3.6 l1.62 3.6 Z\" fill=\"#2c4632\"/><rect x=\"53.16\" y=\"29\" width=\"1.08\" height=\"1.8\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M14 33 C22 29 26 27 34 26 C42 25 48 27 56 30\" fill=\"none\" stroke=\"#c9b98a\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><rect x=\"30\" y=\"15\" width=\"1.4\" height=\"13\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M31.4 15.5 h7 v6 l-3.5 -2 l-3.5 2 Z\" fill=\"#b54f24\"/><path d=\"M31.4 15.5 h7\" fill=\"none\" stroke=\"#e8b64c\" stroke-width=\"0.7\" stroke-linecap=\"round\"/></svg>"
+    },
+    {
+      "n": "Rumsey Park Center Trail",
+      "u": "https://discovergilacounty.com/hiking-payson-area-trails-system/",
+      "f": "In town, a short, flat gravel path stands in the center of Rumsey Park by Ramada 4, with benches set along it for resting. Easy.",
+      "t": [
+        "walking",
+        "trail",
+        "easy",
+        "dogs"
+      ],
+      "d": "less than 10 minutes from the Hearth — 8 minutes by road, 2 miles",
+      "g": "Trails of the Town",
+      "more": {
+        "walking": "Location: The path stands at the park's heart, by Ramada 4. It is a short, flat gravel path, with benches set along it for resting — the gentlest walk on this page.",
+        "trail": "Location: The path is a short, flat gravel way at the park's center, by Ramada 4.",
+        "easy": "For the easy-seeker: rated easy — a short, flat gravel path, the gentlest walk on this page.",
+        "dogs": "For those who travel with hounds: the town's own trails page names this path for walking the dogs — please keep them on a leash."
+      },
+      "r": "Easy",
+      "th": "rumseycenter",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a trail under jagged peaks, with pines and a trail banner.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 26 L10 12 L17 20 L26 8 L34 17 L44 6 L52 15 L60 10 L68 19 L68 32 L0 32 Z\" fill=\"#5d7186\"/><path d=\"M0 30 L13 19 L21 26 L33 15 L43 24 L55 16 L68 25 L68 34 L0 34 Z\" fill=\"#46586c\"/><path d=\"M43 6 L47.5 10.5 L43.8 12.2 L41 10 Z M25 8.6 L28.4 12 L25.8 13.4 L23.4 11.4 Z\" fill=\"#e9edf0\" opacity=\"0.92\"/><path d=\"M4 27 l3.4499999999999997 -8.049999999999999 l3.4499999999999997 8.049999999999999 Z M5.38 21.825 l2.07 -4.6 l2.07 4.6 Z\" fill=\"#2c4632\"/><rect x=\"6.76\" y=\"27\" width=\"1.38\" height=\"2.3\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M58 28 l3.9000000000000004 -9.1 l3.9000000000000004 9.1 Z M59.56 22.15 l2.3400000000000003 -5.2 l2.3400000000000003 5.2 Z\" fill=\"#2c4632\"/><rect x=\"61.12\" y=\"28\" width=\"1.56\" height=\"2.6\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M51 29 l2.7 -6.3 l2.7 6.3 Z M52.08 24.95 l1.62 -3.6 l1.62 3.6 Z\" fill=\"#2c4632\"/><rect x=\"53.16\" y=\"29\" width=\"1.08\" height=\"1.8\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M14 33 C22 29 26 27 34 26 C42 25 48 27 56 30\" fill=\"none\" stroke=\"#c9b98a\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><rect x=\"30\" y=\"15\" width=\"1.4\" height=\"13\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M31.4 15.5 h7 v6 l-3.5 -2 l-3.5 2 Z\" fill=\"#b54f24\"/><path d=\"M31.4 15.5 h7\" fill=\"none\" stroke=\"#e8b64c\" stroke-width=\"0.7\" stroke-linecap=\"round\"/></svg>"
+    },
+    {
+      "n": "Rumsey Park Water Tower Trail",
+      "u": "https://discovergilacounty.com/hiking-payson-area-trails-system/",
+      "f": "In town, a narrow dirt track climbs from the Taylor Pool parking lot some 80 feet up and around the hill — wide views over the town at the top, and a favorite place to watch the sun go down. Moderate.",
+      "t": [
+        "hiking",
+        "walking",
+        "views",
+        "trail",
+        "sunset",
+        "biking"
+      ],
+      "d": "less than 10 minutes from the Hearth — 8 minutes by road, 2 miles",
+      "g": "Trails of the Town",
+      "more": {
+        "hiking": "For the hiker: a narrow dirt track climbs some 80 feet from the Taylor Pool parking lot, up and around the hill — moderate.",
+        "walking": "For the walker: walk it in the evening — the top gives wide views over the town and a favorite place to watch the sun go down.",
+        "views": "For the view-seeker: from the top, the whole town lies below — come at sundown.",
+        "trail": "For the trail-seeker: the path climbs from the Taylor Pool parking lot, up and around the hill.",
+        "sunset": "For the sunset-seeker: the top of the hill is a favorite place to watch the sun go down over the town.",
+        "biking": "For the rider: a favorite trail of the town's mountain bikers — its bike rating is easy to moderate."
+      },
+      "r": "Moderate",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a trail under jagged peaks, with pines and a trail banner.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 26 L10 12 L17 20 L26 8 L34 17 L44 6 L52 15 L60 10 L68 19 L68 32 L0 32 Z\" fill=\"#5d7186\"/><path d=\"M0 30 L13 19 L21 26 L33 15 L43 24 L55 16 L68 25 L68 34 L0 34 Z\" fill=\"#46586c\"/><path d=\"M43 6 L47.5 10.5 L43.8 12.2 L41 10 Z M25 8.6 L28.4 12 L25.8 13.4 L23.4 11.4 Z\" fill=\"#e9edf0\" opacity=\"0.92\"/><path d=\"M4 27 l3.4499999999999997 -8.049999999999999 l3.4499999999999997 8.049999999999999 Z M5.38 21.825 l2.07 -4.6 l2.07 4.6 Z\" fill=\"#2c4632\"/><rect x=\"6.76\" y=\"27\" width=\"1.38\" height=\"2.3\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M58 28 l3.9000000000000004 -9.1 l3.9000000000000004 9.1 Z M59.56 22.15 l2.3400000000000003 -5.2 l2.3400000000000003 5.2 Z\" fill=\"#2c4632\"/><rect x=\"61.12\" y=\"28\" width=\"1.56\" height=\"2.6\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M51 29 l2.7 -6.3 l2.7 6.3 Z M52.08 24.95 l1.62 -3.6 l1.62 3.6 Z\" fill=\"#2c4632\"/><rect x=\"53.16\" y=\"29\" width=\"1.08\" height=\"1.8\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M14 33 C22 29 26 27 34 26 C42 25 48 27 56 30\" fill=\"none\" stroke=\"#c9b98a\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><rect x=\"30\" y=\"15\" width=\"1.4\" height=\"13\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M31.4 15.5 h7 v6 l-3.5 -2 l-3.5 2 Z\" fill=\"#b54f24\"/><path d=\"M31.4 15.5 h7\" fill=\"none\" stroke=\"#e8b64c\" stroke-width=\"0.7\" stroke-linecap=\"round\"/></svg>",
+      "br": "Easy to Moderate",
+      "th": "watertower"
+    },
+    {
+      "n": "Water Wheel Falls",
+      "u": "https://www.fs.usda.gov/r03/tonto/recreation/first-second-third-crossings-and-water-wheel",
+      "f": "North of town on Houston Mesa Road, the trail runs about 1.6 miles out and back, up the East Verde River to the falls, the swimming holes, and the old rusted water wheel that gave the place its name. A federal day-use pass is required — a Tonto pass: $8 per vehicle for the day at a Forest Service office or a store that sells them, $12 at the fee machine, and the machines take debit or credit cards. The fee machines for this ground stand at Shoefly Village, Houston Mesa Campground, and the Payson Ranger Station. The Forest Service gives no months for the fee (TBD).",
+      "t": [
+        "hiking",
+        "water",
+        "falls",
+        "bird watching",
+        "trail",
+        "views"
+      ],
+      "d": "about a 25-minute ride from the Hearth — 10 miles by road",
+      "g": "Trails of the Wilds",
+      "more": {
+        "bird watching": "For the bird watcher: the trailhead is a named eBird hotspot on the East Verde River. Which kinds gather here, the records do not yet say — bring binoculars, and you may be the one to tell.",
+        "hiking": "For the hiker: 1.6 miles out and back up the East Verde River to the falls and the old rusted water wheel that named the place.",
+        "water": "For the water-lover: the East Verde River runs the whole way — pools, falls, and the river itself.",
+        "falls": "For the falls-seeker: the falls pour beside the old rusted water wheel that gave the place its name.",
+        "trail": "For the trail-seeker: the path follows the East Verde River, 1.6 miles out and back to the falls.",
+        "views": "For the view-seeker: the falls pouring beside the old rusted water wheel — the picture this country is known by.",
+        "swimming": "For the swimmer: swimming holes wait along the river below the falls."
+      },
+      "r": "TBD",
+      "w": "Open year-round, day use only.",
+      "th": "waterwheel",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a falls between stone walls.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 2 H26 L30 34 H0 Z\" fill=\"#6f6a5e\"/><path d=\"M42 2 H68 V34 H38 Z\" fill=\"#655f55\"/><path d=\"M4 9 H22 M5 18 H24 M46 11 H64 M44 21 H63\" fill=\"none\" stroke=\"#4c4740\" stroke-width=\"1.1\" stroke-linecap=\"round\" opacity=\"0.85\"/><path d=\"M29 3 L33 12 L36 3 L37 26 C34 28 31 28 29 26 Z\" fill=\"#dcebf4\"/><path d=\"M26 30 C32 28 40 28 46 30 L46 34 L26 34 Z\" fill=\"#7fa8bd\"/><circle cx=\"32\" cy=\"31\" r=\"1.3\" fill=\"#eef6fb\"/><circle cx=\"39\" cy=\"32\" r=\"1\" fill=\"#eef6fb\"/><circle cx=\"35.5\" cy=\"30\" r=\"0.8\" fill=\"#eef6fb\"/><path d=\"M58 14 l3.3000000000000003 -7.700000000000001 l3.3000000000000003 7.700000000000001 Z M59.32 9.05 l1.9800000000000002 -4.4 l1.9800000000000002 4.4 Z\" fill=\"#2c4632\"/><rect x=\"60.64\" y=\"14\" width=\"1.32\" height=\"2.2\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M7 15 l3 -7 l3 7 Z M8.2 10.5 l1.8 -4 l1.8 4 Z\" fill=\"#2c4632\"/><rect x=\"9.4\" y=\"15\" width=\"1.2\" height=\"2\" rx=\"0\" fill=\"#4a3220\"/></svg>"
+    },
+    {
+      "n": "Horton Creek Trail",
+      "u": "https://www.fs.usda.gov/r03/tonto/alerts/upper-lower-tonto-creek-campgrounds-and-horton-creek-trailhead-parking-area-temp",
+      "f": "The trail runs out and back for 9.2 miles along Horton Creek, through old-growth ponderosa and ferns, climbing the Rim's face to Horton Springs at mile five. Hard. NOTE WELL: the trailhead parking stands closed for bridge work on Tonto Creek through December 31, 2026 — begin instead at the Derrick Trailhead.",
+      "t": [
+        "hiking",
+        "water",
+        "creek",
+        "fishing",
+        "bird watching",
+        "trail"
+      ],
+      "d": "about a 40-minute ride from the Hearth — 20 miles by road",
+      "g": "Trails of the Wilds",
+      "more": {
+        "bird watching": "For the bird watcher: the creek trail has its own eBird hotspot. The records birders have left from this creek name the Mexican Jay, the Pacific Wren, and the Red-breasted Nuthatch among the pines and falls.",
+        "hiking": "For the hiker: 9.2 miles out and back along the creek, climbing the Rim's face to Horton Springs at mile five — hard. The trailhead parking stands closed through 2026; begin at the Derrick Trailhead.",
+        "water": "For the water-lover: Horton Creek runs beside the trail its whole length, up to the springs at mile five.",
+        "creek": "For the creek-walker: the trail follows Horton Creek through old-growth ponderosa and ferns, all the way up the Rim's face.",
+        "fishing": "For the angler: the creek is a trout water — its pools are fished along the trail under the ponderosas. A license may be required — check before you go that you hold a valid Arizona fishing license.",
+        "trail": "For the trail-seeker: the path follows Horton Creek 9.2 miles out and back, up the face of the Rim."
+      },
+      "r": "Hard",
+      "th": "horton",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a falls between stone walls.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 2 H26 L30 34 H0 Z\" fill=\"#6f6a5e\"/><path d=\"M42 2 H68 V34 H38 Z\" fill=\"#655f55\"/><path d=\"M4 9 H22 M5 18 H24 M46 11 H64 M44 21 H63\" fill=\"none\" stroke=\"#4c4740\" stroke-width=\"1.1\" stroke-linecap=\"round\" opacity=\"0.85\"/><path d=\"M29 3 L33 12 L36 3 L37 26 C34 28 31 28 29 26 Z\" fill=\"#dcebf4\"/><path d=\"M26 30 C32 28 40 28 46 30 L46 34 L26 34 Z\" fill=\"#7fa8bd\"/><circle cx=\"32\" cy=\"31\" r=\"1.3\" fill=\"#eef6fb\"/><circle cx=\"39\" cy=\"32\" r=\"1\" fill=\"#eef6fb\"/><circle cx=\"35.5\" cy=\"30\" r=\"0.8\" fill=\"#eef6fb\"/><path d=\"M58 14 l3.3000000000000003 -7.700000000000001 l3.3000000000000003 7.700000000000001 Z M59.32 9.05 l1.9800000000000002 -4.4 l1.9800000000000002 4.4 Z\" fill=\"#2c4632\"/><rect x=\"60.64\" y=\"14\" width=\"1.32\" height=\"2.2\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M7 15 l3 -7 l3 7 Z M8.2 10.5 l1.8 -4 l1.8 4 Z\" fill=\"#2c4632\"/><rect x=\"9.4\" y=\"15\" width=\"1.2\" height=\"2\" rx=\"0\" fill=\"#4a3220\"/></svg>"
+    },
+    {
+      "n": "See Canyon Trail",
+      "u": "https://www.fs.usda.gov/recarea/asnf/recreation/hiking/recarea/?recid=44779&actid=50",
+      "f": "The trail runs 7.6 miles up a creek canyon by Christopher Creek, to the top of the Rim. Ferns, vine maples, old fruit trees, and mushrooms after the rains line the way. The canyon is loved above all in fall, when the leaves turn red and gold.",
+      "t": [
+        "hiking",
+        "water",
+        "creek",
+        "bird watching",
+        "trail"
+      ],
+      "d": "about a 40-minute ride from the Hearth — 23 miles by road",
+      "g": "Trails of the Wilds",
+      "more": {
+        "bird watching": "For the bird watcher: the town's own birding page names this trailhead for its creek ground and mixed forest. Birders camped by the trailhead recorded warblers of four kinds, painted redstarts, hermit thrushes, and broad-tailed hummingbirds.",
+        "hiking": "For the hiker: 7.6 miles up a creek canyon by Christopher Creek to the top of the Rim — ferns, vine maples, and old fruit trees.",
+        "water": "For the water-lover: the creek runs the canyon beside you the whole climb.",
+        "creek": "For the creek-walker: the trail climbs beside the creek from Christopher Creek to the Rim's top.",
+        "trail": "For the trail-seeker: the path climbs 7.6 miles up the canyon by Christopher Creek to the top of the Rim.",
+        "fall colors": "For the fall-color seeker: in fall the vine maples turn red and gold up the canyon — the color walk this country is known for."
+      },
+      "r": "TBD",
+      "th": "seecanyon",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a falls in a red-rock canyon.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 4 L15 4 L19 34 L3 34 Z\" fill=\"#8a4a2e\"/><path d=\"M53 4 L68 4 L68 34 L49 34 Z\" fill=\"#7a3f28\"/><path d=\"M2 10 H14 M3 17 H16 M54 12 H66 M52 20 H66\" fill=\"none\" stroke=\"#5d2f1d\" stroke-width=\"1.2\" stroke-linecap=\"round\" opacity=\"0.8\"/><path d=\"M30 0 L34 10 L38 0 L40 34 L28 34 Z\" fill=\"#bcd6e8\"/><path d=\"M21 12 l2.7 -6.3 l2.7 6.3 Z M22.08 7.95 l1.62 -3.6 l1.62 3.6 Z\" fill=\"#2c4632\"/><rect x=\"23.16\" y=\"12\" width=\"1.08\" height=\"1.8\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M44 13 l2.4000000000000004 -5.6000000000000005 l2.4000000000000004 5.6000000000000005 Z M44.96 9.4 l1.4400000000000002 -3.2 l1.4400000000000002 3.2 Z\" fill=\"#2c4632\"/><rect x=\"45.92\" y=\"13\" width=\"0.96\" height=\"1.6\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M24 33 C30 31 38 31 44 33\" fill=\"none\" stroke=\"#a8c8dc\" stroke-width=\"1.6\" stroke-linecap=\"round\"/></svg>"
+    },
+    {
+      "n": "Barnhardt Trail",
+      "u": "https://www.fs.usda.gov/recarea/tonto/null/recarea/?recid=35281&actid=50",
+      "f": "The trail runs 6.6 miles into Barnhardt Canyon in the Mazatzal Wilderness, south of town, through red rock, sycamores, and desert plants, with the Barnhardt Falls running in spring. Challenging.",
+      "t": [
+        "hiking",
+        "water",
+        "falls",
+        "trail",
+        "views"
+      ],
+      "d": "about a 40-minute ride from the Hearth — 18 miles by road",
+      "g": "Trails of the Wilds",
+      "more": {
+        "hiking": "For the hiker: 6.6 miles into Barnhardt Canyon — red rock, sycamores, and desert plants — challenging.",
+        "water": "For the water-lover: the canyon holds its stream, and the Barnhardt Falls run in spring.",
+        "falls": "For the falls-seeker: Barnhardt Falls runs in spring, deep in the canyon.",
+        "trail": "For the trail-seeker: the path climbs 6.6 miles into Barnhardt Canyon, in the Mazatzal Wilderness.",
+        "views": "For the view-seeker: red rock walls and sycamores fill Barnhardt Canyon — bring the camera; the canyon is the picture.",
+        "wilderness": "For the wilderness-seeker: the trail walks into the Mazatzal Wilderness, south of town — true wild country."
+      },
+      "r": "Challenging",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of layered red-rock rim cliffs.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 6 H68 V15 L0 18 Z\" fill=\"#a85838\"/><path d=\"M0 15 L68 12 V21 L0 25 Z\" fill=\"#8a4a2e\"/><path d=\"M0 22 L68 19 V34 H0 Z\" fill=\"#6e3a24\"/><path d=\"M6 8 v5 M20 7 v6 M36 7.5 v5 M52 8 v5\" fill=\"none\" stroke=\"#7a3f28\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><path d=\"M8 7 l2.7 -6.3 l2.7 6.3 Z M9.08 2.95 l1.62 -3.6 l1.62 3.6 Z\" fill=\"#22382a\"/><rect x=\"10.16\" y=\"7\" width=\"1.08\" height=\"1.8\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M58 7 l2.7 -6.3 l2.7 6.3 Z M59.08 2.95 l1.62 -3.6 l1.62 3.6 Z\" fill=\"#22382a\"/><rect x=\"60.16\" y=\"7\" width=\"1.08\" height=\"1.8\" rx=\"0\" fill=\"#4a3220\"/></svg>",
+      "th": "barnhardt"
+    },
+    {
+      "n": "Green Valley Park",
+      "u": "https://adventurepayson.com/parks/",
+      "f": "The town's great green at the end of Main Street — 43 acres built around three lakes, stocked for fishing (a license is needed) and open to your own kayak or canoe. Around the water stand a splash pad for the children, a playground, shaded ramadas with grills for a day's feast, and an amphitheater that hosts summer concerts under the Rim. And the park holds more than play: the Rim Country Museum and the Zane Grey Cabin stand within it, so a traveler may walk from a morning's fishing straight into the country's own history. The name above leads to the town's own fuller word on the park.",
+      "t": [
+        "water",
+        "fishing",
+        "kids",
+        "history",
+        "picnics",
+        "bird watching",
+        "views"
+      ],
+      "d": "less than 10 minutes from the Hearth — 7 minutes by road, 2 miles",
+      "g": "Parks and Grounds",
+      "more": {
+        "bird watching": "For the bird watcher: this park is a named birding ground — an eBird hotspot with more than 200 kinds of birds recorded, and a stop on the Arizona Birding Trail. Ducks and Canada geese live on the three lakes, herons stalk the shallows, and bald eagles and osprey fish the stocked water, while hummingbirds, acorn woodpeckers, and vermilion flycatchers work the trees along the shore. Come early in the morning, or toward evening, when the birds are busiest.",
+        "water": "For the water-lover: three lakes totaling some thirteen acres of water sit at the park's heart.",
+        "fishing": "For the angler: the lakes are stocked for fishing — a license is needed, so check before you go that you hold a valid Arizona fishing license.",
+        "kids": "Location: The splash pad and the playground stand by the lakes, ready for the children.",
+        "history": "Location: The Zane Grey Cabin stands in the park, and the Rim Country Museum tells the country's own story.",
+        "picnics": "For the picnicker: shaded ramadas with grills stand ready for a day's feast.",
+        "views": "For the view-seeker: the town's tourism page names the sunsets here — three lakes under the Rim, at the day's end. The picture seat of the town's parks.",
+        "concerts": "For the music-lover: the amphitheater hosts summer concerts under the Rim.",
+        "kayaking": "For the paddler: your own kayak or canoe may ride the lakes.",
+        "museum": "Location: The Rim Country Museum stands inside the park.",
+        "splash pad": "For the splash-seeker: the town's own plan runs the splash pad from May 1 to September 30, and calls that season proposed and subject to change (TBD). Its daily hours are not settled."
+      },
+      "w": "Open daily, 6 in the morning to 10:30 at night.",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a lake under the rim, with pines and a banner.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 26 L10 12 L17 20 L26 8 L34 17 L44 6 L52 15 L60 10 L68 19 L68 32 L0 32 Z\" fill=\"#5d7186\"/><path d=\"M0 30 L13 19 L21 26 L33 15 L43 24 L55 16 L68 25 L68 34 L0 34 Z\" fill=\"#46586c\"/><path d=\"M43 6 L47.5 10.5 L43.8 12.2 L41 10 Z M25 8.6 L28.4 12 L25.8 13.4 L23.4 11.4 Z\" fill=\"#e9edf0\" opacity=\"0.92\"/><path d=\"M3 26 l3.5999999999999996 -8.4 l3.5999999999999996 8.4 Z M4.4399999999999995 20.6 l2.16 -4.8 l2.16 4.8 Z\" fill=\"#2c4632\"/><rect x=\"5.88\" y=\"26\" width=\"1.44\" height=\"2.4\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M60 27 l3.5999999999999996 -8.4 l3.5999999999999996 8.4 Z M61.44 21.6 l2.16 -4.8 l2.16 4.8 Z\" fill=\"#2c4632\"/><rect x=\"62.88\" y=\"27\" width=\"1.44\" height=\"2.4\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M14 26 C24 23.5 44 23.5 54 26 L54 33 C44 31 24 31 14 33 Z\" fill=\"#7fa8bd\"/><path d=\"M18 27.5 C26 26 42 26 50 27.5\" fill=\"none\" stroke=\"#dcebf4\" stroke-width=\"0.9\" stroke-linecap=\"round\" opacity=\"0.8\"/><rect x=\"30\" y=\"28\" width=\"10\" height=\"1.6\" rx=\"0\" fill=\"#7a5c36\"/><path d=\"M31 28 v3 M34 28 v3 M37 28 v3\" fill=\"none\" stroke=\"#5d4527\" stroke-width=\"0.9\" stroke-linecap=\"round\"/><path d=\"M47 18 L52 13 L57 18 Z\" fill=\"#4a3220\"/><rect x=\"48.5\" y=\"18\" width=\"7\" height=\"4.5\" rx=\"0\" fill=\"#6b4a2a\"/><rect x=\"10\" y=\"15\" width=\"1.4\" height=\"13\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M11.4 15.5 h7 v6 l-3.5 -2 l-3.5 2 Z\" fill=\"#b54f24\"/><path d=\"M11.4 15.5 h7\" fill=\"none\" stroke=\"#e8b64c\" stroke-width=\"0.7\" stroke-linecap=\"round\"/></svg>",
+      "th": "greenvalley"
+    },
+    {
+      "n": "Rumsey Park",
+      "u": "https://adventurepayson.com/parks/",
+      "f": "The largest ground in the town's keeping — 82 acres, and full: a new disc golf course through the trees, six pickleball courts, three tennis courts, a few ball fields, sand volleyball, and basketball. A skate park for the bold, a dog park for the hounds, two playgrounds for the small folk, and bocce and horseshoes for the patient. Six ramadas with grills stand ready for gatherings, a one-mile trail rings the whole park, and the Payson Public Library itself stands inside the park — sport and story under the same pines. The name above leads to the town's own fuller word on the park.",
+      "t": [
+        "basketball",
+        "dogs",
+        "playgrounds",
+        "picnics",
+        "biking",
+        "walking",
+        "kids",
+        "books",
+        "indoors",
+        "trail"
+      ],
+      "d": "less than 10 minutes from the Hearth — 8 minutes by road, 2 miles",
+      "g": "Parks and Grounds",
+      "more": {
+        "books": "Location: The Payson Public Library stands inside this park's own grounds. It lends books for three weeks on a free county card, and holds a children's room, a teen gaming room, and a meeting room to book. The library keeps its own entry on this page, under The Town's Halls, with its hours.",
+        "basketball": "For the basketball player: two courts stand in the park, by the town's own count.",
+        "dogs": "Location: The enclosed dog park stands on the park's northeast side, on the Laredo street side. There, dogs may run free.",
+        "playgrounds": "Location: Two playgrounds stand in the park. One stands on the northeast side, at 404 North Laredo Lane.",
+        "picnics": "For the feast-keeper: six ramadas with tables and grills stand across the park, ready for a day's gathering.",
+        "biking": "For the rider: the town's own page names the park's one-mile ring trail a hiking and mountain bike trail — riders take it around every ground in the park.",
+        "walking": "For the walker: a one-mile trail rings the whole park, past every ground in it.",
+        "kids": "For the children: two playgrounds stand in the park, one of them on the northeast side.",
+        "indoors": "Location: The Payson Public Library stands inside the park, with reading rooms and story times under the same pines.",
+        "trail": "For the trail-seeker: a one-mile trail rings the whole park, past every ground in it — the town's own page names it a hiking and mountain bike trail.",
+        "ball fields": "For the ball player: a few ball fields stand among the park's sports grounds, and a football field stands at the park's center — baseball and softball under the Rim.",
+        "bocce": "Location: The bocce court stands west of the tennis courts, close to the restrooms. It is the park's one full-size court, 60 feet by 10. The town built it in 2021 at the asking of a local seniors' group, and the court can be reserved through the town.",
+        "disc golf": "Location: The disc golf course runs across the park's middle. It is a new course of 18 holes, over hilly ground through the trees.",
+        "horseshoes": "For the horseshoe pitcher: two pits stand in the park, apart from the bocce court.",
+        "pickleball": "Location: The six pickleball courts stand on the park's north side, beside the tennis courts — four beside them, and two more uphill above them. Bring your paddle and take your turn.",
+        "skate park": "Location: The skate park stands on the park's northwest side. Its steel ramps stand on a concrete slab: a half pipe, quarter pipes, banked ramps, a spine ramp, two grind rails, and a fun box with a rail. Lights stand over the ramps, so the skating runs on past sunset, until the park closes.",
+        "tennis": "Location: The three tennis courts stand on the park's north side, a little west of its center. The pickleball courts stand beside them, and the bocce court just west of them.",
+        "volleyball": "For the volleyball player: two sand courts stand among the park's sports grounds."
+      },
+      "w": "Open daily, 6 in the morning to 10:30 at night.",
+      "th": "rumseypark",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a lake under the rim, with pines and a banner.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 26 L10 12 L17 20 L26 8 L34 17 L44 6 L52 15 L60 10 L68 19 L68 32 L0 32 Z\" fill=\"#5d7186\"/><path d=\"M0 30 L13 19 L21 26 L33 15 L43 24 L55 16 L68 25 L68 34 L0 34 Z\" fill=\"#46586c\"/><path d=\"M43 6 L47.5 10.5 L43.8 12.2 L41 10 Z M25 8.6 L28.4 12 L25.8 13.4 L23.4 11.4 Z\" fill=\"#e9edf0\" opacity=\"0.92\"/><path d=\"M3 26 l3.5999999999999996 -8.4 l3.5999999999999996 8.4 Z M4.4399999999999995 20.6 l2.16 -4.8 l2.16 4.8 Z\" fill=\"#2c4632\"/><rect x=\"5.88\" y=\"26\" width=\"1.44\" height=\"2.4\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M60 27 l3.5999999999999996 -8.4 l3.5999999999999996 8.4 Z M61.44 21.6 l2.16 -4.8 l2.16 4.8 Z\" fill=\"#2c4632\"/><rect x=\"62.88\" y=\"27\" width=\"1.44\" height=\"2.4\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M14 26 C24 23.5 44 23.5 54 26 L54 33 C44 31 24 31 14 33 Z\" fill=\"#7fa8bd\"/><path d=\"M18 27.5 C26 26 42 26 50 27.5\" fill=\"none\" stroke=\"#dcebf4\" stroke-width=\"0.9\" stroke-linecap=\"round\" opacity=\"0.8\"/><rect x=\"30\" y=\"28\" width=\"10\" height=\"1.6\" rx=\"0\" fill=\"#7a5c36\"/><path d=\"M31 28 v3 M34 28 v3 M37 28 v3\" fill=\"none\" stroke=\"#5d4527\" stroke-width=\"0.9\" stroke-linecap=\"round\"/><path d=\"M47 18 L52 13 L57 18 Z\" fill=\"#4a3220\"/><rect x=\"48.5\" y=\"18\" width=\"7\" height=\"4.5\" rx=\"0\" fill=\"#6b4a2a\"/><rect x=\"10\" y=\"15\" width=\"1.4\" height=\"13\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M11.4 15.5 h7 v6 l-3.5 -2 l-3.5 2 Z\" fill=\"#b54f24\"/><path d=\"M11.4 15.5 h7\" fill=\"none\" stroke=\"#e8b64c\" stroke-width=\"0.7\" stroke-linecap=\"round\"/></svg>"
+    },
+    {
+      "n": "Deming Park",
+      "u": "https://adventurepayson.com/parks/",
+      "f": "This is a small history park on Main Street. A covered walkway of displays tells how the settlers founded Payson, and a small amphitheater stands in the park.",
+      "t": [
+        "history",
+        "walking"
+      ],
+      "d": "a short ride in town — its ride from the Hearth is not yet measured",
+      "g": "Parks and Grounds",
+      "more": {
+        "history": "For the history-seeker: a covered walkway of displays tells how the settlers founded Payson.",
+        "walking": "For the walker: a short stroll on Main Street, with a small amphitheater beside the displays."
+      },
+      "w": "Open daily, 6 in the morning to 10:30 at night.",
+      "th": "deming",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a lake under the rim, with pines and a banner.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 26 L10 12 L17 20 L26 8 L34 17 L44 6 L52 15 L60 10 L68 19 L68 32 L0 32 Z\" fill=\"#5d7186\"/><path d=\"M0 30 L13 19 L21 26 L33 15 L43 24 L55 16 L68 25 L68 34 L0 34 Z\" fill=\"#46586c\"/><path d=\"M43 6 L47.5 10.5 L43.8 12.2 L41 10 Z M25 8.6 L28.4 12 L25.8 13.4 L23.4 11.4 Z\" fill=\"#e9edf0\" opacity=\"0.92\"/><path d=\"M3 26 l3.5999999999999996 -8.4 l3.5999999999999996 8.4 Z M4.4399999999999995 20.6 l2.16 -4.8 l2.16 4.8 Z\" fill=\"#2c4632\"/><rect x=\"5.88\" y=\"26\" width=\"1.44\" height=\"2.4\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M60 27 l3.5999999999999996 -8.4 l3.5999999999999996 8.4 Z M61.44 21.6 l2.16 -4.8 l2.16 4.8 Z\" fill=\"#2c4632\"/><rect x=\"62.88\" y=\"27\" width=\"1.44\" height=\"2.4\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M14 26 C24 23.5 44 23.5 54 26 L54 33 C44 31 24 31 14 33 Z\" fill=\"#7fa8bd\"/><path d=\"M18 27.5 C26 26 42 26 50 27.5\" fill=\"none\" stroke=\"#dcebf4\" stroke-width=\"0.9\" stroke-linecap=\"round\" opacity=\"0.8\"/><rect x=\"30\" y=\"28\" width=\"10\" height=\"1.6\" rx=\"0\" fill=\"#7a5c36\"/><path d=\"M31 28 v3 M34 28 v3 M37 28 v3\" fill=\"none\" stroke=\"#5d4527\" stroke-width=\"0.9\" stroke-linecap=\"round\"/><path d=\"M47 18 L52 13 L57 18 Z\" fill=\"#4a3220\"/><rect x=\"48.5\" y=\"18\" width=\"7\" height=\"4.5\" rx=\"0\" fill=\"#6b4a2a\"/><rect x=\"10\" y=\"15\" width=\"1.4\" height=\"13\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M11.4 15.5 h7 v6 l-3.5 -2 l-3.5 2 Z\" fill=\"#b54f24\"/><path d=\"M11.4 15.5 h7\" fill=\"none\" stroke=\"#e8b64c\" stroke-width=\"0.7\" stroke-linecap=\"round\"/></svg>"
+    },
+    {
+      "n": "Mustang Neighborhood Park",
+      "u": "https://adventurepayson.com/parks/",
+      "f": "This is a pocket park in Payson Ranchos. It holds a playground with slides and swings, a shaded picnic shelter, and half-court basketball.",
+      "t": [
+        "playgrounds",
+        "kids",
+        "basketball",
+        "picnics"
+      ],
+      "d": "a short ride in town — its ride from the Hearth is not yet measured",
+      "g": "Parks and Grounds",
+      "more": {
+        "playgrounds": "For the playground-seeker: slides and swings stand in this pocket park in Payson Ranchos.",
+        "kids": "For the children: a playground with slides and swings, built for the neighborhood's young.",
+        "basketball": "For the basketball player: half-court basketball stands in the park.",
+        "picnics": "For the picnicker: a shaded picnic shelter waits for the meal."
+      },
+      "w": "Open daily, 6 in the morning to 10:30 at night.",
+      "th": "mustang",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a lake under the rim, with pines and a banner.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 26 L10 12 L17 20 L26 8 L34 17 L44 6 L52 15 L60 10 L68 19 L68 32 L0 32 Z\" fill=\"#5d7186\"/><path d=\"M0 30 L13 19 L21 26 L33 15 L43 24 L55 16 L68 25 L68 34 L0 34 Z\" fill=\"#46586c\"/><path d=\"M43 6 L47.5 10.5 L43.8 12.2 L41 10 Z M25 8.6 L28.4 12 L25.8 13.4 L23.4 11.4 Z\" fill=\"#e9edf0\" opacity=\"0.92\"/><path d=\"M3 26 l3.5999999999999996 -8.4 l3.5999999999999996 8.4 Z M4.4399999999999995 20.6 l2.16 -4.8 l2.16 4.8 Z\" fill=\"#2c4632\"/><rect x=\"5.88\" y=\"26\" width=\"1.44\" height=\"2.4\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M60 27 l3.5999999999999996 -8.4 l3.5999999999999996 8.4 Z M61.44 21.6 l2.16 -4.8 l2.16 4.8 Z\" fill=\"#2c4632\"/><rect x=\"62.88\" y=\"27\" width=\"1.44\" height=\"2.4\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M14 26 C24 23.5 44 23.5 54 26 L54 33 C44 31 24 31 14 33 Z\" fill=\"#7fa8bd\"/><path d=\"M18 27.5 C26 26 42 26 50 27.5\" fill=\"none\" stroke=\"#dcebf4\" stroke-width=\"0.9\" stroke-linecap=\"round\" opacity=\"0.8\"/><rect x=\"30\" y=\"28\" width=\"10\" height=\"1.6\" rx=\"0\" fill=\"#7a5c36\"/><path d=\"M31 28 v3 M34 28 v3 M37 28 v3\" fill=\"none\" stroke=\"#5d4527\" stroke-width=\"0.9\" stroke-linecap=\"round\"/><path d=\"M47 18 L52 13 L57 18 Z\" fill=\"#4a3220\"/><rect x=\"48.5\" y=\"18\" width=\"7\" height=\"4.5\" rx=\"0\" fill=\"#6b4a2a\"/><rect x=\"10\" y=\"15\" width=\"1.4\" height=\"13\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M11.4 15.5 h7 v6 l-3.5 -2 l-3.5 2 Z\" fill=\"#b54f24\"/><path d=\"M11.4 15.5 h7\" fill=\"none\" stroke=\"#e8b64c\" stroke-width=\"0.7\" stroke-linecap=\"round\"/></svg>"
+    },
+    {
+      "n": "Trek Trails Longhorn Bike Park",
+      "u": "https://adventurepayson.com/parks/",
+      "f": "This is a mountain bike park at Rim Country Middle School: a climbing line, jumps and downhill lines, a pump track, and a skills area with wooden features. Open in non-school hours — the park is closed when school is in session.",
+      "t": [
+        "biking"
+      ],
+      "d": "less than 10 minutes from the Hearth — 4 minutes by road, under a mile",
+      "g": "Parks and Grounds",
+      "more": {
+        "biking": "For the rider: a climbing line, jumps and downhill lines, a pump track, and a skills area with wooden features — open in non-school hours, closed when school is in session."
+      },
+      "w": "Open daily, 8 in the morning to dusk — in non-school hours only. Closed while school is in session.",
+      "th": "trek",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a lake under the rim, with pines and a banner.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><path d=\"M0 26 L10 12 L17 20 L26 8 L34 17 L44 6 L52 15 L60 10 L68 19 L68 32 L0 32 Z\" fill=\"#5d7186\"/><path d=\"M0 30 L13 19 L21 26 L33 15 L43 24 L55 16 L68 25 L68 34 L0 34 Z\" fill=\"#46586c\"/><path d=\"M43 6 L47.5 10.5 L43.8 12.2 L41 10 Z M25 8.6 L28.4 12 L25.8 13.4 L23.4 11.4 Z\" fill=\"#e9edf0\" opacity=\"0.92\"/><path d=\"M3 26 l3.5999999999999996 -8.4 l3.5999999999999996 8.4 Z M4.4399999999999995 20.6 l2.16 -4.8 l2.16 4.8 Z\" fill=\"#2c4632\"/><rect x=\"5.88\" y=\"26\" width=\"1.44\" height=\"2.4\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M60 27 l3.5999999999999996 -8.4 l3.5999999999999996 8.4 Z M61.44 21.6 l2.16 -4.8 l2.16 4.8 Z\" fill=\"#2c4632\"/><rect x=\"62.88\" y=\"27\" width=\"1.44\" height=\"2.4\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M14 26 C24 23.5 44 23.5 54 26 L54 33 C44 31 24 31 14 33 Z\" fill=\"#7fa8bd\"/><path d=\"M18 27.5 C26 26 42 26 50 27.5\" fill=\"none\" stroke=\"#dcebf4\" stroke-width=\"0.9\" stroke-linecap=\"round\" opacity=\"0.8\"/><rect x=\"30\" y=\"28\" width=\"10\" height=\"1.6\" rx=\"0\" fill=\"#7a5c36\"/><path d=\"M31 28 v3 M34 28 v3 M37 28 v3\" fill=\"none\" stroke=\"#5d4527\" stroke-width=\"0.9\" stroke-linecap=\"round\"/><path d=\"M47 18 L52 13 L57 18 Z\" fill=\"#4a3220\"/><rect x=\"48.5\" y=\"18\" width=\"7\" height=\"4.5\" rx=\"0\" fill=\"#6b4a2a\"/><rect x=\"10\" y=\"15\" width=\"1.4\" height=\"13\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M11.4 15.5 h7 v6 l-3.5 -2 l-3.5 2 Z\" fill=\"#b54f24\"/><path d=\"M11.4 15.5 h7\" fill=\"none\" stroke=\"#e8b64c\" stroke-width=\"0.7\" stroke-linecap=\"round\"/></svg>"
+    },
+    {
+      "n": "Payson Event Center",
+      "u": "https://www.paysonaz.gov/departments/parks-recreation-tourism",
+      "f": "The town's gathering ground stands at 1400 S. Beeline Highway — the town's feasts and fairs, horse shows and merrymaking fill this ground through the year.",
+      "t": [
+        "events",
+        "horses"
+      ],
+      "d": "less than 10 minutes from the Hearth — 3 minutes by road, under a mile",
+      "g": "The Town's Halls",
+      "more": {
+        "events": "For the feast-goer: the town's feasts and fairs, horse shows and merrymaking fill this ground through the year.",
+        "horses": "For the horse-lover: horse shows fill this ground through the year."
+      },
+      "th": "eventcenter",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a steep-roofed timber hall with a hanging sign.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><rect x=\"0\" y=\"26\" width=\"68\" height=\"8\" rx=\"0\" fill=\"#4c4740\"/><path d=\"M14 26 V13 L34 5 L54 13 V26 Z\" fill=\"#8a6a42\"/><path d=\"M10 14 L34 4 L58 14 L54 17 L34 8 L14 17 Z\" fill=\"#4a3220\"/><path d=\"M16 15 L52 25 M52 15 L16 25\" fill=\"none\" stroke=\"#4a3220\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><path d=\"M29 26 V18 a5 5 0 0 1 10 0 V26 Z\" fill=\"#2f1a12\"/><circle cx=\"34\" cy=\"21\" r=\"1.1\" fill=\"#e8b64c\"/><rect x=\"56\" y=\"12\" width=\"1.3\" height=\"7\" rx=\"0\" fill=\"#4a3220\"/><circle cx=\"56.6\" cy=\"21.5\" r=\"2.8\" fill=\"#efe6cf\"/><path d=\"M54.4 21.5 h4.4 M56.6 19.3 v4.4\" fill=\"none\" stroke=\"#b54f24\" stroke-width=\"0.8\" stroke-linecap=\"round\"/><path d=\"M4 27 l3.3000000000000003 -7.700000000000001 l3.3000000000000003 7.700000000000001 Z M5.32 22.05 l1.9800000000000002 -4.4 l1.9800000000000002 4.4 Z\" fill=\"#2c4632\"/><rect x=\"6.640000000000001\" y=\"27\" width=\"1.32\" height=\"2.2\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M59 28 l3 -7 l3 7 Z M60.2 23.5 l1.8 -4 l1.8 4 Z\" fill=\"#2c4632\"/><rect x=\"61.4\" y=\"28\" width=\"1.2\" height=\"2\" rx=\"0\" fill=\"#4a3220\"/></svg>"
+    },
+    {
+      "n": "Town recreation programs & special events",
+      "u": "https://www.paysonaz.gov/departments/parks-recreation-tourism",
+      "f": "The town's Parks and Recreation office keeps the year's feasts, games, and lessons — its list of them, the Digital Playbook, stands one tap away on the name above.",
+      "t": [
+        "events",
+        "classes"
+      ],
+      "d": "held across the town, in its parks and halls",
+      "g": "The Town's Halls",
+      "more": {
+        "events": "For the feast-goer: the town's Parks and Recreation office holds its gatherings through the year — its Digital Playbook names them all.",
+        "classes": "For the lesson-seeker: lessons and gatherings meet through the year, kept by the town's Parks and Recreation office."
+      },
+      "th": "programs",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a steep-roofed timber hall with a hanging sign.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><rect x=\"0\" y=\"26\" width=\"68\" height=\"8\" rx=\"0\" fill=\"#4c4740\"/><path d=\"M14 26 V13 L34 5 L54 13 V26 Z\" fill=\"#8a6a42\"/><path d=\"M10 14 L34 4 L58 14 L54 17 L34 8 L14 17 Z\" fill=\"#4a3220\"/><path d=\"M16 15 L52 25 M52 15 L16 25\" fill=\"none\" stroke=\"#4a3220\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><path d=\"M29 26 V18 a5 5 0 0 1 10 0 V26 Z\" fill=\"#2f1a12\"/><circle cx=\"34\" cy=\"21\" r=\"1.1\" fill=\"#e8b64c\"/><rect x=\"56\" y=\"12\" width=\"1.3\" height=\"7\" rx=\"0\" fill=\"#4a3220\"/><circle cx=\"56.6\" cy=\"21.5\" r=\"2.8\" fill=\"#efe6cf\"/><path d=\"M54.4 21.5 h4.4 M56.6 19.3 v4.4\" fill=\"none\" stroke=\"#b54f24\" stroke-width=\"0.8\" stroke-linecap=\"round\"/><path d=\"M4 27 l3.3000000000000003 -7.700000000000001 l3.3000000000000003 7.700000000000001 Z M5.32 22.05 l1.9800000000000002 -4.4 l1.9800000000000002 4.4 Z\" fill=\"#2c4632\"/><rect x=\"6.640000000000001\" y=\"27\" width=\"1.32\" height=\"2.2\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M59 28 l3 -7 l3 7 Z M60.2 23.5 l1.8 -4 l1.8 4 Z\" fill=\"#2c4632\"/><rect x=\"61.4\" y=\"28\" width=\"1.2\" height=\"2\" rx=\"0\" fill=\"#4a3220\"/></svg>"
+    },
+    {
+      "n": "Payson Public Library",
+      "u": "https://www.paysonaz.gov/departments/library/library-contact-info",
+      "f": "The library stands inside Rumsey Park, at 328 N. McLane Road. Books lend for three weeks on a free county card, and eBooks and audiobooks lend too. Inside wait a children's room, a teen gaming room, and a meeting room you may book. Programs run through the month — story times, Tai-Chi, stitchers, ukulele, and more.",
+      "t": [
+        "indoors",
+        "books",
+        "kids",
+        "events",
+        "classes"
+      ],
+      "d": "less than 10 minutes from the Hearth — 8 minutes by road, 2 miles",
+      "g": "The Town's Halls",
+      "more": {
+        "indoors": "Location: The library stands inside Rumsey Park. Inside wait reading rooms, a children's room, and a teen gaming room.",
+        "books": "For the reader: books lend for three weeks on a free county card, with eBooks and audiobooks besides.",
+        "kids": "For the children: a children's room and story times wait for the young.",
+        "events": "For the event-goer: programs run through the month — story times, Tai-Chi, stitchers, ukulele, and more.",
+        "classes": "For the class-seeker: classes and groups meet here through the month, and a meeting room may be booked."
+      },
+      "w": "Open Monday 9 in the morning to 6 in the evening; Tuesday and Wednesday 9 in the morning to 7 in the evening; Thursday 9 in the morning to 6 in the evening; Friday and Saturday 9 in the morning to 3 in the afternoon. Closed Sundays and major holidays.",
+      "th": "library",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a steep-roofed timber hall with a hanging sign.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><rect x=\"0\" y=\"26\" width=\"68\" height=\"8\" rx=\"0\" fill=\"#4c4740\"/><path d=\"M14 26 V13 L34 5 L54 13 V26 Z\" fill=\"#8a6a42\"/><path d=\"M10 14 L34 4 L58 14 L54 17 L34 8 L14 17 Z\" fill=\"#4a3220\"/><path d=\"M16 15 L52 25 M52 15 L16 25\" fill=\"none\" stroke=\"#4a3220\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><path d=\"M29 26 V18 a5 5 0 0 1 10 0 V26 Z\" fill=\"#2f1a12\"/><circle cx=\"34\" cy=\"21\" r=\"1.1\" fill=\"#e8b64c\"/><rect x=\"56\" y=\"12\" width=\"1.3\" height=\"7\" rx=\"0\" fill=\"#4a3220\"/><circle cx=\"56.6\" cy=\"21.5\" r=\"2.8\" fill=\"#efe6cf\"/><path d=\"M54.4 21.5 h4.4 M56.6 19.3 v4.4\" fill=\"none\" stroke=\"#b54f24\" stroke-width=\"0.8\" stroke-linecap=\"round\"/><path d=\"M4 27 l3.3000000000000003 -7.700000000000001 l3.3000000000000003 7.700000000000001 Z M5.32 22.05 l1.9800000000000002 -4.4 l1.9800000000000002 4.4 Z\" fill=\"#2c4632\"/><rect x=\"6.640000000000001\" y=\"27\" width=\"1.32\" height=\"2.2\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M59 28 l3 -7 l3 7 Z M60.2 23.5 l1.8 -4 l1.8 4 Z\" fill=\"#2c4632\"/><rect x=\"61.4\" y=\"28\" width=\"1.2\" height=\"2\" rx=\"0\" fill=\"#4a3220\"/></svg>"
+    },
+    {
+      "n": "The Sawmill Mural",
+      "u": "https://www.outdoorssw.com/the-main-attraction",
+      "f": "A 40-by-20-foot painting of the old Payson sawmill, copied in sepia from a historic photograph, on the north wall of the Sawmill Theatre at Sawmill Crossing. Painted by four local artists: Minette Hart, Judy Holbrook, Elizabeth Fowler, and April Bower.",
+      "t": [
+        "art",
+        "murals",
+        "history",
+        "walking"
+      ],
+      "d": "a short ride in town — its ride from the Hearth is not yet measured",
+      "g": "Painted Wonders",
+      "more": {
+        "art": "For the art-seeker: a 40-by-20-foot painting in sepia covers the north wall of the Sawmill Theatre.",
+        "murals": "For the mural-seeker: the mural copies a historic photograph of the old Payson sawmill, wall-wide in sepia.",
+        "history": "For the history-seeker: it shows the town's old sawmill as it stood, taken from a photograph of the time.",
+        "walking": "For the walker: it stands at Sawmill Crossing on Main Street — walk the street and it fills the wall."
+      },
+      "th": "sawmill",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a painted elk on a wall.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><rect x=\"3\" y=\"6\" width=\"62\" height=\"24\" rx=\"0\" fill=\"#efe6cf\"/><path d=\"M3 6 H65 M3 30 H65\" fill=\"none\" stroke=\"#8f8068\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><path d=\"M12 12 C10 8 12 6 14 7 C13 10 14 12 15.5 13 M56 12 C58 8 56 6 54 7 C55 10 54 12 52.5 13\" fill=\"none\" stroke=\"#b54f24\" stroke-width=\"1.7\" stroke-linecap=\"round\"/><circle cx=\"34\" cy=\"18\" r=\"5.5\" fill=\"#b54f24\"/><path d=\"M29 14 l-2 -3 M39 14 l2 -3\" fill=\"none\" stroke=\"#b54f24\" stroke-width=\"1.5\" stroke-linecap=\"round\"/><circle cx=\"32\" cy=\"17\" r=\"0.9\" fill=\"#f3eee3\"/><circle cx=\"36\" cy=\"17\" r=\"0.9\" fill=\"#f3eee3\"/><path d=\"M24 27 C29 24.5 39 24.5 44 27\" fill=\"none\" stroke=\"#7a4416\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><path d=\"M1 30 l2.4000000000000004 -5.6000000000000005 l2.4000000000000004 5.6000000000000005 Z M1.96 26.4 l1.4400000000000002 -3.2 l1.4400000000000002 3.2 Z\" fill=\"#2c4632\"/><rect x=\"2.92\" y=\"30\" width=\"0.96\" height=\"1.6\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M63 30 l2.4000000000000004 -5.6000000000000005 l2.4000000000000004 5.6000000000000005 Z M63.96 26.4 l1.4400000000000002 -3.2 l1.4400000000000002 3.2 Z\" fill=\"#2c4632\"/><rect x=\"64.92\" y=\"30\" width=\"0.96\" height=\"1.6\" rx=\"0\" fill=\"#4a3220\"/></svg>"
+    },
+    {
+      "n": "The Heron Hotel Mural",
+      "u": "https://www.outdoorssw.com/the-main-attraction",
+      "f": "The old Heron Hotel — three stories of it — stands again in paint on the side of the Payson Flower Shop on Main Street, in honor of the town's history. It was painted by Donn Morris.",
+      "t": [
+        "art",
+        "murals",
+        "history",
+        "walking"
+      ],
+      "d": "a short ride in town — its ride from the Hearth is not yet measured",
+      "g": "Painted Wonders",
+      "more": {
+        "art": "For the art-seeker: three stories of the old hotel stand again in paint on the flower shop's side.",
+        "murals": "For the mural-seeker: the mural brings the old Heron Hotel back to Main Street in paint, painted by Donn Morris.",
+        "history": "For the history-seeker: the Heron Hotel was the town's own — the painting honors its memory.",
+        "walking": "For the walker: find it on Main Street, on the side of the Payson Flower Shop."
+      },
+      "th": "heron",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a painted elk on a wall.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><rect x=\"3\" y=\"6\" width=\"62\" height=\"24\" rx=\"0\" fill=\"#efe6cf\"/><path d=\"M3 6 H65 M3 30 H65\" fill=\"none\" stroke=\"#8f8068\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><path d=\"M12 12 C10 8 12 6 14 7 C13 10 14 12 15.5 13 M56 12 C58 8 56 6 54 7 C55 10 54 12 52.5 13\" fill=\"none\" stroke=\"#b54f24\" stroke-width=\"1.7\" stroke-linecap=\"round\"/><circle cx=\"34\" cy=\"18\" r=\"5.5\" fill=\"#b54f24\"/><path d=\"M29 14 l-2 -3 M39 14 l2 -3\" fill=\"none\" stroke=\"#b54f24\" stroke-width=\"1.5\" stroke-linecap=\"round\"/><circle cx=\"32\" cy=\"17\" r=\"0.9\" fill=\"#f3eee3\"/><circle cx=\"36\" cy=\"17\" r=\"0.9\" fill=\"#f3eee3\"/><path d=\"M24 27 C29 24.5 39 24.5 44 27\" fill=\"none\" stroke=\"#7a4416\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><path d=\"M1 30 l2.4000000000000004 -5.6000000000000005 l2.4000000000000004 5.6000000000000005 Z M1.96 26.4 l1.4400000000000002 -3.2 l1.4400000000000002 3.2 Z\" fill=\"#2c4632\"/><rect x=\"2.92\" y=\"30\" width=\"0.96\" height=\"1.6\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M63 30 l2.4000000000000004 -5.6000000000000005 l2.4000000000000004 5.6000000000000005 Z M63.96 26.4 l1.4400000000000002 -3.2 l1.4400000000000002 3.2 Z\" fill=\"#2c4632\"/><rect x=\"64.92\" y=\"30\" width=\"0.96\" height=\"1.6\" rx=\"0\" fill=\"#4a3220\"/></svg>"
+    },
+    {
+      "n": "The American Gulch Fence Mural",
+      "u": "https://www.outdoorssw.com/the-main-attraction",
+      "f": "Bigger-than-life wildlife in bright colors stands painted by local artists on the corrugated fence along the American Gulch walking path: javelina, roadrunner, squirrel, coyote, rabbit, and two elk locking antlers.",
+      "t": [
+        "art",
+        "murals",
+        "walking",
+        "wildlife"
+      ],
+      "d": "a short ride in town — its ride from the Hearth is not yet measured",
+      "g": "Painted Wonders",
+      "more": {
+        "art": "For the art-seeker: bigger-than-life wildlife in bright colors runs along the corrugated fence.",
+        "murals": "For the mural-seeker: javelina, roadrunner, squirrel, coyote, rabbit, and two elk locking antlers — painted on the fence.",
+        "walking": "For the walker: the mural lines the American Gulch walking path itself — the art keeps you company on the walk.",
+        "wildlife": "For the wildlife-seeker: the painted wildlife is the wildlife of this country — javelina, coyote, roadrunner, rabbit, and elk."
+      },
+      "th": "fencemural",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a painted elk on a wall.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><rect x=\"3\" y=\"6\" width=\"62\" height=\"24\" rx=\"0\" fill=\"#efe6cf\"/><path d=\"M3 6 H65 M3 30 H65\" fill=\"none\" stroke=\"#8f8068\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><path d=\"M12 12 C10 8 12 6 14 7 C13 10 14 12 15.5 13 M56 12 C58 8 56 6 54 7 C55 10 54 12 52.5 13\" fill=\"none\" stroke=\"#b54f24\" stroke-width=\"1.7\" stroke-linecap=\"round\"/><circle cx=\"34\" cy=\"18\" r=\"5.5\" fill=\"#b54f24\"/><path d=\"M29 14 l-2 -3 M39 14 l2 -3\" fill=\"none\" stroke=\"#b54f24\" stroke-width=\"1.5\" stroke-linecap=\"round\"/><circle cx=\"32\" cy=\"17\" r=\"0.9\" fill=\"#f3eee3\"/><circle cx=\"36\" cy=\"17\" r=\"0.9\" fill=\"#f3eee3\"/><path d=\"M24 27 C29 24.5 39 24.5 44 27\" fill=\"none\" stroke=\"#7a4416\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><path d=\"M1 30 l2.4000000000000004 -5.6000000000000005 l2.4000000000000004 5.6000000000000005 Z M1.96 26.4 l1.4400000000000002 -3.2 l1.4400000000000002 3.2 Z\" fill=\"#2c4632\"/><rect x=\"2.92\" y=\"30\" width=\"0.96\" height=\"1.6\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M63 30 l2.4000000000000004 -5.6000000000000005 l2.4000000000000004 5.6000000000000005 Z M63.96 26.4 l1.4400000000000002 -3.2 l1.4400000000000002 3.2 Z\" fill=\"#2c4632\"/><rect x=\"64.92\" y=\"30\" width=\"0.96\" height=\"1.6\" rx=\"0\" fill=\"#4a3220\"/></svg>"
+    },
+    {
+      "n": "The Payson Elk Parade",
+      "u": "http://paysonelkparade.blogspot.com/2026/07/what-is-payson-elk-parade.html",
+      "f": "Painted elk statues stand around town. The cost of each is borne by a local business, program, or neighbor, and painted by an artist with its own story of this country. One stands at Banner Payson Medical Center, and more are bound for Main Street. The herd is still growing; its own write-up stands below.",
+      "t": [
+        "art",
+        "walking"
+      ],
+      "d": "a short ride in town — its ride from the Hearth is not yet measured",
+      "g": "Painted Wonders",
+      "more": {
+        "art": "For the art-seeker: each elk is painted by an artist, with its own story of this country.",
+        "walking": "For the walker: the herd stands along the town's streets — walk Main Street and meet them.",
+        "elk statues": "For the statue-seeker: painted elk statues stand around town — one at Banner Payson Medical Center, more bound for Main Street."
+      },
+      "th": "elkparade",
+      "art": "<svg width=\"68\" height=\"44\" viewBox=\"0 0 68 44\" role=\"img\" aria-label=\"A rough drawing of a painted elk on a wall.\" style=\"float:left;margin:2px 12px 6px 0;border:1px solid #8f8068;border-radius:5px\"><rect x=\"0\" y=\"0\" width=\"68\" height=\"34\" rx=\"0\" fill=\"#33465e\"/><rect x=\"0\" y=\"22\" width=\"68\" height=\"12\" rx=\"0\" fill=\"#3c3a34\"/><rect x=\"3\" y=\"6\" width=\"62\" height=\"24\" rx=\"0\" fill=\"#efe6cf\"/><path d=\"M3 6 H65 M3 30 H65\" fill=\"none\" stroke=\"#8f8068\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><path d=\"M12 12 C10 8 12 6 14 7 C13 10 14 12 15.5 13 M56 12 C58 8 56 6 54 7 C55 10 54 12 52.5 13\" fill=\"none\" stroke=\"#b54f24\" stroke-width=\"1.7\" stroke-linecap=\"round\"/><circle cx=\"34\" cy=\"18\" r=\"5.5\" fill=\"#b54f24\"/><path d=\"M29 14 l-2 -3 M39 14 l2 -3\" fill=\"none\" stroke=\"#b54f24\" stroke-width=\"1.5\" stroke-linecap=\"round\"/><circle cx=\"32\" cy=\"17\" r=\"0.9\" fill=\"#f3eee3\"/><circle cx=\"36\" cy=\"17\" r=\"0.9\" fill=\"#f3eee3\"/><path d=\"M24 27 C29 24.5 39 24.5 44 27\" fill=\"none\" stroke=\"#7a4416\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><path d=\"M1 30 l2.4000000000000004 -5.6000000000000005 l2.4000000000000004 5.6000000000000005 Z M1.96 26.4 l1.4400000000000002 -3.2 l1.4400000000000002 3.2 Z\" fill=\"#2c4632\"/><rect x=\"2.92\" y=\"30\" width=\"0.96\" height=\"1.6\" rx=\"0\" fill=\"#4a3220\"/><path d=\"M63 30 l2.4000000000000004 -5.6000000000000005 l2.4000000000000004 5.6000000000000005 Z M63.96 26.4 l1.4400000000000002 -3.2 l1.4400000000000002 3.2 Z\" fill=\"#2c4632\"/><rect x=\"64.92\" y=\"30\" width=\"0.96\" height=\"1.6\" rx=\"0\" fill=\"#4a3220\"/></svg>"
+    }
+  ]
+}
