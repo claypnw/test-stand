@@ -1,1 +1,1 @@
-build-cut test file, first version
+build-cut test file, second version
