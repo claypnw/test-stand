@@ -54,3 +54,19 @@ entry, and no picture changed.
   fixed page above (9ac1b45f…), 5,814,869 bytes served, carrying the
   27 entries and 27 embedded pictures. What is served is what was
   promoted.
+
+## Restore and rebuild from escrow — documentation revision 1.1
+
+The unchanged builder uses two paths beneath Path.home(), rather than reading directly from inputs/. Reproduce its original layout in a clean staging home on a Unix cloud host. Python 3 and Pillow are required; the builder imports PIL.Image. This is a cloud-host reconstruction, never a task for Clay's PC.
+
+1. Fetch only these three files from claypnw/test-stand and verify their Git blob identities:
+   - trails-source/build_page.py — 577b00776cbbd65213934e17d61e55c07b89d758.
+   - trails-source/inputs/trails-page-sample78-2026-10-25.html — 55479cac65c46b98e0b39518ec416bce0f9fdca7; 5,612,057 bytes.
+   - trails-source/inputs/goat-camp-wide-composite.jpg — db7f934e5dbc4b1cac3e057c1b71a17a5c205765; 316,443 bytes.
+2. Beneath the clean staging home, place the unchanged sample at workspace/your_files/trails-page-sample78-2026-10-25.html and the unchanged picture at workspace/trails-page/photos/goat-camp-wide-composite.jpg. Create the output directory workspace/trails-page/build/.
+3. Run the unchanged builder with Path.home() resolving to that staging home. Input placement and the isolated cloud home are the only adaptations; do not edit the builder.
+4. The output is workspace/trails-page/build/trails-and-finds.html beneath the staging home. Expected size: 5,814,869 bytes. Expected Git blob: 9ac1b45f2e1289cf963c738686b7be5fc9661912, matching the released page. Check using git hash-object on the output file. The builder should report 27 entries, 27 pictures, no remaining SAMPLE 78 mark, and two return doors.
+
+MuseAI reported this clean reconstruction on November 25, 2026 in Raven's Reach message MSG-20261126T004800Z-trailsproof1: only the escrowed inputs were used, the builder was unchanged, and the rebuilt output matched the released blob exactly. This records MuseAI's execution evidence; it does not claim a second independent execution. ChatGPT independently checked the shared source identities and added these missing restore steps on November 26. No Cloudflare build or deployment is needed for this reconstruction.
+
+Documentation change only: the builder, inputs and released page remain the same exact revisions listed above. Rollback of this documentation addition is the preceding README blob b72b028c6998729f311657f5edb0bb546f0976be; it does not roll back the page.
